@@ -28,8 +28,7 @@ Aquí encontrarás reflexiones sobre arquitectura distribuida, automatización D
 ## 🧪 Laboratorios y DevOps PoCs
 > [!tip] Infraestructura como código, despliegues y automatización.
 - [[02 Laboratorios/K8s-Cluster-Terraform|Topología y Despliegue de un Cluster K8s con Terraform]]
-- [[02 Laboratorios/Optimizacion-Docker-Images|Optimización de Imágenes Docker Multi-stage]]
-
+- [[ollama-docker-local#Desplegando IA en Local Privacidad y Control]]
 ## 🧠 Artículos y Reflexiones
 > [!quote] Mi visión sobre la industria, patrones de diseño y operaciones.
 - [[01 Artículos/Mi-Stack-Tecnologico|Mi Stack Tecnológico Definitivo como Arquitecto]]
