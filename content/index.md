@@ -24,11 +24,13 @@ Aquí encontrarás reflexiones sobre arquitectura distribuida, automatización D
 > [!info] Mis estándares, convenciones y reglas de oro para equipos.
 - [[03 Guidelines/API-Design-Standards|Estándares de Diseño para APIs RESTful y gRPC]]
 - [[03 Guidelines/Git-Flow-y-CI-CD|Convenciones de Git y Estrategias de Despliegue Zero-Downtime]]
+- [[Quartz + GitHub Actions]]
 
 ## 🧪 Laboratorios y DevOps PoCs
 > [!tip] Infraestructura como código, despliegues y automatización.
 - [[02 Laboratorios/K8s-Cluster-Terraform|Topología y Despliegue de un Cluster K8s con Terraform]]
 - [[ollama-docker-local#Desplegando IA en Local Privacidad y Control]]
+
 ## 🧠 Artículos y Reflexiones
 > [!quote] Mi visión sobre la industria, patrones de diseño y operaciones.
 - [[01 Artículos/Mi-Stack-Tecnologico|Mi Stack Tecnológico Definitivo como Arquitecto]]
