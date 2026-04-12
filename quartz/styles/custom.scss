@@ -5,6 +5,7 @@
 	--brand-cyan: #14b8a6;
 	--brand-violet: #0b1020;
 	--brand-accent: #f59e0b;
+	--brand-warn: #fb7185;
 	--brand-radius-lg: 14px;
 	--brand-radius-md: 10px;
 	--brand-radius-sm: 8px;
@@ -16,6 +17,12 @@
 	--brand-h1: clamp(2rem, 3.5vw, 3rem);
 	--brand-h2: clamp(1.35rem, 2.2vw, 1.9rem);
 	--brand-body: clamp(1rem, 1.2vw, 1.08rem);
+	--brand-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+::selection {
+	background: color-mix(in srgb, var(--brand-cyan) 35%, var(--brand-ink));
+	color: #fff;
 }
 
 body {
@@ -96,6 +103,15 @@ body::after {
 a {
 	text-underline-offset: 0.15em;
 	text-decoration-thickness: 0.08em;
+	transition: color 0.22s var(--brand-ease), text-decoration-color 0.22s var(--brand-ease);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--brand-cyan) 70%, var(--brand-ink));
+	outline-offset: 2px;
+	border-radius: 8px;
 }
 
 .callout {
@@ -105,6 +121,35 @@ a {
 .tags > li > a,
 a.internal.tag-link {
 	font-weight: 600;
+}
+
+.page-title > a {
+	letter-spacing: -0.01em;
+	font-weight: 800;
+	color: color-mix(in srgb, var(--brand-ink) 84%, var(--dark));
+}
+
+.search > .search-button {
+	border-radius: 10px;
+	border-color: color-mix(in srgb, var(--brand-ink) 20%, var(--lightgray));
+	background: color-mix(in srgb, var(--light) 92%, #fff 8%);
+	transition: border-color 0.2s var(--brand-ease), transform 0.2s var(--brand-ease);
+}
+
+.search > .search-button:hover {
+	border-color: color-mix(in srgb, var(--brand-cyan) 40%, var(--brand-ink));
+	transform: translateY(-1px);
+}
+
+.explorer-content ul li > a {
+	border-radius: 8px;
+	padding: 0.05rem 0.25rem;
+	transition: color 0.2s var(--brand-ease), background-color 0.2s var(--brand-ease), transform 0.2s var(--brand-ease);
+}
+
+.explorer-content ul li > a:hover {
+	background: color-mix(in srgb, var(--brand-ink) 10%, transparent);
+	transform: translateX(2px);
 }
 
 /* Reusable editorial system: copy these classes to any site for consistent branding. */
@@ -324,6 +369,7 @@ pre {
 	border-radius: 12px;
 	border: 1px solid color-mix(in srgb, var(--brand-ink) 24%, var(--lightgray));
 	box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 45%, transparent);
+	overflow: auto;
 }
 
 code {
@@ -340,6 +386,12 @@ code {
 .callout-title .callout-title-inner {
 	letter-spacing: 0.01em;
 	font-weight: 700;
+}
+
+.callout:hover {
+	transform: translateY(-1px);
+	transition: transform 0.24s var(--brand-ease), box-shadow 0.24s var(--brand-ease);
+	box-shadow: 0 12px 24px color-mix(in srgb, var(--brand-violet) 12%, transparent);
 }
 
 button.toc-header h3,
@@ -359,6 +411,18 @@ button.desktop-explorer h2 {
 	border-color: color-mix(in srgb, var(--brand-cyan) 18%, var(--lightgray));
 }
 
+footer {
+	padding: 0.85rem 1rem;
+	border: var(--brand-border);
+	border-radius: var(--brand-radius-md);
+	background: color-mix(in srgb, var(--light) 92%, #fff 8%);
+	box-shadow: var(--brand-shadow-card);
+}
+
+footer a {
+	font-weight: 700;
+}
+
 @media (max-width: 800px) {
 	body {
 		background-attachment: scroll;
@@ -375,6 +439,12 @@ button.desktop-explorer h2 {
 		border-radius: var(--brand-radius-md);
 		padding-left: 0.9rem;
 		padding-right: 0.9rem;
+	}
+
+	.callout:hover,
+	.search > .search-button:hover,
+	.explorer-content ul li > a:hover {
+		transform: none;
 	}
 
 	body::before {
@@ -398,6 +468,105 @@ button.desktop-explorer h2 {
 @media (prefers-reduced-motion: reduce) {
 	body::before {
 		animation: none;
+	}
+}
+
+/* Home-only elevated art direction (index page) */
+body[data-slug="index"] .page .page-header {
+	position: relative;
+	overflow: hidden;
+	padding: 1.1rem 1.2rem;
+	border: 1px solid color-mix(in srgb, var(--brand-ink) 26%, var(--lightgray));
+	background:
+		radial-gradient(460px 220px at 0% 0%, color-mix(in srgb, var(--brand-cyan) 20%, transparent), transparent 72%),
+		radial-gradient(380px 180px at 100% 0%, color-mix(in srgb, var(--brand-ink) 20%, transparent), transparent 74%),
+		color-mix(in srgb, var(--light) 90%, #ffffff 10%);
+}
+
+body[data-slug="index"] .page .page-header::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background:
+		repeating-linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--brand-ink) 8%, transparent) 0,
+			color-mix(in srgb, var(--brand-ink) 8%, transparent) 1px,
+			transparent 1px,
+			transparent 26px
+		);
+	opacity: 0.2;
+}
+
+body[data-slug="index"] .page .center article {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	padding: 0.25rem 0 0;
+	max-width: min(1080px, 100%);
+}
+
+body[data-slug="index"] .page .center article > h1:first-of-type {
+	font-size: clamp(2.2rem, 4vw, 3.4rem);
+	line-height: 1.02;
+	letter-spacing: -0.035em;
+	margin-bottom: 0.8rem;
+	text-wrap: balance;
+	max-width: 20ch;
+}
+
+body[data-slug="index"] .page .center article > p:nth-of-type(-n + 2) {
+	max-width: 72ch;
+	font-size: clamp(1.02rem, 1.2vw, 1.14rem);
+	line-height: 1.8;
+	color: color-mix(in srgb, var(--darkgray) 88%, var(--brand-violet) 12%);
+}
+
+body[data-slug="index"] .page .center article > h2 {
+	margin-top: 2rem;
+	padding: 0.8rem 0.95rem;
+	border-left: 4px solid color-mix(in srgb, var(--brand-cyan) 62%, var(--brand-ink));
+	border-radius: 0 12px 12px 0;
+	background: color-mix(in srgb, var(--brand-ink) 6%, var(--light));
+	font-size: clamp(1.28rem, 2vw, 1.6rem);
+	letter-spacing: -0.01em;
+}
+
+body[data-slug="index"] .page .center article ul {
+	border: var(--brand-border);
+	border-radius: var(--brand-radius-md);
+	background: color-mix(in srgb, var(--light) 90%, #ffffff 10%);
+	padding: 0.85rem 1rem 0.85rem 1.5rem;
+	box-shadow: var(--brand-shadow-card);
+	margin-bottom: 1.05rem;
+}
+
+body[data-slug="index"] .page .center article ul li {
+	margin-bottom: 0.48rem;
+}
+
+body[data-slug="index"] .page .center article > hr {
+	height: 1px;
+	border: 0;
+	margin: 1.5rem 0 1.65rem;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		color-mix(in srgb, var(--brand-ink) 34%, var(--lightgray)) 22%,
+		color-mix(in srgb, var(--brand-cyan) 34%, var(--lightgray)) 52%,
+		transparent
+	);
+}
+
+@media (max-width: 800px) {
+	body[data-slug="index"] .page .center article > h1:first-of-type {
+		font-size: clamp(1.8rem, 8.2vw, 2.5rem);
+		max-width: 100%;
+	}
+
+	body[data-slug="index"] .page .center article > h2 {
+		padding: 0.68rem 0.78rem;
 	}
 }
 
