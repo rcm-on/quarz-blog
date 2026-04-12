@@ -21,9 +21,9 @@
 body {
 	position: relative;
 	background:
-		radial-gradient(1200px 650px at 10% -10%, color-mix(in srgb, var(--brand-ink) 24%, transparent), transparent 65%),
-		radial-gradient(900px 520px at 90% 0%, color-mix(in srgb, var(--brand-cyan) 18%, transparent), transparent 72%),
-		linear-gradient(180deg, color-mix(in srgb, var(--light) 92%, #ffffff 8%) 0%, var(--light) 38%, var(--light) 100%);
+		radial-gradient(1300px 700px at 8% -10%, color-mix(in srgb, var(--brand-ink) 24%, transparent), transparent 66%),
+		radial-gradient(980px 560px at 92% -8%, color-mix(in srgb, var(--brand-cyan) 20%, transparent), transparent 72%),
+		linear-gradient(180deg, color-mix(in srgb, var(--light) 90%, #ffffff 10%) 0%, var(--light) 40%, var(--light) 100%);
 	background-attachment: fixed;
 }
 
@@ -36,22 +36,44 @@ body::after {
 	z-index: 0;
 }
 
-/* Subtle neural mesh: tiny nodes + faint links */
+/* Aurora layer: smooth moving gradients, no dotted mesh. */
 body::before {
-	opacity: 0.24;
-	background-image:
-		radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--brand-ink) 40%, transparent) 1.2px, transparent 0),
-		linear-gradient(115deg, color-mix(in srgb, var(--brand-ink) 16%, transparent), transparent 55%),
-		linear-gradient(65deg, color-mix(in srgb, var(--brand-cyan) 13%, transparent), transparent 58%);
-	background-size: 22px 22px, 260px 260px, 280px 280px;
-	mask-image: radial-gradient(circle at 50% 25%, #000 35%, transparent 95%);
-	animation: neuralDrift 24s linear infinite;
+	opacity: 0.45;
+	background:
+		radial-gradient(560px 300px at 12% 24%, color-mix(in srgb, var(--brand-ink) 28%, transparent), transparent 72%),
+		radial-gradient(620px 330px at 86% 18%, color-mix(in srgb, var(--brand-cyan) 24%, transparent), transparent 74%),
+		radial-gradient(780px 430px at 50% 8%, color-mix(in srgb, var(--brand-accent) 14%, transparent), transparent 80%);
+	filter: blur(16px) saturate(104%);
+	transform-origin: center top;
+	animation: auroraFloat 16s ease-in-out infinite alternate;
 }
 
-/* Soft spotlight to keep article area premium and readable */
+/* Soft spotlight to keep article area premium and readable. */
 body::after {
-	opacity: 0.52;
-	background: radial-gradient(720px 440px at 50% 22%, color-mix(in srgb, #ffffff 82%, transparent), transparent 76%);
+	opacity: 0.58;
+	background:
+		repeating-linear-gradient(
+			120deg,
+			color-mix(in srgb, var(--brand-ink) 8%, transparent) 0,
+			color-mix(in srgb, var(--brand-ink) 8%, transparent) 1px,
+			transparent 1px,
+			transparent 44px
+		),
+		repeating-linear-gradient(
+			60deg,
+			color-mix(in srgb, var(--brand-cyan) 7%, transparent) 0,
+			color-mix(in srgb, var(--brand-cyan) 7%, transparent) 1px,
+			transparent 1px,
+			transparent 44px
+		),
+		radial-gradient(circle at 22% 32%, color-mix(in srgb, var(--brand-cyan) 24%, transparent) 0 2px, transparent 3px),
+		radial-gradient(circle at 74% 20%, color-mix(in srgb, var(--brand-ink) 26%, transparent) 0 2px, transparent 3px),
+		radial-gradient(circle at 68% 62%, color-mix(in srgb, var(--brand-cyan) 18%, transparent) 0 1.8px, transparent 3px),
+		radial-gradient(760px 470px at 50% 22%, color-mix(in srgb, #ffffff 84%, transparent), transparent 77%),
+		radial-gradient(680px 340px at 50% 100%, color-mix(in srgb, var(--light) 70%, transparent), transparent 82%);
+	background-size: 260px 260px, 260px 260px, auto, auto, auto, auto, auto;
+	background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+	filter: blur(0.35px);
 }
 
 // Professional visual polish layered on top of Quartz defaults.
@@ -236,18 +258,134 @@ a.internal.tag-link {
 	border-radius: 0 var(--brand-radius-md) var(--brand-radius-md) 0;
 }
 
+/* Distinctive site chrome: make it feel like a custom editorial product. */
+.page > #quartz-body {
+	gap: 14px;
+	grid-template-columns: 300px minmax(0, 1fr) 280px;
+}
+
+.page > #quartz-body .sidebar {
+	border: var(--brand-border);
+	border-radius: var(--brand-radius-lg);
+	background: color-mix(in srgb, var(--light) 86%, #ffffff 14%);
+	box-shadow: var(--brand-shadow-card);
+	padding: 5.4rem 1.25rem 1.25rem;
+	backdrop-filter: blur(8px) saturate(108%);
+}
+
+.page > #quartz-body .center article {
+	max-width: min(980px, 100%);
+	padding: clamp(1rem, 1.8vw, 1.6rem);
+	border: var(--brand-border);
+	border-radius: var(--brand-radius-lg);
+	background: color-mix(in srgb, var(--light) 90%, #ffffff 10%);
+	box-shadow: var(--brand-shadow-soft);
+	backdrop-filter: blur(2px);
+}
+
+.page .page-header {
+	padding: 0.85rem 1rem;
+	border: var(--brand-border);
+	border-radius: var(--brand-radius-md);
+	background: color-mix(in srgb, var(--light) 88%, #ffffff 12%);
+	box-shadow: var(--brand-shadow-card);
+}
+
+.breadcrumb-container {
+	font-weight: 600;
+	font-size: 0.92rem;
+	letter-spacing: 0.01em;
+}
+
+.article-title {
+	font-size: clamp(2rem, 2.4vw, 2.85rem);
+	font-weight: 800;
+	text-wrap: balance;
+}
+
+.content-meta {
+	font-size: 1rem;
+	color: color-mix(in srgb, var(--darkgray) 90%, var(--brand-ink) 10%);
+}
+
+.tags > li > a,
+a.internal.tag-link {
+	border: 1px solid color-mix(in srgb, var(--brand-ink) 18%, transparent);
+	background: linear-gradient(
+		130deg,
+		color-mix(in srgb, var(--brand-ink) 12%, var(--light)),
+		color-mix(in srgb, var(--brand-cyan) 10%, var(--light))
+	);
+	border-radius: 999px;
+	padding: 0.22rem 0.56rem;
+}
+
+pre {
+	border-radius: 12px;
+	border: 1px solid color-mix(in srgb, var(--brand-ink) 24%, var(--lightgray));
+	box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 45%, transparent);
+}
+
+code {
+	border-radius: 6px;
+	background: color-mix(in srgb, var(--brand-ink) 10%, var(--lightgray));
+}
+
+.callout {
+	border-width: 1px;
+	box-shadow: 0 8px 18px color-mix(in srgb, var(--brand-violet) 8%, transparent);
+	border-radius: 12px;
+}
+
+.callout-title .callout-title-inner {
+	letter-spacing: 0.01em;
+	font-weight: 700;
+}
+
+button.toc-header h3,
+.backlinks > h3,
+.graph > h3,
+button.desktop-explorer h2 {
+	font-size: 0.98rem;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	color: color-mix(in srgb, var(--brand-ink) 74%, var(--dark));
+}
+
+:root[saved-theme="dark"] .page > #quartz-body .sidebar,
+:root[saved-theme="dark"] .page > #quartz-body .center article,
+:root[saved-theme="dark"] .page .page-header {
+	background: color-mix(in srgb, var(--light) 90%, #0b1320 10%);
+	border-color: color-mix(in srgb, var(--brand-cyan) 18%, var(--lightgray));
+}
+
 @media (max-width: 800px) {
 	body {
 		background-attachment: scroll;
 	}
 
+	.page > #quartz-body {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 8px;
+	}
+
+	.page > #quartz-body .sidebar,
+	.page > #quartz-body .center article,
+	.page .page-header {
+		border-radius: var(--brand-radius-md);
+		padding-left: 0.9rem;
+		padding-right: 0.9rem;
+	}
+
 	body::before {
-		opacity: 0.16;
-		background-size: 26px 26px, 220px 220px, 240px 240px;
+		opacity: 0.3;
+		filter: blur(14px);
 	}
 
 	body::after {
 		opacity: 0.38;
+		background-size: 220px 220px, 220px 220px, auto, auto, auto, auto, auto;
+		filter: blur(0.2px);
 	}
 
 	.brand-grid .span-6,
@@ -263,11 +401,11 @@ a.internal.tag-link {
 	}
 }
 
-@keyframes neuralDrift {
+@keyframes auroraFloat {
 	0% {
-		background-position: 0 0, 0 0, 0 0;
+		transform: translate3d(0, -0.6rem, 0) scale(1);
 	}
 	100% {
-		background-position: 40px 26px, 18px 42px, -26px 18px;
+		transform: translate3d(0, 0.75rem, 0) scale(1.03);
 	}
 }
