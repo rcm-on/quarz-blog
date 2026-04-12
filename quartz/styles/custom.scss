@@ -1,7 +1,64 @@
 @use "./base.scss";
 
+:root {
+	--brand-ink: #0f4c81;
+	--brand-cyan: #14b8a6;
+	--brand-violet: #0b1020;
+	--brand-accent: #f59e0b;
+	--brand-radius-lg: 14px;
+	--brand-radius-md: 10px;
+	--brand-radius-sm: 8px;
+	--brand-shadow-soft: 0 10px 30px color-mix(in srgb, var(--brand-violet) 16%, transparent);
+	--brand-shadow-card: 0 8px 24px color-mix(in srgb, var(--brand-violet) 12%, transparent);
+	--brand-border: 1px solid color-mix(in srgb, var(--brand-ink) 18%, var(--lightgray));
+	--brand-reading-max: 74ch;
+	--brand-kicker: 0.78rem;
+	--brand-h1: clamp(2rem, 3.5vw, 3rem);
+	--brand-h2: clamp(1.35rem, 2.2vw, 1.9rem);
+	--brand-body: clamp(1rem, 1.2vw, 1.08rem);
+}
+
+body {
+	position: relative;
+	background:
+		radial-gradient(1200px 650px at 10% -10%, color-mix(in srgb, var(--brand-ink) 24%, transparent), transparent 65%),
+		radial-gradient(900px 520px at 90% 0%, color-mix(in srgb, var(--brand-cyan) 18%, transparent), transparent 72%),
+		linear-gradient(180deg, color-mix(in srgb, var(--light) 92%, #ffffff 8%) 0%, var(--light) 38%, var(--light) 100%);
+	background-attachment: fixed;
+}
+
+body::before,
+body::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* Subtle neural mesh: tiny nodes + faint links */
+body::before {
+	opacity: 0.24;
+	background-image:
+		radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--brand-ink) 40%, transparent) 1.2px, transparent 0),
+		linear-gradient(115deg, color-mix(in srgb, var(--brand-ink) 16%, transparent), transparent 55%),
+		linear-gradient(65deg, color-mix(in srgb, var(--brand-cyan) 13%, transparent), transparent 58%);
+	background-size: 22px 22px, 260px 260px, 280px 280px;
+	mask-image: radial-gradient(circle at 50% 25%, #000 35%, transparent 95%);
+	animation: neuralDrift 24s linear infinite;
+}
+
+/* Soft spotlight to keep article area premium and readable */
+body::after {
+	opacity: 0.52;
+	background: radial-gradient(720px 440px at 50% 22%, color-mix(in srgb, #ffffff 82%, transparent), transparent 76%);
+}
+
 // Professional visual polish layered on top of Quartz defaults.
 .page {
+	position: relative;
+	z-index: 1;
+
 	.page-header {
 		border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 70%, transparent);
 		margin-bottom: 1rem;
@@ -26,4 +83,191 @@ a {
 .tags > li > a,
 a.internal.tag-link {
 	font-weight: 600;
+}
+
+/* Reusable editorial system: copy these classes to any site for consistent branding. */
+.brand-shell {
+	max-width: min(1100px, 100% - 2rem);
+	margin-inline: auto;
+}
+
+.brand-prose {
+	max-width: var(--brand-reading-max);
+	font-size: var(--brand-body);
+	line-height: 1.72;
+}
+
+.brand-kicker {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	font-size: var(--brand-kicker);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.11em;
+	color: color-mix(in srgb, var(--brand-ink) 82%, var(--dark));
+}
+
+.brand-kicker::before {
+	content: "";
+	width: 1.35rem;
+	height: 2px;
+	border-radius: 999px;
+	background: linear-gradient(90deg, var(--brand-ink), var(--brand-cyan));
+}
+
+.brand-title {
+	font-size: var(--brand-h1);
+	line-height: 1.07;
+	letter-spacing: -0.03em;
+	text-wrap: balance;
+	margin: 0.3rem 0 0.85rem;
+	color: color-mix(in srgb, var(--dark) 90%, var(--brand-violet) 10%);
+}
+
+.brand-subtitle {
+	font-size: 1.1rem;
+	color: color-mix(in srgb, var(--darkgray) 88%, var(--brand-violet) 12%);
+	max-width: 68ch;
+	text-wrap: pretty;
+}
+
+.brand-divider {
+	height: 1px;
+	border: 0;
+	margin: 1.4rem 0 1.6rem;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		color-mix(in srgb, var(--brand-ink) 34%, var(--lightgray)) 16%,
+		color-mix(in srgb, var(--brand-cyan) 28%, var(--lightgray)) 55%,
+		transparent
+	);
+}
+
+.brand-card {
+	background: color-mix(in srgb, var(--light) 92%, #ffffff 8%);
+	border: var(--brand-border);
+	border-radius: var(--brand-radius-lg);
+	box-shadow: var(--brand-shadow-card);
+	padding: clamp(1rem, 2vw, 1.4rem);
+	backdrop-filter: blur(1.5px);
+}
+
+.brand-grid {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.brand-grid > * {
+	grid-column: span 12;
+}
+
+.brand-grid .span-6 {
+	grid-column: span 6;
+}
+
+.brand-grid .span-4 {
+	grid-column: span 4;
+}
+
+.brand-grid .span-8 {
+	grid-column: span 8;
+}
+
+.brand-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	padding: 0.56rem 0.92rem;
+	border-radius: var(--brand-radius-sm);
+	border: 1px solid color-mix(in srgb, var(--brand-ink) 30%, transparent);
+	background: linear-gradient(
+		145deg,
+		color-mix(in srgb, var(--brand-ink) 14%, var(--light)),
+		color-mix(in srgb, var(--brand-cyan) 10%, var(--light))
+	);
+	font-weight: 700;
+	text-decoration: none;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brand-button:hover {
+	transform: translateY(-1px);
+	box-shadow: var(--brand-shadow-soft);
+	text-decoration: none;
+}
+
+.brand-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.2rem 0.5rem;
+	border-radius: 999px;
+	font-size: 0.82rem;
+	font-weight: 600;
+	border: 1px solid color-mix(in srgb, var(--brand-cyan) 36%, transparent);
+	background: color-mix(in srgb, var(--brand-cyan) 14%, var(--light));
+}
+
+.brand-neural-dot {
+	position: relative;
+	padding-left: 0.95rem;
+}
+
+.brand-neural-dot::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.58em;
+	width: 0.42rem;
+	height: 0.42rem;
+	border-radius: 50%;
+	background: radial-gradient(circle, var(--brand-cyan) 0, var(--brand-ink) 75%);
+	box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-cyan) 15%, transparent);
+}
+
+.brand-quote {
+	border-left: 4px solid color-mix(in srgb, var(--brand-cyan) 60%, var(--brand-ink));
+	padding: 0.8rem 1rem;
+	margin: 1.2rem 0;
+	background: color-mix(in srgb, var(--brand-ink) 6%, var(--light));
+	border-radius: 0 var(--brand-radius-md) var(--brand-radius-md) 0;
+}
+
+@media (max-width: 800px) {
+	body {
+		background-attachment: scroll;
+	}
+
+	body::before {
+		opacity: 0.16;
+		background-size: 26px 26px, 220px 220px, 240px 240px;
+	}
+
+	body::after {
+		opacity: 0.38;
+	}
+
+	.brand-grid .span-6,
+	.brand-grid .span-4,
+	.brand-grid .span-8 {
+		grid-column: span 12;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	body::before {
+		animation: none;
+	}
+}
+
+@keyframes neuralDrift {
+	0% {
+		background-position: 0 0, 0 0, 0 0;
+	}
+	100% {
+		background-position: 40px 26px, 18px 42px, -26px 18px;
+	}
 }
