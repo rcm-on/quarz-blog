@@ -15,7 +15,7 @@ Este artículo registra  los pasos de configuración y los problemas resueltos p
 
 Para que el ecosistema funcione sin fricciones entre la escritura local y el control de versiones con Git, la estructura del repositorio debe ser estricta.
 
-[\!warning\] Regla de Oro del Entorno Local
+> [!warning] Regla de Oro del Entorno Local
 
 El plugin de Git en Obsidian puede fallar si no detecta correctamente la raíz del repositorio.
 
