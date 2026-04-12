@@ -27,7 +27,7 @@ El plugin de Git en Obsidian puede fallar si no detecta correctamente la raíz d
 
 Para mantener URLs profesionales (Slugs) y evitar problemas de codificación en servidores Linux, he adoptado el siguiente estándar de nomenclatura:
 
-[!info] Buenas Prácticas de SEO y Enrutamiento
+> [!info] Buenas Prácticas de SEO y Enrutamiento
 
 * **Nombre del archivo:** Corto, en minúsculas y separado por guiones (ej. guia-despliegue-quartz). Esto genera la URL limpia: /Articulos/guia-despliegue-quartz.  
 * **Propiedad Title (Frontmatter):** Dentro del archivo, se usa la propiedad YAML title: para definir el título largo y presentable que leerá el usuario.  
@@ -38,11 +38,11 @@ Para mantener URLs profesionales (Slugs) y evitar problemas de codificación en 
 
 Durante el primer despliegue a producción en GitHub Pages, el sistema falló por un conflicto de motores de renderizado.
 
-[!bug] El Problema: Liquid Exception
+> [!bug] El Problema: Liquid Exception
 
 GitHub Pages intentó compilar el sitio React/Node usando **Jekyll** (su motor heredado por defecto). Al leer la sintaxis de Quartz, lanzó un error de sintaxis de Liquid.
 
-[!success] La Solución: Infraestructura como Código (IaC)
+> [!success] La Solución: Infraestructura como Código (IaC)
 
 Se inyectó manualmente el pipeline de despliegue Node.js ignorando Jekyll.
 
