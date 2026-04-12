@@ -48,3 +48,4 @@ services:
 
 volumes:
   ollama_data:
+```
