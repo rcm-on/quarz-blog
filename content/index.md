@@ -1,5 +1,5 @@
 ---
-title: 🏗️ Architecture, DevOps & AI Hub
+title: Ramón Campos Martin | Architecture, DevOps & AI Hub
 layout: layout
 ---
 # [Ramón Campos Martin] | Software Architect & AI Explorer

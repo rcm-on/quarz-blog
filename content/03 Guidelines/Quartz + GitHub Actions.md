@@ -1,5 +1,5 @@
 ---
-title: "Construyendo este sitio: Arquitectura Docs-as-Code con Obsidian y Quartz"
+title: "Ramón Campos Martin | Docs-as-Code con Obsidian, Quartz y GitHub Actions"
 date: 2026-03-31
 tags:
   - quartz
