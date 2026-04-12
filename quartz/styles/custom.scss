@@ -305,36 +305,36 @@ a.internal.tag-link {
 
 /* Distinctive site chrome: make it feel like a custom editorial product. */
 .page > #quartz-body {
-	gap: 14px;
+	gap: 8px;
 	grid-template-columns: 300px minmax(0, 1fr) 280px;
 }
 
 .page > #quartz-body .sidebar {
-	border: 1px solid color-mix(in srgb, var(--brand-ink) 14%, transparent);
-	border-radius: var(--brand-radius-lg);
-	background: color-mix(in srgb, var(--light) 66%, transparent);
-	box-shadow: 0 8px 24px color-mix(in srgb, var(--brand-violet) 8%, transparent);
-	padding: 5.4rem 1.25rem 1.25rem;
-	backdrop-filter: blur(14px) saturate(115%);
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	padding: 6rem 1.6rem 1.6rem;
+	backdrop-filter: none;
 }
 
 .page > #quartz-body .center article {
 	max-width: min(980px, 100%);
-	padding: clamp(1rem, 1.8vw, 1.6rem);
-	border: 1px solid color-mix(in srgb, var(--brand-ink) 12%, transparent);
-	border-radius: var(--brand-radius-lg);
-	background: color-mix(in srgb, var(--light) 72%, transparent);
-	box-shadow: 0 12px 28px color-mix(in srgb, var(--brand-violet) 10%, transparent);
-	backdrop-filter: blur(16px) saturate(112%);
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	backdrop-filter: none;
 }
 
 .page .page-header {
-	padding: 0.85rem 1rem;
-	border: 1px solid color-mix(in srgb, var(--brand-ink) 14%, transparent);
-	border-radius: var(--brand-radius-md);
-	background: color-mix(in srgb, var(--light) 68%, transparent);
-	box-shadow: 0 8px 20px color-mix(in srgb, var(--brand-violet) 8%, transparent);
-	backdrop-filter: blur(12px) saturate(112%);
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	backdrop-filter: none;
 }
 
 .breadcrumb-container {
@@ -409,17 +409,17 @@ button.desktop-explorer h2 {
 :root[saved-theme="dark"] .page > #quartz-body .sidebar,
 :root[saved-theme="dark"] .page > #quartz-body .center article,
 :root[saved-theme="dark"] .page .page-header {
-	background: color-mix(in srgb, var(--light) 64%, transparent);
-	border-color: color-mix(in srgb, var(--brand-cyan) 18%, var(--lightgray));
+	background: transparent;
+	border-color: transparent;
 }
 
 footer {
-	padding: 0.85rem 1rem;
-	border: 1px solid color-mix(in srgb, var(--brand-ink) 12%, transparent);
-	border-radius: var(--brand-radius-md);
-	background: color-mix(in srgb, var(--light) 64%, transparent);
-	box-shadow: 0 8px 20px color-mix(in srgb, var(--brand-violet) 8%, transparent);
-	backdrop-filter: blur(12px) saturate(110%);
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	backdrop-filter: none;
 }
 
 footer a {
@@ -439,9 +439,9 @@ footer a {
 	.page > #quartz-body .sidebar,
 	.page > #quartz-body .center article,
 	.page .page-header {
-		border-radius: var(--brand-radius-md);
-		padding-left: 0.9rem;
-		padding-right: 0.9rem;
+		border-radius: 0;
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.callout:hover,
@@ -478,28 +478,13 @@ footer a {
 body[data-slug="index"] .page .page-header {
 	position: relative;
 	overflow: hidden;
-	padding: 1.1rem 1.2rem;
-	border: 1px solid color-mix(in srgb, var(--brand-ink) 26%, var(--lightgray));
-	background:
-		radial-gradient(460px 220px at 0% 0%, color-mix(in srgb, var(--brand-cyan) 20%, transparent), transparent 72%),
-		radial-gradient(380px 180px at 100% 0%, color-mix(in srgb, var(--brand-ink) 20%, transparent), transparent 74%),
-		color-mix(in srgb, var(--light) 90%, #ffffff 10%);
+	padding: 0;
+	border: none;
+	background: transparent;
 }
 
 body[data-slug="index"] .page .page-header::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	pointer-events: none;
-	background:
-		repeating-linear-gradient(
-			135deg,
-			color-mix(in srgb, var(--brand-ink) 8%, transparent) 0,
-			color-mix(in srgb, var(--brand-ink) 8%, transparent) 1px,
-			transparent 1px,
-			transparent 26px
-		);
-	opacity: 0.2;
+	content: none;
 }
 
 body[data-slug="index"] .page .center article {
@@ -528,20 +513,20 @@ body[data-slug="index"] .page .center article > p:nth-of-type(-n + 2) {
 
 body[data-slug="index"] .page .center article > h2 {
 	margin-top: 2rem;
-	padding: 0.8rem 0.95rem;
-	border-left: 4px solid color-mix(in srgb, var(--brand-cyan) 62%, var(--brand-ink));
-	border-radius: 0 12px 12px 0;
-	background: color-mix(in srgb, var(--brand-ink) 6%, var(--light));
+	padding: 0;
+	border-left: none;
+	border-radius: 0;
+	background: transparent;
 	font-size: clamp(1.28rem, 2vw, 1.6rem);
 	letter-spacing: -0.01em;
 }
 
 body[data-slug="index"] .page .center article ul {
-	border: var(--brand-border);
-	border-radius: var(--brand-radius-md);
-	background: color-mix(in srgb, var(--light) 90%, #ffffff 10%);
-	padding: 0.85rem 1rem 0.85rem 1.5rem;
-	box-shadow: var(--brand-shadow-card);
+	border: none;
+	border-radius: 0;
+	background: transparent;
+	padding: 0 0 0 1.5rem;
+	box-shadow: none;
 	margin-bottom: 1.05rem;
 }
 
