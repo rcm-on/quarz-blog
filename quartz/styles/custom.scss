@@ -1,4 +1,29 @@
 @use "./base.scss";
 
+// Professional visual polish layered on top of Quartz defaults.
+.page {
+	.page-header {
+		border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 70%, transparent);
+		margin-bottom: 1rem;
+		padding-bottom: 0.75rem;
+	}
 
-// put your custom CSS here!
+	.article-title {
+		letter-spacing: -0.02em;
+		line-height: 1.15;
+	}
+}
+
+a {
+	text-underline-offset: 0.15em;
+	text-decoration-thickness: 0.08em;
+}
+
+.callout {
+	border-radius: 10px;
+}
+
+.tags > li > a,
+a.internal.tag-link {
+	font-weight: 600;
+}

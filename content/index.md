@@ -2,11 +2,11 @@
 title: Ramón Campos Martin | Architecture, DevOps & AI Hub
 layout: layout
 ---
-# [Ramón Campos Martin] | Software Architect & AI Explorer
+# Ramón Campos Martin | Software Architect
 
-Bienvenido a mi ecosistema. Trato la documentación como código (**Docs as Code**) y este espacio es el registro vivo de cómo diseño, construyo y escalo sistemas modernos.
+Este sitio documenta decisiones de arquitectura, prácticas de ingeniería y laboratorios aplicados de IA con enfoque en impacto técnico real.
 
-Aquí encontrarás reflexiones sobre arquitectura distribuida, automatización DevOps y mis pruebas de concepto integrando modelos de Inteligencia Artificial (LLMOps) en entornos de producción.
+Publico contenido accionable sobre sistemas distribuidos, DevOps y LLMOps para equipos que construyen productos en producción.
 
 ---
 
@@ -42,4 +42,4 @@ Aquí encontrarás reflexiones sobre arquitectura distribuida, automatización D
 #system-design #kubernetes #aws #terraform #cicd #llmops #rag #golang #python
 
 ### 📫 Connect
-[GitHub](https://github.com/TU_USUARIO) | [LinkedIn](https://linkedin.com/in/TU_PERFIL)
+[GitHub](https://github.com/rcm-on)
