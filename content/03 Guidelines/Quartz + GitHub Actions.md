@@ -16,12 +16,11 @@ Este artículo registra  los pasos de configuración y los problemas resueltos p
 Para que el ecosistema funcione sin fricciones entre la escritura local y el control de versiones con Git, la estructura del repositorio debe ser estricta.
 
 > [!warning] Regla de Oro del Entorno Local
-
-El plugin de Git en Obsidian puede fallar si no detecta correctamente la raíz del repositorio.
-
-1. **Clonado Limpio:** Se debe clonar el fork de Quartz en una carpeta nueva.  
-2. **Raíz de la Bóveda:** Al abrir Obsidian, se selecciona la **carpeta principal del repositorio**, NO la carpeta content.  
-3. **Gestión de Contenido:** Todo el contenido (Markdown, imágenes) vive *exclusivamente* dentro de la subcarpeta content.
+> El plugin de Git en Obsidian puede fallar si no detecta correctamente la raíz del repositorio.
+>
+> 1. **Clonado Limpio:** Se debe clonar el fork de Quartz en una carpeta nueva.  
+> 2. **Raíz de la Bóveda:** Al abrir Obsidian, se selecciona la **carpeta principal del repositorio**, NO la carpeta content.  
+> 3. **Gestión de Contenido:** Todo el contenido (Markdown, imágenes) vive *exclusivamente* dentro de la subcarpeta content.
 
 ## **🔗 2\. Estándar de Enrutamiento (Clean URLs)**
 
