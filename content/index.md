@@ -1,12 +1,12 @@
 ---
-title: Ramón Campos Martin | Architecture, DevOps & AI Hub
+title: Ramón Campos Martin | Blog técnico de Arquitectura, DevOps e IA
 layout: layout
 ---
-# Ramón Campos Martin | Software Architect
+# Blog técnico de Ramón Campos Martin
 
-Este sitio documenta decisiones de arquitectura, prácticas de ingeniería y laboratorios aplicados de IA con enfoque en impacto técnico real.
+Guías prácticas y documentación técnica sobre arquitectura de software, prácticas de ingeniería y laboratorios aplicados de IA.
 
-Publico contenido accionable sobre sistemas distribuidos, DevOps y LLMOps para equipos que construyen productos en producción.
+Contenido accionable para equipos que diseñan, despliegan y operan sistemas en producción.
 
 ---
 
@@ -42,4 +42,4 @@ Publico contenido accionable sobre sistemas distribuidos, DevOps y LLMOps para e
 #system-design #kubernetes #aws #terraform #cicd #llmops #rag #golang #python
 
 ### 📫 Connect
-[GitHub](https://github.com/rcm-on)
+[GitHub](https://github.com/rcm-on) | [LinkedIn](https://linkedin.com/in/ramón-campos-78aba234)

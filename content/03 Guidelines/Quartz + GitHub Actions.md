@@ -7,7 +7,7 @@ tags:
   - github
   - obsidian
 ---
-# **🚀 Docs-as-Code: El Motor de este Portfolio**
+# **🚀 Docs-as-Code: El Motor de este Blog Técnico**
 
 Este artículo registra  los pasos de configuración y los problemas resueltos para levantar este mismo sitio utilizando **Obsidian** (como CMS local), **Quartz v4** (como generador de sitio estático) y **GitHub Actions** (como pipeline de CI/CD).
 

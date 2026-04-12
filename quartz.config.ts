@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Ramón Campos Martin | Software Architecture, DevOps & AI Systems",
+    pageTitle: "Ramón Campos Martin | Blog técnico de Arquitectura, DevOps e IA",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
