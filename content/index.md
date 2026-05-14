@@ -1,45 +1,39 @@
 ---
-title: Ramón Campos Martin | Blog técnico de Arquitectura, DevOps e IA
+title: Ramón Campos Martin | Arquitectura, DevOps e IA
 layout: layout
 ---
-# Blog técnico de Ramón Campos Martin
 
-Guías prácticas y documentación técnica sobre arquitectura de software, prácticas de ingeniería y laboratorios aplicados de IA.
-
-Contenido accionable para equipos que diseñan, despliegan y operan sistemas en producción.
+Notas técnicas sobre cómo diseñar, desplegar y operar sistemas en producción. Sin hype, con criterio.
 
 ---
 
-## 🏛️ Architecture Decision Records (ADRs)
-> [!abstract] El registro de mis decisiones técnicas y sus trade-offs.
-- [[04 ADRs/ADR-001-Adopcion-Diataxis|ADR 001: Adopción del Framework Diátaxis para Documentación]]
-- [[04 ADRs/ADR-002-Modelos-Locales-vs-API|ADR 002: Uso de LLMs Locales vs APIs de Terceros en Privacidad de Datos]]
+## 📝 Artículos
 
-## 🤖 AI & LLMOps
-> [!example] Pruebas de concepto integrando modelos de lenguaje, RAG y automatización.
-- [[02 Laboratorios/Despliegue-Local-Ollama-Docker|Arquitectura y Despliegue de LLMs locales con Ollama y Docker]]
-- [[01 Artículos/Arquitectura-RAG-Explicada|Diseñando un sistema RAG (Retrieval-Augmented Generation) seguro]]
+- [[01 Artículos/coste-conocimiento-retenido-organizaciones|El coste oculto del conocimiento retenido en las organizaciones]]
+- [[01 Artículos/documentacion-poder-conocimiento|El conocimiento que no se documenta no se comparte. Era una elección.]]
+- [[01 Artículos/documentar-ahora-es-diferente|Documentar ahora es diferente. Y por fin lo entendemos.]]
 
-## 📜 Engineering Guidelines
-> [!info] Mis estándares, convenciones y reglas de oro para equipos.
-- [[03 Guidelines/API-Design-Standards|Estándares de Diseño para APIs RESTful y gRPC]]
-- [[03 Guidelines/Git-Flow-y-CI-CD|Convenciones de Git y Estrategias de Despliegue Zero-Downtime]]
-- [[Quartz + GitHub Actions]]
+## 🧠 Arquitectura IA
 
-## 🧪 Laboratorios y DevOps PoCs
-> [!tip] Infraestructura como código, despliegues y automatización.
-- [[02 Laboratorios/K8s-Cluster-Terraform|Topología y Despliegue de un Cluster K8s con Terraform]]
-- [[ollama-docker-local#Desplegando IA en Local Privacidad y Control]]
+Cómo diseñar el entorno que rodea al modelo — no solo el modelo.
 
-## 🧠 Artículos y Reflexiones
-> [!quote] Mi visión sobre la industria, patrones de diseño y operaciones.
-- [[01 Artículos/Mi-Stack-Tecnologico|Mi Stack Tecnológico Definitivo como Arquitecto]]
-- [[01 Artículos/Trade-offs-Microservicios|El falso mito de los Microservicios por defecto]]
+- [[04 Arquitectura IA/harness-engineering-agentes-ia|Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA]]
+- [[04 Arquitectura IA/arquitectura-como-contexto|La arquitectura no es solo para los humanos del equipo]]
+- [[04 Arquitectura IA/genera-el-plan-primero|Pídele al modelo que piense antes de que genere]]
+- [[04 Arquitectura IA/confiabilidad-no-viene-del-modelo|La confiabilidad de un agente no viene del modelo]]
+- [[04 Arquitectura IA/context-engineering|Context Engineering: la disciplina que nadie está nombrando]]
+
+## 🤖 Laboratorios
+
+Experimentos prácticos con infraestructura y modelos.
+
+- [[02 Laboratorios/arch-md-ejemplo|Lab: ARCH.md — ejemplo de documento de arquitectura para agentes IA]]
+- [[02 Laboratorios/ollama-docker-local|Despliegue local de LLMs con Ollama y Docker]]
+
+## 📜 Guidelines
+
+- [[03 Guidelines/Quartz + GitHub Actions|Publicar con Quartz y GitHub Actions]]
 
 ---
 
-### 🛠️ Tech Stack Core
-#system-design #kubernetes #aws #terraform #cicd #llmops #rag #golang #python
-
-### 📫 Connect
-[GitHub](https://github.com/rcm-on) | [LinkedIn](https://linkedin.com/in/ramón-campos-78aba234)
+`#arquitectura` `#devops` `#ia` `#llm` `#agentes` `#kubernetes` `#aws`

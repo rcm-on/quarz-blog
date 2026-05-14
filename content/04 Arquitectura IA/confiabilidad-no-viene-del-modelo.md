@@ -20,23 +20,14 @@ El modelo no sabe lo que no sabe.
 Si despliegas un LLM en producción sin capas de verificación, estás asumiendo que el modelo va a ser correcto la mayor parte del tiempo. Esa asunción falla de formas que son difíciles de detectar hasta que el daño ya está hecho.
 
 ```mermaid
-graph TD
-    subgraph Sin verificación
-        A1[Agente] -->|"respuesta confiada\n(puede estar mal)"| P1[Producción]
-        P1 -->|fallo silencioso| E1[Error detectado tarde]
-    end
+graph LR
+    A1[Agente] -->|sin verificación| P1[Producción]
+    P1 --> E1[/Error silencioso/]
 
-    subgraph Con capas de verificación
-        A2[Agente] --> V1[Tests automáticos]
-        V1 -->|falla| A2
-        V1 -->|pasa| V2[Revisión humana\nen puntos críticos]
-        V2 --> P2[Producción]
-    end
-
-    style E1 fill:#ef4444,color:#fff
-    style P2 fill:#22c55e,color:#fff
-    style V1 fill:#4338ca,color:#fff
-    style V2 fill:#f97316,color:#fff
+    A2[Agente] --> V1[Tests]
+    V1 -->|falla| A2
+    V1 -->|pasa| V2[Aprobación humana]
+    V2 --> P2([Producción segura])
 ```
 
 La confiabilidad no es una propiedad del modelo. Es una propiedad del **sistema que lo rodea**.

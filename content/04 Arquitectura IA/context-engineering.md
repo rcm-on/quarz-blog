@@ -29,7 +29,7 @@ graph TD
         A[Arquitectura de referencia]
     end
 
-    CE{{"Context Engineer\ndiseña la ventana"}}
+    CE{{"Context Engineer"}}
 
     S --> CE
     H --> CE
@@ -38,10 +38,8 @@ graph TD
     A --> CE
 
     CE -->|contexto optimizado| M[Modelo]
-    M --> OUT[Output predecible\ny coherente]
+    M --> OUT[Output predecible y coherente]
 
-    style CE fill:#f97316,color:#fff
-    style M fill:#4338ca,color:#fff
 ```
 
 El context engineer decide lo que entra y lo que se queda fuera. Es una decisión de diseño con consecuencias directas en la calidad del output.
@@ -64,7 +62,7 @@ Estas decisiones no las toma el desarrollador en cada sesión. Las define el arq
 
 ```mermaid
 graph LR
-    ARQ[Arquitecto\ndiseña la política] -->|CONTEXT.md| H[Harness]
+    ARQ[Arquitecto] -->|CONTEXT.md| H[Harness]
     H -->|aplica la política| C[Ventana de contexto]
     C -->|entrada optimizada| M[Modelo]
     M --> OUT[Output]

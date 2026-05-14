@@ -28,12 +28,12 @@ $$H = (E, T, C, S, L, V)$$
 
 ```mermaid
 graph TD
-    E["**E** — Bucle de Ejecución\nobservar → pensar → actuar"]
-    T["**T** — Registro de Herramientas\ncatálogo validado: bash, browser, APIs"]
-    C["**C** — Gestor de Contexto\nfiltra y prioriza lo que entra al modelo"]
-    S["**S** — Almacén de Estado\nmemoria persistente entre sesiones"]
-    L["**L** — Ganchos de Ciclo de Vida\npuntos de intercepción y aprobación"]
-    V["**V** — Interfaz de Evaluación\nmétricas, trazas, verificación de éxito"]
+    E["E — Bucle de Ejecución: observar → pensar → actuar"]
+    T["T — Registro de Herramientas: bash, browser, APIs"]
+    C["C — Gestor de Contexto: filtra lo que entra al modelo"]
+    S["S — Almacén de Estado: memoria entre sesiones"]
+    L["L — Ganchos de Ciclo de Vida: intercepción y aprobación"]
+    V["V — Interfaz de Evaluación: métricas y trazas"]
 
     E -->|usa| T
     E -->|consume| C
@@ -41,9 +41,6 @@ graph TD
     L -->|intercepta| E
     V -->|instrumenta| E
 
-    style E fill:#4338ca,color:#fff
-    style L fill:#f97316,color:#fff
-    style V fill:#f97316,color:#fff
 ```
 
 Cada componente resuelve un problema distinto. La mayoría de los proyectos que fallan en producción lo hacen porque ignoraron **L** (no hay supervisión humana en los momentos críticos) o **V** (no hay forma de saber si el agente está haciendo lo correcto).
@@ -100,8 +97,8 @@ graph LR
     end
 
     subgraph Estado["Estado compartido (S)"]
-        MEM[(Memoria\npersistente)]
-        CTX[(Contexto\nsesión)]
+        MEM[(Memoria persistente)]
+        CTX[(Contexto sesión)]
     end
 
     P -->|plan| R
@@ -127,7 +124,7 @@ Aquí está el giro práctico más importante: gran parte de las políticas del 
 
 Herramientas como Claude Code, Cursor o los flujos de trabajo de Mitchell Hashimoto convergen en el mismo patrón: `AGENTS.md` y `MEMORY.md`.
 
-```
+```text
 repositorio/
 ├── AGENTS.md       ← políticas, restricciones, roles
 ├── MEMORY.md       ← aprendizajes persistentes entre sesiones

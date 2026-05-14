@@ -21,12 +21,10 @@ La idea es simple. En vez de pedir el output directamente, pides al modelo que g
 
 ```mermaid
 graph LR
-    P[Tu problema] -->|paso 1| R["Modelo razona:\n¿qué necesito saber?"]
-    R -->|conocimiento generado| G["Modelo genera:\nel output real"]
-    G --> O[Resultado coherente\ncon el sistema]
+    P[Tu problema] -->|paso 1| R[Modelo razona y planifica]
+    R -->|conocimiento generado| G[Modelo genera el output]
+    G --> O[Resultado coherente con el sistema]
 
-    style R fill:#4338ca,color:#fff
-    style G fill:#f97316,color:#fff
 ```
 
 En la práctica: primero pides el plan de implementación. El modelo te explica cómo va a estructurar la solución, qué patrones va a aplicar, qué dependencias va a necesitar. Entonces sí pides el código, con ese plan como contexto.
