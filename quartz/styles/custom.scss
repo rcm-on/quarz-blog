@@ -1,608 +1,549 @@
 @use "./base.scss";
 
+/* =================================================
+   RCM — Brand System · Índigo × Coral
+   Modern SaaS · AACC · Neurodivergente · Personal
+   ================================================= */
+
+/* -------------------------------------------------
+   TOKENS — Light (default)
+   Quartz inyecta los tokens base (--light, --dark,
+   --secondary, --tertiary…) desde quartz.config.ts.
+   Aquí extendemos con tokens de marca propios.
+   ------------------------------------------------- */
 :root {
-	--brand-ink: #0f4c81;
-	--brand-cyan: #14b8a6;
-	--brand-violet: #0b1020;
-	--brand-accent: #f59e0b;
-	--brand-warn: #fb7185;
-	--brand-radius-lg: 14px;
-	--brand-radius-md: 10px;
-	--brand-radius-sm: 8px;
-	--brand-shadow-soft: 0 10px 30px color-mix(in srgb, var(--brand-violet) 16%, transparent);
-	--brand-shadow-card: 0 8px 24px color-mix(in srgb, var(--brand-violet) 12%, transparent);
-	--brand-border: 1px solid color-mix(in srgb, var(--brand-ink) 18%, var(--lightgray));
-	--brand-reading-max: 74ch;
-	--brand-kicker: 0.78rem;
-	--brand-h1: clamp(2rem, 3.5vw, 3rem);
-	--brand-h2: clamp(1.35rem, 2.2vw, 1.9rem);
-	--brand-body: clamp(1rem, 1.2vw, 1.08rem);
-	--brand-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* Accesos directos a la paleta */
+  --rcm-indigo:        #4338ca;
+  --rcm-coral:         #f97316;
+  --rcm-indigo-pale:   rgba(67, 56, 202, 0.09);
+  --rcm-coral-pale:    rgba(249, 115, 22, 0.09);
+
+  /* Shape */
+  --rcm-radius-lg:  16px;
+  --rcm-radius-md:  10px;
+  --rcm-radius-sm:   6px;
+
+  /* Shadow — capas finas, nada dramático */
+  --rcm-shadow-sm:  0 1px 2px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
+  --rcm-shadow-md:  0 2px 6px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.06);
+
+  /* Motion */
+  --rcm-ease:        cubic-bezier(0.22, 0.61, 0.36, 1);
+  --rcm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Reading width */
+  --rcm-prose-width: 72ch;
 }
 
-::selection {
-	background: color-mix(in srgb, var(--brand-cyan) 35%, var(--brand-ink));
-	color: #fff;
+/* -------------------------------------------------
+   TOKENS — Dark override
+   ------------------------------------------------- */
+:root[saved-theme="dark"] {
+  --rcm-indigo:        #818cf8;
+  --rcm-coral:         #fb923c;
+  --rcm-indigo-pale:   rgba(129, 140, 248, 0.11);
+  --rcm-coral-pale:    rgba(251, 146, 60, 0.11);
+  --rcm-shadow-sm:  0 1px 2px rgba(0,0,0,.25), 0 4px 12px rgba(0,0,0,.20);
+  --rcm-shadow-md:  0 2px 6px rgba(0,0,0,.30), 0 12px 32px rgba(0,0,0,.25);
 }
+
+/* =================================================
+   AURORA — solo gradiente animado, sin malla
+   ================================================= */
 
 body {
-	position: relative;
-	background:
-		radial-gradient(1300px 700px at 8% -10%, color-mix(in srgb, var(--brand-ink) 10%, transparent), transparent 70%),
-		radial-gradient(980px 560px at 92% -8%, color-mix(in srgb, var(--brand-cyan) 8%, transparent), transparent 76%),
-		linear-gradient(180deg, color-mix(in srgb, var(--light) 90%, #ffffff 10%) 0%, var(--light) 40%, var(--light) 100%);
-	background-attachment: fixed;
+  position: relative;
+  background-color: var(--light);
+  background-attachment: fixed;
 }
 
-body::before,
-body::after {
-	content: "";
-	position: fixed;
-	inset: 0;
-	pointer-events: none;
-	z-index: 0;
-}
-
-/* Aurora layer: smooth moving gradients, no dotted mesh. */
 body::before {
-	opacity: 0.16;
-	background:
-		radial-gradient(560px 300px at 12% 24%, color-mix(in srgb, var(--brand-ink) 14%, transparent), transparent 76%),
-		radial-gradient(620px 330px at 86% 18%, color-mix(in srgb, var(--brand-cyan) 12%, transparent), transparent 78%),
-		radial-gradient(780px 430px at 50% 8%, color-mix(in srgb, var(--brand-accent) 6%, transparent), transparent 84%);
-	filter: blur(20px) saturate(96%);
-	transform-origin: center top;
-	animation: auroraFloat 42s ease-in-out infinite alternate;
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.16;
+  background:
+    radial-gradient(700px 420px at  8%  -8%, rgba(67,  56, 202, 0.50), transparent 68%),
+    radial-gradient(500px 300px at 92%   6%, rgba(249, 115, 22, 0.28), transparent 70%),
+    radial-gradient(840px 480px at 50% 105%, rgba(67,  56, 202, 0.18), transparent 76%);
+  filter: blur(32px) saturate(130%);
+  animation: rcmAurora 52s ease-in-out infinite alternate;
 }
 
-/* Fine mathematical mesh overlay (no decorative nodes). */
-body::after {
-	opacity: 0.22;
-	background:
-		repeating-linear-gradient(
-			90deg,
-			color-mix(in srgb, var(--brand-ink) 6%, transparent) 0,
-			color-mix(in srgb, var(--brand-ink) 6%, transparent) 1px,
-			transparent 1px,
-			transparent 34px
-		),
-		repeating-linear-gradient(
-			0deg,
-			color-mix(in srgb, var(--brand-cyan) 5%, transparent) 0,
-			color-mix(in srgb, var(--brand-cyan) 5%, transparent) 1px,
-			transparent 1px,
-			transparent 34px
-		),
-		radial-gradient(760px 470px at 50% 22%, color-mix(in srgb, #ffffff 84%, transparent), transparent 77%),
-		radial-gradient(680px 340px at 50% 100%, color-mix(in srgb, var(--light) 70%, transparent), transparent 82%);
-	background-size: 34px 34px, 34px 34px, auto, auto;
-	background-position: 0 0, 0 0, 0 0, 0 0;
-	filter: blur(0.1px);
-	animation: meshDrift 90s linear infinite;
-}
-
-/* Dark mode: amplify neural mesh and add brighter node hubs. */
 :root[saved-theme="dark"] body::before {
-	opacity: 0.28;
-	background:
-		radial-gradient(600px 320px at 14% 24%, color-mix(in srgb, #67d7ff 18%, transparent), transparent 76%),
-		radial-gradient(640px 360px at 82% 20%, color-mix(in srgb, #2dd4bf 16%, transparent), transparent 80%),
-		radial-gradient(820px 420px at 52% 6%, color-mix(in srgb, #7dd3fc 10%, transparent), transparent 86%);
-	filter: blur(20px) saturate(100%);
+  opacity: 0.28;
+  background:
+    radial-gradient(700px 420px at  8%  -8%, rgba(99, 102, 241, 0.60), transparent 68%),
+    radial-gradient(500px 300px at 92%   6%, rgba(251, 146, 60, 0.32), transparent 70%),
+    radial-gradient(840px 480px at 50% 105%, rgba(99, 102, 241, 0.22), transparent 76%);
 }
 
+@keyframes rcmAurora {
+  0%   { transform: translate3d(0, -1.2rem, 0) scale(1);    }
+  100% { transform: translate3d(0,  1.2rem, 0) scale(1.05); }
+}
+
+/* Arborescencia neural — cubre toda la pantalla (16:9) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'%3E%3Cg stroke='rgba(67,56,202,0.50)' stroke-width='1' fill='none'%3E%3Cline x1='200' y1='60' x2='80' y2='200'/%3E%3Cline x1='200' y1='60' x2='350' y2='180'/%3E%3Cline x1='500' y1='40' x2='350' y2='180'/%3E%3Cline x1='500' y1='40' x2='620' y2='195'/%3E%3Cline x1='800' y1='55' x2='620' y2='195'/%3E%3Cline x1='800' y1='55' x2='880' y2='185'/%3E%3Cline x1='1100' y1='45' x2='880' y2='185'/%3E%3Cline x1='1100' y1='45' x2='1150' y2='200'/%3E%3Cline x1='1400' y1='65' x2='1150' y2='200'/%3E%3Cline x1='1400' y1='65' x2='1520' y2='190'/%3E%3Cline x1='80' y1='200' x2='170' y2='380'/%3E%3Cline x1='350' y1='180' x2='170' y2='380'/%3E%3Cline x1='350' y1='180' x2='460' y2='360'/%3E%3Cline x1='620' y1='195' x2='460' y2='360'/%3E%3Cline x1='620' y1='195' x2='740' y2='375'/%3E%3Cline x1='880' y1='185' x2='740' y2='375'/%3E%3Cline x1='880' y1='185' x2='1020' y2='365'/%3E%3Cline x1='1150' y1='200' x2='1020' y2='365'/%3E%3Cline x1='1150' y1='200' x2='1300' y2='380'/%3E%3Cline x1='1520' y1='190' x2='1300' y2='380'/%3E%3Cline x1='170' y1='380' x2='100' y2='560'/%3E%3Cline x1='460' y1='360' x2='100' y2='560'/%3E%3Cline x1='460' y1='360' x2='380' y2='540'/%3E%3Cline x1='740' y1='375' x2='380' y2='540'/%3E%3Cline x1='740' y1='375' x2='660' y2='555'/%3E%3Cline x1='1020' y1='365' x2='660' y2='555'/%3E%3Cline x1='1020' y1='365' x2='940' y2='545'/%3E%3Cline x1='1300' y1='380' x2='940' y2='545'/%3E%3Cline x1='1300' y1='380' x2='1220' y2='560'/%3E%3Cline x1='1300' y1='380' x2='1480' y2='550'/%3E%3Cline x1='100' y1='560' x2='250' y2='730'/%3E%3Cline x1='380' y1='540' x2='250' y2='730'/%3E%3Cline x1='380' y1='540' x2='540' y2='715'/%3E%3Cline x1='660' y1='555' x2='540' y2='715'/%3E%3Cline x1='660' y1='555' x2='820' y2='730'/%3E%3Cline x1='940' y1='545' x2='820' y2='730'/%3E%3Cline x1='940' y1='545' x2='1100' y2='720'/%3E%3Cline x1='1220' y1='560' x2='1100' y2='720'/%3E%3Cline x1='1220' y1='560' x2='1380' y2='735'/%3E%3Cline x1='1480' y1='550' x2='1380' y2='735'/%3E%3Cline x1='250' y1='730' x2='90' y2='870'/%3E%3Cline x1='250' y1='730' x2='370' y2='855'/%3E%3Cline x1='540' y1='715' x2='370' y2='855'/%3E%3Cline x1='540' y1='715' x2='650' y2='865'/%3E%3Cline x1='820' y1='730' x2='650' y2='865'/%3E%3Cline x1='820' y1='730' x2='930' y2='860'/%3E%3Cline x1='1100' y1='720' x2='930' y2='860'/%3E%3Cline x1='1100' y1='720' x2='1210' y2='870'/%3E%3Cline x1='1380' y1='735' x2='1210' y2='870'/%3E%3Cline x1='1380' y1='735' x2='1510' y2='860'/%3E%3Cline x1='350' y1='180' x2='620' y2='195'/%3E%3Cline x1='880' y1='185' x2='1150' y2='200'/%3E%3Cline x1='460' y1='360' x2='740' y2='375'/%3E%3Cline x1='1020' y1='365' x2='1300' y2='380'/%3E%3Cline x1='380' y1='540' x2='660' y2='555'/%3E%3Cline x1='940' y1='545' x2='1220' y2='560'/%3E%3Cline x1='540' y1='715' x2='820' y2='730'/%3E%3Cline x1='1100' y1='720' x2='1380' y2='735'/%3E%3C/g%3E%3Cg fill='rgba(67,56,202,0.70)'%3E%3Ccircle cx='200' cy='60' r='4'/%3E%3Ccircle cx='500' cy='40' r='4.5'/%3E%3Ccircle cx='800' cy='55' r='4.5'/%3E%3Ccircle cx='1100' cy='45' r='4'/%3E%3Ccircle cx='1400' cy='65' r='4'/%3E%3Ccircle cx='80' cy='200' r='3.5'/%3E%3Ccircle cx='350' cy='180' r='4.5'/%3E%3Ccircle cx='620' cy='195' r='4.5'/%3E%3Ccircle cx='880' cy='185' r='4.5'/%3E%3Ccircle cx='1150' cy='200' r='4.5'/%3E%3Ccircle cx='1520' cy='190' r='3.5'/%3E%3Ccircle cx='170' cy='380' r='4'/%3E%3Ccircle cx='460' cy='360' r='4.8'/%3E%3Ccircle cx='740' cy='375' r='5.2'/%3E%3Ccircle cx='1020' cy='365' r='5'/%3E%3Ccircle cx='1300' cy='380' r='4.8'/%3E%3Ccircle cx='100' cy='560' r='3.5'/%3E%3Ccircle cx='380' cy='540' r='4.5'/%3E%3Ccircle cx='660' cy='555' r='5.2'/%3E%3Ccircle cx='940' cy='545' r='5'/%3E%3Ccircle cx='1220' cy='560' r='4.5'/%3E%3Ccircle cx='1480' cy='550' r='3.5'/%3E%3Ccircle cx='250' cy='730' r='4'/%3E%3Ccircle cx='540' cy='715' r='4.8'/%3E%3Ccircle cx='820' cy='730' r='5.2'/%3E%3Ccircle cx='1100' cy='720' r='5'/%3E%3Ccircle cx='1380' cy='735' r='4.5'/%3E%3Ccircle cx='90' cy='870' r='3.5'/%3E%3Ccircle cx='370' cy='855' r='4'/%3E%3Ccircle cx='650' cy='865' r='4.5'/%3E%3Ccircle cx='930' cy='860' r='4.5'/%3E%3Ccircle cx='1210' cy='870' r='4'/%3E%3Ccircle cx='1510' cy='860' r='3.5'/%3E%3C/g%3E%3Cg fill='rgba(249,115,22,0.85)'%3E%3Ccircle cx='740' cy='375' r='2.8'/%3E%3Ccircle cx='660' cy='555' r='2.8'/%3E%3Ccircle cx='820' cy='730' r='2.8'/%3E%3Ccircle cx='500' cy='40' r='2.5'/%3E%3Ccircle cx='940' cy='545' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Arborescencia neural — oscuro */
 :root[saved-theme="dark"] body::after {
-	opacity: 0.34;
-	background:
-		repeating-linear-gradient(
-			90deg,
-			color-mix(in srgb, #7dd3fc 10%, transparent) 0,
-			color-mix(in srgb, #7dd3fc 10%, transparent) 1px,
-			transparent 1px,
-			transparent 32px
-		),
-		repeating-linear-gradient(
-			0deg,
-			color-mix(in srgb, #2dd4bf 9%, transparent) 0,
-			color-mix(in srgb, #2dd4bf 9%, transparent) 1px,
-			transparent 1px,
-			transparent 32px
-		),
-		radial-gradient(760px 470px at 50% 22%, color-mix(in srgb, #0f172a 38%, transparent), transparent 80%);
-	background-size: 32px 32px, 32px 32px, auto;
-	background-position: 0 0, 0 0, 0 0;
-	filter: blur(0.1px) saturate(104%);
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'%3E%3Cg stroke='rgba(129,140,248,0.42)' stroke-width='1' fill='none'%3E%3Cline x1='200' y1='60' x2='80' y2='200'/%3E%3Cline x1='200' y1='60' x2='350' y2='180'/%3E%3Cline x1='500' y1='40' x2='350' y2='180'/%3E%3Cline x1='500' y1='40' x2='620' y2='195'/%3E%3Cline x1='800' y1='55' x2='620' y2='195'/%3E%3Cline x1='800' y1='55' x2='880' y2='185'/%3E%3Cline x1='1100' y1='45' x2='880' y2='185'/%3E%3Cline x1='1100' y1='45' x2='1150' y2='200'/%3E%3Cline x1='1400' y1='65' x2='1150' y2='200'/%3E%3Cline x1='1400' y1='65' x2='1520' y2='190'/%3E%3Cline x1='80' y1='200' x2='170' y2='380'/%3E%3Cline x1='350' y1='180' x2='170' y2='380'/%3E%3Cline x1='350' y1='180' x2='460' y2='360'/%3E%3Cline x1='620' y1='195' x2='460' y2='360'/%3E%3Cline x1='620' y1='195' x2='740' y2='375'/%3E%3Cline x1='880' y1='185' x2='740' y2='375'/%3E%3Cline x1='880' y1='185' x2='1020' y2='365'/%3E%3Cline x1='1150' y1='200' x2='1020' y2='365'/%3E%3Cline x1='1150' y1='200' x2='1300' y2='380'/%3E%3Cline x1='1520' y1='190' x2='1300' y2='380'/%3E%3Cline x1='170' y1='380' x2='100' y2='560'/%3E%3Cline x1='460' y1='360' x2='100' y2='560'/%3E%3Cline x1='460' y1='360' x2='380' y2='540'/%3E%3Cline x1='740' y1='375' x2='380' y2='540'/%3E%3Cline x1='740' y1='375' x2='660' y2='555'/%3E%3Cline x1='1020' y1='365' x2='660' y2='555'/%3E%3Cline x1='1020' y1='365' x2='940' y2='545'/%3E%3Cline x1='1300' y1='380' x2='940' y2='545'/%3E%3Cline x1='1300' y1='380' x2='1220' y2='560'/%3E%3Cline x1='1300' y1='380' x2='1480' y2='550'/%3E%3Cline x1='100' y1='560' x2='250' y2='730'/%3E%3Cline x1='380' y1='540' x2='250' y2='730'/%3E%3Cline x1='380' y1='540' x2='540' y2='715'/%3E%3Cline x1='660' y1='555' x2='540' y2='715'/%3E%3Cline x1='660' y1='555' x2='820' y2='730'/%3E%3Cline x1='940' y1='545' x2='820' y2='730'/%3E%3Cline x1='940' y1='545' x2='1100' y2='720'/%3E%3Cline x1='1220' y1='560' x2='1100' y2='720'/%3E%3Cline x1='1220' y1='560' x2='1380' y2='735'/%3E%3Cline x1='1480' y1='550' x2='1380' y2='735'/%3E%3Cline x1='250' y1='730' x2='90' y2='870'/%3E%3Cline x1='250' y1='730' x2='370' y2='855'/%3E%3Cline x1='540' y1='715' x2='370' y2='855'/%3E%3Cline x1='540' y1='715' x2='650' y2='865'/%3E%3Cline x1='820' y1='730' x2='650' y2='865'/%3E%3Cline x1='820' y1='730' x2='930' y2='860'/%3E%3Cline x1='1100' y1='720' x2='930' y2='860'/%3E%3Cline x1='1100' y1='720' x2='1210' y2='870'/%3E%3Cline x1='1380' y1='735' x2='1210' y2='870'/%3E%3Cline x1='1380' y1='735' x2='1510' y2='860'/%3E%3Cline x1='350' y1='180' x2='620' y2='195'/%3E%3Cline x1='880' y1='185' x2='1150' y2='200'/%3E%3Cline x1='460' y1='360' x2='740' y2='375'/%3E%3Cline x1='1020' y1='365' x2='1300' y2='380'/%3E%3Cline x1='380' y1='540' x2='660' y2='555'/%3E%3Cline x1='940' y1='545' x2='1220' y2='560'/%3E%3Cline x1='540' y1='715' x2='820' y2='730'/%3E%3Cline x1='1100' y1='720' x2='1380' y2='735'/%3E%3C/g%3E%3Cg fill='rgba(129,140,248,0.65)'%3E%3Ccircle cx='200' cy='60' r='4'/%3E%3Ccircle cx='500' cy='40' r='4.5'/%3E%3Ccircle cx='800' cy='55' r='4.5'/%3E%3Ccircle cx='1100' cy='45' r='4'/%3E%3Ccircle cx='1400' cy='65' r='4'/%3E%3Ccircle cx='80' cy='200' r='3.5'/%3E%3Ccircle cx='350' cy='180' r='4.5'/%3E%3Ccircle cx='620' cy='195' r='4.5'/%3E%3Ccircle cx='880' cy='185' r='4.5'/%3E%3Ccircle cx='1150' cy='200' r='4.5'/%3E%3Ccircle cx='1520' cy='190' r='3.5'/%3E%3Ccircle cx='170' cy='380' r='4'/%3E%3Ccircle cx='460' cy='360' r='4.8'/%3E%3Ccircle cx='740' cy='375' r='5.2'/%3E%3Ccircle cx='1020' cy='365' r='5'/%3E%3Ccircle cx='1300' cy='380' r='4.8'/%3E%3Ccircle cx='100' cy='560' r='3.5'/%3E%3Ccircle cx='380' cy='540' r='4.5'/%3E%3Ccircle cx='660' cy='555' r='5.2'/%3E%3Ccircle cx='940' cy='545' r='5'/%3E%3Ccircle cx='1220' cy='560' r='4.5'/%3E%3Ccircle cx='1480' cy='550' r='3.5'/%3E%3Ccircle cx='250' cy='730' r='4'/%3E%3Ccircle cx='540' cy='715' r='4.8'/%3E%3Ccircle cx='820' cy='730' r='5.2'/%3E%3Ccircle cx='1100' cy='720' r='5'/%3E%3Ccircle cx='1380' cy='735' r='4.5'/%3E%3Ccircle cx='90' cy='870' r='3.5'/%3E%3Ccircle cx='370' cy='855' r='4'/%3E%3Ccircle cx='650' cy='865' r='4.5'/%3E%3Ccircle cx='930' cy='860' r='4.5'/%3E%3Ccircle cx='1210' cy='870' r='4'/%3E%3Ccircle cx='1510' cy='860' r='3.5'/%3E%3C/g%3E%3Cg fill='rgba(251,146,60,0.85)'%3E%3Ccircle cx='740' cy='375' r='2.8'/%3E%3Ccircle cx='660' cy='555' r='2.8'/%3E%3Ccircle cx='820' cy='730' r='2.8'/%3E%3Ccircle cx='500' cy='40' r='2.5'/%3E%3Ccircle cx='940' cy='545' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-// Professional visual polish layered on top of Quartz defaults.
+@keyframes rcmAurora {
+  0%   { transform: translate3d(0, -1.2rem, 0) scale(1);    }
+  100% { transform: translate3d(0,  1.2rem, 0) scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+}
+
+@media (max-width: 800px) {
+  body {
+    background-attachment: scroll;
+  }
+  body::before {
+    opacity: 0.20;
+    filter: blur(20px);
+  }
+  body::after {
+    opacity: 0.04;
+  }
+}
+
+/* =================================================
+   CAPA DE PÁGINA — sobre la aurora
+   ================================================= */
+
 .page {
-	position: relative;
-	z-index: 1;
-
-	.page-header {
-		border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 70%, transparent);
-		margin-bottom: 1rem;
-		padding-bottom: 0.75rem;
-	}
-
-	.article-title {
-		letter-spacing: -0.02em;
-		line-height: 1.15;
-	}
+  position: relative;
+  z-index: 1;
 }
+
+/* =================================================
+   SELECCIÓN DE TEXTO
+   ================================================= */
+
+::selection {
+  background: color-mix(in srgb, var(--rcm-indigo) 55%, var(--rcm-coral) 45%);
+  color: #fff;
+}
+
+/* =================================================
+   TIPOGRAFÍA
+   ================================================= */
+
+.article-title {
+  font-size: clamp(1.9rem, 2.8vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  text-wrap: balance;
+  background: linear-gradient(
+    138deg,
+    var(--dark)          0%,
+    color-mix(in srgb, var(--rcm-indigo) 80%, var(--dark)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =================================================
+   LINKS
+   ================================================= */
 
 a {
-	text-underline-offset: 0.15em;
-	text-decoration-thickness: 0.08em;
-	transition: color 0.22s var(--brand-ease), text-decoration-color 0.22s var(--brand-ease);
+  color: var(--secondary);
+  text-underline-offset: 0.16em;
+  transition: color 0.18s var(--rcm-ease);
+}
+
+a:hover {
+  color: var(--tertiary);
+}
+
+a.internal {
+  background-color: var(--rcm-indigo-pale);
+  border-radius: 4px;
+  text-decoration: none;
 }
 
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
-	outline: 2px solid color-mix(in srgb, var(--brand-cyan) 70%, var(--brand-ink));
-	outline-offset: 2px;
-	border-radius: 8px;
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
+  border-radius: var(--rcm-radius-sm);
 }
 
-.callout {
-	border-radius: 10px;
+/* =================================================
+   BARRA DE PROGRESO
+   ================================================= */
+
+.navigation-progress {
+  background: linear-gradient(90deg, var(--rcm-indigo), var(--rcm-coral));
 }
 
-.tags > li > a,
-a.internal.tag-link {
-	font-weight: 600;
-}
+/* =================================================
+   CABECERA DEL SITIO
+   ================================================= */
 
 .page-title > a {
-	letter-spacing: -0.01em;
-	font-weight: 800;
-	color: color-mix(in srgb, var(--brand-ink) 84%, var(--dark));
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  /* Degradado índigo → coral: firme + cálido */
+  background: linear-gradient(
+    128deg,
+    var(--dark)            0%,
+    var(--rcm-indigo)     55%,
+    var(--rcm-coral)     100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
+/* Acento AACC/ND — punto de color único junto al título,
+   visible pero sutil: un fragmento de espectro completo. */
+.page-title > a::after {
+  content: " ◈";
+  background: linear-gradient(90deg, var(--rcm-indigo), var(--rcm-coral));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 0.7em;
+  opacity: 0.75;
+}
+
+.page-header {
+  border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 75%, transparent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* =================================================
+   BÚSQUEDA
+   ================================================= */
+
 .search > .search-button {
-	border-radius: 10px;
-	border-color: color-mix(in srgb, var(--brand-ink) 20%, var(--lightgray));
-	background: color-mix(in srgb, var(--light) 92%, #fff 8%);
-	transition: border-color 0.2s var(--brand-ease), transform 0.2s var(--brand-ease);
+  border-radius: var(--rcm-radius-sm);
+  border: 1px solid var(--lightgray);
+  background: color-mix(in srgb, var(--light) 96%, var(--rcm-indigo) 4%);
+  transition: border-color 0.18s var(--rcm-ease), box-shadow 0.18s var(--rcm-ease);
 }
 
 .search > .search-button:hover {
-	border-color: color-mix(in srgb, var(--brand-cyan) 40%, var(--brand-ink));
-	transform: translateY(-1px);
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px var(--rcm-indigo-pale);
 }
 
-.explorer-content ul li > a {
-	border-radius: 8px;
-	padding: 0.05rem 0.25rem;
-	transition: color 0.2s var(--brand-ease), background-color 0.2s var(--brand-ease), transform 0.2s var(--brand-ease);
-}
-
-.explorer-content ul li > a:hover {
-	background: color-mix(in srgb, var(--brand-ink) 10%, transparent);
-	transform: translateX(2px);
-}
-
-/* Reusable editorial system: copy these classes to any site for consistent branding. */
-.brand-shell {
-	max-width: min(1100px, 100% - 2rem);
-	margin-inline: auto;
-}
-
-.brand-prose {
-	max-width: var(--brand-reading-max);
-	font-size: var(--brand-body);
-	line-height: 1.72;
-}
-
-.brand-kicker {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.45rem;
-	font-size: var(--brand-kicker);
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.11em;
-	color: color-mix(in srgb, var(--brand-ink) 82%, var(--dark));
-}
-
-.brand-kicker::before {
-	content: "";
-	width: 1.35rem;
-	height: 2px;
-	border-radius: 999px;
-	background: linear-gradient(90deg, var(--brand-ink), var(--brand-cyan));
-}
-
-.brand-title {
-	font-size: var(--brand-h1);
-	line-height: 1.07;
-	letter-spacing: -0.03em;
-	text-wrap: balance;
-	margin: 0.3rem 0 0.85rem;
-	color: color-mix(in srgb, var(--dark) 90%, var(--brand-violet) 10%);
-}
-
-.brand-subtitle {
-	font-size: 1.1rem;
-	color: color-mix(in srgb, var(--darkgray) 88%, var(--brand-violet) 12%);
-	max-width: 68ch;
-	text-wrap: pretty;
-}
-
-.brand-divider {
-	height: 1px;
-	border: 0;
-	margin: 1.4rem 0 1.6rem;
-	background: linear-gradient(
-		90deg,
-		transparent,
-		color-mix(in srgb, var(--brand-ink) 34%, var(--lightgray)) 16%,
-		color-mix(in srgb, var(--brand-cyan) 28%, var(--lightgray)) 55%,
-		transparent
-	);
-}
-
-.brand-card {
-	background: color-mix(in srgb, var(--light) 92%, #ffffff 8%);
-	border: var(--brand-border);
-	border-radius: var(--brand-radius-lg);
-	box-shadow: var(--brand-shadow-card);
-	padding: clamp(1rem, 2vw, 1.4rem);
-	backdrop-filter: blur(1.5px);
-}
-
-.brand-grid {
-	display: grid;
-	grid-template-columns: repeat(12, minmax(0, 1fr));
-	gap: 1rem;
-}
-
-.brand-grid > * {
-	grid-column: span 12;
-}
-
-.brand-grid .span-6 {
-	grid-column: span 6;
-}
-
-.brand-grid .span-4 {
-	grid-column: span 4;
-}
-
-.brand-grid .span-8 {
-	grid-column: span 8;
-}
-
-.brand-button {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.45rem;
-	padding: 0.56rem 0.92rem;
-	border-radius: var(--brand-radius-sm);
-	border: 1px solid color-mix(in srgb, var(--brand-ink) 30%, transparent);
-	background: linear-gradient(
-		145deg,
-		color-mix(in srgb, var(--brand-ink) 14%, var(--light)),
-		color-mix(in srgb, var(--brand-cyan) 10%, var(--light))
-	);
-	font-weight: 700;
-	text-decoration: none;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.brand-button:hover {
-	transform: translateY(-1px);
-	box-shadow: var(--brand-shadow-soft);
-	text-decoration: none;
-}
-
-.brand-chip {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.35rem;
-	padding: 0.2rem 0.5rem;
-	border-radius: 999px;
-	font-size: 0.82rem;
-	font-weight: 600;
-	border: 1px solid color-mix(in srgb, var(--brand-cyan) 36%, transparent);
-	background: color-mix(in srgb, var(--brand-cyan) 14%, var(--light));
-}
-
-.brand-neural-dot {
-	position: relative;
-	padding-left: 0.95rem;
-}
-
-.brand-neural-dot::before {
-	content: "";
-	position: absolute;
-	left: 0;
-	top: 0.58em;
-	width: 0.42rem;
-	height: 0.42rem;
-	border-radius: 50%;
-	background: radial-gradient(circle, var(--brand-cyan) 0, var(--brand-ink) 75%);
-	box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-cyan) 15%, transparent);
-}
-
-.brand-quote {
-	border-left: 4px solid color-mix(in srgb, var(--brand-cyan) 60%, var(--brand-ink));
-	padding: 0.8rem 1rem;
-	margin: 1.2rem 0;
-	background: color-mix(in srgb, var(--brand-ink) 6%, var(--light));
-	border-radius: 0 var(--brand-radius-md) var(--brand-radius-md) 0;
-}
-
-/* Distinctive site chrome: make it feel like a custom editorial product. */
-.page > #quartz-body {
-	gap: 8px;
-	grid-template-columns: 300px minmax(0, 1fr) 280px;
-}
-
-.page > #quartz-body .sidebar {
-	border: none;
-	border-radius: 0;
-	background: transparent;
-	box-shadow: none;
-	padding: 6rem 1.6rem 1.6rem;
-	backdrop-filter: none;
-}
-
-.page > #quartz-body .center article {
-	max-width: min(980px, 100%);
-	padding: 0;
-	border: none;
-	border-radius: 0;
-	background: transparent;
-	box-shadow: none;
-	backdrop-filter: none;
-}
-
-.page .page-header {
-	padding: 0;
-	border: none;
-	border-radius: 0;
-	background: transparent;
-	box-shadow: none;
-	backdrop-filter: none;
-}
-
-.breadcrumb-container {
-	font-weight: 600;
-	font-size: 0.92rem;
-	letter-spacing: 0.01em;
-}
-
-.article-title {
-	font-size: clamp(2rem, 2.4vw, 2.85rem);
-	font-weight: 800;
-	text-wrap: balance;
-}
-
-.content-meta {
-	font-size: 1rem;
-	color: color-mix(in srgb, var(--darkgray) 90%, var(--brand-ink) 10%);
-}
-
-.tags > li > a,
-a.internal.tag-link {
-	border: 1px solid color-mix(in srgb, var(--brand-ink) 14%, transparent);
-	background: linear-gradient(
-		130deg,
-		color-mix(in srgb, var(--brand-ink) 8%, transparent),
-		color-mix(in srgb, var(--brand-cyan) 8%, transparent)
-	);
-	border-radius: 999px;
-	padding: 0.22rem 0.56rem;
-}
-
-pre {
-	border-radius: 12px;
-	border: 1px solid color-mix(in srgb, var(--brand-ink) 24%, var(--lightgray));
-	box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 45%, transparent);
-	overflow: auto;
-}
-
-code {
-	border-radius: 6px;
-	background: color-mix(in srgb, var(--brand-ink) 10%, var(--lightgray));
-}
-
-.callout {
-	border-width: 1px;
-	box-shadow: 0 8px 18px color-mix(in srgb, var(--brand-violet) 6%, transparent);
-	border-radius: 12px;
-	backdrop-filter: blur(8px) saturate(108%);
-}
-
-.callout-title .callout-title-inner {
-	letter-spacing: 0.01em;
-	font-weight: 700;
-}
-
-.callout:hover {
-	transform: translateY(-1px);
-	transition: transform 0.24s var(--brand-ease), box-shadow 0.24s var(--brand-ease);
-	box-shadow: 0 12px 24px color-mix(in srgb, var(--brand-violet) 12%, transparent);
-}
+/* =================================================
+   SIDEBAR
+   ================================================= */
 
 button.toc-header h3,
 .backlinks > h3,
 .graph > h3,
 button.desktop-explorer h2 {
-	font-size: 0.98rem;
-	letter-spacing: 0.02em;
-	text-transform: uppercase;
-	color: color-mix(in srgb, var(--brand-ink) 74%, var(--dark));
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.explorer-content ul li > a {
+  border-radius: var(--rcm-radius-sm);
+  padding: 0.06rem 0.28rem;
+  transition: color 0.16s var(--rcm-ease), background-color 0.16s var(--rcm-ease);
+}
+
+.explorer-content ul li > a:hover {
+  background: var(--rcm-indigo-pale);
+  color: var(--secondary);
+}
+
+/* =================================================
+   CÓDIGO
+   ================================================= */
+
+pre {
+  border-radius: var(--rcm-radius-md);
+  border: 1px solid var(--lightgray);
+  box-shadow: var(--rcm-shadow-sm);
+}
+
+code {
+  border-radius: 4px;
+  background: var(--rcm-indigo-pale);
+  color: color-mix(in srgb, var(--secondary) 85%, var(--dark));
+  padding: 0.1em 0.3em;
+  font-size: 0.88em;
+}
+
+/* =================================================
+   BLOCKQUOTE
+   ================================================= */
+
+blockquote {
+  border-left: 3px solid var(--secondary);
+  background: var(--rcm-indigo-pale);
+  border-radius: 0 var(--rcm-radius-sm) var(--rcm-radius-sm) 0;
+  padding: 0.65rem 1rem;
+  margin: 1.2rem 0;
+}
+
+/* =================================================
+   CALLOUTS
+   ================================================= */
+
+.callout {
+  border-radius: var(--rcm-radius-md);
+  border-width: 1px;
+  box-shadow: var(--rcm-shadow-sm);
+}
+
+.callout-title .callout-title-inner {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* =================================================
+   TAGS
+   ================================================= */
+
+.tags > li > a,
+a.internal.tag-link {
+  font-weight: 600;
+  font-size: 0.79rem;
+  border: 1px solid color-mix(in srgb, var(--rcm-coral) 30%, transparent);
+  background: var(--rcm-coral-pale);
+  color: color-mix(in srgb, var(--rcm-coral) 88%, var(--dark));
+  border-radius: 999px;
+  padding: 0.18rem 0.58rem;
+  transition: background 0.18s var(--rcm-ease), border-color 0.18s var(--rcm-ease);
+}
+
+.tags > li > a:hover,
+a.internal.tag-link:hover {
+  background: color-mix(in srgb, var(--rcm-coral) 18%, transparent);
+  border-color: color-mix(in srgb, var(--rcm-coral) 55%, transparent);
+  color: var(--rcm-coral);
+}
+
+/* =================================================
+   SEPARADOR HR — degradado índigo/coral
+   ================================================= */
+
+hr {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--rcm-indigo) 38%, var(--lightgray)) 28%,
+    color-mix(in srgb, var(--rcm-coral)  32%, var(--lightgray)) 58%,
+    transparent
+  );
+}
+
+/* =================================================
+   LAYOUT — overrides de Quartz
+   ================================================= */
+
+.page > #quartz-body {
+  gap: 8px;
+  grid-template-columns: 300px minmax(0, 1fr) 280px;
+}
+
+.page > #quartz-body .sidebar {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 6rem 1.5rem 1.5rem;
+}
+
+.page > #quartz-body .center article {
+  max-width: min(960px, 100%);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.page .page-header {
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
 }
 
 :root[saved-theme="dark"] .page > #quartz-body .sidebar,
 :root[saved-theme="dark"] .page > #quartz-body .center article,
 :root[saved-theme="dark"] .page .page-header {
-	background: transparent;
-	border-color: transparent;
+  background: transparent;
+  border-color: transparent;
 }
 
 footer {
-	padding: 0;
-	border: none;
-	border-radius: 0;
-	background: transparent;
-	box-shadow: none;
-	backdrop-filter: none;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 footer a {
-	font-weight: 700;
+  font-weight: 700;
 }
 
-@media (max-width: 800px) {
-	body {
-		background-attachment: scroll;
-	}
-
-	.page > #quartz-body {
-		grid-template-columns: minmax(0, 1fr);
-		gap: 8px;
-	}
-
-	.page > #quartz-body .sidebar,
-	.page > #quartz-body .center article,
-	.page .page-header {
-		border-radius: 0;
-		padding-left: 0;
-		padding-right: 0;
-	}
-
-	.callout:hover,
-	.search > .search-button:hover,
-	.explorer-content ul li > a:hover {
-		transform: none;
-	}
-
-	body::before {
-		opacity: 0.3;
-		filter: blur(14px);
-	}
-
-	body::after {
-		opacity: 0.38;
-		background-size: 220px 220px, 220px 220px, auto, auto, auto, auto, auto;
-		filter: blur(0.2px);
-	}
-
-	.brand-grid .span-6,
-	.brand-grid .span-4,
-	.brand-grid .span-8 {
-		grid-column: span 12;
-	}
+.breadcrumb-container {
+  font-size: 0.87rem;
+  font-weight: 500;
+  color: var(--gray);
 }
 
-@media (prefers-reduced-motion: reduce) {
-	body::before {
-		animation: none;
-	}
+.content-meta {
+  font-size: 0.9rem;
+  color: var(--gray);
 }
 
-/* Home-only elevated art direction (index page) */
-body[data-slug="index"] .page .page-header {
-	position: relative;
-	overflow: hidden;
-	padding: 0;
-	border: none;
-	background: transparent;
-}
-
-body[data-slug="index"] .page .page-header::after {
-	content: none;
-}
+/* =================================================
+   HOME (index) — art direction elevada
+   ================================================= */
 
 body[data-slug="index"] .page .center article {
-	background: transparent;
-	border: none;
-	box-shadow: none;
-	padding: 0.25rem 0 0;
-	max-width: min(1080px, 100%);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0.25rem 0 0;
+  max-width: min(1080px, 100%);
 }
 
 body[data-slug="index"] .page .center article > h1:first-of-type {
-	font-size: clamp(2.2rem, 4vw, 3.4rem);
-	line-height: 1.02;
-	letter-spacing: -0.035em;
-	margin-bottom: 0.8rem;
-	text-wrap: balance;
-	max-width: 20ch;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+  max-width: 22ch;
+  background: linear-gradient(
+    138deg,
+    var(--dark)                                              0%,
+    color-mix(in srgb, var(--rcm-indigo) 90%, var(--dark)) 55%,
+    color-mix(in srgb, var(--rcm-coral)  80%, var(--dark)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 body[data-slug="index"] .page .center article > p:nth-of-type(-n + 2) {
-	max-width: 72ch;
-	font-size: clamp(1.02rem, 1.2vw, 1.14rem);
-	line-height: 1.8;
-	color: color-mix(in srgb, var(--darkgray) 88%, var(--brand-violet) 12%);
+  max-width: 68ch;
+  font-size: clamp(1rem, 1.15vw, 1.12rem);
+  line-height: 1.78;
+  color: var(--darkgray);
 }
 
 body[data-slug="index"] .page .center article > h2 {
-	margin-top: 2rem;
-	padding: 0;
-	border-left: none;
-	border-radius: 0;
-	background: transparent;
-	font-size: clamp(1.28rem, 2vw, 1.6rem);
-	letter-spacing: -0.01em;
+  margin-top: 2rem;
+  background: transparent;
+  padding: 0;
+  border-left: none;
+  border-radius: 0;
+  font-size: clamp(1.28rem, 2vw, 1.6rem);
+  letter-spacing: -0.01em;
 }
 
-body[data-slug="index"] .page .center article ul {
-	border: none;
-	border-radius: 0;
-	background: transparent;
-	padding: 0 0 0 1.5rem;
-	box-shadow: none;
-	margin-bottom: 1.05rem;
-}
-
-body[data-slug="index"] .page .center article ul li {
-	margin-bottom: 0.48rem;
+body[data-slug="index"] .page .center article > ul {
+  border: none;
+  background: transparent;
+  padding: 0 0 0 1.5rem;
+  box-shadow: none;
+  margin-bottom: 1rem;
 }
 
 body[data-slug="index"] .page .center article > hr {
-	height: 1px;
-	border: 0;
-	margin: 1.5rem 0 1.65rem;
-	background: linear-gradient(
-		90deg,
-		transparent,
-		color-mix(in srgb, var(--brand-ink) 34%, var(--lightgray)) 22%,
-		color-mix(in srgb, var(--brand-cyan) 34%, var(--lightgray)) 52%,
-		transparent
-	);
+  margin: 1.6rem 0 1.8rem;
 }
+
+/* =================================================
+   MOBILE
+   ================================================= */
 
 @media (max-width: 800px) {
-	body[data-slug="index"] .page .center article > h1:first-of-type {
-		font-size: clamp(1.8rem, 8.2vw, 2.5rem);
-		max-width: 100%;
-	}
+  .page > #quartz-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
 
-	body[data-slug="index"] .page .center article > h2 {
-		padding: 0.68rem 0.78rem;
-	}
+  .page > #quartz-body .sidebar,
+  .page > #quartz-body .center article,
+  .page .page-header {
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  body[data-slug="index"] .page .center article > h1:first-of-type {
+    font-size: clamp(1.9rem, 9vw, 2.8rem);
+    max-width: 100%;
+  }
 }
 
-@keyframes auroraFloat {
-	0% {
-		transform: translate3d(0, -0.6rem, 0) scale(1);
-	}
-	100% {
-		transform: translate3d(0, 0.75rem, 0) scale(1.03);
-	}
+/* =================================================
+   UTILIDADES DE MARCA — reutilizables en notas
+   ================================================= */
+
+.rcm-prose {
+  max-width: var(--rcm-prose-width);
+  line-height: 1.72;
 }
 
-@keyframes meshDrift {
-	0% {
-		background-position: 0 0, 0 0, 0 0, 0 0;
-	}
-	100% {
-		background-position: 22px 0, 0 22px, 0 0, 0 0;
-	}
+.rcm-card {
+  background: color-mix(in srgb, var(--light) 94%, var(--rcm-indigo) 6%);
+  border: 1px solid var(--lightgray);
+  border-radius: var(--rcm-radius-lg);
+  box-shadow: var(--rcm-shadow-sm);
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.rcm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.79rem;
+  font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--rcm-indigo) 25%, transparent);
+  background: var(--rcm-indigo-pale);
+  color: var(--secondary);
+}
+
+.rcm-divider {
+  height: 1px;
+  border: 0;
+  margin: 1.5rem 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--rcm-indigo) 38%, var(--lightgray)) 28%,
+    color-mix(in srgb, var(--rcm-coral)  32%, var(--lightgray)) 58%,
+    transparent
+  );
 }
