@@ -9,6 +9,7 @@ Notas técnicas sobre cómo diseñar, desplegar y operar sistemas en producción
 
 ## 📝 Artículos
 
+- [[01 Artículos/onboarding-talento-desperdiciado|El onboarding que nunca ocurre y el talento que se pierde en él]]
 - [[01 Artículos/coste-conocimiento-retenido-organizaciones|El coste oculto del conocimiento retenido en las organizaciones]]
 - [[01 Artículos/documentacion-poder-conocimiento|El conocimiento que no se documenta no se comparte. Era una elección.]]
 - [[01 Artículos/documentar-ahora-es-diferente|Documentar ahora es diferente. Y por fin lo entendemos.]]
