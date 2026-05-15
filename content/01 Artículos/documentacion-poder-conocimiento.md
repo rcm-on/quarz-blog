@@ -7,7 +7,7 @@ tags:
   - cultura-técnica
   - reflexión
   - ia
-description: "Durante años dijimos que documentar era una pérdida de tiempo. Mentimos. Era miedo, era pereza y en algunos casos era poder. La IA lo ha dejado al descubierto."
+description: "Durante años dijimos que documentar era una pérdida de tiempo. ¿Nos equivocamos? Era miedo, era pereza y en algunos casos era poder. La IA lo ha dejado al descubierto."
 ---
 
 Voy a decir algo incómodo. Y lo digo como opinión, no como verdad universal — aunque creo que quien lo haya vivido lo reconocerá.

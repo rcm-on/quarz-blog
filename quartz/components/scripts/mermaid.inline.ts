@@ -226,14 +226,17 @@ document.addEventListener("nav", async () => {
       theme: darkMode ? "dark" : "base",
       themeVariables: {
         fontFamily: computedStyleMap["--codeFont"],
-        primaryColor: computedStyleMap["--light"],
-        primaryTextColor: computedStyleMap["--darkgray"],
-        primaryBorderColor: computedStyleMap["--tertiary"],
-        lineColor: computedStyleMap["--darkgray"],
-        secondaryColor: computedStyleMap["--secondary"],
-        tertiaryColor: computedStyleMap["--tertiary"],
-        clusterBkg: computedStyleMap["--light"],
-        edgeLabelBackground: computedStyleMap["--highlight"],
+        // Nodos — fondo sólido contrastado, nunca transparente
+        primaryColor:       darkMode ? "#1e1b4b" : "#e0e7ff",
+        primaryTextColor:   darkMode ? "#c7d2fe" : "#1e1b4b",
+        primaryBorderColor: darkMode ? "#6366f1" : "#4338ca",
+        // Líneas — siempre visibles
+        lineColor:          darkMode ? "#a5b4fc" : "#4338ca",
+        // Nodos secundarios y terciarios
+        secondaryColor:     darkMode ? "#3d2000" : "#fef3c7",
+        tertiaryColor:      darkMode ? "#252266" : "#dde4ff",
+        clusterBkg:         darkMode ? "#141228" : "#f5f3ff",
+        edgeLabelBackground: darkMode ? "#1e1b4b" : "#e0e7ff",
         // Mindmap branch colors — indigo/coral palette, legible en ambos modos
         cScale0: darkMode ? "#3730a3" : "#dde4ff",
         cScale1: darkMode ? "#92400e" : "#fef3c7",

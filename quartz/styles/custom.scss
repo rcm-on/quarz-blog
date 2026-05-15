@@ -534,6 +534,40 @@ body[data-slug="index"] .page .center article > hr {
 }
 
 /* =================================================
+   MERMAID — estilo homogéneo con carousels y SVGs
+   Nodos con fondo sólido, líneas siempre visibles
+   ================================================= */
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Nodos principales — fondo sólido */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon {
+  stroke-width: 2px !important;
+}
+
+/* Texto siempre legible */
+.mermaid .nodeLabel,
+.mermaid .label {
+  font-family: var(--codeFont) !important;
+}
+
+/* Líneas de conexión más visibles */
+.mermaid .edgePath .path {
+  stroke-width: 2px !important;
+}
+
+/* Estados — mismo sistema */
+.mermaid .statediagram-state rect {
+  stroke-width: 2px !important;
+}
+
+/* =================================================
    UTILIDADES DE MARCA — reutilizables en notas
    ================================================= */
 

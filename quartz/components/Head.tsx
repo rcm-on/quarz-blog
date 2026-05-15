@@ -89,7 +89,7 @@ export default (() => {
         <script
           defer
           src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon='{"token":"4bd4d9a2a4fd41ada302cc0f5b3d4526"}'
+          data-cf-beacon='{"token":"032af40f62a246a88831826b4f46746e"}'
         ></script>
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
