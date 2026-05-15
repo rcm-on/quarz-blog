@@ -6,7 +6,6 @@ tags:
   - lab
   - mermaid
 description: "Prueba de todos los tipos de diagrama Mermaid disponibles en Quartz."
-draft: false
 ---
 
 Comprobación de los tipos de diagrama Mermaid disponibles en Quartz.
