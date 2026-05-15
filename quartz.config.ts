@@ -12,7 +12,7 @@ const config: QuartzConfig = {
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
-    analytics: null,
+    analytics: { provider: "google", tagId: "G-QKST2MECVR" },
     locale: "en-US",
     baseUrl: "blog.rcmon.dev",
     ignorePatterns: ["private", "templates", ".obsidian"],
