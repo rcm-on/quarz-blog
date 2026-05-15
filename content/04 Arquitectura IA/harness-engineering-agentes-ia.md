@@ -8,11 +8,9 @@ tags:
   - harness
   - orquestación
 description: "La efectividad de un agente IA no depende del modelo, sino del harness que lo rodea: la infraestructura de control, supervisión y retroalimentación que convierte un LLM en un sistema autónomo confiable."
-banner: "../../static/banners/harness-engineering.svg"
+banner: "/quarz-blog/static/banners/harness-engineering.svg"
 socialImage: "../../static/social/harness-engineering-linkedin.svg"
 ---
-
-![Harness Engineering](../../static/banners/harness-engineering.svg)
 
 La primera vez que desplegué un agente IA en un proyecto real, cometí el error que comete todo el mundo: traté el modelo como si fuera suficiente.
 
