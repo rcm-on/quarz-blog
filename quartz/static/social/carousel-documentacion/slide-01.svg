@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0d18"/>
+      <stop offset="100%" stop-color="#141228"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#4338ca" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <rect width="1080" height="1080" fill="url(#glow)"/>
+
+  <!-- Número de slide -->
+  <text x="80" y="90" fill="#4338ca" font-size="14" font-family="JetBrains Mono, monospace" opacity="0.5">01 / 06</text>
+
+  <!-- Acento -->
+  <rect x="80" y="110" width="60" height="3" rx="1.5" fill="#4338ca" opacity="0.8"/>
+
+  <!-- Comillas decorativas -->
+  <text x="72" y="420" fill="#4338ca" font-size="220" font-family="Manrope, sans-serif" font-weight="800" opacity="0.06">"</text>
+
+  <!-- Frase principal -->
+  <text x="80" y="390" fill="#e8ecf8" font-size="68" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-2" opacity="0.97">Durante años</text>
+  <text x="80" y="470" fill="#e8ecf8" font-size="68" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-2" opacity="0.97">dijimos que</text>
+  <text x="80" y="550" fill="#e8ecf8" font-size="68" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-2" opacity="0.97">documentar era</text>
+  <text x="80" y="630" fill="#818cf8" font-size="68" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-2" opacity="0.95">una pérdida</text>
+  <text x="80" y="710" fill="#818cf8" font-size="68" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-2" opacity="0.95">de tiempo.</text>
+
+  <!-- La palabra que golpea -->
+  <text x="80" y="820" fill="#fbbf24" font-size="96" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-3">Mentimos.</text>
+
+  <!-- Footer -->
+  <rect x="0" y="990" width="1080" height="90" fill="rgba(12,13,24,0.9)"/>
+  <text x="80" y="1040" fill="#6b7a9a" font-size="16" font-family="JetBrains Mono, monospace">Ramón Campos Martin · Arquitecto de Software</text>
+  <text x="1000" y="1040" fill="#4338ca" font-size="18" font-family="Manrope, sans-serif" font-weight="800" text-anchor="end" opacity="0.5">RCM ◈</text>
+</svg>

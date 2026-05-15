@@ -9,8 +9,8 @@ export const sharedPageComponents: SharedLayout = {
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/rcm-on",
-      LinkedIn: "https://linkedin.com/in/ramón-campos-78aba234",
-      Home: "/quarz-blog/",
+      LinkedIn: "https://linkedin.com/in/ram%C3%B3n-campos-78aba234",
+      Home: "https://blog.rcmon.dev",
     },
   }),
 }

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0d18"/>
+      <stop offset="100%" stop-color="#141228"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#b45309" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <rect width="1080" height="1080" fill="url(#glow)"/>
+
+  <text x="80" y="90" fill="#4338ca" font-size="14" font-family="JetBrains Mono, monospace" opacity="0.5">06 / 06</text>
+  <rect x="80" y="110" width="60" height="3" rx="1.5" fill="#b45309" opacity="0.8"/>
+
+  <!-- Cierre potente -->
+  <text x="80" y="280" fill="#e8ecf8" font-size="54" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">La elección ya no es</text>
+  <text x="80" y="348" fill="#e8ecf8" font-size="54" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">documentar o no.</text>
+
+  <rect x="80" y="390" width="920" height="2" rx="1" fill="#4338ca" opacity="0.2"/>
+
+  <text x="80" y="470" fill="#818cf8" font-size="54" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">Es documentar bien</text>
+  <text x="80" y="538" fill="#fbbf24" font-size="54" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">o perder la ventaja</text>
+  <text x="80" y="606" fill="#fbbf24" font-size="54" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">que la IA podría darte.</text>
+
+  <!-- CTA -->
+  <rect x="80" y="680" width="920" height="120" rx="16" fill="rgba(67,56,202,0.12)" stroke="#4338ca" stroke-width="1.5" opacity="0.7"/>
+  <text x="540" y="728" fill="#818cf8" font-size="20" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.75">Artículo completo con referencias →</text>
+  <text x="540" y="762" fill="#4338ca" font-size="20" font-family="JetBrains Mono, monospace" text-anchor="middle" font-weight="700" opacity="0.9">blog.rcmon.dev</text>
+  <text x="540" y="792" fill="#6b7a9a" font-size="16" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.6">¿Te lo has encontrado en tu equipo? Cuéntalo en comentarios.</text>
+
+  <!-- Hashtags -->
+  <text x="80" y="870" fill="#4338ca" font-size="18" font-family="JetBrains Mono, monospace" opacity="0.55">#arquitectura  #documentación  #ia  #ingenieríadesoftware</text>
+
+  <rect x="0" y="990" width="1080" height="90" fill="rgba(12,13,24,0.9)"/>
+  <text x="80" y="1040" fill="#6b7a9a" font-size="16" font-family="JetBrains Mono, monospace">Ramón Campos Martin · Arquitecto de Software</text>
+  <text x="1000" y="1040" fill="#4338ca" font-size="18" font-family="Manrope, sans-serif" font-weight="800" text-anchor="end" opacity="0.5">RCM ◈</text>
+</svg>

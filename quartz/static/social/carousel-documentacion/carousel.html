@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  @page {
+    size: 1080px 1080px;
+    margin: 0;
+  }
+
+  body {
+    width: 1080px;
+    background: #0c0d18;
+  }
+
+  .slide {
+    width: 1080px;
+    height: 1080px;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 80px;
+    background: linear-gradient(135deg, #0c0d18, #141228);
+    font-family: 'Manrope', 'Segoe UI', sans-serif;
+  }
+
+  .slide:last-child { page-break-after: avoid; }
+
+  .slide-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: #4338ca;
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 3px;
+    background: #4338ca;
+    border-radius: 2px;
+    margin-bottom: 60px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    color: #818cf8;
+    opacity: 0.7;
+    margin-bottom: 40px;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: rgba(12,13,24,0.92);
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+    justify-content: space-between;
+  }
+
+  .footer-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    color: #6b7a9a;
+  }
+
+  .footer-brand {
+    font-size: 17px;
+    font-weight: 800;
+    color: #4338ca;
+    opacity: 0.4;
+  }
+
+  /* SLIDE 1 */
+  .s1-quote { font-size: 220px; color: #4338ca; opacity: 0.06; position: absolute; top: 140px; left: 60px; line-height: 1; }
+  .s1-main { margin-top: 60px; }
+  .s1-main p { font-size: 66px; font-weight: 800; letter-spacing: -2px; line-height: 1.1; color: #e8ecf8; }
+  .s1-main p.blue { color: #818cf8; }
+  .s1-punch { font-size: 90px; font-weight: 800; letter-spacing: -3px; color: #fbbf24; margin-top: 32px; }
+
+  /* SLIDE 2 */
+  .s2-headline { font-size: 54px; font-weight: 800; letter-spacing: -1.5px; color: #e8ecf8; line-height: 1.15; }
+  .s2-accent { color: #fbbf24; }
+  .s2-body { font-size: 26px; color: #bcc5d8; line-height: 1.6; margin-top: 32px; }
+  .s2-box { background: rgba(67,56,202,0.1); border: 1px solid rgba(67,56,202,0.4); border-radius: 12px; padding: 28px 32px; margin-top: 40px; }
+  .s2-box p { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #818cf8; line-height: 1.6; }
+
+  /* SLIDE 3 */
+  .s3-big { font-size: 54px; font-weight: 800; letter-spacing: -1.5px; color: #e8ecf8; line-height: 1.15; }
+  .s3-punch { color: #fbbf24; }
+  .s3-body { font-size: 26px; color: #bcc5d8; margin-top: 32px; line-height: 1.6; }
+  .s3-highlight { color: #818cf8; font-weight: 700; }
+  .s3-badge { display: inline-block; background: rgba(180,83,9,0.15); border: 1.5px solid #b45309; border-radius: 24px; padding: 10px 28px; margin-top: 40px; font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #fbbf24; font-weight: 700; }
+
+  /* SLIDE 4 */
+  .s4-before { font-size: 48px; font-weight: 800; letter-spacing: -1.5px; color: #e8ecf8; line-height: 1.2; }
+  .s4-dim { color: #6b7a9a; }
+  .s4-divider { width: 100%; height: 1px; background: rgba(67,56,202,0.2); margin: 32px 0; }
+  .s4-after { font-size: 48px; font-weight: 800; letter-spacing: -1.5px; color: #e8ecf8; line-height: 1.2; }
+  .s4-punch { color: #fbbf24; }
+  .s4-body { font-size: 24px; color: #bcc5d8; margin-top: 32px; line-height: 1.6; }
+  .s4-end { color: #818cf8; font-weight: 700; margin-top: 16px; }
+
+  /* SLIDE 5 */
+  .s5-intro { font-size: 26px; color: #bcc5d8; margin-bottom: 8px; }
+  .s5-lead { font-size: 28px; font-weight: 700; color: #818cf8; margin-bottom: 36px; }
+  .s5-item { background: rgba(67,56,202,0.08); border: 1px solid rgba(67,56,202,0.3); border-radius: 12px; padding: 22px 28px; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 20px; }
+  .s5-num { font-size: 26px; font-weight: 800; color: #fbbf24; min-width: 40px; }
+  .s5-text h4 { font-size: 22px; font-weight: 700; color: #e8ecf8; }
+  .s5-text p { font-size: 18px; color: #6b7a9a; margin-top: 4px; }
+  .s5-footer-text { font-size: 22px; font-weight: 700; color: #818cf8; margin-top: 28px; }
+  .s5-footer-sub { font-size: 20px; color: #6b7a9a; }
+
+  /* SLIDE 6 */
+  .s6-close { font-size: 52px; font-weight: 800; letter-spacing: -1.5px; color: #e8ecf8; line-height: 1.15; }
+  .s6-blue { color: #818cf8; }
+  .s6-amber { color: #fbbf24; }
+  .s6-divider { width: 100%; height: 1px; background: rgba(67,56,202,0.2); margin: 28px 0; }
+  .s6-cta { background: rgba(67,56,202,0.12); border: 1.5px solid rgba(67,56,202,0.5); border-radius: 16px; padding: 28px 32px; margin-top: 28px; }
+  .s6-cta p { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #818cf8; margin-bottom: 8px; }
+  .s6-cta a { font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #4338ca; font-weight: 700; }
+  .s6-cta small { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #6b7a9a; display: block; margin-top: 8px; }
+  .s6-tags { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #4338ca; opacity: 0.55; margin-top: 28px; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=JetBrains+Mono:wght@400;700&family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- SLIDE 1: Hook -->
+<div class="slide">
+  <div class="slide-num">01 / 06</div>
+  <div class="accent-line"></div>
+  <div class="s1-quote">"</div>
+  <div class="s1-main">
+    <p>Durante años dijimos</p>
+    <p>que documentar era</p>
+    <p class="blue">una pérdida de tiempo.</p>
+  </div>
+  <div class="s1-punch">Mentimos.</div>
+  <div class="footer">
+    <span class="footer-name">Ramón Campos Martin · Arquitecto de Software</span>
+    <span class="footer-brand">RCM ◈</span>
+  </div>
+</div>
+
+<!-- SLIDE 2: La verdad incómoda -->
+<div class="slide">
+  <div class="slide-num">02 / 06</div>
+  <div class="accent-line"></div>
+  <div class="section-label">La verdad incómoda</div>
+  <div class="s2-headline">
+    El técnico que sabe<br>
+    lo que nadie más sabe<br>
+    es <span class="s2-accent">indispensable.</span>
+  </div>
+  <div class="s2-body">
+    Documentar ese conocimiento significaba,<br>
+    en alguna medida, renunciar a ese poder.<br><br>
+    <span style="color:#6b7a9a">No siempre fue consciente. Pero era el incentivo.</span>
+  </div>
+  <div class="s2-box">
+    <p>No era pereza. Era estrategia de supervivencia.<br>
+    <span style="color:#6b7a9a">Y durante décadas, era perfectamente racional.</span></p>
+  </div>
+  <div class="footer">
+    <span class="footer-name">Ramón Campos Martin · Arquitecto de Software</span>
+    <span class="footer-brand">RCM ◈</span>
+  </div>
+</div>
+
+<!-- SLIDE 3: El coste real -->
+<div class="slide">
+  <div class="slide-num">03 / 06</div>
+  <div class="accent-line"></div>
+  <div class="section-label">El coste real</div>
+  <div class="s3-big">
+    Si esa persona se va,<br>
+    enferma o gana la lotería —<br>
+    <span class="s3-punch">el proyecto se para.</span>
+  </div>
+  <div class="s3-body">
+    El conocimiento retenido en una persona<br>
+    no es un activo.<br>
+    <span class="s3-highlight">Es una deuda que paga el equipo,<br>
+    no el que la genera.</span>
+  </div>
+  <div><span class="s3-badge">Lottery factor = 1</span></div>
+  <div class="footer">
+    <span class="footer-name">Ramón Campos Martin · Arquitecto de Software</span>
+    <span class="footer-brand">RCM ◈</span>
+  </div>
+</div>
+
+<!-- SLIDE 4: Lo que cambió la IA -->
+<div class="slide">
+  <div class="slide-num">04 / 06</div>
+  <div class="accent-line"></div>
+  <div class="section-label">Lo que cambió la IA</div>
+  <div class="s4-before">
+    Antes: el que no documentaba<br>
+    <span class="s4-dim">lo pagaba el nuevo en 6 meses.</span>
+  </div>
+  <div class="s4-divider"></div>
+  <div class="s4-after">
+    Ahora: lo pagas<br>
+    <span class="s4-punch">tú mismo.</span><br>
+    <span style="color:#818cf8">En la misma sesión.</span>
+  </div>
+  <div class="s4-body">
+    El agente IA no puede pedirte que le expliques.<br>
+    Si no está documentado, para él no existe.<br>
+    <span class="s4-end">El incentivo cambió. El comportamiento cambia.</span>
+  </div>
+  <div class="footer">
+    <span class="footer-name">Ramón Campos Martin · Arquitecto de Software</span>
+    <span class="footer-brand">RCM ◈</span>
+  </div>
+</div>
+
+<!-- SLIDE 5: Qué documentar -->
+<div class="slide">
+  <div class="slide-num">05 / 06</div>
+  <div class="accent-line"></div>
+  <div class="section-label">Qué documentar</div>
+  <p class="s5-intro">El código ya dice el QUÉ.</p>
+  <p class="s5-lead">Lo que tiene valor es lo que no está en ningún sitio:</p>
+  <div class="s5-item">
+    <span class="s5-num">01</span>
+    <div class="s5-text">
+      <h4>El PORQUÉ de cada decisión</h4>
+      <p>Por qué está hecho así, qué alternativas se descartaron</p>
+    </div>
+  </div>
+  <div class="s5-item">
+    <span class="s5-num">02</span>
+    <div class="s5-text">
+      <h4>Las RESTRICCIONES</h4>
+      <p>Lo que no se puede hacer y por qué</p>
+    </div>
+  </div>
+  <div class="s5-item">
+    <span class="s5-num">03</span>
+    <div class="s5-text">
+      <h4>Los APRENDIZAJES</h4>
+      <p>Cada error corregido, documentado. Solo crece hacia adelante.</p>
+    </div>
+  </div>
+  <p class="s5-footer-text">Corto. Honesto. Actualizado.</p>
+  <p class="s5-footer-sub">40 líneas valen más que 200 páginas aspiracionales.</p>
+  <div class="footer">
+    <span class="footer-name">Ramón Campos Martin · Arquitecto de Software</span>
+    <span class="footer-brand">RCM ◈</span>
+  </div>
+</div>
+
+<!-- SLIDE 6: Cierre + CTA -->
+<div class="slide">
+  <div class="slide-num">06 / 06</div>
+  <div class="accent-line" style="background:#b45309;"></div>
+  <div class="s6-close">
+    La elección ya no es<br>
+    documentar o no.<br>
+    <span class="s6-divider" style="margin:20px 0;"></span>
+    <span class="s6-blue">Es documentar bien</span><br>
+    <span class="s6-amber">o perder la ventaja</span><br>
+    <span class="s6-amber">que la IA podría darte.</span>
+  </div>
+  <div class="s6-cta">
+    <p>Artículo completo con referencias →</p>
+    <a>blog.rcmon.dev</a>
+    <small>¿Te lo has encontrado en tu equipo? Cuéntalo en comentarios.</small>
+  </div>
+  <div class="s6-tags">#arquitectura &nbsp; #documentación &nbsp; #ia &nbsp; #ingenieríadesoftware</div>
+  <div class="footer">
+    <span class="footer-name">Ramón Campos Martin · Arquitecto de Software</span>
+    <span class="footer-brand">RCM ◈</span>
+  </div>
+</div>
+
+<!-- Botón de impresión -->
+<div style="position:fixed;top:20px;right:20px;z-index:9999;display:flex;gap:12px;align-items:center;" id="print-ui">
+  <span id="status" style="font-family:monospace;font-size:13px;color:#818cf8;background:#0c0d18;padding:8px 14px;border-radius:8px;border:1px solid #4338ca;">Cargando fuentes...</span>
+  <button id="print-btn" disabled onclick="window.print()"
+    style="background:#4338ca;color:#fff;border:none;padding:12px 24px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;opacity:0.5">
+    Imprimir PDF
+  </button>
+</div>
+
+<script>
+document.fonts.ready.then(() => {
+  document.getElementById('status').textContent = '✓ Fuentes listas';
+  document.getElementById('status').style.color = '#fbbf24';
+  const btn = document.getElementById('print-btn');
+  btn.disabled = false;
+  btn.style.opacity = '1';
+});
+</script>
+
+<style>
+@media print {
+  #print-ui { display: none !important; }
+}
+</style>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0d18"/>
+      <stop offset="100%" stop-color="#141228"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+
+  <text x="80" y="90" fill="#4338ca" font-size="14" font-family="JetBrains Mono, monospace" opacity="0.5">05 / 06</text>
+  <rect x="80" y="110" width="60" height="3" rx="1.5" fill="#4338ca" opacity="0.8"/>
+
+  <text x="80" y="200" fill="#818cf8" font-size="18" font-family="JetBrains Mono, monospace" opacity="0.7">Qué documentar</text>
+
+  <text x="80" y="290" fill="#6b7a9a" font-size="30" font-family="Source Sans 3, sans-serif" opacity="0.8">El código ya dice el QUÉ.</text>
+  <text x="80" y="330" fill="#818cf8" font-size="30" font-family="Source Sans 3, sans-serif" font-weight="700" opacity="0.9">Lo que tiene valor es lo que no está en ningún sitio:</text>
+
+  <!-- 3 items con iconos visuales -->
+  <rect x="80" y="380" width="920" height="110" rx="12" fill="rgba(67,56,202,0.08)" stroke="#4338ca" stroke-width="1" opacity="0.5"/>
+  <text x="130" y="425" fill="#fbbf24" font-size="28" font-family="Manrope, sans-serif" font-weight="800" opacity="0.9">01</text>
+  <text x="190" y="420" fill="#e8ecf8" font-size="26" font-family="Manrope, sans-serif" font-weight="700">El PORQUÉ de cada decisión</text>
+  <text x="190" y="452" fill="#6b7a9a" font-size="20" font-family="Source Sans 3, sans-serif" opacity="0.75">Por qué está hecho así, qué alternativas se descartaron</text>
+  <text x="130" y="465" fill="#fbbf24" font-size="22" font-family="Manrope, sans-serif" font-weight="800" opacity="0.4">──────────────────────────────────────</text>
+
+  <rect x="80" y="506" width="920" height="110" rx="12" fill="rgba(67,56,202,0.08)" stroke="#4338ca" stroke-width="1" opacity="0.5"/>
+  <text x="130" y="551" fill="#fbbf24" font-size="28" font-family="Manrope, sans-serif" font-weight="800" opacity="0.9">02</text>
+  <text x="190" y="546" fill="#e8ecf8" font-size="26" font-family="Manrope, sans-serif" font-weight="700">Las RESTRICCIONES</text>
+  <text x="190" y="578" fill="#6b7a9a" font-size="20" font-family="Source Sans 3, sans-serif" opacity="0.75">Lo que no se puede hacer y por qué</text>
+
+  <rect x="80" y="632" width="920" height="110" rx="12" fill="rgba(67,56,202,0.08)" stroke="#4338ca" stroke-width="1" opacity="0.5"/>
+  <text x="130" y="677" fill="#fbbf24" font-size="28" font-family="Manrope, sans-serif" font-weight="800" opacity="0.9">03</text>
+  <text x="190" y="672" fill="#e8ecf8" font-size="26" font-family="Manrope, sans-serif" font-weight="700">Los APRENDIZAJES</text>
+  <text x="190" y="704" fill="#6b7a9a" font-size="20" font-family="Source Sans 3, sans-serif" opacity="0.75">Cada error corregido, documentado. Solo crece.</text>
+
+  <text x="80" y="800" fill="#818cf8" font-size="24" font-family="Source Sans 3, sans-serif" font-weight="700" opacity="0.85">Corto. Honesto. Actualizado.</text>
+  <text x="80" y="834" fill="#6b7a9a" font-size="22" font-family="Source Sans 3, sans-serif" opacity="0.7">40 líneas valen más que 200 páginas aspiracionales.</text>
+
+  <rect x="0" y="990" width="1080" height="90" fill="rgba(12,13,24,0.9)"/>
+  <text x="80" y="1040" fill="#6b7a9a" font-size="16" font-family="JetBrains Mono, monospace">Ramón Campos Martin · Arquitecto de Software</text>
+  <text x="1000" y="1040" fill="#4338ca" font-size="18" font-family="Manrope, sans-serif" font-weight="800" text-anchor="end" opacity="0.5">RCM ◈</text>
+</svg>

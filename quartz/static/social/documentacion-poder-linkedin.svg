@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 627" width="1200" height="627">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0d18"/>
+      <stop offset="100%" stop-color="#141228"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#4338ca" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="1200" height="627" fill="url(#bg)"/>
+  <rect width="1200" height="627" fill="url(#glow)"/>
+
+  <!-- Acento superior izquierdo -->
+  <rect x="80" y="80" width="4" height="80" rx="2" fill="#4338ca" opacity="0.9"/>
+  <rect x="80" y="80" width="80" height="4" rx="2" fill="#4338ca" opacity="0.9"/>
+
+  <!-- Acento inferior derecho -->
+  <rect x="1116" y="467" width="4" height="80" rx="2" fill="#b45309" opacity="0.7"/>
+  <rect x="1040" y="543" width="80" height="4" rx="2" fill="#b45309" opacity="0.7"/>
+
+  <!-- Comilla de apertura -->
+  <text x="80" y="230" fill="#4338ca" font-size="180" font-family="Manrope, sans-serif" font-weight="800" opacity="0.12">"</text>
+
+  <!-- La frase — en tres líneas para respirar -->
+  <text x="120" y="255" fill="#e8ecf8" font-size="58" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5" opacity="0.97">Durante años dijimos</text>
+  <text x="120" y="330" fill="#e8ecf8" font-size="58" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5" opacity="0.97">que documentar era</text>
+  <text x="120" y="405" fill="#818cf8" font-size="58" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5" opacity="0.97">una pérdida de tiempo.</text>
+
+  <!-- La palabra que golpea -->
+  <text x="120" y="490" fill="#fbbf24" font-size="72" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-2" opacity="1">Mentimos.</text>
+
+  <!-- Separador -->
+  <rect x="120" y="520" width="48" height="2" rx="1" fill="#4338ca" opacity="0.6"/>
+
+  <!-- Autor -->
+  <text x="120" y="552" fill="#6b7a9a" font-size="16" font-family="JetBrains Mono, monospace" opacity="0.85">Ramón Campos Martin · Arquitecto de Software</text>
+  <text x="120" y="576" fill="#4338ca" font-size="14" font-family="JetBrains Mono, monospace" opacity="0.55">blog.rcmon.dev</text>
+
+  <!-- Marca -->
+  <text x="1120" y="576" fill="#4338ca" font-size="18" font-family="Manrope, sans-serif" font-weight="800" opacity="0.35" text-anchor="end">RCM ◈</text>
+</svg>

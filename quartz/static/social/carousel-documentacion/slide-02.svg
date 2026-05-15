@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0d18"/>
+      <stop offset="100%" stop-color="#141228"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+
+  <text x="80" y="90" fill="#4338ca" font-size="14" font-family="JetBrains Mono, monospace" opacity="0.5">02 / 06</text>
+  <rect x="80" y="110" width="60" height="3" rx="1.5" fill="#4338ca" opacity="0.8"/>
+
+  <!-- Título de sección -->
+  <text x="80" y="200" fill="#818cf8" font-size="18" font-family="JetBrains Mono, monospace" opacity="0.7">La verdad incómoda</text>
+
+  <!-- Idea principal -->
+  <text x="80" y="310" fill="#e8ecf8" font-size="56" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">El técnico que sabe</text>
+  <text x="80" y="380" fill="#e8ecf8" font-size="56" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">lo que nadie más</text>
+  <text x="80" y="450" fill="#e8ecf8" font-size="56" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">sabe es</text>
+  <text x="80" y="520" fill="#fbbf24" font-size="56" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">indispensable.</text>
+
+  <!-- Separador -->
+  <rect x="80" y="570" width="40" height="2" rx="1" fill="#4338ca" opacity="0.5"/>
+
+  <!-- Explicación -->
+  <text x="80" y="640" fill="#bcc5d8" font-size="28" font-family="Source Sans 3, sans-serif" opacity="0.85">Documentar ese conocimiento significaba,</text>
+  <text x="80" y="678" fill="#bcc5d8" font-size="28" font-family="Source Sans 3, sans-serif" opacity="0.85">en alguna medida, renunciar a ese poder.</text>
+
+  <text x="80" y="760" fill="#6b7a9a" font-size="24" font-family="Source Sans 3, sans-serif" opacity="0.75">No siempre fue consciente.</text>
+  <text x="80" y="796" fill="#6b7a9a" font-size="24" font-family="Source Sans 3, sans-serif" opacity="0.75">Pero era el incentivo.</text>
+
+  <!-- Insight destacado -->
+  <rect x="80" y="840" width="920" height="100" rx="12" fill="rgba(67,56,202,0.1)" stroke="#4338ca" stroke-width="1" opacity="0.6"/>
+  <text x="540" y="882" fill="#818cf8" font-size="20" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.85">No era pereza. Era estrategia de supervivencia.</text>
+  <text x="540" y="916" fill="#6b7a9a" font-size="17" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.6">Y durante décadas, era perfectamente racional.</text>
+
+  <rect x="0" y="990" width="1080" height="90" fill="rgba(12,13,24,0.9)"/>
+  <text x="80" y="1040" fill="#6b7a9a" font-size="16" font-family="JetBrains Mono, monospace">Ramón Campos Martin · Arquitecto de Software</text>
+  <text x="1000" y="1040" fill="#4338ca" font-size="18" font-family="Manrope, sans-serif" font-weight="800" text-anchor="end" opacity="0.5">RCM ◈</text>
+</svg>

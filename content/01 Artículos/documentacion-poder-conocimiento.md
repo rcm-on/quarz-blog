@@ -150,3 +150,13 @@ La elección ya no es entre documentar y no documentar. Es entre documentar bien
 ---
 
 > Artículos relacionados: [[01 Artículos/documentar-ahora-es-diferente|Documentar ahora es diferente]] · [[04 Arquitectura IA/documento-arquitectura-base|ARCH.md: memoria para el agente]] · [[04 Arquitectura IA/ratchet-efecto-memoria-agente|El efecto ratchet]] · [[02 Laboratorios/arch-md-ejemplo|Lab: ARCH.md ejemplo]]
+
+---
+
+## Referencias
+
+- **Andrew Hunt & David Thomas** — *The Pragmatic Programmer* (1999, actualizado 2019). Introduce el concepto de *lottery factor* como medida de la dependencia crítica de conocimiento en un equipo.
+- **Martin Fowler** — [*Truck Number*](https://martinfowler.com/bliki/TruckNumber.html), martinfowler.com. Definición y análisis del indicador en contextos de equipo de software.
+- **Nicole Forsgren, Jez Humble & Gene Kim** — *Accelerate: The Science of Lean Software and DevOps* (2018). El conocimiento distribuido como predictor de rendimiento organizacional en equipos de alto rendimiento.
+- **Matthew Skelton & Manuel Pais** — *Team Topologies* (2019). Diseño de equipos para minimizar dependencias críticas de conocimiento y reducir la carga cognitiva individual.
+- **Gene Kim, Kevin Behr & George Spafford** — *The Phoenix Project* (2013). Ilustración narrativa de cómo el conocimiento retenido en una sola persona puede paralizar una organización entera.

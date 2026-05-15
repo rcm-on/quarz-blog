@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0d18"/>
+      <stop offset="100%" stop-color="#141228"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+
+  <text x="80" y="90" fill="#4338ca" font-size="14" font-family="JetBrains Mono, monospace" opacity="0.5">04 / 06</text>
+  <rect x="80" y="110" width="60" height="3" rx="1.5" fill="#4338ca" opacity="0.8"/>
+
+  <text x="80" y="200" fill="#818cf8" font-size="18" font-family="JetBrains Mono, monospace" opacity="0.7">Lo que cambió la IA</text>
+
+  <text x="80" y="310" fill="#e8ecf8" font-size="50" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">Antes: el que no</text>
+  <text x="80" y="372" fill="#e8ecf8" font-size="50" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">documentaba lo pagaba</text>
+  <text x="80" y="434" fill="#6b7a9a" font-size="50" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">el nuevo en 6 meses.</text>
+
+  <rect x="80" y="468" width="920" height="2" rx="1" fill="#4338ca" opacity="0.15"/>
+
+  <text x="80" y="546" fill="#e8ecf8" font-size="50" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">Ahora: lo pagas</text>
+  <text x="80" y="608" fill="#fbbf24" font-size="50" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">tú mismo.</text>
+  <text x="80" y="670" fill="#818cf8" font-size="50" font-family="Manrope, sans-serif" font-weight="800" letter-spacing="-1.5">En la misma sesión.</text>
+
+  <rect x="80" y="720" width="40" height="2" rx="1" fill="#4338ca" opacity="0.5"/>
+
+  <text x="80" y="790" fill="#bcc5d8" font-size="25" font-family="Source Sans 3, sans-serif" opacity="0.85">El agente IA no puede pedirte que le expliques.</text>
+  <text x="80" y="824" fill="#bcc5d8" font-size="25" font-family="Source Sans 3, sans-serif" opacity="0.85">Si no está documentado, para él no existe.</text>
+  <text x="80" y="876" fill="#818cf8" font-size="25" font-family="Source Sans 3, sans-serif" font-weight="700" opacity="0.9">El incentivo cambió. El comportamiento cambia.</text>
+
+  <rect x="0" y="990" width="1080" height="90" fill="rgba(12,13,24,0.9)"/>
+  <text x="80" y="1040" fill="#6b7a9a" font-size="16" font-family="JetBrains Mono, monospace">Ramón Campos Martin · Arquitecto de Software</text>
+  <text x="1000" y="1040" fill="#4338ca" font-size="18" font-family="Manrope, sans-serif" font-weight="800" text-anchor="end" opacity="0.5">RCM ◈</text>
+</svg>
