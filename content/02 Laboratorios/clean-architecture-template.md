@@ -1,6 +1,7 @@
 ---
 title: "Lab: Clean Architecture — estructura base para proyectos nuevos"
 date: 2026-05-14
+draft: true
 tags:
   - lab
   - arquitectura

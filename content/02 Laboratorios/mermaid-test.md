@@ -1,6 +1,7 @@
 ---
 title: "Diagramas Mermaid — Prueba de renders"
 date: 2026-05-14
+draft: true
 tags:
   - lab
   - mermaid

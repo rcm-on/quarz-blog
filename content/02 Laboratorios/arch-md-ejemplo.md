@@ -1,6 +1,7 @@
 ---
 title: "Lab: ARCH.md — cómo describir tu proyecto para que el agente entienda el contexto"
 date: 2026-05-14
+draft: true
 tags:
   - lab
   - ia

@@ -234,6 +234,20 @@ document.addEventListener("nav", async () => {
         tertiaryColor: computedStyleMap["--tertiary"],
         clusterBkg: computedStyleMap["--light"],
         edgeLabelBackground: computedStyleMap["--highlight"],
+        // Mindmap branch colors — indigo/coral palette, legible en ambos modos
+        cScale0: darkMode ? "#3730a3" : "#dde4ff",
+        cScale1: darkMode ? "#92400e" : "#fef3c7",
+        cScale2: darkMode ? "#4338ca" : "#e0e7ff",
+        cScale3: darkMode ? "#78350f" : "#fde68a",
+        cScale4: darkMode ? "#312e81" : "#ede9fe",
+        cScale5: darkMode ? "#451a03" : "#fffbeb",
+        cScale6: darkMode ? "#1e3a5f" : "#f0f9ff",
+        cScale7: darkMode ? "#6d28d9" : "#fef9c3",
+        cScaleLabel0: darkMode ? "#e0e7ff" : "#1e1b4b",
+        cScaleLabel1: darkMode ? "#fde68a" : "#451a03",
+        cScaleLabel2: darkMode ? "#e0e7ff" : "#1e1b4b",
+        cScaleLabel3: darkMode ? "#fef3c7" : "#451a03",
+        cScaleLabel4: darkMode ? "#ede9fe" : "#2e1065",
       },
     })
 

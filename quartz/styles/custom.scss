@@ -1,7 +1,7 @@
 @use "./base.scss";
 
 /* =================================================
-   RCM — Brand System · Índigo × Coral
+   RCM — Brand System · Índigo × Amber
    Modern SaaS · AACC · Neurodivergente · Personal
    ================================================= */
 
@@ -14,9 +14,9 @@
 :root {
   /* Accesos directos a la paleta */
   --rcm-indigo:        #4338ca;
-  --rcm-coral:         #f97316;
+  --rcm-coral:         #b45309;
   --rcm-indigo-pale:   rgba(67, 56, 202, 0.09);
-  --rcm-coral-pale:    rgba(249, 115, 22, 0.09);
+  --rcm-coral-pale:    rgba(180, 83, 9, 0.09);
 
   /* Shape */
   --rcm-radius-lg:  16px;
@@ -40,9 +40,9 @@
    ------------------------------------------------- */
 :root[saved-theme="dark"] {
   --rcm-indigo:        #818cf8;
-  --rcm-coral:         #fb923c;
+  --rcm-coral:         #fbbf24;
   --rcm-indigo-pale:   rgba(129, 140, 248, 0.11);
-  --rcm-coral-pale:    rgba(251, 146, 60, 0.11);
+  --rcm-coral-pale:    rgba(251, 191, 36, 0.11);
   --rcm-shadow-sm:  0 1px 2px rgba(0,0,0,.25), 0 4px 12px rgba(0,0,0,.20);
   --rcm-shadow-md:  0 2px 6px rgba(0,0,0,.30), 0 12px 32px rgba(0,0,0,.25);
 }
@@ -56,36 +56,33 @@ body {
   background-color: var(--light);
 }
 
-/* Gradiente suave en esquinas — modo claro */
+/* =================================================
+   BACKGROUND — Mesh gradient profesional
+   Inspiración: Linear, Vercel, Raycast (2024-2025)
+   Light: orbes suaves visibles · Dark: glows + grid
+   ================================================= */
+
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 1;
   background:
-    radial-gradient(ellipse 80% 50% at 0% 0%,   rgba(67, 56, 202, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 100% 0%,  rgba(249, 115, 22, 0.05) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(67, 56, 202, 0.04) 0%, transparent 60%);
+    radial-gradient(ellipse 85% 65% at -5%  -5%,  rgba(67, 56, 202, 0.13) 0%, transparent 58%),
+    radial-gradient(ellipse 65% 55% at 108% 108%, rgba(180, 83,  9, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at  52%  -8%,  rgba(67, 56, 202, 0.06) 0%, transparent 62%);
 }
 
 :root[saved-theme="dark"] body::before {
-  opacity: 0.18;
   background:
-    radial-gradient(700px 420px at  8%  -8%, rgba(99, 102, 241, 0.45), transparent 68%),
-    radial-gradient(500px 300px at 92%   6%, rgba(251, 146, 60, 0.20), transparent 70%),
-    radial-gradient(840px 480px at 50% 105%, rgba(99, 102, 241, 0.16), transparent 76%);
-  filter: blur(32px) saturate(120%);
-  animation: rcmAurora 52s ease-in-out infinite alternate;
+    radial-gradient(ellipse 70% 60% at  8%   4%,  rgba(99, 102, 241, 0.38) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 48% at 90%  92%,  rgba(251, 191, 36, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 38% at 50% 108%,  rgba(67,  56, 202, 0.12) 0%, transparent 62%);
+  filter: blur(52px) saturate(130%);
 }
 
-@keyframes rcmAurora {
-  0%   { transform: translate3d(0, -1.2rem, 0) scale(1);    }
-  100% { transform: translate3d(0,  1.2rem, 0) scale(1.05); }
-}
-
-/* Arborescencia neural — solo modo oscuro */
+/* Dot grid — solo modo oscuro, estilo Linear/Vercel */
 body::after {
   content: "";
   position: fixed;
@@ -93,39 +90,22 @@ body::after {
   pointer-events: none;
   z-index: 0;
   opacity: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'%3E%3Cg stroke='rgba(67,56,202,0.50)' stroke-width='1' fill='none'%3E%3Cline x1='200' y1='60' x2='80' y2='200'/%3E%3Cline x1='200' y1='60' x2='350' y2='180'/%3E%3Cline x1='500' y1='40' x2='350' y2='180'/%3E%3Cline x1='500' y1='40' x2='620' y2='195'/%3E%3Cline x1='800' y1='55' x2='620' y2='195'/%3E%3Cline x1='800' y1='55' x2='880' y2='185'/%3E%3Cline x1='1100' y1='45' x2='880' y2='185'/%3E%3Cline x1='1100' y1='45' x2='1150' y2='200'/%3E%3Cline x1='1400' y1='65' x2='1150' y2='200'/%3E%3Cline x1='1400' y1='65' x2='1520' y2='190'/%3E%3Cline x1='80' y1='200' x2='170' y2='380'/%3E%3Cline x1='350' y1='180' x2='170' y2='380'/%3E%3Cline x1='350' y1='180' x2='460' y2='360'/%3E%3Cline x1='620' y1='195' x2='460' y2='360'/%3E%3Cline x1='620' y1='195' x2='740' y2='375'/%3E%3Cline x1='880' y1='185' x2='740' y2='375'/%3E%3Cline x1='880' y1='185' x2='1020' y2='365'/%3E%3Cline x1='1150' y1='200' x2='1020' y2='365'/%3E%3Cline x1='1150' y1='200' x2='1300' y2='380'/%3E%3Cline x1='1520' y1='190' x2='1300' y2='380'/%3E%3Cline x1='170' y1='380' x2='100' y2='560'/%3E%3Cline x1='460' y1='360' x2='100' y2='560'/%3E%3Cline x1='460' y1='360' x2='380' y2='540'/%3E%3Cline x1='740' y1='375' x2='380' y2='540'/%3E%3Cline x1='740' y1='375' x2='660' y2='555'/%3E%3Cline x1='1020' y1='365' x2='660' y2='555'/%3E%3Cline x1='1020' y1='365' x2='940' y2='545'/%3E%3Cline x1='1300' y1='380' x2='940' y2='545'/%3E%3Cline x1='1300' y1='380' x2='1220' y2='560'/%3E%3Cline x1='1300' y1='380' x2='1480' y2='550'/%3E%3Cline x1='100' y1='560' x2='250' y2='730'/%3E%3Cline x1='380' y1='540' x2='250' y2='730'/%3E%3Cline x1='380' y1='540' x2='540' y2='715'/%3E%3Cline x1='660' y1='555' x2='540' y2='715'/%3E%3Cline x1='660' y1='555' x2='820' y2='730'/%3E%3Cline x1='940' y1='545' x2='820' y2='730'/%3E%3Cline x1='940' y1='545' x2='1100' y2='720'/%3E%3Cline x1='1220' y1='560' x2='1100' y2='720'/%3E%3Cline x1='1220' y1='560' x2='1380' y2='735'/%3E%3Cline x1='1480' y1='550' x2='1380' y2='735'/%3E%3Cline x1='250' y1='730' x2='90' y2='870'/%3E%3Cline x1='250' y1='730' x2='370' y2='855'/%3E%3Cline x1='540' y1='715' x2='370' y2='855'/%3E%3Cline x1='540' y1='715' x2='650' y2='865'/%3E%3Cline x1='820' y1='730' x2='650' y2='865'/%3E%3Cline x1='820' y1='730' x2='930' y2='860'/%3E%3Cline x1='1100' y1='720' x2='930' y2='860'/%3E%3Cline x1='1100' y1='720' x2='1210' y2='870'/%3E%3Cline x1='1380' y1='735' x2='1210' y2='870'/%3E%3Cline x1='1380' y1='735' x2='1510' y2='860'/%3E%3Cline x1='350' y1='180' x2='620' y2='195'/%3E%3Cline x1='880' y1='185' x2='1150' y2='200'/%3E%3Cline x1='460' y1='360' x2='740' y2='375'/%3E%3Cline x1='1020' y1='365' x2='1300' y2='380'/%3E%3Cline x1='380' y1='540' x2='660' y2='555'/%3E%3Cline x1='940' y1='545' x2='1220' y2='560'/%3E%3Cline x1='540' y1='715' x2='820' y2='730'/%3E%3Cline x1='1100' y1='720' x2='1380' y2='735'/%3E%3C/g%3E%3Cg fill='rgba(67,56,202,0.70)'%3E%3Ccircle cx='200' cy='60' r='4'/%3E%3Ccircle cx='500' cy='40' r='4.5'/%3E%3Ccircle cx='800' cy='55' r='4.5'/%3E%3Ccircle cx='1100' cy='45' r='4'/%3E%3Ccircle cx='1400' cy='65' r='4'/%3E%3Ccircle cx='80' cy='200' r='3.5'/%3E%3Ccircle cx='350' cy='180' r='4.5'/%3E%3Ccircle cx='620' cy='195' r='4.5'/%3E%3Ccircle cx='880' cy='185' r='4.5'/%3E%3Ccircle cx='1150' cy='200' r='4.5'/%3E%3Ccircle cx='1520' cy='190' r='3.5'/%3E%3Ccircle cx='170' cy='380' r='4'/%3E%3Ccircle cx='460' cy='360' r='4.8'/%3E%3Ccircle cx='740' cy='375' r='5.2'/%3E%3Ccircle cx='1020' cy='365' r='5'/%3E%3Ccircle cx='1300' cy='380' r='4.8'/%3E%3Ccircle cx='100' cy='560' r='3.5'/%3E%3Ccircle cx='380' cy='540' r='4.5'/%3E%3Ccircle cx='660' cy='555' r='5.2'/%3E%3Ccircle cx='940' cy='545' r='5'/%3E%3Ccircle cx='1220' cy='560' r='4.5'/%3E%3Ccircle cx='1480' cy='550' r='3.5'/%3E%3Ccircle cx='250' cy='730' r='4'/%3E%3Ccircle cx='540' cy='715' r='4.8'/%3E%3Ccircle cx='820' cy='730' r='5.2'/%3E%3Ccircle cx='1100' cy='720' r='5'/%3E%3Ccircle cx='1380' cy='735' r='4.5'/%3E%3Ccircle cx='90' cy='870' r='3.5'/%3E%3Ccircle cx='370' cy='855' r='4'/%3E%3Ccircle cx='650' cy='865' r='4.5'/%3E%3Ccircle cx='930' cy='860' r='4.5'/%3E%3Ccircle cx='1210' cy='870' r='4'/%3E%3Ccircle cx='1510' cy='860' r='3.5'/%3E%3C/g%3E%3Cg fill='rgba(249,115,22,0.85)'%3E%3Ccircle cx='740' cy='375' r='2.8'/%3E%3Ccircle cx='660' cy='555' r='2.8'/%3E%3Ccircle cx='820' cy='730' r='2.8'/%3E%3Ccircle cx='500' cy='40' r='2.5'/%3E%3Ccircle cx='940' cy='545' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
-/* Arborescencia neural — activada en oscuro */
 :root[saved-theme="dark"] body::after {
-  opacity: 0.18;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'%3E%3Cg stroke='rgba(129,140,248,0.42)' stroke-width='1' fill='none'%3E%3Cline x1='200' y1='60' x2='80' y2='200'/%3E%3Cline x1='200' y1='60' x2='350' y2='180'/%3E%3Cline x1='500' y1='40' x2='350' y2='180'/%3E%3Cline x1='500' y1='40' x2='620' y2='195'/%3E%3Cline x1='800' y1='55' x2='620' y2='195'/%3E%3Cline x1='800' y1='55' x2='880' y2='185'/%3E%3Cline x1='1100' y1='45' x2='880' y2='185'/%3E%3Cline x1='1100' y1='45' x2='1150' y2='200'/%3E%3Cline x1='1400' y1='65' x2='1150' y2='200'/%3E%3Cline x1='1400' y1='65' x2='1520' y2='190'/%3E%3Cline x1='80' y1='200' x2='170' y2='380'/%3E%3Cline x1='350' y1='180' x2='170' y2='380'/%3E%3Cline x1='350' y1='180' x2='460' y2='360'/%3E%3Cline x1='620' y1='195' x2='460' y2='360'/%3E%3Cline x1='620' y1='195' x2='740' y2='375'/%3E%3Cline x1='880' y1='185' x2='740' y2='375'/%3E%3Cline x1='880' y1='185' x2='1020' y2='365'/%3E%3Cline x1='1150' y1='200' x2='1020' y2='365'/%3E%3Cline x1='1150' y1='200' x2='1300' y2='380'/%3E%3Cline x1='1520' y1='190' x2='1300' y2='380'/%3E%3Cline x1='170' y1='380' x2='100' y2='560'/%3E%3Cline x1='460' y1='360' x2='100' y2='560'/%3E%3Cline x1='460' y1='360' x2='380' y2='540'/%3E%3Cline x1='740' y1='375' x2='380' y2='540'/%3E%3Cline x1='740' y1='375' x2='660' y2='555'/%3E%3Cline x1='1020' y1='365' x2='660' y2='555'/%3E%3Cline x1='1020' y1='365' x2='940' y2='545'/%3E%3Cline x1='1300' y1='380' x2='940' y2='545'/%3E%3Cline x1='1300' y1='380' x2='1220' y2='560'/%3E%3Cline x1='1300' y1='380' x2='1480' y2='550'/%3E%3Cline x1='100' y1='560' x2='250' y2='730'/%3E%3Cline x1='380' y1='540' x2='250' y2='730'/%3E%3Cline x1='380' y1='540' x2='540' y2='715'/%3E%3Cline x1='660' y1='555' x2='540' y2='715'/%3E%3Cline x1='660' y1='555' x2='820' y2='730'/%3E%3Cline x1='940' y1='545' x2='820' y2='730'/%3E%3Cline x1='940' y1='545' x2='1100' y2='720'/%3E%3Cline x1='1220' y1='560' x2='1100' y2='720'/%3E%3Cline x1='1220' y1='560' x2='1380' y2='735'/%3E%3Cline x1='1480' y1='550' x2='1380' y2='735'/%3E%3Cline x1='250' y1='730' x2='90' y2='870'/%3E%3Cline x1='250' y1='730' x2='370' y2='855'/%3E%3Cline x1='540' y1='715' x2='370' y2='855'/%3E%3Cline x1='540' y1='715' x2='650' y2='865'/%3E%3Cline x1='820' y1='730' x2='650' y2='865'/%3E%3Cline x1='820' y1='730' x2='930' y2='860'/%3E%3Cline x1='1100' y1='720' x2='930' y2='860'/%3E%3Cline x1='1100' y1='720' x2='1210' y2='870'/%3E%3Cline x1='1380' y1='735' x2='1210' y2='870'/%3E%3Cline x1='1380' y1='735' x2='1510' y2='860'/%3E%3Cline x1='350' y1='180' x2='620' y2='195'/%3E%3Cline x1='880' y1='185' x2='1150' y2='200'/%3E%3Cline x1='460' y1='360' x2='740' y2='375'/%3E%3Cline x1='1020' y1='365' x2='1300' y2='380'/%3E%3Cline x1='380' y1='540' x2='660' y2='555'/%3E%3Cline x1='940' y1='545' x2='1220' y2='560'/%3E%3Cline x1='540' y1='715' x2='820' y2='730'/%3E%3Cline x1='1100' y1='720' x2='1380' y2='735'/%3E%3C/g%3E%3Cg fill='rgba(129,140,248,0.65)'%3E%3Ccircle cx='200' cy='60' r='4'/%3E%3Ccircle cx='500' cy='40' r='4.5'/%3E%3Ccircle cx='800' cy='55' r='4.5'/%3E%3Ccircle cx='1100' cy='45' r='4'/%3E%3Ccircle cx='1400' cy='65' r='4'/%3E%3Ccircle cx='80' cy='200' r='3.5'/%3E%3Ccircle cx='350' cy='180' r='4.5'/%3E%3Ccircle cx='620' cy='195' r='4.5'/%3E%3Ccircle cx='880' cy='185' r='4.5'/%3E%3Ccircle cx='1150' cy='200' r='4.5'/%3E%3Ccircle cx='1520' cy='190' r='3.5'/%3E%3Ccircle cx='170' cy='380' r='4'/%3E%3Ccircle cx='460' cy='360' r='4.8'/%3E%3Ccircle cx='740' cy='375' r='5.2'/%3E%3Ccircle cx='1020' cy='365' r='5'/%3E%3Ccircle cx='1300' cy='380' r='4.8'/%3E%3Ccircle cx='100' cy='560' r='3.5'/%3E%3Ccircle cx='380' cy='540' r='4.5'/%3E%3Ccircle cx='660' cy='555' r='5.2'/%3E%3Ccircle cx='940' cy='545' r='5'/%3E%3Ccircle cx='1220' cy='560' r='4.5'/%3E%3Ccircle cx='1480' cy='550' r='3.5'/%3E%3Ccircle cx='250' cy='730' r='4'/%3E%3Ccircle cx='540' cy='715' r='4.8'/%3E%3Ccircle cx='820' cy='730' r='5.2'/%3E%3Ccircle cx='1100' cy='720' r='5'/%3E%3Ccircle cx='1380' cy='735' r='4.5'/%3E%3Ccircle cx='90' cy='870' r='3.5'/%3E%3Ccircle cx='370' cy='855' r='4'/%3E%3Ccircle cx='650' cy='865' r='4.5'/%3E%3Ccircle cx='930' cy='860' r='4.5'/%3E%3Ccircle cx='1210' cy='870' r='4'/%3E%3Ccircle cx='1510' cy='860' r='3.5'/%3E%3C/g%3E%3Cg fill='rgba(251,146,60,0.85)'%3E%3Ccircle cx='740' cy='375' r='2.8'/%3E%3Ccircle cx='660' cy='555' r='2.8'/%3E%3Ccircle cx='820' cy='730' r='2.8'/%3E%3Ccircle cx='500' cy='40' r='2.5'/%3E%3Ccircle cx='940' cy='545' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-@keyframes rcmAurora {
-  0%   { transform: translate3d(0, -1.2rem, 0) scale(1);    }
-  100% { transform: translate3d(0,  1.2rem, 0) scale(1.05); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body::before { animation: none; }
+  opacity: 1;
+  background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1.1' fill='rgba(129,140,248,0.09)'/%3E%3C/svg%3E");
+  background-size: 28px 28px;
+  background-repeat: repeat;
 }
 
 @media (max-width: 800px) {
   :root[saved-theme="dark"] body::before {
-    opacity: 0.14;
-    filter: blur(20px);
-  }
-  :root[saved-theme="dark"] body::after {
-    opacity: 0.14;
+    filter: blur(36px);
   }
 }
-
 /* =================================================
-   CAPA DE PÁGINA — sobre la aurora
+   CAPA DE PÁGINA — sobre el fondo
    ================================================= */
 
 .page {
@@ -145,6 +125,28 @@ body::after {
 /* =================================================
    TIPOGRAFÍA
    ================================================= */
+
+/* Cuerpo — lectura cómoda */
+.center article p,
+.center article li {
+  line-height: 1.82;
+  font-size: clamp(1rem, 1.1vw, 1.06rem);
+}
+
+/* Headings de artículo — jerarquía clara */
+.center article h2 {
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  margin-top: 2.4rem;
+}
+
+.center article h3 {
+  font-size: clamp(1.1rem, 1.5vw, 1.28rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 1.8rem;
+}
 
 .article-title {
   font-size: clamp(1.9rem, 2.8vw, 3.1rem);
