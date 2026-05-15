@@ -1,7 +1,6 @@
 ---
 title: "ARCH.md: el documento que le da memoria a tu agente"
 date: 2026-05-14
-draft: true
 tags:
   - arquitectura
   - ia
@@ -10,19 +9,19 @@ tags:
 description: "Un documento de arquitectura base no es documentación. Es el contrato operativo que permite a un agente trabajar con coherencia en tu proyecto sesión tras sesión."
 ---
 
-Un agente IA no recuerda nada entre sesiones. Cada vez que lo abres, empieza de cero.
+La tercera vez que el agente generó código que rompía las convenciones del proyecto, me rendí a la evidencia: el problema no era el modelo. Era que cada sesión empezaba sin memoria de las decisiones anteriores.
 
-Sin contexto, tomará decisiones que contradicen las que tomaste la semana pasada. Generará código que no encaja con la arquitectura existente. Usará convenciones distintas en cada sesión.
+Le había dado el contexto en el prompt. Una vez. No era suficiente.
 
-La solución no es un prompt mejor. Es un **documento de arquitectura base** — un archivo que vive en la raíz del repositorio y que el agente lee antes de actuar.
+Lo que necesitaba era un documento que viviera en el repositorio, que el agente leyera antes de actuar en cada sesión, y que acumulara todo lo que ya había decidido sobre el proyecto. No para un auditor. No para un compañero nuevo. Para la herramienta con la que trabajo hoy.
 
-No es documentación. Es contexto operativo.
+Eso es un `ARCH.md`.
 
 ---
 
-## Qué contiene un ARCH.md
+## Qué contiene
 
-Un documento de arquitectura base tiene cinco secciones que todo agente necesita:
+Cinco secciones. Cada una responde a una pregunta distinta que el agente necesita resuelta antes de actuar:
 
 ```mermaid
 graph TD
@@ -35,36 +34,15 @@ graph TD
     F -->|crece con cada error| F
 ```
 
-### 1. Identidad del proyecto
+**Identidad** — quién eres, qué construyes, para quién, con qué tono. Sin esto, el agente opera en abstracto y sus decisiones son genéricas.
 
-Quién eres, qué construyes, para quién, qué tono usas. El agente necesita saber en qué dominio opera antes de generar cualquier cosa.
+**Estructura** — dónde va cada tipo de archivo. Sin esta sección, el agente decide solo dónde poner las cosas. Y decide diferente cada sesión.
 
-```markdown
-## Qué es este proyecto
-Blog técnico de [nombre] publicado con Quartz 4.
-Dominio: Arquitectura de software, DevOps e IA.
-Tono: directo, con criterio propio, sin hype.
-```
+**Convenciones** — las decisiones técnicas que ya tomaste. Qué librería usas para X. Qué patrón aplicas en Y. El agente no tiene que adivinar ni proponer alternativas que ya descartaste.
 
-### 2. Estructura y reglas de contenido
+**Restricciones** — las acciones que nunca debe ejecutar. `git push --force`, borrar contenido sin confirmar, modificar archivos que son código upstream. Esta sección es la que implementa los ganchos de ciclo de vida del harness en lenguaje natural.
 
-Dónde va cada tipo de archivo. Qué está prohibido tocar. Qué frontmatter es obligatorio.
-
-Sin esta sección, el agente decide solo dónde poner las cosas — y decide diferente cada sesión.
-
-### 3. Stack y convenciones
-
-Las decisiones técnicas que ya tomaste. Qué librería usas para X. Qué patrón aplicas en Y. El agente no tiene que adivinar ni proponer alternativas que ya descartaste.
-
-### 4. Restricciones de ejecución
-
-Las acciones que nunca debe hacer: `git push --force`, borrar contenido sin confirmar, modificar archivos que son código upstream.
-
-Esta sección es la que implementa los **ganchos de ciclo de vida** del harness en forma de reglas de lenguaje natural.
-
-### 5. Aprendizajes acumulados — el efecto ratchet
-
-La sección más importante. Cada vez que el agente comete un error y tú lo corriges, la lección se documenta aquí. El documento no puede "desaprender" — solo acumula.
+**Aprendizajes** — la sección más importante. Cada vez que el agente comete un error y lo corriges, la lección se documenta aquí. El documento no puede desaprender — solo acumula.
 
 ```markdown
 ## Aprendizajes acumulados
@@ -72,7 +50,7 @@ La sección más importante. Cada vez que el agente comete un error y tú lo cor
 - No usar `style fill:` en diagramas Mermaid: los colores hardcoded
   chocan con el tema del sitio.
 - No añadir `\n` en labels de Mermaid: no se interpreta.
-- El home solo enlaza artículos que ya existen.
+- El home solo enlaza artículos que ya existen en el repositorio.
 ```
 
 Con el tiempo, esta sección se convierte en la memoria colectiva del proyecto.
@@ -106,14 +84,14 @@ Empieza pequeño. Un ARCH.md de 30 líneas que se lee en 2 minutos es más útil
 
 ## Por qué funciona
 
-El agente no toma mejores decisiones porque sea más inteligente con el ARCH.md. Las toma porque tiene **menos espacio para improvisar**.
+El agente no toma mejores decisiones porque sea más inteligente con el ARCH.md. Las toma porque tiene menos espacio para improvisar.
 
 Las decisiones ya están tomadas. Las convenciones ya están definidas. Las restricciones ya están documentadas.
 
 El documento no aumenta la inteligencia del agente. Reduce su incertidumbre.
 
-Y eso, en sistemas que operan en producción, es exactamente lo que necesitas.
+Y eso, en sistemas que trabajan contigo en producción, es exactamente lo que necesitas.
 
 ---
 
-> El `ARCH.md` de este proyecto está disponible en la raíz del repositorio como ejemplo concreto.
+> Relacionado: [[04 Arquitectura IA/harness-engineering-agentes-ia|Harness Engineering]] · [[04 Arquitectura IA/ratchet-efecto-memoria-agente|El efecto ratchet]]

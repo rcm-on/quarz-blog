@@ -1,7 +1,6 @@
 ---
 title: "Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA"
 date: 2026-05-14
-draft: true
 tags:
   - ia
   - arquitectura
@@ -9,48 +8,49 @@ tags:
   - harness
   - orquestación
 description: "La efectividad de un agente IA no depende del modelo, sino del harness que lo rodea: la infraestructura de control, supervisión y retroalimentación que convierte un LLM en un sistema autónomo confiable."
+banner: "../../static/banners/harness-engineering.svg"
+socialImage: "../../static/social/harness-engineering-linkedin.svg"
 ---
 
-Hay un cambio de paradigma en marcha que la mayoría de los debates sobre IA generativa están ignorando. No se trata del modelo. Se trata de lo que lo rodea.
+![Harness Engineering](../../static/banners/harness-engineering.svg)
 
-**Harness engineering** — ingeniería de arneses — es la disciplina que emerge cuando los equipos descubren que desplegar un LLM en producción no es conectar una API, sino diseñar un sistema completo de control, supervisión y retroalimentación alrededor de él.
+La primera vez que desplegué un agente IA en un proyecto real, cometí el error que comete todo el mundo: traté el modelo como si fuera suficiente.
 
-El trabajo del ingeniero se desplaza. Ya no es entrenar ni afinar modelos. Es **arquitectar comportamientos**.
+Conecté la API, di instrucciones en el prompt, lo solté. Funcionó bien los primeros días. Luego empezaron los problemas: el agente tomaba decisiones que contradecían las del día anterior, ejecutaba acciones que no debía, ignoraba restricciones que yo asumía implícitas. El modelo no había cambiado. Yo no había cambiado. Pero el sistema fallaba.
+
+El problema no era el modelo. Era que no había sistema.
 
 ---
 
-## Qué es un harness y por qué importa
+## Qué es un harness
 
-Un harness no es el modelo. Es todo lo demás: el ecosistema de software y reglas que controla cómo el agente observa, razona y ejecuta tareas de manera confiable en producción.
+Un harness no es el modelo. Es todo lo que lo rodea: el ecosistema de software y reglas que controla cómo el agente observa, razona y ejecuta tareas de forma confiable en producción.
 
-Formalmente, un harness se define como seis componentes interdependientes:
-
-$$H = (E, T, C, S, L, V)$$
+Tiene seis piezas interdependientes:
 
 ```mermaid
 graph TD
-    E["E — Bucle de Ejecución: observar → pensar → actuar"]
-    T["T — Registro de Herramientas: bash, browser, APIs"]
-    C["C — Gestor de Contexto: filtra lo que entra al modelo"]
-    S["S — Almacén de Estado: memoria entre sesiones"]
-    L["L — Ganchos de Ciclo de Vida: intercepción y aprobación"]
-    V["V — Interfaz de Evaluación: métricas y trazas"]
+    E["Bucle de ejecución — observar → pensar → actuar"]
+    T["Registro de herramientas — bash, browser, APIs"]
+    C["Gestor de contexto — filtra lo que entra al modelo"]
+    S["Almacén de estado — memoria entre sesiones"]
+    L["Ganchos de ciclo de vida — intercepción y aprobación"]
+    V["Interfaz de evaluación — métricas y trazas"]
 
     E -->|usa| T
     E -->|consume| C
     E -->|lee y escribe| S
     L -->|intercepta| E
     V -->|instrumenta| E
-
 ```
 
-Cada componente resuelve un problema distinto. La mayoría de los proyectos que fallan en producción lo hacen porque ignoraron **L** (no hay supervisión humana en los momentos críticos) o **V** (no hay forma de saber si el agente está haciendo lo correcto).
+La mayoría de los proyectos que fallan en producción lo hacen porque ignoraron los ganchos (no hay supervisión humana en los momentos críticos) o la evaluación (no hay forma de saber si el agente está haciendo lo correcto).
 
 ---
 
 ## El ciclo que el modelo no ve
 
-El bucle observe-think-act es la unidad de trabajo de cualquier agente. El harness es el que decide cuándo continuar, cuándo pedir aprobación y cuándo detener.
+El agente observa, piensa y actúa. El harness decide cuándo dejar que actúe, cuándo pedir aprobación y cuándo parar.
 
 ```mermaid
 sequenceDiagram
@@ -58,7 +58,7 @@ sequenceDiagram
     participant C as Gestor de Contexto
     participant M as Modelo LLM
     participant T as Herramientas
-    participant L as Ganchos (Lifecycle)
+    participant L as Ganchos
 
     H->>C: construye ventana de contexto
     C-->>H: contexto filtrado y priorizado
@@ -76,54 +76,15 @@ sequenceDiagram
     H->>H: ¿condición de terminación?
 ```
 
-La clave está en los ganchos (**L**). Sin ellos, el agente ejecuta acciones irreversibles sin supervisión. Con ellos, el arquitecto define exactamente qué nivel de autonomía se otorga y en qué condiciones.
-
----
-
-## Orquestación multi-agente: LangGraph y AutoGen
-
-Cuando el problema supera las capacidades de un solo agente, entra la orquestación multi-agente. Frameworks como **LangGraph** y **AutoGen** implementan esta capa mediante grafos de estados y agentes especializados que comparten contexto.
-
-```mermaid
-graph LR
-    subgraph Orquestador["Orchestrator (plano de control)"]
-        P[Planificador]
-        R[Router]
-    end
-
-    subgraph Agentes["Agentes especializados"]
-        AG[Agente Generador]
-        AR[Agente Revisor]
-        AE[Agente Ejecutor]
-    end
-
-    subgraph Estado["Estado compartido (S)"]
-        MEM[(Memoria persistente)]
-        CTX[(Contexto sesión)]
-    end
-
-    P -->|plan| R
-    R -->|tarea de código| AG
-    R -->|tarea de revisión| AR
-    R -->|tarea de ejecución| AE
-    AG -->|escribe| MEM
-    AR -->|lee y valida| MEM
-    AE -->|lee| CTX
-    AR -->|done?| P
-
-    style P fill:#4338ca,color:#fff
-    style MEM fill:#f97316,color:#fff
-```
-
-La separación de roles no es opcional: el **Agente Generador** produce, el **Agente Revisor** valida contra la condición de terminación antes de que el orquestador avance. Sin este ciclo, los errores se propagan sin fricción.
+Sin los ganchos, el agente ejecuta acciones irreversibles sin supervisión. Con ellos, tú defines exactamente qué nivel de autonomía se otorga y en qué condiciones.
 
 ---
 
 ## Markdown como infraestructura del harness
 
-Aquí está el giro práctico más importante: gran parte de las políticas del harness —el contexto (**C**) y el estado (**S**)— se implementan en archivos Markdown planos en la raíz del repositorio.
+Aquí está el giro que más me sorprendió cuando lo entendí: gran parte del harness se implementa en archivos Markdown planos en la raíz del repositorio.
 
-Herramientas como Claude Code, Cursor o los flujos de trabajo de Mitchell Hashimoto convergen en el mismo patrón: `AGENTS.md` y `MEMORY.md`.
+`AGENTS.md` y `MEMORY.md` — o `ARCH.md` según el proyecto — son el contexto y el estado del harness. No código. Texto.
 
 ```text
 repositorio/
@@ -132,9 +93,7 @@ repositorio/
 └── src/
 ```
 
-### El efecto trinquete
-
-El principio de diseño es el **efecto trinquete** (*ratchet*): cada vez que el agente comete un error, la solución se documenta en el Markdown. El harness no puede volver atrás — cada aprendizaje se acumula.
+Cada vez que el agente comete un error y lo corriges, la lección va al Markdown. El harness no puede desaprender — solo acumula. Es el **efecto ratchet**: el sistema mejora sesión a sesión sin poder retroceder.
 
 ```mermaid
 stateDiagram-v2
@@ -146,73 +105,75 @@ stateDiagram-v2
     Documentado --> Ejecución : siguiente sesión
     Ejecución --> Éxito : tarea completada
     Éxito --> [*]
-
-    note right of Documentado
-        El harness no puede
-        "desaprender" una regla.
-        Solo puede acumular.
-    end note
 ```
 
-### Estructura de un AGENTS.md
+Un ejemplo concreto de cómo queda un `AGENTS.md` funcional:
 
 ```markdown
 # AGENTS.md
 
-## Contexto y Estado (C, S)
+## Contexto y restricciones
 - La lógica de estado reside exclusivamente en la capa de servicios.
 - Nunca comentar tests que fallan — repararlos o eliminarlos.
 - Usar siempre `src/utils/logger.ts`, nunca `console.log`.
 
-## Restricciones de Herramientas (T, E)
-- Bloqueado: `rm -rf`, `git push --force`, `DROP TABLE`.
-- Antes de PR: ejecutar `npm run typecheck && npm run lint`.
+## Herramientas bloqueadas
+- `rm -rf`, `git push --force`, `DROP TABLE` sin confirmación explícita.
 
-## Orquestación Multi-Agente (L)
-- Agente Generador escribe código.
-- Agente Revisor valida la done-condition antes de avanzar.
-- Aprendizajes de sesión → registrar en MEMORY.md.
+## Antes de cualquier PR
+- Ejecutar `npm run typecheck && npm run lint`.
 ```
 
 ---
 
-## El cambio de paradigma para el arquitecto
+## Orquestación multi-agente
 
-La IA generativa tradicional pedía al arquitecto que eligiera el modelo correcto. La ingeniería de arneses le pide algo diferente: **diseñar el sistema de comportamientos** que hace que ese modelo sea confiable en producción.
+Cuando el problema supera las capacidades de un agente, entra la orquestación. Frameworks como LangGraph y AutoGen implementan agentes especializados que comparten contexto a través del estado compartido.
 
 ```mermaid
-mindmap
-  root((Harness\nEngineering))
-    Control
-      Ganchos de ciclo de vida
-      Aprobación humana
-      Condiciones de terminación
-    Supervisión
-      Interfaz de evaluación
-      Métricas de agente
-      Trazabilidad de decisiones
-    Retroalimentación
-      Efecto trinquete
-      AGENTS.md y MEMORY.md
-      Ciclos de mejora continua
-    Orquestación
-      LangGraph
-      AutoGen
-      Roles separados
+graph LR
+    subgraph Orquestador["Orchestrator"]
+        P[Planificador]
+        R[Router]
+    end
+
+    subgraph Agentes["Agentes especializados"]
+        AG[Generador]
+        AR[Revisor]
+        AE[Ejecutor]
+    end
+
+    subgraph Estado["Estado compartido"]
+        MEM[(Memoria persistente)]
+        CTX[(Contexto sesión)]
+    end
+
+    P -->|plan| R
+    R -->|código| AG
+    R -->|revisión| AR
+    R -->|ejecución| AE
+    AG -->|escribe| MEM
+    AR -->|valida| MEM
+    AE -->|lee| CTX
+    AR -->|done?| P
 ```
 
-Los sectores financiero y de desarrollo de software que ya operan con estos sistemas comparten una lección: el modelo importa menos de lo que se cree. Lo que marca la diferencia es la calidad del harness.
+La separación de roles no es opcional. El Agente Revisor valida contra la condición de terminación antes de que el orquestador avance. Sin este ciclo, los errores se propagan sin fricción.
 
 ---
 
-## Conclusión
+## El cambio real
 
-**La autonomía de un agente no es una propiedad del modelo, es una propiedad del harness.**
+La IA generativa pedía al arquitecto que eligiera el modelo correcto. La ingeniería de arneses le pide algo distinto: diseñar el sistema de comportamientos que hace que ese modelo sea confiable en producción.
 
-Cuanto mejor diseñado esté el sistema de control que rodea al LLM —sus ganchos, su gestión de contexto, su almacén de estado, su interfaz de evaluación— mayor y más segura puede ser la autonomía que se le otorga.
+La autonomía de un agente no es una propiedad del modelo. Es una propiedad del harness.
 
-El arquitecto que entiende esto no pregunta "¿qué modelo uso?" sino "¿qué comportamientos necesito garantizar y cómo los encuadro?". Esa es exactamente la pregunta correcta.
+Cuanto mejor diseñado esté el sistema que lo rodea — sus ganchos, su gestión de contexto, su estado, su evaluación — mayor y más segura puede ser la autonomía que le otorgas.
+
+El arquitecto que entiende esto deja de preguntar "¿qué modelo uso?" y empieza a preguntar "¿qué comportamientos necesito garantizar y cómo los encuadro?".
+
+Esa es la pregunta correcta.
 
 ---
 
-> Artículo basado en el análisis de 40 fuentes sobre *Harness Engineering and the Evolution of Agentic Workflows* (6 mayo 2026). Los diagramas son elaboración propia a partir de los conceptos del corpus.
+> Relacionado: [[04 Arquitectura IA/documento-arquitectura-base|ARCH.md: el documento que le da memoria a tu agente]] · [[04 Arquitectura IA/ratchet-efecto-memoria-agente|El efecto ratchet]]

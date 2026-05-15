@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+  <defs>
+    <radialGradient id="core-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#4338ca" stop-opacity="0.35"/>
+      <stop offset="60%"  stop-color="#4338ca" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#4338ca" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg-left" cx="0%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#4338ca" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg-right" cx="100%" cy="50%" r="45%">
+      <stop offset="0%" stop-color="#b45309" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow-filter">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arr-i" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,1 L7,4 L0,7 Z" fill="#4338ca" opacity="0.55"/>
+    </marker>
+    <marker id="arr-o" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,1 L7,4 L0,7 Z" fill="#b45309" opacity="0.65"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="300" fill="transparent"/>
+  <rect width="1200" height="300" fill="url(#bg-left)"/>
+  <rect width="1200" height="300" fill="url(#bg-right)"/>
+  <rect x="1" y="1" width="1198" height="298" rx="12" fill="none" stroke="#4338ca" stroke-width="0.8" opacity="0.1"/>
+
+  <!-- ======= NÚCLEO: el LLM como fuente de energía ======= -->
+  <!-- Glow de fondo -->
+  <circle cx="600" cy="150" r="110" fill="url(#core-glow)"/>
+
+  <!-- Anillos del harness — lo que contiene y controla -->
+  <circle cx="600" cy="150" r="90"  fill="none" stroke="#4338ca" stroke-width="0.6" opacity="0.15"/>
+  <circle cx="600" cy="150" r="68"  fill="none" stroke="#4338ca" stroke-width="1"   opacity="0.25"/>
+  <circle cx="600" cy="150" r="46"  fill="none" stroke="#4338ca" stroke-width="1.5" opacity="0.40"/>
+
+  <!-- Núcleo LLM -->
+  <circle cx="600" cy="150" r="28" fill="rgba(67,56,202,0.25)" stroke="#4338ca" stroke-width="2" opacity="0.9" filter="url(#glow-filter)"/>
+  <text x="600" y="155" fill="#4338ca" font-size="13" font-family="JetBrains Mono, monospace" text-anchor="middle" font-weight="800" opacity="0.95">LLM</text>
+
+  <!-- ======= 4 PUNTOS DE ANCLAJE del harness ======= -->
+  <!-- Norte: contexto -->
+  <line x1="600" y1="60" x2="600" y2="102" stroke="#4338ca" stroke-width="1.2" opacity="0.4"/>
+  <circle cx="600" cy="57" r="5" fill="#4338ca" opacity="0.7"/>
+  <text x="600" y="44" fill="#4338ca" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.65">contexto</text>
+
+  <!-- Sur: estado -->
+  <line x1="600" y1="198" x2="600" y2="240" stroke="#4338ca" stroke-width="1.2" opacity="0.4"/>
+  <circle cx="600" cy="243" r="5" fill="#4338ca" opacity="0.7"/>
+  <text x="600" y="260" fill="#4338ca" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.65">estado</text>
+
+  <!-- Este: ganchos -->
+  <line x1="648" y1="150" x2="690" y2="150" stroke="#4338ca" stroke-width="1.2" opacity="0.4"/>
+  <circle cx="693" cy="150" r="5" fill="#4338ca" opacity="0.7"/>
+  <text x="730" y="154" fill="#4338ca" font-size="11" font-family="JetBrains Mono, monospace" opacity="0.65">ganchos</text>
+
+  <!-- Oeste: evaluación -->
+  <line x1="552" y1="150" x2="510" y2="150" stroke="#4338ca" stroke-width="1.2" opacity="0.4"/>
+  <circle cx="507" cy="150" r="5" fill="#4338ca" opacity="0.7"/>
+  <text x="480" y="154" fill="#4338ca" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="end" opacity="0.65">eval</text>
+
+  <!-- ======= INPUT — flujo que entra ======= -->
+  <!-- Línea de entrada -->
+  <line x1="60" y1="150" x2="490" y2="150" stroke="#b45309" stroke-width="1.5" opacity="0.25" stroke-dasharray="6 4"/>
+  <!-- Flecha que entra al anillo exterior -->
+  <line x1="490" y1="150" x2="508" y2="150" stroke="#b45309" stroke-width="1.5" opacity="0.55" marker-end="url(#arr-i)"/>
+  <text x="260" y="138" fill="#b45309" font-size="12" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.5">input</text>
+
+  <!-- Nodos decorativos en la línea de entrada -->
+  <circle cx="160" cy="150" r="3.5" fill="#b45309" opacity="0.4"/>
+  <circle cx="300" cy="150" r="3.5" fill="#b45309" opacity="0.4"/>
+  <circle cx="420" cy="150" r="3.5" fill="#b45309" opacity="0.4"/>
+
+  <!-- ======= OUTPUT — flujo que sale ======= -->
+  <line x1="693" y1="150" x2="1140" y2="150" stroke="#b45309" stroke-width="1.5" opacity="0.25" stroke-dasharray="6 4"/>
+  <line x1="750" y1="150" x2="1138" y2="150" stroke="#b45309" stroke-width="1.5" opacity="0.55" marker-end="url(#arr-o)"/>
+  <text x="940" y="138" fill="#b45309" font-size="12" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.5">output</text>
+
+  <!-- Nodos decorativos en la línea de salida -->
+  <circle cx="800" cy="150" r="3.5" fill="#b45309" opacity="0.4"/>
+  <circle cx="940" cy="150" r="3.5" fill="#b45309" opacity="0.4"/>
+  <circle cx="1060" cy="150" r="3.5" fill="#b45309" opacity="0.4"/>
+</svg>
