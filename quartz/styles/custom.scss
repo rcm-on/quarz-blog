@@ -184,6 +184,13 @@ a.internal {
   text-decoration: none;
 }
 
+body[data-slug="index"] a.internal {
+  background-color: transparent;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-color: color-mix(in srgb, var(--secondary) 40%, transparent);
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
