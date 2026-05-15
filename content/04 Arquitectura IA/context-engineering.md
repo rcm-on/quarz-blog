@@ -1,6 +1,7 @@
 ---
 title: "Context Engineering: la disciplina que nadie está nombrando"
 date: 2026-05-14
+draft: true
 tags:
   - arquitectura
   - ia

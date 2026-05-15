@@ -1,6 +1,7 @@
 ---
 title: "Pídele al modelo que piense antes de que genere"
 date: 2026-05-14
+draft: true
 tags:
   - arquitectura
   - ia

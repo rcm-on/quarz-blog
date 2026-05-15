@@ -1,6 +1,7 @@
 ---
 title: "El efecto ratchet: cómo los agentes IA aprenden a no repetir errores"
 date: 2026-05-14
+draft: true
 tags:
   - ia
   - agentes

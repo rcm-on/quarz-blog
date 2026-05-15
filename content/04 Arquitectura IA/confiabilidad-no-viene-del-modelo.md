@@ -1,6 +1,7 @@
 ---
 title: "La confiabilidad de un agente no viene del modelo"
 date: 2026-05-14
+draft: true
 tags:
   - arquitectura
   - ia

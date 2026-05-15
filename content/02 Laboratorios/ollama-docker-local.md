@@ -1,6 +1,7 @@
 ---
 title: Arquitectura y Despliegue de LLMs locales con Ollama y Docker
 date: 2026-03-30
+draft: true
 tags: [llmops, docker, arquitectura, ia]
 ---
 # Desplegando IA en Local: Privacidad y Control

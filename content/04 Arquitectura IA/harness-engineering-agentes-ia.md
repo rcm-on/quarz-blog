@@ -1,6 +1,7 @@
 ---
 title: "Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA"
 date: 2026-05-14
+draft: true
 tags:
   - ia
   - arquitectura
