@@ -9,15 +9,31 @@ tags:
 description: "Cuando trabajas con LLMs en proyectos reales, la arquitectura cumple una función que nadie te explica: es el único mecanismo que mantiene la coherencia entre sesiones."
 ---
 
-Hay algo que nadie te dice cuando empiezas a integrar LLMs en un proyecto de software real: el modelo no recuerda nada.
+Llevaba tres semanas trabajando en un proyecto con un agente IA. Todo funcionaba. El código que generaba era correcto, las decisiones técnicas eran razonables. Me sentía productivo.
 
-Cada sesión empieza de cero. Sin memoria del diseño que tomaste la semana pasada, sin contexto de por qué ese módulo está donde está, sin entender qué compromisos arquitectónicos hay en el sistema. Si no le das esa información explícitamente, generará código que funciona en aislamiento pero no encaja con el resto.
+Entonces volví después de un fin de semana.
 
-Este es el problema que Fowler documenta con claridad: **la coherencia entre sesiones es un problema de arquitectura, no de prompts**.
+El agente empezó a sugerir cambios que contradecían decisiones que habíamos tomado días antes. La carpeta `domain/` que habíamos mantenido limpia empezó a llenarse de lógica de infraestructura. Los contratos entre capas que yo había definido dejaron de respetarse.
 
-## La solución es simple, pero requiere disciplina
+No había cambiado el modelo. No había cambiado el proyecto. Había cambiado la sesión.
 
-El patrón es el siguiente: antes de generar código, generas el plan arquitectónico. Luego ese plan se convierte en el contexto que inyectas al inicio de cada sesión posterior.
+---
+
+Ahí entendí algo que nadie te explica antes de que lo vivas: el modelo no tiene memoria entre sesiones.
+
+Cada vez que lo abres, empieza de cero. Sin contexto del diseño que tomaste la semana pasada. Sin entender por qué ese módulo está donde está. Sin saber qué compromisos arquitectónicos existen en el sistema.
+
+Si no le das esa información explícitamente, genera código que funciona en aislamiento y rompe la coherencia del resto.
+
+---
+
+## Lo que tuve que cambiar
+
+La solución no fue difícil de entender. Fue difícil de aceptar.
+
+Tenía que documentar las decisiones arquitectónicas. No para una auditoría. No para un nuevo empleado hipotético. Para la herramienta con la que trabajo hoy.
+
+El patrón es simple:
 
 ```mermaid
 sequenceDiagram
@@ -35,20 +51,24 @@ sequenceDiagram
     end
 ```
 
-La arquitectura deja de ser un documento que lees tú y pasa a ser el **contrato operativo que el agente necesita para funcionar de forma coherente**.
+Antes de cada sesión, inyecto el `ARCH.md`. El agente opera dentro de los límites que yo he definido. Yo sigo siendo el arquitecto. El agente es el ejecutor.
 
-## Lo que esto cambia
-
-Antes, documentar decisiones de arquitectura era una buena práctica. Ahora es una necesidad operativa si trabajas con agentes.
-
-Sin `ARCH.md`, cada sesión del agente produce código que refleja sus propias asunciones sobre cómo debe estar organizado el sistema. Con el tiempo, el proyecto se fragmenta en estilos distintos generados en momentos distintos.
-
-Con `ARCH.md`, el agente opera dentro de los límites que tú has definido. Tú sigues siendo el arquitecto. El agente es el ejecutor.
+Sin ese documento, cada sesión produce código que refleja las asunciones propias del modelo sobre cómo debe organizarse un sistema. Con el tiempo, el proyecto se fragmenta — distintos estilos, distintas decisiones, sin memoria de las anteriores.
 
 ---
 
-La arquitectura siempre fue una forma de comunicación. Lo que ha cambiado es que ahora también tienes que comunicarte con máquinas.
+## La arquitectura siempre fue comunicación
+
+Durante años, documentar la arquitectura era una buena práctica. Una de esas cosas que todos decían que había que hacer y pocos hacían.
+
+Ahora es una necesidad operativa.
+
+La arquitectura deja de ser el documento que lees tú y pasa a ser el contrato que el agente necesita para trabajar contigo. No es un cambio menor. Es un cambio de para quién escribes.
+
+Siempre fue una forma de comunicación entre personas. Lo que ha cambiado es que ahora también tienes que comunicarte con máquinas.
+
+Y las máquinas solo leen lo que tienes escrito.
 
 ---
 
-> Basado en la investigación de Xu Hao y Martin Fowler: *"ChatGPT-Driven Development"* (martinfowler.com, 2023).
+> Relacionado: [[04 Arquitectura IA/documento-arquitectura-base|ARCH.md: el documento que le da memoria a tu agente]] · [[04 Arquitectura IA/context-engineering|Context Engineering]]
