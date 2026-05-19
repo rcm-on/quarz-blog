@@ -83,17 +83,18 @@ body::before {
   filter: blur(60px) saturate(120%);
 }
 
-/* Light mode — dot grid violet */
+/* Light mode — red neural sobre blanco, colores suaves */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-size: 24px 24px;
-  background-repeat: repeat;
   opacity: 1;
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1.2' fill='rgba(109,40,217,0.09)'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'%3E%3Cg stroke='rgba(109,40,217,0.10)' stroke-width='1' fill='none'%3E%3Cline x1='200' y1='150' x2='500' y2='300'/%3E%3Cline x1='500' y1='300' x2='800' y2='180'/%3E%3Cline x1='800' y1='180' x2='1100' y2='350'/%3E%3Cline x1='1100' y1='350' x2='1400' y2='200'/%3E%3Cline x1='300' y1='500' x2='600' y2='650'/%3E%3Cline x1='600' y1='650' x2='900' y2='480'/%3E%3Cline x1='900' y1='480' x2='1200' y2='600'/%3E%3Cline x1='100' y1='700' x2='400' y2='800'/%3E%3Cline x1='400' y1='800' x2='700' y2='720'/%3E%3Cline x1='700' y1='720' x2='1000' y2='820'/%3E%3Cline x1='1000' y1='820' x2='1300' y2='700'/%3E%3Cline x1='200' y1='150' x2='300' y2='500'/%3E%3Cline x1='500' y1='300' x2='600' y2='650'/%3E%3Cline x1='800' y1='180' x2='900' y2='480'/%3E%3Cline x1='1100' y1='350' x2='1200' y2='600'/%3E%3Cline x1='300' y1='500' x2='400' y2='800'/%3E%3Cline x1='600' y1='650' x2='700' y2='720'/%3E%3Cline x1='900' y1='480' x2='1000' y2='820'/%3E%3Cline x1='1200' y1='600' x2='1300' y2='700'/%3E%3C/g%3E%3Cg fill='rgba(109,40,217,0.18)'%3E%3Ccircle cx='200' cy='150' r='3.5'/%3E%3Ccircle cx='500' cy='300' r='4'/%3E%3Ccircle cx='800' cy='180' r='4'/%3E%3Ccircle cx='1100' cy='350' r='3.5'/%3E%3Ccircle cx='1400' cy='200' r='3'/%3E%3Ccircle cx='300' cy='500' r='3.5'/%3E%3Ccircle cx='600' cy='650' r='4.5'/%3E%3Ccircle cx='900' cy='480' r='4'/%3E%3Ccircle cx='1200' cy='600' r='3.5'/%3E%3Ccircle cx='100' cy='700' r='3'/%3E%3Ccircle cx='400' cy='800' r='3.5'/%3E%3Ccircle cx='700' cy='720' r='4'/%3E%3Ccircle cx='1000' cy='820' r='3.5'/%3E%3Ccircle cx='1300' cy='700' r='3'/%3E%3C/g%3E%3Cg fill='rgba(79,70,229,0.30)'%3E%3Ccircle cx='600' cy='650' r='2'/%3E%3Ccircle cx='900' cy='480' r='2'/%3E%3Ccircle cx='500' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Dark mode — red neural premium */
@@ -346,19 +347,19 @@ blockquote {
 a.internal.tag-link {
   font-weight: 500;
   font-size: 0.76rem;
-  border: 1px solid var(--lightgray);
-  background: transparent;
-  color: var(--gray);
+  border: 1px solid color-mix(in srgb, var(--secondary) 35%, transparent);
+  background: color-mix(in srgb, var(--secondary) 8%, transparent);
+  color: var(--secondary);
   border-radius: 999px;
   padding: 0.15rem 0.55rem;
-  transition: background 0.18s var(--rcm-ease), border-color 0.18s var(--rcm-ease), color 0.18s var(--rcm-ease);
+  opacity: 0.75;
+  transition: opacity 0.18s var(--rcm-ease), background 0.18s var(--rcm-ease);
 }
 
 .tags > li > a:hover,
 a.internal.tag-link:hover {
-  background: var(--rcm-indigo-pale);
-  border-color: var(--secondary);
-  color: var(--secondary);
+  opacity: 1;
+  background: color-mix(in srgb, var(--secondary) 15%, transparent);
 }
 
 /* =================================================
