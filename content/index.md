@@ -17,15 +17,10 @@ Notas técnicas sobre cómo diseñar, desplegar y operar sistemas en producción
 Cómo diseñar el entorno que rodea al modelo — no solo el modelo.
 
 - [[04 Arquitectura IA/harness-engineering-agentes-ia|Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA]]
-- [[04 Arquitectura IA/documento-arquitectura-base|ARCH.md: el documento que le da memoria a tu agente]]
 
 ## 🤖 Laboratorios
 
 - [[02 Laboratorios/arch-md-ejemplo|Lab: ARCH.md — ejemplo de documento de arquitectura para agentes IA]]
-
-## 📜 Guidelines
-
-- [[03 Guidelines/Quartz + GitHub Actions|Publicar con Quartz y GitHub Actions]]
 
 ---
 

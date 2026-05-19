@@ -1,6 +1,7 @@
 ---
 title: "Ramón Campos Martin | Docs-as-Code con Obsidian, Quartz y GitHub Actions"
 date: 2026-03-31
+draft: true
 tags:
   - quartz
   - github/actions

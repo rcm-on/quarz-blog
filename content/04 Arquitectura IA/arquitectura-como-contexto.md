@@ -1,6 +1,7 @@
 ---
 title: "La arquitectura no es solo para los humanos del equipo"
 date: 2026-05-14
+draft: true
 tags:
   - arquitectura
   - ia
