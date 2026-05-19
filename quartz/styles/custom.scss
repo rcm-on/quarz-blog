@@ -68,11 +68,11 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  /* Light mode — violet suave en esquinas */
+  /* Light mode — violet más presente */
   background:
-    radial-gradient(ellipse 80% 60% at -5%  -5%,  rgba(109, 40, 217, 0.14) 0%, transparent 58%),
-    radial-gradient(ellipse 60% 50% at 108% 108%, rgba(79, 70, 229, 0.10) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at  52%  -8%,  rgba(109, 40, 217, 0.07) 0%, transparent 62%);
+    radial-gradient(ellipse 85% 65% at -5%  -5%,  rgba(109, 40, 217, 0.20) 0%, transparent 58%),
+    radial-gradient(ellipse 65% 55% at 108% 108%, rgba(79, 70, 229, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at  52%  -8%,  rgba(109, 40, 217, 0.10) 0%, transparent 62%);
 }
 
 :root[saved-theme="dark"] body::before {
