@@ -12,11 +12,11 @@
    Aquí extendemos con tokens de marca propios.
    ------------------------------------------------- */
 :root {
-  /* Accesos directos a la paleta */
-  --rcm-indigo:        #4338ca;
-  --rcm-coral:         #b45309;
-  --rcm-indigo-pale:   rgba(67, 56, 202, 0.09);
-  --rcm-coral-pale:    rgba(180, 83, 9, 0.09);
+  /* Accesos directos a la paleta — Violet × Indigo premium */
+  --rcm-indigo:        #6d28d9;
+  --rcm-coral:         #4f46e5;
+  --rcm-indigo-pale:   rgba(109, 40, 217, 0.07);
+  --rcm-coral-pale:    rgba(79, 70, 229, 0.07);
 
   /* Shape */
   --rcm-radius-lg:  16px;
@@ -69,9 +69,9 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 85% 65% at -5%  -5%,  rgba(67, 56, 202, 0.13) 0%, transparent 58%),
-    radial-gradient(ellipse 65% 55% at 108% 108%, rgba(180, 83,  9, 0.09) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 45% at  52%  -8%,  rgba(67, 56, 202, 0.06) 0%, transparent 62%);
+    radial-gradient(ellipse 80% 60% at -5%  -5%,  rgba(67, 56, 202, 0.18) 0%, transparent 58%),
+    radial-gradient(ellipse 60% 50% at 108% 108%, rgba(180, 83,  9, 0.13) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at  52%  -8%,  rgba(67, 56, 202, 0.09) 0%, transparent 62%);
 }
 
 :root[saved-theme="dark"] body::before {
@@ -82,22 +82,21 @@ body::before {
   filter: blur(52px) saturate(110%);
 }
 
-/* Dot grid — ambos modos */
+/* Dot grid — ambos modos, más visible */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-size: 28px 28px;
+  background-size: 24px 24px;
   background-repeat: repeat;
-  /* Light mode: puntos índigo muy sutiles */
   opacity: 1;
-  background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(67,56,202,0.07)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1.2' fill='rgba(67,56,202,0.12)'/%3E%3C/svg%3E");
 }
 
 :root[saved-theme="dark"] body::after {
-  background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1.1' fill='rgba(129,140,248,0.09)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1.2' fill='rgba(129,140,248,0.14)'/%3E%3C/svg%3E");
 }
 
 @media (max-width: 800px) {
@@ -130,8 +129,9 @@ body::after {
 /* Cuerpo — lectura cómoda */
 .center article p,
 .center article li {
-  line-height: 1.82;
+  line-height: 1.85;
   font-size: clamp(1rem, 1.1vw, 1.06rem);
+  letter-spacing: 0.01em;
 }
 
 /* Headings de artículo — jerarquía clara */
@@ -338,21 +338,21 @@ blockquote {
 
 .tags > li > a,
 a.internal.tag-link {
-  font-weight: 600;
-  font-size: 0.79rem;
-  border: 1px solid color-mix(in srgb, var(--rcm-coral) 30%, transparent);
-  background: var(--rcm-coral-pale);
-  color: color-mix(in srgb, var(--rcm-coral) 88%, var(--dark));
+  font-weight: 500;
+  font-size: 0.76rem;
+  border: 1px solid var(--lightgray);
+  background: transparent;
+  color: var(--gray);
   border-radius: 999px;
-  padding: 0.18rem 0.58rem;
-  transition: background 0.18s var(--rcm-ease), border-color 0.18s var(--rcm-ease);
+  padding: 0.15rem 0.55rem;
+  transition: background 0.18s var(--rcm-ease), border-color 0.18s var(--rcm-ease), color 0.18s var(--rcm-ease);
 }
 
 .tags > li > a:hover,
 a.internal.tag-link:hover {
-  background: color-mix(in srgb, var(--rcm-coral) 18%, transparent);
-  border-color: color-mix(in srgb, var(--rcm-coral) 55%, transparent);
-  color: var(--rcm-coral);
+  background: var(--rcm-indigo-pale);
+  border-color: var(--secondary);
+  color: var(--secondary);
 }
 
 /* =================================================
