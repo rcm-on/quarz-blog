@@ -39,10 +39,10 @@
    TOKENS — Dark override
    ------------------------------------------------- */
 :root[saved-theme="dark"] {
-  --rcm-indigo:        #818cf8;
-  --rcm-coral:         #fbbf24;
-  --rcm-indigo-pale:   rgba(129, 140, 248, 0.09);
-  --rcm-coral-pale:    rgba(251, 191, 36, 0.09);
+  --rcm-indigo:        #a78bfa;
+  --rcm-coral:         #818cf8;
+  --rcm-indigo-pale:   rgba(167, 139, 250, 0.09);
+  --rcm-coral-pale:    rgba(129, 140, 248, 0.09);
   --rcm-shadow-sm:  0 1px 2px rgba(0,0,0,.25), 0 4px 12px rgba(0,0,0,.20);
   --rcm-shadow-md:  0 2px 6px rgba(0,0,0,.30), 0 12px 32px rgba(0,0,0,.25);
 }
@@ -76,13 +76,13 @@ body::before {
 
 :root[saved-theme="dark"] body::before {
   background:
-    radial-gradient(ellipse 70% 60% at  8%   4%,  rgba(99, 102, 241, 0.22) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 48% at 90%  92%,  rgba(251, 191, 36, 0.10) 0%, transparent 60%),
-    radial-gradient(ellipse 45% 38% at 50% 108%,  rgba(67,  56, 202, 0.08) 0%, transparent 62%);
-  filter: blur(52px) saturate(110%);
+    radial-gradient(ellipse 70% 60% at  8%   4%,  rgba(109, 40, 217, 0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 48% at 90%  92%,  rgba(79, 70, 229, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 38% at 50% 108%,  rgba(109, 40, 217, 0.10) 0%, transparent 62%);
+  filter: blur(60px) saturate(120%);
 }
 
-/* Dot grid — ambos modos, más visible */
+/* Dot grid — solo modo claro */
 body::after {
   content: "";
   position: fixed;
@@ -92,11 +92,12 @@ body::after {
   background-size: 24px 24px;
   background-repeat: repeat;
   opacity: 1;
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1.2' fill='rgba(67,56,202,0.12)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1.2' fill='rgba(109,40,217,0.10)'/%3E%3C/svg%3E");
 }
 
+/* Oscuro — sin malla, solo glows */
 :root[saved-theme="dark"] body::after {
-  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1.2' fill='rgba(129,140,248,0.14)'/%3E%3C/svg%3E");
+  opacity: 0;
 }
 
 @media (max-width: 800px) {
