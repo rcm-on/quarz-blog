@@ -1,49 +1,5 @@
 @use "./base.scss";
-
-/* =================================================
-   RCM — Brand System · Architect Stone
-   Stone × Teal · Senior · Technical · Personal
-   ================================================= */
-
-/* -------------------------------------------------
-   TOKENS — Light (default)
-   ------------------------------------------------- */
-:root {
-  /* 3 niveles de teal:
-     strong → decoración viva (progress bar, bordes de pre, gradientes)
-     base   → links y texto interactivo (más oscuro, legible)
-     pale   → fondos sutiles */
-  --rcm-teal-strong: #0d9488;
-  --rcm-teal:        #0f766e;
-  --rcm-cyan:        #0891b2;
-  --rcm-teal-pale:   rgba(15, 118, 110, 0.07);
-  --rcm-cyan-pale:   rgba(8, 145, 178, 0.07);
-
-  --rcm-radius-lg:  16px;
-  --rcm-radius-md:  10px;
-  --rcm-radius-sm:   6px;
-
-  --rcm-shadow-sm:  0 1px 2px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
-  --rcm-shadow-md:  0 2px 6px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.06);
-
-  --rcm-ease:        cubic-bezier(0.22, 0.61, 0.36, 1);
-  --rcm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  --rcm-prose-width: 72ch;
-}
-
-/* -------------------------------------------------
-   TOKENS — Dark override
-   ------------------------------------------------- */
-:root[saved-theme="dark"] {
-  --rcm-teal-strong: #2dd4bf;
-  --rcm-teal:        #2dd4bf;
-  --rcm-cyan:        #22d3ee;
-  --rcm-teal-pale:   rgba(45, 212, 191, 0.10);
-  --rcm-cyan-pale:   rgba(34, 211, 238, 0.10);
-  --rcm-shadow-sm:   0 1px 2px rgba(0,0,0,.30), 0 4px 12px rgba(0,0,0,.25);
-  --rcm-shadow-md:   0 2px 6px rgba(0,0,0,.35), 0 12px 32px rgba(0,0,0,.30);
-}
+@use "./rcm-brand"; /* tokens y estilos base — editar solo aquí */
 
 /* =================================================
    BACKGROUND
@@ -51,12 +7,16 @@
    Dark:  barrido más intenso + red neuronal teal
    ================================================= */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   position: relative;
   background-color: var(--light);
 }
 
-/* Barrido lateral — visible de borde a borde */
+/* Barrido lateral — sutil en light, no debe interferir con la lectura */
 body::before {
   content: "";
   position: fixed;
@@ -65,15 +25,15 @@ body::before {
   z-index: 0;
   background:
     linear-gradient(90deg,
-      rgba(13, 148, 136, 0.18) 0%,
-      rgba(13, 148, 136, 0.08) 22%,
+      rgba(13, 148, 136, 0.08) 0%,
+      rgba(13, 148, 136, 0.03) 22%,
       transparent              45%,
       transparent              55%,
-      rgba(8, 145, 178, 0.08)  78%,
-      rgba(8, 145, 178, 0.15) 100%
+      rgba(8, 145, 178, 0.03)  78%,
+      rgba(8, 145, 178, 0.07) 100%
     ),
-    radial-gradient(ellipse 55% 90% at   0% 50%, rgba(13, 148, 136, 0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 55% 90% at 100% 50%, rgba(8, 145, 178, 0.06)  0%, transparent 70%);
+    radial-gradient(ellipse 55% 90% at   0% 50%, rgba(13, 148, 136, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 90% at 100% 50%, rgba(8, 145, 178, 0.03)  0%, transparent 70%);
 }
 
 :root[saved-theme="dark"] body::before {
@@ -121,7 +81,7 @@ body::after {
 }
 
 :root[saved-theme="dark"] ::selection {
-  background: rgba(45, 212, 191, 0.18) !important;
+  background: rgba(45, 212, 191, 0.22) !important;
   color: inherit !important;
 }
 
@@ -143,6 +103,16 @@ body::after {
   margin-top: 2.4rem;
 }
 
+.center article h2::after {
+  content: "";
+  display: block;
+  height: 1.5px;
+  width: 2.5rem;
+  margin-top: 0.3rem;
+  background: linear-gradient(90deg, var(--rcm-teal-strong), transparent);
+  border-radius: 1px;
+}
+
 .center article h3 {
   font-size: clamp(1.1rem, 1.5vw, 1.28rem);
   font-weight: 700;
@@ -161,6 +131,14 @@ body::after {
     var(--dark)                                             0%,
     color-mix(in srgb, var(--rcm-teal) 85%, var(--dark)) 100%
   );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dark: el título vive en la paleta teal (no de blanco puro a teal) */
+:root[saved-theme="dark"] .article-title {
+  background: linear-gradient(138deg, #daf3f1 0%, #2dd4bf 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -227,14 +205,27 @@ input:focus-visible {
   background-clip: text;
 }
 
-.page-title > a::after {
-  content: " ◈";
-  background: linear-gradient(90deg, var(--rcm-teal), var(--rcm-cyan));
+/* Dark: todo el título en paleta teal — sin salto a blanco puro */
+:root[saved-theme="dark"] .page-title > a {
+  background: linear-gradient(
+    128deg,
+    #b2e0dd  0%,
+    var(--rcm-teal-strong) 55%,
+    var(--rcm-cyan) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: 0.7em;
-  opacity: 0.75;
+}
+
+.page-title > a::after {
+  content: " ◈";
+  background: linear-gradient(90deg, var(--rcm-teal-strong), var(--rcm-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 0.85em;
+  opacity: 0.9;
 }
 
 .page-header {
@@ -277,12 +268,17 @@ button.desktop-explorer h2 {
 .explorer-content ul li > a {
   border-radius: var(--rcm-radius-sm);
   padding: 0.06rem 0.28rem;
+  color: var(--darkgray);
   transition: color 0.16s var(--rcm-ease), background-color 0.16s var(--rcm-ease);
 }
 
 .explorer-content ul li > a:hover {
   background: var(--rcm-teal-pale);
   color: var(--secondary);
+}
+
+:root[saved-theme="dark"] .explorer-content ul li > a {
+  color: var(--gray);
 }
 
 /* =================================================
@@ -304,8 +300,12 @@ pre {
   box-shadow: var(--rcm-shadow-sm);
   overflow-x: auto;
   position: relative;
-  /* Tab size legible para código de arquitectura */
   tab-size: 2;
+}
+
+/* Dark mode: reemplaza el frío #0d1117 de github-dark por warm-dark coherente */
+:root[saved-theme="dark"] pre {
+  background-color: #1e1b19 !important;
 }
 
 /* Acento teal en el borde superior del bloque */
@@ -537,6 +537,13 @@ body[data-slug="index"] .page .center article > h1:first-of-type {
   background-clip: text;
 }
 
+:root[saved-theme="dark"] body[data-slug="index"] .page .center article > h1:first-of-type {
+  background: linear-gradient(138deg, #daf3f1 0%, #2dd4bf 60%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 body[data-slug="index"] .page .center article > p:nth-of-type(-n + 2) {
   max-width: 68ch;
   font-size: clamp(1rem, 1.15vw, 1.12rem);
@@ -704,6 +711,14 @@ body[data-slug="index"] .page .center article > hr {
   opacity: 0 !important;
 }
 
+/* Dark: edge label text necesita más contraste */
+:root[saved-theme="dark"] .mermaid .edgeLabel,
+:root[saved-theme="dark"] .mermaid .edgeLabel *,
+:root[saved-theme="dark"] .mermaid foreignObject div,
+:root[saved-theme="dark"] .mermaid foreignObject span {
+  color: var(--darkgray) !important;
+}
+
 /* Hover en nodos clickables */
 .mermaid .node.clickable:hover rect,
 .mermaid .node.clickable:hover circle,
@@ -744,6 +759,21 @@ body[data-slug="index"] .page .center article > hr {
 :root[saved-theme="dark"] .mermaid .node.clickable:hover ellipse,
 :root[saved-theme="dark"] .mermaid .node.clickable:hover polygon {
   fill: rgba(45, 212, 191, 0.12) !important;
+}
+
+/* Mermaid en pre — sin tarjeta opaca, el diagrama flota sobre la página */
+pre:has(> code.mermaid) {
+  background-color: transparent !important;
+  border: 1px solid rgba(13, 148, 136, 0.18) !important;
+  box-shadow: none !important;
+}
+
+pre:has(> code.mermaid)::before {
+  display: none !important;
+}
+
+:root[saved-theme="dark"] pre:has(> code.mermaid) {
+  border-color: rgba(45, 212, 191, 0.14) !important;
 }
 
 /* =================================================

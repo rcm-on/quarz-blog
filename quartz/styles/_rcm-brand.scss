@@ -1,0 +1,302 @@
+/* =================================================================
+   RCM Brand System — Architect Stone × Teal
+   Ramón Campos Martín · blog.rcmon.dev
+   -----------------------------------------------------------------
+   Portátil: no depende de Quartz ni de ningún framework.
+   Importa este archivo y añade las fuentes de Google:
+     Bricolage Grotesque · DM Sans · JetBrains Mono
+   -----------------------------------------------------------------
+   Selector dark mode:
+     Quartz  → [saved-theme="dark"]
+     Estándar → [data-theme="dark"] o clase .dark en :root / html
+   Ajusta el mixin $dark-selector al inicio si tu proyecto usa otro.
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   0. CONFIGURACIÓN — cambia aquí, se propaga a todo
+   ----------------------------------------------------------------- */
+
+// Color base (se usa también como rgba hardcoded en pocos sitios)
+$rcm-teal-hex:       #0f766e;   // light mode links
+$rcm-teal-dark-hex:  #2dd4bf;   // dark mode links
+
+// Selector de dark mode de tu proyecto
+$dark: '[saved-theme="dark"], [data-theme="dark"], .dark';
+
+
+/* -----------------------------------------------------------------
+   1. TOKENS CSS — light (default)
+   ----------------------------------------------------------------- */
+:root {
+  /* Tres niveles de teal:
+     strong → decoración viva (barras, bordes, gradientes)
+     base   → links e interactivos (más oscuro, legible en texto)
+     pale   → fondos sutiles (highlights, hover) */
+  --rcm-teal-strong: #0d9488;
+  --rcm-teal:        #0f766e;
+  --rcm-cyan:        #0891b2;
+  --rcm-teal-pale:   rgba(15, 118, 110, 0.07);
+  --rcm-cyan-pale:   rgba(8, 145, 178, 0.07);
+
+  /* Radios */
+  --rcm-radius-lg: 16px;
+  --rcm-radius-md: 10px;
+  --rcm-radius-sm:  6px;
+
+  /* Sombras */
+  --rcm-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --rcm-shadow-md: 0 2px 6px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.06);
+
+  /* Easings */
+  --rcm-ease:        cubic-bezier(0.22, 0.61, 0.36, 1);
+  --rcm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Ancho de prosa cómodo para lectura técnica */
+  --rcm-prose-width: 72ch;
+}
+
+/* -----------------------------------------------------------------
+   2. TOKENS CSS — dark override
+   ----------------------------------------------------------------- */
+:root[saved-theme="dark"],
+:root[data-theme="dark"],
+:root.dark {
+  --rcm-teal-strong: #2dd4bf;   /* vivid — solo decoración */
+  --rcm-teal:        #4eb8b0;   /* desaturado — links y texto */
+  --rcm-cyan:        #22d3ee;
+  --rcm-teal-pale:   rgba(45, 212, 191, 0.10);
+  --rcm-cyan-pale:   rgba(34, 211, 238, 0.10);
+  --rcm-shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 12px rgba(0, 0, 0, 0.25);
+  --rcm-shadow-md:   0 2px 6px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.30);
+}
+
+
+/* -----------------------------------------------------------------
+   3. BACKGROUND — barrido lateral teal→transparent→cyan
+      Cubre toda la ventana sin interferir con el contenido.
+   ----------------------------------------------------------------- */
+body {
+  position: relative;
+  min-height: 100dvh;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(13, 148, 136, 0.08)  0%,
+      rgba(13, 148, 136, 0.03) 22%,
+      transparent               45%,
+      transparent               55%,
+      rgba(8,  145, 178, 0.03)  78%,
+      rgba(8,  145, 178, 0.07) 100%
+    ),
+    radial-gradient(ellipse 55% 90% at   0% 50%, rgba(13, 148, 136, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 90% at 100% 50%, rgba(8,  145, 178, 0.03) 0%, transparent 70%);
+}
+
+:root[saved-theme="dark"] body::before,
+:root[data-theme="dark"]  body::before,
+:root.dark                body::before {
+  background:
+    linear-gradient(90deg,
+      rgba(13, 148, 136, 0.32)  0%,
+      rgba(13, 148, 136, 0.14) 25%,
+      transparent               48%,
+      transparent               52%,
+      rgba(8,  145, 178, 0.14)  75%,
+      rgba(8,  145, 178, 0.28) 100%
+    ),
+    radial-gradient(ellipse 50% 100% at   0% 50%, rgba(13, 148, 136, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 100% at 100% 50%, rgba(8,  145, 178, 0.10) 0%, transparent 70%);
+  filter: blur(55px) saturate(120%);
+}
+
+@media (max-width: 768px) {
+  :root[saved-theme="dark"] body::before,
+  :root[data-theme="dark"]  body::before,
+  :root.dark                body::before {
+    filter: blur(38px);
+  }
+}
+
+
+/* -----------------------------------------------------------------
+   4. SELECCIÓN DE TEXTO
+   ----------------------------------------------------------------- */
+::selection {
+  background: rgba(15, 118, 110, 0.22) !important;
+  color: inherit !important;
+}
+
+:root[saved-theme="dark"] ::selection,
+:root[data-theme="dark"]  ::selection,
+:root.dark                ::selection {
+  background: rgba(45, 212, 191, 0.18) !important;
+  color: inherit !important;
+}
+
+
+/* -----------------------------------------------------------------
+   5. TIPOGRAFÍA — escalas y espaciado
+      Fuentes: Bricolage Grotesque (headers) · DM Sans (body) · JetBrains Mono (code)
+      Añade en tu HTML:
+        <link href="https://fonts.googleapis.com/css2?
+          family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800
+          &family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500
+          &family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+   ----------------------------------------------------------------- */
+
+/* Prosa */
+article p,
+article li {
+  line-height: 1.85;
+  font-size: clamp(1rem, 1.1vw, 1.06rem);
+  letter-spacing: 0.01em;
+}
+
+article h1,
+.article-title {
+  font-size: clamp(1.9rem, 2.8vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  text-wrap: balance;
+  /* Gradiente de texto oscuro→teal */
+  background: linear-gradient(138deg, currentColor 0%, var(--rcm-teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+article h2 {
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  margin-top: 2.4rem;
+}
+
+article h3 {
+  font-size: clamp(1.1rem, 1.5vw, 1.28rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 1.8rem;
+}
+
+
+/* -----------------------------------------------------------------
+   6. LINKS
+   ----------------------------------------------------------------- */
+a {
+  color: var(--rcm-teal);
+  text-underline-offset: 0.16em;
+  transition: color 0.18s var(--rcm-ease);
+}
+
+a:hover {
+  color: var(--rcm-cyan);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--rcm-teal);
+  outline-offset: 3px;
+  border-radius: var(--rcm-radius-sm);
+}
+
+
+/* -----------------------------------------------------------------
+   7. CÓDIGO — bloques e inline
+   ----------------------------------------------------------------- */
+
+/* Ligaduras de JetBrains Mono */
+pre, code, kbd, samp {
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "liga" 1, "calt" 1, "ss01" 1, "ss02" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Bloque de código */
+pre {
+  border-radius: var(--rcm-radius-md);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: var(--rcm-shadow-sm);
+  overflow-x: auto;
+  position: relative;
+  tab-size: 2;
+}
+
+:root[saved-theme="dark"] pre,
+:root[data-theme="dark"]  pre,
+:root.dark                pre {
+  /* Fondo cálido en vez del frío #0d1117 de github-dark */
+  background-color: #1e1b19 !important;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Acento teal en el borde superior */
+pre::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--rcm-teal-strong), var(--rcm-cyan));
+  border-radius: var(--rcm-radius-md) var(--rcm-radius-md) 0 0;
+  pointer-events: none;
+}
+
+/* Deja que el syntax highlighter controle el interior */
+pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  border-radius: 0 !important;
+}
+
+/* Código inline */
+:not(pre) > code {
+  border-radius: 4px;
+  background: var(--rcm-teal-pale);
+  color: var(--rcm-teal);
+  padding: 0.12em 0.38em;
+  font-size: 0.875em;
+  font-weight: 500;
+  border: 1px solid rgba(15, 118, 110, 0.18);
+}
+
+:root[saved-theme="dark"] :not(pre) > code,
+:root[data-theme="dark"]  :not(pre) > code,
+:root.dark                :not(pre) > code {
+  border-color: rgba(45, 212, 191, 0.22);
+}
+
+/* Atajos de teclado */
+kbd {
+  display: inline-block;
+  padding: 0.1em 0.45em 0.15em;
+  font-size: 0.8em;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: var(--rcm-radius-sm);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom-width: 2px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+
+/* -----------------------------------------------------------------
+   8. BARRA DE PROGRESO DE LECTURA (opcional)
+      Añade un elemento con clase .reading-progress fijo en top:0
+   ----------------------------------------------------------------- */
+.reading-progress,
+.navigation-progress {
+  background: linear-gradient(90deg, var(--rcm-teal-strong), var(--rcm-cyan));
+}

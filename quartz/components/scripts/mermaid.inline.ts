@@ -231,7 +231,7 @@ document.addEventListener("nav", async () => {
         primaryTextColor:    darkMode ? "#d6d3d1"      : "#1c1917",
         primaryBorderColor:  darkMode ? "#2dd4bf"      : "#0d9488",
         // Líneas y flechas
-        lineColor:           darkMode ? "#78716c"      : "#78716c",
+        lineColor:           darkMode ? "#a8a29e"      : "#78716c",
         // Nodos secundarios / terciarios
         secondaryColor:      darkMode ? "transparent"  : "#e6fafa",
         tertiaryColor:       darkMode ? "transparent"  : "#f0fdfa",
