@@ -226,31 +226,32 @@ document.addEventListener("nav", async () => {
       theme: darkMode ? "dark" : "base",
       themeVariables: {
         fontFamily: computedStyleMap["--codeFont"],
-        // Nodos — paleta violet × indigo premium
-        primaryColor:       darkMode ? "#2e1065" : "#ede9fe",
-        primaryTextColor:   darkMode ? "#ddd6fe" : "#2e1065",
-        primaryBorderColor: darkMode ? "#7c3aed" : "#6d28d9",
-        // Líneas — siempre visibles
-        lineColor:          darkMode ? "#a78bfa" : "#6d28d9",
-        // Nodos secundarios y terciarios
-        secondaryColor:     darkMode ? "#1e1b4b" : "#e0e7ff",
-        tertiaryColor:      darkMode ? "#1e1b4b" : "#ede9fe",
-        clusterBkg:         darkMode ? "#09090b" : "#f5f3ff",
-        edgeLabelBackground: darkMode ? "#2e1065" : "#ede9fe",
-        // Mindmap branch colors — violet × indigo
-        cScale0: darkMode ? "#2e1065" : "#ede9fe",
-        cScale1: darkMode ? "#1e1b4b" : "#e0e7ff",
-        cScale2: darkMode ? "#3b0764" : "#faf5ff",
-        cScale3: darkMode ? "#1e1b4b" : "#eef2ff",
-        cScale4: darkMode ? "#2e1065" : "#f5f3ff",
-        cScale5: darkMode ? "#1e1b4b" : "#ede9fe",
-        cScale6: darkMode ? "#0f0a1e" : "#f8f7ff",
-        cScale7: darkMode ? "#2e1065" : "#ede9fe",
-        cScaleLabel0: darkMode ? "#ddd6fe" : "#2e1065",
-        cScaleLabel1: darkMode ? "#c4b5fd" : "#1e1b4b",
-        cScaleLabel2: darkMode ? "#ddd6fe" : "#2e1065",
-        cScaleLabel3: darkMode ? "#c4b5fd" : "#1e1b4b",
-        cScaleLabel4: darkMode ? "#ddd6fe" : "#2e1065",
+        // Nodos — paleta Stone × Teal
+        primaryColor:        darkMode ? "transparent"  : "#f0fdfa",
+        primaryTextColor:    darkMode ? "#d6d3d1"      : "#1c1917",
+        primaryBorderColor:  darkMode ? "#2dd4bf"      : "#0d9488",
+        // Líneas y flechas
+        lineColor:           darkMode ? "#78716c"      : "#78716c",
+        // Nodos secundarios / terciarios
+        secondaryColor:      darkMode ? "transparent"  : "#e6fafa",
+        tertiaryColor:       darkMode ? "transparent"  : "#f0fdfa",
+        clusterBkg:          darkMode ? "#141210"      : "#faf9f7",
+        // Labels de aristas — transparente para que no pinten
+        edgeLabelBackground: darkMode ? "transparent"  : "transparent",
+        // Mindmap branch colors — teal × stone
+        cScale0: darkMode ? "#134e4a" : "#ccfbf1",
+        cScale1: darkMode ? "#0f3d3a" : "#99f6e4",
+        cScale2: darkMode ? "#164e63" : "#cffafe",
+        cScale3: darkMode ? "#0c3a47" : "#a5f3fc",
+        cScale4: darkMode ? "#134e4a" : "#ccfbf1",
+        cScale5: darkMode ? "#0f3d3a" : "#99f6e4",
+        cScale6: darkMode ? "#0a2e2b" : "#f0fdfa",
+        cScale7: darkMode ? "#134e4a" : "#ccfbf1",
+        cScaleLabel0: darkMode ? "#2dd4bf" : "#134e4a",
+        cScaleLabel1: darkMode ? "#5eead4" : "#0f3d3a",
+        cScaleLabel2: darkMode ? "#2dd4bf" : "#134e4a",
+        cScaleLabel3: darkMode ? "#5eead4" : "#0f3d3a",
+        cScaleLabel4: darkMode ? "#2dd4bf" : "#134e4a",
       },
     })
 

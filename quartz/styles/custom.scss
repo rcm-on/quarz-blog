@@ -1,37 +1,34 @@
 @use "./base.scss";
 
 /* =================================================
-   RCM — Brand System · Índigo × Amber
-   Modern SaaS · AACC · Neurodivergente · Personal
+   RCM — Brand System · Architect Stone
+   Stone × Teal · Senior · Technical · Personal
    ================================================= */
 
 /* -------------------------------------------------
    TOKENS — Light (default)
-   Quartz inyecta los tokens base (--light, --dark,
-   --secondary, --tertiary…) desde quartz.config.ts.
-   Aquí extendemos con tokens de marca propios.
    ------------------------------------------------- */
 :root {
-  /* Accesos directos a la paleta — Violet × Indigo premium */
-  --rcm-indigo:        #6d28d9;
-  --rcm-coral:         #4f46e5;
-  --rcm-indigo-pale:   rgba(109, 40, 217, 0.07);
-  --rcm-coral-pale:    rgba(79, 70, 229, 0.07);
+  /* 3 niveles de teal:
+     strong → decoración viva (progress bar, bordes de pre, gradientes)
+     base   → links y texto interactivo (más oscuro, legible)
+     pale   → fondos sutiles */
+  --rcm-teal-strong: #0d9488;
+  --rcm-teal:        #0f766e;
+  --rcm-cyan:        #0891b2;
+  --rcm-teal-pale:   rgba(15, 118, 110, 0.07);
+  --rcm-cyan-pale:   rgba(8, 145, 178, 0.07);
 
-  /* Shape */
   --rcm-radius-lg:  16px;
   --rcm-radius-md:  10px;
   --rcm-radius-sm:   6px;
 
-  /* Shadow — capas finas, nada dramático */
   --rcm-shadow-sm:  0 1px 2px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.04);
   --rcm-shadow-md:  0 2px 6px rgba(0,0,0,.08), 0 12px 32px rgba(0,0,0,.06);
 
-  /* Motion */
   --rcm-ease:        cubic-bezier(0.22, 0.61, 0.36, 1);
   --rcm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* Reading width */
   --rcm-prose-width: 72ch;
 }
 
@@ -39,16 +36,18 @@
    TOKENS — Dark override
    ------------------------------------------------- */
 :root[saved-theme="dark"] {
-  --rcm-indigo:        #a78bfa;
-  --rcm-coral:         #818cf8;
-  --rcm-indigo-pale:   rgba(167, 139, 250, 0.09);
-  --rcm-coral-pale:    rgba(129, 140, 248, 0.09);
-  --rcm-shadow-sm:  0 1px 2px rgba(0,0,0,.25), 0 4px 12px rgba(0,0,0,.20);
-  --rcm-shadow-md:  0 2px 6px rgba(0,0,0,.30), 0 12px 32px rgba(0,0,0,.25);
+  --rcm-teal:       #2dd4bf;
+  --rcm-cyan:       #22d3ee;
+  --rcm-teal-pale:  rgba(45, 212, 191, 0.10);
+  --rcm-cyan-pale:  rgba(34, 211, 238, 0.10);
+  --rcm-shadow-sm:  0 1px 2px rgba(0,0,0,.30), 0 4px 12px rgba(0,0,0,.25);
+  --rcm-shadow-md:  0 2px 6px rgba(0,0,0,.35), 0 12px 32px rgba(0,0,0,.30);
 }
 
 /* =================================================
-   AURORA — solo gradiente animado, sin malla
+   BACKGROUND
+   Light: barrido lateral teal→cyan + red neuronal sutil
+   Dark:  barrido más intenso + red neuronal teal
    ================================================= */
 
 body {
@@ -56,61 +55,52 @@ body {
   background-color: var(--light);
 }
 
-/* =================================================
-   BACKGROUND — Mesh gradient profesional
-   Inspiración: Linear, Vercel, Raycast (2024-2025)
-   Light: orbes suaves visibles · Dark: glows + grid
-   ================================================= */
-
+/* Barrido lateral — visible de borde a borde */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  /* Light mode — violet más presente */
   background:
-    radial-gradient(ellipse 85% 65% at -5%  -5%,  rgba(109, 40, 217, 0.20) 0%, transparent 58%),
-    radial-gradient(ellipse 65% 55% at 108% 108%, rgba(79, 70, 229, 0.15) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 45% at  52%  -8%,  rgba(109, 40, 217, 0.10) 0%, transparent 62%);
+    linear-gradient(90deg,
+      rgba(13, 148, 136, 0.18) 0%,
+      rgba(13, 148, 136, 0.08) 22%,
+      transparent              45%,
+      transparent              55%,
+      rgba(8, 145, 178, 0.08)  78%,
+      rgba(8, 145, 178, 0.15) 100%
+    ),
+    radial-gradient(ellipse 55% 90% at   0% 50%, rgba(13, 148, 136, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 90% at 100% 50%, rgba(8, 145, 178, 0.06)  0%, transparent 70%);
 }
 
 :root[saved-theme="dark"] body::before {
   background:
-    radial-gradient(ellipse 70% 60% at  8%   4%,  rgba(109, 40, 217, 0.28) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 48% at 90%  92%,  rgba(79, 70, 229, 0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 45% 38% at 50% 108%,  rgba(109, 40, 217, 0.10) 0%, transparent 62%);
-  filter: blur(60px) saturate(120%);
+    linear-gradient(90deg,
+      rgba(13, 148, 136, 0.32) 0%,
+      rgba(13, 148, 136, 0.14) 25%,
+      transparent              48%,
+      transparent              52%,
+      rgba(8, 145, 178, 0.14)  75%,
+      rgba(8, 145, 178, 0.28) 100%
+    ),
+    radial-gradient(ellipse 50% 100% at   0% 50%, rgba(13, 148, 136, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 100% at 100% 50%, rgba(8, 145, 178, 0.10)  0%, transparent 70%);
+  filter: blur(55px) saturate(120%);
 }
 
-/* Light mode — red neural amplia, patrón distribuido */
+/* Sin patrón de fondo — solo el barrido lateral */
 body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 1;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'%3E%3Cg stroke='rgba(109,40,217,0.10)' stroke-width='0.8' fill='none'%3E%3Cline x1='80' y1='80' x2='280' y2='180'/%3E%3Cline x1='280' y1='180' x2='480' y2='80'/%3E%3Cline x1='480' y1='80' x2='680' y2='200'/%3E%3Cline x1='680' y1='200' x2='880' y2='80'/%3E%3Cline x1='880' y1='80' x2='1080' y2='180'/%3E%3Cline x1='1080' y1='180' x2='1280' y2='80'/%3E%3Cline x1='1280' y1='80' x2='1520' y2='160'/%3E%3Cline x1='80' y1='80' x2='160' y2='320'/%3E%3Cline x1='280' y1='180' x2='360' y2='420'/%3E%3Cline x1='480' y1='80' x2='560' y2='320'/%3E%3Cline x1='680' y1='200' x2='760' y2='420'/%3E%3Cline x1='880' y1='80' x2='960' y2='320'/%3E%3Cline x1='1080' y1='180' x2='1160' y2='420'/%3E%3Cline x1='1280' y1='80' x2='1360' y2='320'/%3E%3Cline x1='160' y1='320' x2='360' y2='420'/%3E%3Cline x1='360' y1='420' x2='560' y2='320'/%3E%3Cline x1='560' y1='320' x2='760' y2='420'/%3E%3Cline x1='760' y1='420' x2='960' y2='320'/%3E%3Cline x1='960' y1='320' x2='1160' y2='420'/%3E%3Cline x1='1160' y1='420' x2='1360' y2='320'/%3E%3Cline x1='1360' y1='320' x2='1520' y2='400'/%3E%3Cline x1='160' y1='320' x2='240' y2='560'/%3E%3Cline x1='360' y1='420' x2='440' y2='640'/%3E%3Cline x1='560' y1='320' x2='640' y2='560'/%3E%3Cline x1='760' y1='420' x2='840' y2='640'/%3E%3Cline x1='960' y1='320' x2='1040' y2='560'/%3E%3Cline x1='1160' y1='420' x2='1240' y2='640'/%3E%3Cline x1='1360' y1='320' x2='1440' y2='560'/%3E%3Cline x1='240' y1='560' x2='440' y2='640'/%3E%3Cline x1='440' y1='640' x2='640' y2='560'/%3E%3Cline x1='640' y1='560' x2='840' y2='640'/%3E%3Cline x1='840' y1='640' x2='1040' y2='560'/%3E%3Cline x1='1040' y1='560' x2='1240' y2='640'/%3E%3Cline x1='1240' y1='640' x2='1440' y2='560'/%3E%3Cline x1='240' y1='560' x2='320' y2='780'/%3E%3Cline x1='440' y1='640' x2='520' y2='820'/%3E%3Cline x1='640' y1='560' x2='720' y2='800'/%3E%3Cline x1='840' y1='640' x2='920' y2='820'/%3E%3Cline x1='1040' y1='560' x2='1120' y2='800'/%3E%3Cline x1='1240' y1='640' x2='1320' y2='820'/%3E%3Cline x1='320' y1='780' x2='520' y2='820'/%3E%3Cline x1='520' y1='820' x2='720' y2='800'/%3E%3Cline x1='720' y1='800' x2='920' y2='820'/%3E%3Cline x1='920' y1='820' x2='1120' y2='800'/%3E%3Cline x1='1120' y1='800' x2='1320' y2='820'/%3E%3C/g%3E%3Cg fill='rgba(109,40,217,0.16)'%3E%3Ccircle cx='80' cy='80' r='3'/%3E%3Ccircle cx='280' cy='180' r='3.5'/%3E%3Ccircle cx='480' cy='80' r='3'/%3E%3Ccircle cx='680' cy='200' r='4'/%3E%3Ccircle cx='880' cy='80' r='3'/%3E%3Ccircle cx='1080' cy='180' r='3.5'/%3E%3Ccircle cx='1280' cy='80' r='3'/%3E%3Ccircle cx='1520' cy='160' r='2.5'/%3E%3Ccircle cx='160' cy='320' r='3.5'/%3E%3Ccircle cx='360' cy='420' r='4'/%3E%3Ccircle cx='560' cy='320' r='3.5'/%3E%3Ccircle cx='760' cy='420' r='4.5'/%3E%3Ccircle cx='960' cy='320' r='3.5'/%3E%3Ccircle cx='1160' cy='420' r='4'/%3E%3Ccircle cx='1360' cy='320' r='3.5'/%3E%3Ccircle cx='1520' cy='400' r='2.5'/%3E%3Ccircle cx='240' cy='560' r='3.5'/%3E%3Ccircle cx='440' cy='640' r='4'/%3E%3Ccircle cx='640' cy='560' r='3.5'/%3E%3Ccircle cx='840' cy='640' r='4.5'/%3E%3Ccircle cx='1040' cy='560' r='3.5'/%3E%3Ccircle cx='1240' cy='640' r='4'/%3E%3Ccircle cx='1440' cy='560' r='3'/%3E%3Ccircle cx='320' cy='780' r='3'/%3E%3Ccircle cx='520' cy='820' r='3.5'/%3E%3Ccircle cx='720' cy='800' r='3'/%3E%3Ccircle cx='920' cy='820' r='3.5'/%3E%3Ccircle cx='1120' cy='800' r='3'/%3E%3Ccircle cx='1320' cy='820' r='3'/%3E%3C/g%3E%3Cg fill='rgba(79,70,229,0.28)'%3E%3Ccircle cx='680' cy='200' r='2'/%3E%3Ccircle cx='760' cy='420' r='2'/%3E%3Ccircle cx='840' cy='640' r='2'/%3E%3Ccircle cx='360' cy='420' r='2'/%3E%3Ccircle cx='1160' cy='420' r='2'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-/* Dark mode — red neural premium */
-:root[saved-theme="dark"] body::after {
-  opacity: 1;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'%3E%3Cg stroke='rgba(167,139,250,0.18)' stroke-width='1' fill='none'%3E%3Cline x1='200' y1='150' x2='500' y2='300'/%3E%3Cline x1='500' y1='300' x2='800' y2='180'/%3E%3Cline x1='800' y1='180' x2='1100' y2='350'/%3E%3Cline x1='1100' y1='350' x2='1400' y2='200'/%3E%3Cline x1='300' y1='500' x2='600' y2='650'/%3E%3Cline x1='600' y1='650' x2='900' y2='480'/%3E%3Cline x1='900' y1='480' x2='1200' y2='600'/%3E%3Cline x1='100' y1='700' x2='400' y2='800'/%3E%3Cline x1='400' y1='800' x2='700' y2='720'/%3E%3Cline x1='700' y1='720' x2='1000' y2='820'/%3E%3Cline x1='1000' y1='820' x2='1300' y2='700'/%3E%3Cline x1='200' y1='150' x2='300' y2='500'/%3E%3Cline x1='500' y1='300' x2='600' y2='650'/%3E%3Cline x1='800' y1='180' x2='900' y2='480'/%3E%3Cline x1='1100' y1='350' x2='1200' y2='600'/%3E%3Cline x1='300' y1='500' x2='400' y2='800'/%3E%3Cline x1='600' y1='650' x2='700' y2='720'/%3E%3Cline x1='900' y1='480' x2='1000' y2='820'/%3E%3Cline x1='1200' y1='600' x2='1300' y2='700'/%3E%3C/g%3E%3Cg fill='rgba(167,139,250,0.35)'%3E%3Ccircle cx='200' cy='150' r='3.5'/%3E%3Ccircle cx='500' cy='300' r='4'/%3E%3Ccircle cx='800' cy='180' r='4'/%3E%3Ccircle cx='1100' cy='350' r='3.5'/%3E%3Ccircle cx='1400' cy='200' r='3'/%3E%3Ccircle cx='300' cy='500' r='3.5'/%3E%3Ccircle cx='600' cy='650' r='4.5'/%3E%3Ccircle cx='900' cy='480' r='4'/%3E%3Ccircle cx='1200' cy='600' r='3.5'/%3E%3Ccircle cx='100' cy='700' r='3'/%3E%3Ccircle cx='400' cy='800' r='3.5'/%3E%3Ccircle cx='700' cy='720' r='4'/%3E%3Ccircle cx='1000' cy='820' r='3.5'/%3E%3Ccircle cx='1300' cy='700' r='3'/%3E%3C/g%3E%3Cg fill='rgba(109,40,217,0.5)'%3E%3Ccircle cx='600' cy='650' r='2'/%3E%3Ccircle cx='900' cy='480' r='2'/%3E%3Ccircle cx='500' cy='300' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  display: none;
 }
 
 @media (max-width: 800px) {
   :root[saved-theme="dark"] body::before {
-    filter: blur(36px);
+    filter: blur(38px);
   }
 }
+
 /* =================================================
    CAPA DE PÁGINA — sobre el fondo
    ================================================= */
@@ -125,7 +115,7 @@ body::after {
    ================================================= */
 
 ::selection {
-  background: color-mix(in srgb, var(--rcm-indigo) 55%, var(--rcm-coral) 45%);
+  background: color-mix(in srgb, var(--rcm-teal) 60%, var(--rcm-cyan) 40%);
   color: #fff;
 }
 
@@ -133,7 +123,6 @@ body::after {
    TIPOGRAFÍA
    ================================================= */
 
-/* Cuerpo — lectura cómoda */
 .center article p,
 .center article li {
   line-height: 1.85;
@@ -141,7 +130,6 @@ body::after {
   letter-spacing: 0.01em;
 }
 
-/* Headings de artículo — jerarquía clara */
 .center article h2 {
   font-size: clamp(1.35rem, 2vw, 1.65rem);
   font-weight: 750;
@@ -164,8 +152,8 @@ body::after {
   text-wrap: balance;
   background: linear-gradient(
     138deg,
-    var(--dark)          0%,
-    color-mix(in srgb, var(--rcm-indigo) 80%, var(--dark)) 100%
+    var(--dark)                                             0%,
+    color-mix(in srgb, var(--rcm-teal) 85%, var(--dark)) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -187,7 +175,7 @@ a:hover {
 }
 
 a.internal {
-  background-color: var(--rcm-indigo-pale);
+  background-color: var(--rcm-teal-pale);
   border-radius: 4px;
   text-decoration: none;
 }
@@ -212,7 +200,7 @@ input:focus-visible {
    ================================================= */
 
 .navigation-progress {
-  background: linear-gradient(90deg, var(--rcm-indigo), var(--rcm-coral));
+  background: linear-gradient(90deg, var(--rcm-teal), var(--rcm-cyan));
 }
 
 /* =================================================
@@ -222,23 +210,20 @@ input:focus-visible {
 .page-title > a {
   font-weight: 800;
   letter-spacing: -0.025em;
-  /* Degradado índigo → coral: firme + cálido */
   background: linear-gradient(
     128deg,
-    var(--dark)            0%,
-    var(--rcm-indigo)     55%,
-    var(--rcm-coral)     100%
+    var(--dark)       0%,
+    var(--rcm-teal)  60%,
+    var(--rcm-cyan) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Acento AACC/ND — punto de color único junto al título,
-   visible pero sutil: un fragmento de espectro completo. */
 .page-title > a::after {
   content: " ◈";
-  background: linear-gradient(90deg, var(--rcm-indigo), var(--rcm-coral));
+  background: linear-gradient(90deg, var(--rcm-teal), var(--rcm-cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -259,13 +244,13 @@ input:focus-visible {
 .search > .search-button {
   border-radius: var(--rcm-radius-sm);
   border: 1px solid var(--lightgray);
-  background: color-mix(in srgb, var(--light) 96%, var(--rcm-indigo) 4%);
+  background: color-mix(in srgb, var(--light) 96%, var(--rcm-teal) 4%);
   transition: border-color 0.18s var(--rcm-ease), box-shadow 0.18s var(--rcm-ease);
 }
 
 .search > .search-button:hover {
   border-color: var(--secondary);
-  box-shadow: 0 0 0 3px var(--rcm-indigo-pale);
+  box-shadow: 0 0 0 3px var(--rcm-teal-pale);
 }
 
 /* =================================================
@@ -290,26 +275,86 @@ button.desktop-explorer h2 {
 }
 
 .explorer-content ul li > a:hover {
-  background: var(--rcm-indigo-pale);
+  background: var(--rcm-teal-pale);
   color: var(--secondary);
 }
 
 /* =================================================
-   CÓDIGO
+   CÓDIGO — bloque vs inline separados
    ================================================= */
 
+/* Ligaduras y rendering óptimo para JetBrains Mono */
+pre, code, kbd, samp {
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "liga" 1, "calt" 1, "ss01" 1, "ss02" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Contenedor del bloque — shiki pone el bg, nosotros ponemos forma */
 pre {
   border-radius: var(--rcm-radius-md);
   border: 1px solid var(--lightgray);
   box-shadow: var(--rcm-shadow-sm);
+  overflow-x: auto;
+  position: relative;
+  /* Tab size legible para código de arquitectura */
+  tab-size: 2;
 }
 
-code {
+/* Acento teal en el borde superior del bloque */
+pre::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--rcm-teal), var(--rcm-cyan));
+  border-radius: var(--rcm-radius-md) var(--rcm-radius-md) 0 0;
+  pointer-events: none;
+}
+
+/* code dentro de pre — shiki lo controla, no interferir */
+pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  border-radius: 0 !important;
+}
+
+/* Inline code — fuera de pre */
+:not(pre) > code {
   border-radius: 4px;
-  background: var(--rcm-indigo-pale);
-  color: color-mix(in srgb, var(--secondary) 85%, var(--dark));
-  padding: 0.1em 0.3em;
-  font-size: 0.88em;
+  background: var(--rcm-teal-pale);
+  color: var(--secondary);
+  padding: 0.12em 0.38em;
+  font-size: 0.875em;
+  font-weight: 500;
+  /* Borde sólido sin color-mix para máxima compatibilidad */
+  border: 1px solid rgba(13, 148, 136, 0.18);
+}
+
+:root[saved-theme="dark"] :not(pre) > code {
+  background: var(--rcm-teal-pale);
+  border-color: rgba(45, 212, 191, 0.22);
+}
+
+/* kbd — atajos de teclado con look de tecla real */
+kbd {
+  display: inline-block;
+  padding: 0.1em 0.45em 0.15em;
+  font-size: 0.8em;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--darkgray);
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-bottom-width: 2px;
+  border-radius: var(--rcm-radius-sm);
+  box-shadow: 0 1px 0 var(--lightgray);
 }
 
 /* =================================================
@@ -318,7 +363,7 @@ code {
 
 blockquote {
   border-left: 3px solid var(--secondary);
-  background: var(--rcm-indigo-pale);
+  background: var(--rcm-teal-pale);
   border-radius: 0 var(--rcm-radius-sm) var(--rcm-radius-sm) 0;
   padding: 0.65rem 1rem;
   margin: 1.2rem 0;
@@ -363,15 +408,15 @@ a.internal.tag-link:hover {
 }
 
 /* =================================================
-   SEPARADOR HR — degradado índigo/coral
+   SEPARADOR HR
    ================================================= */
 
 hr {
   background: linear-gradient(
     90deg,
     transparent,
-    color-mix(in srgb, var(--rcm-indigo) 38%, var(--lightgray)) 28%,
-    color-mix(in srgb, var(--rcm-coral)  32%, var(--lightgray)) 58%,
+    color-mix(in srgb, var(--rcm-teal) 38%, var(--lightgray)) 28%,
+    color-mix(in srgb, var(--rcm-cyan)  32%, var(--lightgray)) 58%,
     transparent
   );
 }
@@ -390,6 +435,25 @@ hr {
   background: transparent;
   box-shadow: none;
   padding: 6rem 1.5rem 1.5rem;
+}
+
+/* Sidebar izquierdo en móvil — frosted glass sobre el fondo */
+@media (max-width: 800px) {
+  .page > #quartz-body .sidebar.left {
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 249, 247, 0.82) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    border-bottom: 1px solid rgba(13, 148, 136, 0.14);
+    padding: 0.75rem 1rem !important;
+  }
+
+  :root[saved-theme="dark"] .page > #quartz-body .sidebar.left {
+    background: rgba(20, 18, 16, 0.82) !important;
+    border-bottom-color: rgba(45, 212, 191, 0.12);
+  }
 }
 
 .page > #quartz-body .center article {
@@ -459,8 +523,8 @@ body[data-slug="index"] .page .center article > h1:first-of-type {
   background: linear-gradient(
     138deg,
     var(--dark)                                              0%,
-    color-mix(in srgb, var(--rcm-indigo) 90%, var(--dark)) 55%,
-    color-mix(in srgb, var(--rcm-coral)  80%, var(--dark)) 100%
+    color-mix(in srgb, var(--rcm-teal) 90%, var(--dark))  55%,
+    color-mix(in srgb, var(--rcm-cyan)  80%, var(--dark)) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -514,7 +578,6 @@ body[data-slug="index"] .page .center article > hr {
     padding-right: 0;
   }
 
-  /* Título del sitio — compacto en móvil */
   .page-title {
     flex-shrink: 1;
     min-width: 0;
@@ -542,37 +605,139 @@ body[data-slug="index"] .page .center article > hr {
 }
 
 /* =================================================
-   MERMAID — estilo homogéneo con carousels y SVGs
-   Nodos con fondo sólido, líneas siempre visibles
+   MERMAID — integrado con la paleta stone × teal
+   Sin relleno en nodos: solo borde teal sobre fondo transparente
    ================================================= */
 
 .mermaid svg {
   max-width: 100%;
   height: auto;
+  border-radius: var(--rcm-radius-md);
 }
 
-/* Nodos principales — fondo sólido */
+/* Nodos — transparentes, solo borde teal */
 .mermaid .node rect,
 .mermaid .node circle,
 .mermaid .node ellipse,
-.mermaid .node polygon {
-  stroke-width: 2px !important;
+.mermaid .node polygon,
+.mermaid .node path {
+  fill: transparent !important;
+  stroke: var(--rcm-teal) !important;
+  stroke-width: 1.5px !important;
 }
 
-/* Texto siempre legible */
+/* El contenido HTML dentro de foreignObject también puede tener bg inline */
+.mermaid foreignObject > div,
+.mermaid foreignObject > span,
 .mermaid .nodeLabel,
-.mermaid .label {
-  font-family: var(--codeFont) !important;
+.mermaid .nodeLabel > * {
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
-/* Líneas de conexión más visibles */
-.mermaid .edgePath .path {
-  stroke-width: 2px !important;
+/* Texto de nodos */
+.mermaid .nodeLabel,
+.mermaid .label,
+.mermaid text {
+  fill: var(--darkgray) !important;
+  color: var(--darkgray) !important;
+  font-family: var(--bodyFont) !important;
+  font-size: 13px !important;
 }
 
-/* Estados — mismo sistema */
-.mermaid .statediagram-state rect {
-  stroke-width: 2px !important;
+/* Aristas */
+.mermaid .edgePath .path,
+.mermaid .flowchart-link {
+  stroke: var(--gray) !important;
+  stroke-width: 1.5px !important;
+}
+
+/* Puntas de flecha */
+.mermaid .arrowheadPath,
+.mermaid marker path {
+  fill: var(--gray) !important;
+  stroke: none !important;
+}
+
+/* Clusters / subgrafos — solo borde punteado */
+.mermaid .cluster rect {
+  fill: transparent !important;
+  stroke: color-mix(in srgb, var(--rcm-teal) 50%, var(--lightgray)) !important;
+  stroke-width: 1px !important;
+  stroke-dasharray: 5 3 !important;
+}
+
+.mermaid .cluster text {
+  fill: var(--gray) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* Labels de aristas — todas las variantes que Mermaid puede generar */
+.mermaid .edgeLabel,
+.mermaid .edgeLabel *,
+.mermaid span.edgeLabel,
+.mermaid .labelBkg,
+.mermaid .labelBkg *,
+.mermaid .label-container,
+.mermaid .edgeLabelWrapper,
+.mermaid .edgeLabelWrapper *,
+.mermaid foreignObject div,
+.mermaid foreignObject span {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--gray) !important;
+  font-size: 11px !important;
+}
+
+.mermaid .edgeLabel rect,
+.mermaid .labelBkg rect {
+  fill: transparent !important;
+  stroke: none !important;
+  opacity: 0 !important;
+}
+
+/* Hover en nodos clickables */
+.mermaid .node.clickable:hover rect,
+.mermaid .node.clickable:hover circle,
+.mermaid .node.clickable:hover ellipse,
+.mermaid .node.clickable:hover polygon {
+  fill: rgba(13, 148, 136, 0.10) !important;
+  stroke: var(--rcm-cyan) !important;
+}
+
+/* Dark mode — borde más brillante sobre fondo oscuro */
+:root[saved-theme="dark"] .mermaid .node rect,
+:root[saved-theme="dark"] .mermaid .node circle,
+:root[saved-theme="dark"] .mermaid .node ellipse,
+:root[saved-theme="dark"] .mermaid .node polygon,
+:root[saved-theme="dark"] .mermaid .node path {
+  fill: transparent !important;
+  stroke: var(--rcm-teal) !important;
+  stroke-width: 1.5px !important;
+}
+
+:root[saved-theme="dark"] .mermaid .nodeLabel,
+:root[saved-theme="dark"] .mermaid .label,
+:root[saved-theme="dark"] .mermaid text {
+  fill: var(--darkgray) !important;
+  color: var(--darkgray) !important;
+}
+
+:root[saved-theme="dark"] .mermaid foreignObject > div,
+:root[saved-theme="dark"] .mermaid foreignObject > span,
+:root[saved-theme="dark"] .mermaid .nodeLabel,
+:root[saved-theme="dark"] .mermaid .nodeLabel > * {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+:root[saved-theme="dark"] .mermaid .node.clickable:hover rect,
+:root[saved-theme="dark"] .mermaid .node.clickable:hover circle,
+:root[saved-theme="dark"] .mermaid .node.clickable:hover ellipse,
+:root[saved-theme="dark"] .mermaid .node.clickable:hover polygon {
+  fill: rgba(45, 212, 191, 0.12) !important;
 }
 
 /* =================================================
@@ -585,7 +750,7 @@ body[data-slug="index"] .page .center article > hr {
 }
 
 .rcm-card {
-  background: color-mix(in srgb, var(--light) 94%, var(--rcm-indigo) 6%);
+  background: color-mix(in srgb, var(--light) 94%, var(--rcm-teal) 6%);
   border: 1px solid var(--lightgray);
   border-radius: var(--rcm-radius-lg);
   box-shadow: var(--rcm-shadow-sm);
@@ -600,8 +765,8 @@ body[data-slug="index"] .page .center article > hr {
   border-radius: 999px;
   font-size: 0.79rem;
   font-weight: 600;
-  border: 1px solid color-mix(in srgb, var(--rcm-indigo) 25%, transparent);
-  background: var(--rcm-indigo-pale);
+  border: 1px solid color-mix(in srgb, var(--rcm-teal) 25%, transparent);
+  background: var(--rcm-teal-pale);
   color: var(--secondary);
 }
 
@@ -612,8 +777,8 @@ body[data-slug="index"] .page .center article > hr {
   background: linear-gradient(
     90deg,
     transparent,
-    color-mix(in srgb, var(--rcm-indigo) 38%, var(--lightgray)) 28%,
-    color-mix(in srgb, var(--rcm-coral)  32%, var(--lightgray)) 58%,
+    color-mix(in srgb, var(--rcm-teal) 38%, var(--lightgray)) 28%,
+    color-mix(in srgb, var(--rcm-cyan)  32%, var(--lightgray)) 58%,
     transparent
   );
 }
