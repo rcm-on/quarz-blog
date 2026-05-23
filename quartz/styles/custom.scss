@@ -281,6 +281,24 @@ button.desktop-explorer h2 {
   color: var(--gray);
 }
 
+/* TOC + Backlinks — misma neutralidad que el explorer */
+.toc > ul a,
+.backlinks > ul a {
+  color: var(--darkgray);
+  font-weight: 400;
+  transition: color 0.16s var(--rcm-ease);
+}
+
+.toc > ul a:hover,
+.backlinks > ul a:hover {
+  color: var(--secondary);
+}
+
+:root[saved-theme="dark"] .toc > ul a,
+:root[saved-theme="dark"] .backlinks > ul a {
+  color: var(--gray);
+}
+
 /* =================================================
    CÓDIGO — bloque vs inline separados
    ================================================= */
@@ -774,6 +792,149 @@ pre:has(> code.mermaid)::before {
 
 :root[saved-theme="dark"] pre:has(> code.mermaid) {
   border-color: rgba(45, 212, 191, 0.14) !important;
+}
+
+/* =================================================
+   GRAPH VIEW — container integrado en la paleta
+   El canvas ya usa --secondary/--tertiary del config
+   ================================================= */
+
+.graph > .graph-outer {
+  border-radius: var(--rcm-radius-md);
+  border: 1px solid rgba(13, 148, 136, 0.18);
+  background: transparent;
+  height: 220px;
+}
+
+:root[saved-theme="dark"] .graph > .graph-outer {
+  border-color: rgba(45, 212, 191, 0.12);
+}
+
+.graph > .graph-outer > .global-graph-icon {
+  border-radius: var(--rcm-radius-sm);
+  color: var(--gray);
+  opacity: 0.6;
+  transition: background-color 0.18s var(--rcm-ease), opacity 0.18s var(--rcm-ease);
+}
+
+.graph > .graph-outer > .global-graph-icon:hover {
+  background-color: var(--rcm-teal-pale) !important;
+  color: var(--secondary);
+  opacity: 1;
+}
+
+/* Global graph popup */
+.global-graph-outer > .global-graph-container {
+  border-radius: var(--rcm-radius-lg);
+  border: 1px solid rgba(13, 148, 136, 0.22);
+  background-color: var(--light);
+  box-shadow: var(--rcm-shadow-md);
+}
+
+:root[saved-theme="dark"] .global-graph-outer > .global-graph-container {
+  border-color: rgba(45, 212, 191, 0.15);
+  background-color: #1a1715;
+}
+
+/* =================================================
+   CLIPBOARD BUTTON — botón copy branded
+   ================================================= */
+
+.clipboard-button {
+  border-radius: var(--rcm-radius-sm);
+  background-color: color-mix(in srgb, var(--light) 92%, var(--rcm-teal) 8%);
+  border: 1px solid var(--lightgray);
+  color: var(--gray);
+  padding: 0.3rem;
+  margin: 0.35rem;
+  transition: background-color 0.18s var(--rcm-ease),
+              border-color 0.18s var(--rcm-ease),
+              opacity 0.18s var(--rcm-ease);
+}
+
+.clipboard-button > svg {
+  fill: var(--gray) !important;
+  filter: none !important;
+}
+
+.clipboard-button:hover {
+  border-color: var(--secondary) !important;
+  background-color: var(--rcm-teal-pale) !important;
+}
+
+.clipboard-button:hover > svg {
+  fill: var(--secondary) !important;
+}
+
+:root[saved-theme="dark"] .clipboard-button {
+  background-color: #1e1b19;
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+:root[saved-theme="dark"] .clipboard-button:hover {
+  border-color: rgba(45, 212, 191, 0.45) !important;
+  background-color: rgba(45, 212, 191, 0.08) !important;
+}
+
+:root[saved-theme="dark"] .clipboard-button > svg {
+  fill: var(--gray) !important;
+}
+
+:root[saved-theme="dark"] .clipboard-button:hover > svg {
+  fill: var(--secondary) !important;
+}
+
+/* =================================================
+   TABLAS — mismo nivel de cuidado que el código
+   ================================================= */
+
+.table-container {
+  border-radius: var(--rcm-radius-md);
+  border: 1px solid var(--lightgray);
+  overflow: hidden;
+  margin: 1.2rem 0;
+  box-shadow: var(--rcm-shadow-sm);
+}
+
+.table-container > table {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+th {
+  background: color-mix(in srgb, var(--light) 85%, var(--rcm-teal) 15%);
+  border-bottom: 2px solid var(--secondary);
+  color: var(--dark);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 0.9rem;
+}
+
+td {
+  padding: 0.4rem 0.9rem;
+}
+
+tr {
+  transition: background-color 0.15s var(--rcm-ease);
+}
+
+tr:not(:last-child) {
+  border-bottom: 1px solid var(--lightgray);
+}
+
+tbody tr:hover td {
+  background: var(--rcm-teal-pale);
+}
+
+:root[saved-theme="dark"] th {
+  background: color-mix(in srgb, var(--light) 40%, var(--rcm-teal) 8%);
+  border-bottom-color: var(--secondary);
+}
+
+:root[saved-theme="dark"] tbody tr:hover td {
+  background: rgba(45, 212, 191, 0.06);
 }
 
 /* =================================================
