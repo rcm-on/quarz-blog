@@ -116,8 +116,13 @@ body::after {
    ================================================= */
 
 ::selection {
-  background: color-mix(in srgb, var(--rcm-teal) 60%, var(--rcm-cyan) 40%);
-  color: #fff;
+  background: rgba(15, 118, 110, 0.22) !important;
+  color: inherit !important;
+}
+
+:root[saved-theme="dark"] ::selection {
+  background: rgba(45, 212, 191, 0.18) !important;
+  color: inherit !important;
 }
 
 /* =================================================
@@ -335,7 +340,7 @@ pre code {
   font-size: 0.875em;
   font-weight: 500;
   /* Borde sólido sin color-mix para máxima compatibilidad */
-  border: 1px solid rgba(13, 148, 136, 0.18);
+  border: 1px solid rgba(15, 118, 110, 0.18);
 }
 
 :root[saved-theme="dark"] :not(pre) > code {
