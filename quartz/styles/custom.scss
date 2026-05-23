@@ -369,16 +369,132 @@ pre code {
 /* kbd — atajos de teclado con look de tecla real */
 kbd {
   display: inline-block;
-  padding: 0.1em 0.45em 0.15em;
-  font-size: 0.8em;
+  padding: 0.12em 0.5em 0.16em;
+  font-size: 0.78em;
   font-weight: 600;
   line-height: 1;
+  letter-spacing: 0.02em;
   color: var(--darkgray);
-  background: var(--light);
+  font-family: var(--codeFont);
+  background: color-mix(in srgb, var(--light) 85%, var(--lightgray) 15%);
   border: 1px solid var(--lightgray);
-  border-bottom-width: 2px;
+  border-bottom: 2px solid color-mix(in srgb, var(--lightgray) 70%, var(--gray) 30%);
   border-radius: var(--rcm-radius-sm);
-  box-shadow: 0 1px 0 var(--lightgray);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+:root[saved-theme="dark"] kbd {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.16);
+  border-bottom-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+  color: var(--darkgray);
+}
+
+/* =================================================
+   FORMULARIOS — scoped a artículos para no romper UI de Quartz
+   ================================================= */
+
+.center article input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.center article select,
+.center article textarea {
+  width: 100%;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--lightgray);
+  border-radius: var(--rcm-radius-sm);
+  background: var(--light);
+  color: var(--darkgray);
+  font-family: var(--bodyFont);
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.18s var(--rcm-ease), box-shadow 0.18s var(--rcm-ease);
+}
+
+.center article input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+.center article select:focus,
+.center article textarea:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px var(--rcm-teal-pale);
+}
+
+.center article textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.6;
+}
+
+.center article select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2378716c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+  padding-right: 2.2rem;
+  cursor: pointer;
+}
+
+.center article label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray);
+}
+
+.center article button:not(.clipboard-button) {
+  padding: 0.5rem 1.25rem;
+  background: var(--secondary);
+  color: #fff;
+  border: none;
+  border-radius: var(--rcm-radius-sm);
+  font-family: var(--bodyFont);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.18s var(--rcm-ease), box-shadow 0.18s var(--rcm-ease);
+}
+
+.center article button:not(.clipboard-button):hover {
+  background: var(--tertiary);
+  box-shadow: 0 2px 10px rgba(13, 148, 136, 0.28);
+}
+
+:root[saved-theme="dark"] .center article input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+:root[saved-theme="dark"] .center article select,
+:root[saved-theme="dark"] .center article textarea {
+  background: var(--lightgray);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: var(--darkgray);
+}
+
+:root[saved-theme="dark"] .center article input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+:root[saved-theme="dark"] .center article select:focus,
+:root[saved-theme="dark"] .center article textarea:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
+}
+
+:root[saved-theme="dark"] .center article select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a8a29e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* =================================================
+   KATEX — colores coherentes con la paleta
+   ================================================= */
+
+.katex, .katex * {
+  color: var(--darkgray) !important;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
+
+.katex-display > .katex {
+  font-size: 1.1em;
 }
 
 /* =================================================
@@ -885,6 +1001,124 @@ pre:has(> code.mermaid)::before {
 }
 
 /* =================================================
+   LISTAS DE DEFINICIÓN dl/dt/dd
+   ================================================= */
+
+dl {
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem 1.2rem;
+  align-items: baseline;
+}
+
+dt {
+  font-weight: 700;
+  color: var(--dark);
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--lightgray);
+  font-size: 0.95rem;
+}
+
+dd {
+  margin: 0;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--lightgray);
+  color: var(--darkgray);
+  line-height: 1.65;
+}
+
+dt:first-of-type,
+dd:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+/* =================================================
+   DETAILS / SUMMARY — acordeón branded
+   ================================================= */
+
+details {
+  border: 1px solid var(--lightgray);
+  border-radius: var(--rcm-radius-md);
+  margin: 0.9rem 0;
+  overflow: hidden;
+  transition: box-shadow 0.2s var(--rcm-ease);
+}
+
+details[open] {
+  box-shadow: var(--rcm-shadow-sm);
+}
+
+summary {
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--darkgray);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: background-color 0.16s var(--rcm-ease), color 0.16s var(--rcm-ease);
+}
+
+summary::before {
+  content: "▶";
+  font-size: 0.65em;
+  color: var(--rcm-teal);
+  transition: transform 0.2s var(--rcm-ease);
+  flex-shrink: 0;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+summary:hover {
+  background: var(--rcm-teal-pale);
+  color: var(--secondary);
+}
+
+details > :not(summary) {
+  padding: 0 1rem 0.8rem;
+}
+
+:root[saved-theme="dark"] details {
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+/* =================================================
+   H5 / H6 — diferenciados visualmente
+   ================================================= */
+
+h5 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+  margin-top: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+h6 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  opacity: 0.75;
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
+}
+
+/* =================================================
    TABLAS — mismo nivel de cuidado que el código
    ================================================= */
 
@@ -929,7 +1163,7 @@ tbody tr:hover td {
 }
 
 :root[saved-theme="dark"] th {
-  background: color-mix(in srgb, var(--light) 40%, var(--rcm-teal) 8%);
+  background: rgba(13, 148, 136, 0.12);
   border-bottom-color: var(--secondary);
 }
 
@@ -958,13 +1192,21 @@ tbody tr:hover td {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.18rem 0.55rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.79rem;
+  font-size: 0.75rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
   border: 1px solid color-mix(in srgb, var(--rcm-teal) 25%, transparent);
   background: var(--rcm-teal-pale);
   color: var(--secondary);
+  transition: background 0.16s var(--rcm-ease), border-color 0.16s var(--rcm-ease);
+  cursor: default;
+}
+
+.rcm-chip:hover {
+  background: color-mix(in srgb, var(--rcm-teal-pale) 100%, var(--rcm-teal) 8%);
+  border-color: color-mix(in srgb, var(--rcm-teal) 45%, transparent);
 }
 
 .rcm-divider {
