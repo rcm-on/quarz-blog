@@ -25,30 +25,30 @@ body::before {
   z-index: 0;
   background:
     linear-gradient(90deg,
-      rgba(13, 148, 136, 0.08) 0%,
-      rgba(13, 148, 136, 0.03) 22%,
-      transparent              45%,
-      transparent              55%,
-      rgba(8, 145, 178, 0.03)  78%,
-      rgba(8, 145, 178, 0.07) 100%
+      rgba(13, 148, 136, 0.06) 0%,
+      rgba(13, 148, 136, 0.02) 20%,
+      transparent              42%,
+      transparent              58%,
+      rgba(8, 145, 178, 0.02)  80%,
+      rgba(8, 145, 178, 0.05) 100%
     ),
-    radial-gradient(ellipse 55% 90% at   0% 50%, rgba(13, 148, 136, 0.04) 0%, transparent 70%),
-    radial-gradient(ellipse 55% 90% at 100% 50%, rgba(8, 145, 178, 0.03)  0%, transparent 70%);
+    radial-gradient(ellipse 40% 90% at   0% 50%, rgba(13, 148, 136, 0.03) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 90% at 100% 50%, rgba(8, 145, 178, 0.02)  0%, transparent 70%);
 }
 
 :root[saved-theme="dark"] body::before {
   background:
     linear-gradient(90deg,
-      rgba(13, 148, 136, 0.32) 0%,
-      rgba(13, 148, 136, 0.14) 25%,
-      transparent              48%,
-      transparent              52%,
-      rgba(8, 145, 178, 0.14)  75%,
-      rgba(8, 145, 178, 0.28) 100%
+      rgba(13, 148, 136, 0.25) 0%,
+      rgba(13, 148, 136, 0.10) 25%,
+      transparent              46%,
+      transparent              54%,
+      rgba(8, 145, 178, 0.10)  75%,
+      rgba(8, 145, 178, 0.22) 100%
     ),
-    radial-gradient(ellipse 50% 100% at   0% 50%, rgba(13, 148, 136, 0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 100% at 100% 50%, rgba(8, 145, 178, 0.10)  0%, transparent 70%);
-  filter: blur(55px) saturate(120%);
+    radial-gradient(ellipse 45% 100% at   0% 50%, rgba(13, 148, 136, 0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 100% at 100% 50%, rgba(8, 145, 178, 0.08)  0%, transparent 70%);
+  filter: blur(45px) saturate(115%);
 }
 
 /* Sin patrón de fondo — solo el barrido lateral */
@@ -58,7 +58,7 @@ body::after {
 
 @media (max-width: 800px) {
   :root[saved-theme="dark"] body::before {
-    filter: blur(38px);
+    filter: blur(32px) saturate(110%);
   }
 }
 
@@ -427,11 +427,14 @@ kbd {
 }
 
 .center article select {
+  background-color: var(--light);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2378716c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.65rem center;
+  background-size: 12px 8px;
   padding-right: 2.2rem;
   cursor: pointer;
+  color-scheme: light;
 }
 
 .center article label {
@@ -476,7 +479,12 @@ kbd {
 }
 
 :root[saved-theme="dark"] .center article select {
+  background-color: var(--lightgray);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a8a29e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+  background-size: 12px 8px;
+  color-scheme: dark;
 }
 
 /* =================================================
@@ -637,8 +645,26 @@ footer a {
 }
 
 .content-meta {
-  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem;
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--gray);
+  letter-spacing: 0.01em;
+  margin-bottom: 0.6rem;
+}
+
+/* Reemplaza coma por middot teal */
+.content-meta[show-comma="true"] > *:not(:last-child) {
+  margin-right: 0;
+}
+
+.content-meta[show-comma="true"] > *:not(:last-child)::after {
+  content: " · ";
+  color: var(--rcm-teal);
+  font-weight: 700;
 }
 
 /* =================================================
@@ -1028,8 +1054,8 @@ dd {
   line-height: 1.65;
 }
 
-dt:first-of-type,
-dd:first-of-type {
+dl > dt:first-child,
+dl > dd:nth-child(2) {
   border-top: none;
   padding-top: 0;
 }
@@ -1172,6 +1198,162 @@ tbody tr:hover td {
 }
 
 /* =================================================
+   LANGUAGE PILL — badge del lenguaje en code blocks
+   CSS puro via attr(data-language) en el pre de Shiki
+   ================================================= */
+
+pre[data-language]::after {
+  content: attr(data-language);
+  position: absolute;
+  bottom: 0.55rem;
+  right: 0.6rem;
+  font-family: var(--codeFont);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rcm-teal);
+  opacity: 0.55;
+  pointer-events: none;
+  line-height: 1;
+  z-index: 1;
+}
+
+:root[saved-theme="dark"] pre[data-language]::after {
+  color: var(--rcm-teal-strong);
+  opacity: 0.5;
+}
+
+pre:has(> code.mermaid)::after {
+  display: none !important;
+}
+
+/* =================================================
+   TOC ACTIVE INDICATOR — barra teal animada
+   Quartz asigna .in-view al heading en viewport
+   ================================================= */
+
+ul.toc-content li > a {
+  position: relative;
+  padding-left: 0.7rem;
+  display: block;
+}
+
+ul.toc-content li > a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 0;
+  background: var(--rcm-teal-strong);
+  border-radius: 1px;
+  transition: height 0.25s var(--rcm-ease), opacity 0.25s var(--rcm-ease);
+  opacity: 0;
+}
+
+ul.toc-content li > a.in-view {
+  color: var(--secondary) !important;
+  opacity: 1 !important;
+  font-weight: 600;
+}
+
+ul.toc-content li > a.in-view::before {
+  height: 1em;
+  opacity: 1;
+}
+
+/* =================================================
+   SCROLL-DRIVEN ANIMATIONS — entrada suave de bloques
+   CSS puro, sin JS. Requiere Chrome 115+ / Safari 18+
+   Degradación elegante: simplemente sin animación
+   ================================================= */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes rcm-in {
+      from {
+        opacity: 0.2;
+        transform: translateY(0.4rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .center article h2,
+    .center article h3 {
+      animation: rcm-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 28%;
+    }
+
+    .center article blockquote,
+    .center article figure[data-rehype-pretty-code-figure],
+    .center article .callout,
+    .center article table {
+      animation: rcm-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 22%;
+    }
+  }
+}
+
+/* =================================================
+   CODE LINE HOVER — acento teal en línea activa
+   ================================================= */
+
+pre > code > [data-line] {
+  transition: background-color 0.12s var(--rcm-ease), border-left-color 0.12s var(--rcm-ease);
+}
+
+pre > code > [data-line]:hover {
+  background-color: rgba(13, 148, 136, 0.05);
+  border-left-color: var(--rcm-teal) !important;
+}
+
+:root[saved-theme="dark"] pre > code > [data-line]:hover {
+  background-color: rgba(45, 212, 191, 0.06);
+  border-left-color: var(--rcm-teal) !important;
+}
+
+/* =================================================
+   DROP CAP — primera letra de artículos
+   Solo en páginas de contenido, no en home
+   ================================================= */
+
+body:not([data-slug="index"]) .center article > p:first-of-type::first-letter {
+  font-family: var(--headerFont);
+  font-size: 3.5em;
+  font-weight: 800;
+  line-height: 0.78;
+  float: left;
+  margin: 0.06em 0.12em 0 0;
+  color: var(--rcm-teal);
+  letter-spacing: -0.02em;
+}
+
+:root[saved-theme="dark"] body:not([data-slug="index"]) .center article > p:first-of-type::first-letter {
+  color: var(--rcm-teal-strong);
+}
+
+/* =================================================
+   SCROLL MARGIN — anclas del TOC no tapadas por header sticky
+   ================================================= */
+
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
+  scroll-margin-top: 2rem;
+}
+
+@media (max-width: 800px) {
+  h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* =================================================
    UTILIDADES DE MARCA — reutilizables en notas
    ================================================= */
 
@@ -1220,4 +1402,191 @@ tbody tr:hover td {
     color-mix(in srgb, var(--rcm-cyan)  32%, var(--lightgray)) 58%,
     transparent
   );
+}
+
+/* =================================================
+   TIPOGRAFÍA AVANZADA — pequeños detalles, gran impacto
+   ================================================= */
+
+/* Previene viudas/huérfanas — Chrome 117+, Safari 17.5+ */
+.center article p,
+.center article li,
+.center article dd {
+  text-wrap: pretty;
+}
+
+/* Optical sizing automático en headings */
+h1, h2, h3, h4, .article-title {
+  font-optical-sizing: auto;
+}
+
+/* Lead — primer párrafo de artículo con más presencia */
+body:not([data-slug="index"]) .center article > p:first-of-type {
+  font-size: clamp(1.02rem, 1.15vw, 1.08rem);
+  line-height: 1.88;
+}
+
+/* =================================================
+   ELEMENTOS SEMÁNTICOS HTML — cobertura completa
+   ================================================= */
+
+/* mark — resaltado de texto */
+mark {
+  background: var(--textHighlight);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0.06em 0.2em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* abbr — abreviaturas con cursor de ayuda */
+abbr[title] {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--rcm-teal);
+  cursor: help;
+}
+
+/* cite — referencias y títulos de obras */
+cite {
+  font-style: italic;
+  color: var(--gray);
+}
+
+/* del / s — tachado visible en ambos modos (sin opacity que lo desvanece) */
+del, s {
+  text-decoration: line-through;
+  text-decoration-color: var(--gray);
+  text-decoration-thickness: 1.5px;
+  color: var(--gray);
+}
+
+:root[saved-theme="dark"] del,
+:root[saved-theme="dark"] s {
+  color: color-mix(in srgb, var(--darkgray) 55%, var(--gray) 45%);
+  text-decoration-color: var(--gray);
+}
+
+/* ins — inserción con subrayado teal */
+ins {
+  text-decoration: underline;
+  text-decoration-color: var(--rcm-teal);
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1.5px;
+}
+
+/* figcaption — pies de imagen */
+figcaption {
+  font-size: 0.79rem;
+  color: var(--gray);
+  text-align: center;
+  font-style: italic;
+  margin-top: 0.55rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+/* Imágenes en artículos */
+.center article img:not([class]) {
+  border-radius: var(--rcm-radius-md);
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  box-shadow: var(--rcm-shadow-sm);
+}
+
+/* =================================================
+   FOOTNOTES — notas al pie (Pandoc/Quartz)
+   ================================================= */
+
+.footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--lightgray);
+  font-size: 0.83rem;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+.footnotes ol {
+  padding-left: 1.4rem;
+}
+
+.footnotes li {
+  margin-bottom: 0.45rem;
+}
+
+.footnotes li > p {
+  margin: 0;
+  display: inline;
+}
+
+/* Superíndice de referencia */
+a[data-footnote-ref],
+a.footnote-ref {
+  font-size: 0.72em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 0 0.1em;
+  margin-left: 0.06em;
+  background: var(--rcm-teal-pale);
+  border-radius: 2px;
+}
+
+/* =================================================
+   ARTICLE END MARK — señal elegante de fin de lectura
+   ================================================= */
+
+body:not([data-slug="index"]) .center article::after {
+  content: "◈";
+  display: block;
+  text-align: center;
+  margin-top: 3.5rem;
+  padding-bottom: 2.5rem;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, var(--rcm-teal), var(--rcm-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.45;
+}
+
+/* =================================================
+   READING PROGRESS — barra lateral CSS scroll-driven
+   Crece de arriba a abajo en el borde izquierdo
+   Sin JS, sin DOM extra. Requiere Chrome 115+
+   ================================================= */
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes rcm-reading-progress {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+
+    body:not([data-slug="index"]) .page::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(
+        180deg,
+        var(--rcm-teal-strong) 0%,
+        var(--rcm-cyan)        100%
+      );
+      transform-origin: 0% 0%;
+      transform: scaleY(0);
+      z-index: 9999;
+      pointer-events: none;
+      animation: rcm-reading-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
 }

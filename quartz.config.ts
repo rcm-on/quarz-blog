@@ -13,7 +13,7 @@ const config: QuartzConfig = {
     enableSPA: true,
     enablePopovers: true,
     analytics: { provider: "google", tagId: "G-QKST2MECVR" },
-    locale: "en-US",
+    locale: "es-ES",
     baseUrl: "blog.rcmon.dev",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",

@@ -431,7 +431,78 @@ Este párrafo está dentro de `.rcm-prose`. Limita el ancho a `72ch` con `line-h
 
 ---
 
-## 15. Selección de texto
+## 15. Tipografía inline avanzada
+
+### mark — resaltado semántico
+
+El modelo no es el problema. <mark>El harness es lo que marca la diferencia</mark> entre un prototipo y un sistema en producción. Múltiples resaltados: <mark>contexto</mark>, <mark>memoria persistente</mark> y <mark>herramientas</mark> son los tres pilares.
+
+### del / ins — control de cambios
+
+El agente <del>no necesita instrucciones detalladas</del> <ins>mejora notablemente con contexto estructurado</ins> cuando el harness está bien diseñado.
+
+Versión anterior: <del>usar el modelo más grande para todo</del>  
+Versión actual: <ins>elegir el modelo según tarea y coste</ins>
+
+### abbr — abreviaturas
+
+<abbr title="Large Language Model">LLM</abbr>, <abbr title="Retrieval-Augmented Generation">RAG</abbr>, <abbr title="Model Context Protocol">MCP</abbr>, <abbr title="Continuous Integration / Continuous Deployment">CI/CD</abbr>.
+
+Hover sobre cualquiera para ver la definición completa.
+
+### cite — referencias de obras
+
+Según <cite>The Art of Doing Science and Engineering</cite> de Richard Hamming: "Los problemas más importantes son los que nadie más está intentando resolver".
+
+### sup / sub — índices matemáticos y tipográficos
+
+Física: E = mc<sup>2</sup>. Química: H<sub>2</sub>O. Nota al pie<sup><a href="#fn-1">[1]</a></sup>.
+
+---
+
+## 16. Imágenes con figcaption
+
+HTML `<figure>` con `<figcaption>` real — diferente del `_italic_` que Quartz genera como párrafo em:
+
+<figure>
+<img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22800%22%20height%3D%22260%22%20viewBox%3D%220%200%20800%20260%22%3E%3Crect%20width%3D%22800%22%20height%3D%22260%22%20rx%3D%2210%22%20fill%3D%22%23141210%22%2F%3E%3Crect%20x%3D%2240%22%20y%3D%2250%22%20width%3D%22160%22%20height%3D%2270%22%20rx%3D%228%22%20fill%3D%22none%22%20stroke%3D%22%230d9488%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22280%22%20y%3D%2250%22%20width%3D%22160%22%20height%3D%2270%22%20rx%3D%228%22%20fill%3D%22none%22%20stroke%3D%22%230d9488%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22520%22%20y%3D%2250%22%20width%3D%22160%22%20height%3D%2270%22%20rx%3D%228%22%20fill%3D%22none%22%20stroke%3D%22%230891b2%22%20stroke-width%3D%221.5%22%2F%3E%3Crect%20x%3D%22280%22%20y%3D%22160%22%20width%3D%22160%22%20height%3D%2270%22%20rx%3D%228%22%20fill%3D%22rgba(13%2C148%2C136%2C0.15)%22%20stroke%3D%22%230d9488%22%20stroke-width%3D%221.5%22%2F%3E%3Cline%20x1%3D%22200%22%20y1%3D%2285%22%20x2%3D%22280%22%20y2%3D%2285%22%20stroke%3D%22%230d9488%22%20stroke-width%3D%221%22%2F%3E%3Cline%20x1%3D%22440%22%20y1%3D%2285%22%20x2%3D%22520%22%20y2%3D%2285%22%20stroke%3D%22%230891b2%22%20stroke-width%3D%221%22%2F%3E%3Cline%20x1%3D%22360%22%20y1%3D%22120%22%20x2%3D%22360%22%20y2%3D%22160%22%20stroke%3D%22%230d9488%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%224%202%22%2F%3E%3Ctext%20x%3D%22120%22%20y%3D%2291%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2213%22%20fill%3D%22%23d6d3d1%22%3EHarness%3C%2Ftext%3E%3Ctext%20x%3D%22360%22%20y%3D%2291%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2213%22%20fill%3D%22%23d6d3d1%22%3EModelo%3C%2Ftext%3E%3Ctext%20x%3D%22600%22%20y%3D%2291%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2213%22%20fill%3D%22%23d6d3d1%22%3ESalida%3C%2Ftext%3E%3Ctext%20x%3D%22360%22%20y%3D%22201%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2213%22%20fill%3D%22%234eb8b0%22%3EMemoria%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Arquitectura de un agente IA con harness, modelo, salida y memoria">
+<figcaption>Fig. 1 — Arquitectura de un sistema agéntico. El harness envuelve al modelo; la memoria es ortogonal a ambos.</figcaption>
+</figure>
+
+---
+
+## 17. Notas al pie
+
+Texto con referencia numérica al pie de página<sup id="fnref-1"><a href="#fn-1">[1]</a></sup> y otra de arquitectura<sup id="fnref-2"><a href="#fn-2">[2]</a></sup>.
+
+<div class="footnotes">
+<ol>
+<li id="fn-1">Claude Sonnet 4.6 en producción como agente autónomo — <code>claude-sonnet-4-6</code>. <a href="#fnref-1">↩</a></li>
+<li id="fn-2">Arquitectura event-driven con Kafka para el harness de mensajería asíncrona. <a href="#fnref-2">↩</a></li>
+</ol>
+</div>
+
+---
+
+## 18. Nuevas features automáticas
+
+Estas tres features se activan solas — sin clases ni markup adicional.
+
+### Barra de progreso lateral
+
+Una línea teal de **2px** crece en el **borde izquierdo** del viewport mientras lees. Se llena de arriba a abajo usando CSS `scroll-driven animations` — sin JavaScript. Solo Chrome 115+ / Safari 18+; el resto no ve nada.
+
+### Marca de fin de artículo
+
+El símbolo **◈** aparece centrado al final de cualquier artículo (excepto el index). Es un pseudo-elemento CSS — no hay que añadir nada en el markdown. Desplázate hasta el final de esta página para verlo.
+
+### TOC — indicador activo
+
+La barra vertical teal de 2px en el TOC crece en el link del heading visible en viewport. Quartz asigna `.in-view` al link activo; el CSS lo convierte en feedback visual. Funciona en el sidebar derecho cuando el artículo tiene suficientes headings.
+
+---
+
+## 19. Selección de texto
 
 Selecciona este párrafo para ver el color de selección. En **light mode** debe ser verde teal translúcido. En **dark mode** teal más saturado. En ningún caso el verde neón por defecto de Quartz.
 
