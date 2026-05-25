@@ -523,15 +523,15 @@ blockquote {
    De 9 colores arcoíris → coherencia con Stone × Teal.
    ================================================= */
 
-/* Estructura: borde izquierdo como único acento de color */
+/* Estructura: borde izquierdo + tint 2% apenas perceptible */
 .callout {
   border: none !important;
   border-left: 3px solid var(--color) !important;
   border-radius: 0 var(--rcm-radius-sm) var(--rcm-radius-sm) 0 !important;
-  background-color: color-mix(in srgb, var(--light) 96%, var(--color) 4%) !important;
+  background: color-mix(in srgb, var(--light) 98%, var(--color) 2%) !important;
   box-shadow: none !important;
   padding: 0 1rem !important;
-  margin: 1rem 0;
+  margin: 1.1rem 0;
 }
 
 .callout-title .callout-title-inner {

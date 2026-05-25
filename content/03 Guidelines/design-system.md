@@ -1,6 +1,7 @@
 ---
 title: "Design System — Catálogo completo de componentes"
 date: 2026-05-23
+draft: true
 tags:
   - design
   - guidelines
