@@ -518,18 +518,60 @@ blockquote {
 }
 
 /* =================================================
-   CALLOUTS
+   CALLOUTS — redesign editorial
+   3 tiers semánticos. Borde izquierdo + fondo tintado mínimo.
+   De 9 colores arcoíris → coherencia con Stone × Teal.
    ================================================= */
 
+/* Estructura: borde izquierdo como único acento de color */
 .callout {
-  border-radius: var(--rcm-radius-md);
-  border-width: 1px;
-  box-shadow: var(--rcm-shadow-sm);
+  border: none !important;
+  border-left: 3px solid var(--color) !important;
+  border-radius: 0 var(--rcm-radius-sm) var(--rcm-radius-sm) 0 !important;
+  background-color: color-mix(in srgb, var(--light) 96%, var(--color) 4%) !important;
+  box-shadow: none !important;
+  padding: 0 1rem !important;
+  margin: 1rem 0;
 }
 
 .callout-title .callout-title-inner {
   font-weight: 700;
   letter-spacing: 0.01em;
+}
+
+/* TIER 1 — Informacional → teal palette */
+.callout[data-callout],
+.callout[data-callout="abstract"],
+.callout[data-callout="info"],
+.callout[data-callout="todo"],
+.callout[data-callout="tip"],
+.callout[data-callout="success"],
+.callout[data-callout="example"] {
+  --color: var(--secondary) !important;
+}
+
+/* TIER 2 — Precaución → amber stone desaturado */
+.callout[data-callout="warning"],
+.callout[data-callout="question"] {
+  --color: #92400e !important;
+}
+
+:root[saved-theme="dark"] .callout[data-callout="warning"],
+:root[saved-theme="dark"] .callout[data-callout="question"] {
+  --color: #d97706 !important;
+}
+
+/* TIER 3 — Crítico → rojo stone */
+.callout[data-callout="failure"],
+.callout[data-callout="danger"],
+.callout[data-callout="bug"] {
+  --color: #b91c1c !important;
+}
+
+:root[saved-theme="dark"] .callout[data-callout="failure"],
+:root[saved-theme="dark"] .callout[data-callout="danger"],
+:root[saved-theme="dark"] .callout[data-callout="bug"] {
+  --color: #ef4444 !important;
 }
 
 /* =================================================
@@ -1283,17 +1325,18 @@ ul.toc-content li > a.in-view::before {
       }
     }
 
-    .center article h2,
-    .center article h3 {
+    /* Solo en dark mode — en light el contenido ya es claro y no necesita refuerzo */
+    :root[saved-theme="dark"] .center article h2,
+    :root[saved-theme="dark"] .center article h3 {
       animation: rcm-in linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 28%;
     }
 
-    .center article blockquote,
-    .center article figure[data-rehype-pretty-code-figure],
-    .center article .callout,
-    .center article table {
+    :root[saved-theme="dark"] .center article blockquote,
+    :root[saved-theme="dark"] .center article figure[data-rehype-pretty-code-figure],
+    :root[saved-theme="dark"] .center article .callout,
+    :root[saved-theme="dark"] .center article table {
       animation: rcm-in linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 22%;
@@ -1569,7 +1612,8 @@ body:not([data-slug="index"]) .center article::after {
       to   { transform: scaleY(1); }
     }
 
-    body:not([data-slug="index"]) .page::before {
+    /* Solo dark mode — en light la barra choca con el fondo claro */
+    :root[saved-theme="dark"] body:not([data-slug="index"]) .page::before {
       content: "";
       position: fixed;
       top: 0;
