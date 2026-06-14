@@ -2,9 +2,24 @@
 @use "./rcm-brand"; /* tokens y estilos base — editar solo aquí */
 
 /* =================================================
-   BACKGROUND
-   Light: barrido lateral teal→cyan + red neuronal sutil
-   Dark:  barrido más intenso + red neuronal teal
+   FIRMA DE MARCA — "Arborescencia neural"
+   SVG de dendritas reutilizable como mask-image:
+   toma el color del acento (currentColor del background)
+   en ambos modos. Trazo fino + nodos en los extremos.
+   ================================================= */
+
+:root {
+  /* Mini red neuronal horizontal para divisores: líneas que entran a un
+     clúster central de nodos interconectados (sinapsis) */
+  --rcm-neural-branch: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 34" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round"><path d="M0 17 H86"/><path d="M174 17 H260"/><path d="M86 17 L110 7"/><path d="M86 17 L110 27"/><path d="M110 7 L134 17"/><path d="M110 27 L134 17"/><path d="M110 7 L110 27"/><path d="M134 17 L158 7"/><path d="M134 17 L158 27"/><path d="M158 7 L174 17"/><path d="M158 27 L174 17"/><path d="M158 7 L158 27"/><circle cx="86" cy="17" r="2.6" fill="black" stroke="none"/><circle cx="110" cy="7" r="2.6" fill="black" stroke="none"/><circle cx="110" cy="27" r="2.6" fill="black" stroke="none"/><circle cx="134" cy="17" r="3.4" fill="black" stroke="none"/><circle cx="158" cy="7" r="2.6" fill="black" stroke="none"/><circle cx="158" cy="27" r="2.6" fill="black" stroke="none"/><circle cx="174" cy="17" r="2.6" fill="black" stroke="none"/></svg>');
+  /* Neurona: soma central con dendritas y nodos sinápticos (marca de fin / logo) */
+  --rcm-neural-node: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="black" stroke-width="1.8" stroke-linecap="round"><path d="M24 24 L24 9"/><path d="M24 24 L24 39"/><path d="M24 24 L37 16"/><path d="M24 24 L11 32"/><path d="M24 24 L38 33"/><path d="M24 24 L11 15"/><path d="M24 24 L40 24"/><path d="M24 24 L8 24"/><circle cx="24" cy="24" r="4.2" fill="black" stroke="none"/><circle cx="24" cy="9" r="2.3" fill="black" stroke="none"/><circle cx="24" cy="39" r="2.3" fill="black" stroke="none"/><circle cx="37" cy="16" r="2.3" fill="black" stroke="none"/><circle cx="11" cy="32" r="2.3" fill="black" stroke="none"/><circle cx="38" cy="33" r="2.3" fill="black" stroke="none"/><circle cx="11" cy="15" r="2.3" fill="black" stroke="none"/><circle cx="40" cy="24" r="2" fill="black" stroke="none"/><circle cx="8" cy="24" r="2" fill="black" stroke="none"/></svg>');
+  /* Campo neuronal de fondo: red amplia de nodos interconectados (decorativo) */
+  --rcm-neural-field: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round"><path d="M120 140 L260 80"/><path d="M120 140 L300 260"/><path d="M260 80 L470 160"/><path d="M300 260 L470 160"/><path d="M300 260 L180 360"/><path d="M470 160 L520 360"/><path d="M470 160 L660 90"/><path d="M520 360 L700 280"/><path d="M660 90 L700 280"/><path d="M660 90 L840 200"/><path d="M700 280 L840 200"/><path d="M700 280 L880 400"/><path d="M840 200 L1010 130"/><path d="M840 200 L1060 320"/><path d="M880 400 L1060 320"/><path d="M1010 130 L1060 320"/><path d="M520 360 L420 470"/><path d="M180 360 L420 470"/><path d="M880 400 L760 470"/><path d="M1060 320 L980 500"/><path d="M420 470 L520 360"/><circle cx="120" cy="140" r="5" fill="black" stroke="none"/><circle cx="260" cy="80" r="5" fill="black" stroke="none"/><circle cx="300" cy="260" r="6" fill="black" stroke="none"/><circle cx="470" cy="160" r="6" fill="black" stroke="none"/><circle cx="520" cy="360" r="6" fill="black" stroke="none"/><circle cx="660" cy="90" r="5" fill="black" stroke="none"/><circle cx="700" cy="280" r="6" fill="black" stroke="none"/><circle cx="840" cy="200" r="6" fill="black" stroke="none"/><circle cx="880" cy="400" r="6" fill="black" stroke="none"/><circle cx="1010" cy="130" r="5" fill="black" stroke="none"/><circle cx="1060" cy="320" r="6" fill="black" stroke="none"/><circle cx="180" cy="360" r="5" fill="black" stroke="none"/><circle cx="420" cy="470" r="5" fill="black" stroke="none"/><circle cx="760" cy="470" r="5" fill="black" stroke="none"/><circle cx="980" cy="500" r="5" fill="black" stroke="none"/></svg>');
+}
+
+/* =================================================
+   LIENZO
    ================================================= */
 
 html {
@@ -16,54 +31,14 @@ body {
   background-color: var(--light);
 }
 
-/* Barrido lateral — sutil en light, no debe interferir con la lectura */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    linear-gradient(90deg,
-      rgba(13, 148, 136, 0.06) 0%,
-      rgba(13, 148, 136, 0.02) 20%,
-      transparent              42%,
-      transparent              58%,
-      rgba(8, 145, 178, 0.02)  80%,
-      rgba(8, 145, 178, 0.05) 100%
-    ),
-    radial-gradient(ellipse 40% 90% at   0% 50%, rgba(13, 148, 136, 0.03) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 90% at 100% 50%, rgba(8, 145, 178, 0.02)  0%, transparent 70%);
-}
-
-:root[saved-theme="dark"] body::before {
-  background:
-    linear-gradient(90deg,
-      rgba(13, 148, 136, 0.25) 0%,
-      rgba(13, 148, 136, 0.10) 25%,
-      transparent              46%,
-      transparent              54%,
-      rgba(8, 145, 178, 0.10)  75%,
-      rgba(8, 145, 178, 0.22) 100%
-    ),
-    radial-gradient(ellipse 45% 100% at   0% 50%, rgba(13, 148, 136, 0.09) 0%, transparent 70%),
-    radial-gradient(ellipse 45% 100% at 100% 50%, rgba(8, 145, 178, 0.08)  0%, transparent 70%);
-  filter: blur(45px) saturate(115%);
-}
-
-/* Sin patrón de fondo — solo el barrido lateral */
+/* Sin aurora ni patrón — lienzo navy/papel plano */
+body::before,
 body::after {
   display: none;
 }
 
-@media (max-width: 800px) {
-  :root[saved-theme="dark"] body::before {
-    filter: blur(32px) saturate(110%);
-  }
-}
-
 /* =================================================
-   CAPA DE PÁGINA — sobre el fondo
+   CAPA DE PÁGINA
    ================================================= */
 
 .page {
@@ -76,12 +51,12 @@ body::after {
    ================================================= */
 
 ::selection {
-  background: rgba(15, 118, 110, 0.22) !important;
+  background: rgba(220, 79, 71, 0.18) !important;
   color: inherit !important;
 }
 
 :root[saved-theme="dark"] ::selection {
-  background: rgba(45, 212, 191, 0.22) !important;
+  background: rgba(255, 107, 107, 0.22) !important;
   color: inherit !important;
 }
 
@@ -109,7 +84,7 @@ body::after {
   height: 1.5px;
   width: 2.5rem;
   margin-top: 0.3rem;
-  background: linear-gradient(90deg, var(--rcm-teal-strong), transparent);
+  background: linear-gradient(90deg, var(--rcm-accent-strong), transparent);
   border-radius: 1px;
 }
 
@@ -126,22 +101,7 @@ body::after {
   letter-spacing: -0.03em;
   line-height: 1.08;
   text-wrap: balance;
-  background: linear-gradient(
-    138deg,
-    var(--dark)                                             0%,
-    color-mix(in srgb, var(--rcm-teal) 85%, var(--dark)) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Dark: el título vive en la paleta teal (no de blanco puro a teal) */
-:root[saved-theme="dark"] .article-title {
-  background: linear-gradient(138deg, #daf3f1 0%, #2dd4bf 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--dark);
 }
 
 /* =================================================
@@ -159,7 +119,7 @@ a:hover {
 }
 
 a.internal {
-  background-color: var(--rcm-teal-pale);
+  background-color: var(--rcm-accent-pale);
   border-radius: 4px;
   text-decoration: none;
 }
@@ -184,7 +144,7 @@ input:focus-visible {
    ================================================= */
 
 .navigation-progress {
-  background: linear-gradient(90deg, var(--rcm-teal-strong), var(--rcm-cyan));
+  background: linear-gradient(90deg, var(--rcm-accent-strong), var(--rcm-accent-2));
 }
 
 /* =================================================
@@ -194,37 +154,20 @@ input:focus-visible {
 .page-title > a {
   font-weight: 800;
   letter-spacing: -0.025em;
-  background: linear-gradient(
-    128deg,
-    var(--dark)       0%,
-    var(--rcm-teal)  60%,
-    var(--rcm-cyan) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--dark);
 }
 
-/* Dark: todo el título en paleta teal — sin salto a blanco puro */
-:root[saved-theme="dark"] .page-title > a {
-  background: linear-gradient(
-    128deg,
-    #b2e0dd  0%,
-    var(--rcm-teal-strong) 55%,
-    var(--rcm-cyan) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
+/* Firma neural: nodo-dendrita junto al título del sitio */
 .page-title > a::after {
-  content: " ◈";
-  background: linear-gradient(90deg, var(--rcm-teal-strong), var(--rcm-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 0.85em;
+  content: "";
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  margin-left: 0.4em;
+  vertical-align: -0.08em;
+  background-color: var(--rcm-accent);
+  -webkit-mask: var(--rcm-neural-node) center / contain no-repeat;
+  mask: var(--rcm-neural-node) center / contain no-repeat;
   opacity: 0.9;
 }
 
@@ -241,13 +184,13 @@ input:focus-visible {
 .search > .search-button {
   border-radius: var(--rcm-radius-sm);
   border: 1px solid var(--lightgray);
-  background: color-mix(in srgb, var(--light) 96%, var(--rcm-teal) 4%);
+  background: color-mix(in srgb, var(--light) 96%, var(--rcm-accent) 4%);
   transition: border-color 0.18s var(--rcm-ease), box-shadow 0.18s var(--rcm-ease);
 }
 
 .search > .search-button:hover {
   border-color: var(--secondary);
-  box-shadow: 0 0 0 3px var(--rcm-teal-pale);
+  box-shadow: 0 0 0 3px var(--rcm-accent-pale);
 }
 
 /* =================================================
@@ -273,7 +216,7 @@ button.desktop-explorer h2 {
 }
 
 .explorer-content ul li > a:hover {
-  background: var(--rcm-teal-pale);
+  background: var(--rcm-accent-pale);
   color: var(--secondary);
 }
 
@@ -321,22 +264,11 @@ pre {
   tab-size: 2;
 }
 
-/* Dark mode: reemplaza el frío #0d1117 de github-dark por warm-dark coherente */
+/* Dark mode: superficie navy ELEVADA — más clara que el lienzo para que
+   el bloque se lea como tarjeta (no se funda con el fondo de la página) */
 :root[saved-theme="dark"] pre {
-  background-color: #1e1b19 !important;
-}
-
-/* Acento teal en el borde superior del bloque */
-pre::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--rcm-teal-strong), var(--rcm-cyan));
-  border-radius: var(--rcm-radius-md) var(--rcm-radius-md) 0 0;
-  pointer-events: none;
+  background-color: #1a2336 !important;
+  border-color: rgba(255, 255, 255, 0.09);
 }
 
 /* code dentro de pre — shiki lo controla, no interferir */
@@ -352,18 +284,18 @@ pre code {
 /* Inline code — fuera de pre */
 :not(pre) > code {
   border-radius: 4px;
-  background: var(--rcm-teal-pale);
+  background: var(--rcm-accent-pale);
   color: var(--secondary);
   padding: 0.12em 0.38em;
   font-size: 0.875em;
   font-weight: 500;
   /* Borde sólido sin color-mix para máxima compatibilidad */
-  border: 1px solid rgba(15, 118, 110, 0.18);
+  border: 1px solid rgba(220, 79, 71, 0.18);
 }
 
 :root[saved-theme="dark"] :not(pre) > code {
-  background: var(--rcm-teal-pale);
-  border-color: rgba(45, 212, 191, 0.22);
+  background: var(--rcm-accent-pale);
+  border-color: rgba(255, 107, 107, 0.22);
 }
 
 /* kbd — atajos de teclado con look de tecla real */
@@ -417,7 +349,7 @@ kbd {
 .center article textarea:focus {
   outline: none;
   border-color: var(--secondary);
-  box-shadow: 0 0 0 3px var(--rcm-teal-pale);
+  box-shadow: 0 0 0 3px var(--rcm-accent-pale);
 }
 
 .center article textarea {
@@ -460,7 +392,7 @@ kbd {
 
 .center article button:not(.clipboard-button):hover {
   background: var(--tertiary);
-  box-shadow: 0 2px 10px rgba(13, 148, 136, 0.28);
+  box-shadow: 0 2px 10px rgba(220, 79, 71, 0.28);
 }
 
 :root[saved-theme="dark"] .center article input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
@@ -475,7 +407,7 @@ kbd {
 :root[saved-theme="dark"] .center article select:focus,
 :root[saved-theme="dark"] .center article textarea:focus {
   border-color: var(--secondary);
-  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.12);
 }
 
 :root[saved-theme="dark"] .center article select {
@@ -511,7 +443,7 @@ kbd {
 
 blockquote {
   border-left: 3px solid var(--secondary);
-  background: var(--rcm-teal-pale);
+  background: var(--rcm-accent-pale);
   border-radius: 0 var(--rcm-radius-sm) var(--rcm-radius-sm) 0;
   padding: 0.65rem 1rem;
   margin: 1.2rem 0;
@@ -602,13 +534,13 @@ a.internal.tag-link:hover {
    ================================================= */
 
 hr {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--rcm-teal) 38%, var(--lightgray)) 28%,
-    color-mix(in srgb, var(--rcm-cyan)  32%, var(--lightgray)) 58%,
-    transparent
-  );
+  height: 32px;
+  border: none;
+  background-color: var(--rcm-accent);
+  -webkit-mask: var(--rcm-neural-branch) center / auto 100% no-repeat;
+  mask: var(--rcm-neural-branch) center / auto 100% no-repeat;
+  opacity: 0.7;
+  margin: 2.4rem 0;
 }
 
 /* =================================================
@@ -633,16 +565,16 @@ hr {
     position: sticky !important;
     top: 0;
     z-index: 100;
-    background: rgba(250, 249, 247, 0.82) !important;
+    background: rgba(247, 248, 251, 0.82) !important;
     -webkit-backdrop-filter: blur(18px) saturate(160%);
     backdrop-filter: blur(18px) saturate(160%);
-    border-bottom: 1px solid rgba(13, 148, 136, 0.14);
+    border-bottom: 1px solid rgba(220, 79, 71, 0.14);
     padding: 0.75rem 1rem !important;
   }
 
   :root[saved-theme="dark"] .page > #quartz-body .sidebar.left {
-    background: rgba(20, 18, 16, 0.82) !important;
-    border-bottom-color: rgba(45, 212, 191, 0.12);
+    background: rgba(13, 20, 36, 0.82) !important;
+    border-bottom-color: rgba(255, 107, 107, 0.12);
   }
 }
 
@@ -705,7 +637,7 @@ footer a {
 
 .content-meta[show-comma="true"] > *:not(:last-child)::after {
   content: " · ";
-  color: var(--rcm-teal);
+  color: var(--rcm-accent);
   font-weight: 700;
 }
 
@@ -728,22 +660,7 @@ body[data-slug="index"] .page .center article > h1:first-of-type {
   margin-bottom: 1rem;
   text-wrap: balance;
   max-width: 22ch;
-  background: linear-gradient(
-    138deg,
-    var(--dark)                                              0%,
-    color-mix(in srgb, var(--rcm-teal) 90%, var(--dark))  55%,
-    color-mix(in srgb, var(--rcm-cyan)  80%, var(--dark)) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-:root[saved-theme="dark"] body[data-slug="index"] .page .center article > h1:first-of-type {
-  background: linear-gradient(138deg, #daf3f1 0%, #2dd4bf 60%, #22d3ee 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--dark);
 }
 
 body[data-slug="index"] .page .center article > p:nth-of-type(-n + 2) {
@@ -837,7 +754,7 @@ body[data-slug="index"] .page .center article > hr {
 .mermaid .node polygon,
 .mermaid .node path {
   fill: transparent !important;
-  stroke: var(--rcm-teal) !important;
+  stroke: var(--rcm-accent) !important;
   stroke-width: 1.5px !important;
 }
 
@@ -877,7 +794,7 @@ body[data-slug="index"] .page .center article > hr {
 /* Clusters / subgrafos — solo borde punteado */
 .mermaid .cluster rect {
   fill: transparent !important;
-  stroke: color-mix(in srgb, var(--rcm-teal) 50%, var(--lightgray)) !important;
+  stroke: color-mix(in srgb, var(--rcm-accent) 50%, var(--lightgray)) !important;
   stroke-width: 1px !important;
   stroke-dasharray: 5 3 !important;
 }
@@ -926,8 +843,8 @@ body[data-slug="index"] .page .center article > hr {
 .mermaid .node.clickable:hover circle,
 .mermaid .node.clickable:hover ellipse,
 .mermaid .node.clickable:hover polygon {
-  fill: rgba(13, 148, 136, 0.10) !important;
-  stroke: var(--rcm-cyan) !important;
+  fill: rgba(220, 79, 71, 0.10) !important;
+  stroke: var(--rcm-accent-2) !important;
 }
 
 /* Dark mode — borde más brillante sobre fondo oscuro */
@@ -937,7 +854,7 @@ body[data-slug="index"] .page .center article > hr {
 :root[saved-theme="dark"] .mermaid .node polygon,
 :root[saved-theme="dark"] .mermaid .node path {
   fill: transparent !important;
-  stroke: var(--rcm-teal) !important;
+  stroke: var(--rcm-accent) !important;
   stroke-width: 1.5px !important;
 }
 
@@ -960,13 +877,13 @@ body[data-slug="index"] .page .center article > hr {
 :root[saved-theme="dark"] .mermaid .node.clickable:hover circle,
 :root[saved-theme="dark"] .mermaid .node.clickable:hover ellipse,
 :root[saved-theme="dark"] .mermaid .node.clickable:hover polygon {
-  fill: rgba(45, 212, 191, 0.12) !important;
+  fill: rgba(255, 107, 107, 0.12) !important;
 }
 
 /* Mermaid en pre — sin tarjeta opaca, el diagrama flota sobre la página */
 pre:has(> code.mermaid) {
   background-color: transparent !important;
-  border: 1px solid rgba(13, 148, 136, 0.18) !important;
+  border: 1px solid rgba(220, 79, 71, 0.18) !important;
   box-shadow: none !important;
 }
 
@@ -975,7 +892,7 @@ pre:has(> code.mermaid)::before {
 }
 
 :root[saved-theme="dark"] pre:has(> code.mermaid) {
-  border-color: rgba(45, 212, 191, 0.14) !important;
+  border-color: rgba(255, 107, 107, 0.14) !important;
 }
 
 /* =================================================
@@ -985,13 +902,13 @@ pre:has(> code.mermaid)::before {
 
 .graph > .graph-outer {
   border-radius: var(--rcm-radius-md);
-  border: 1px solid rgba(13, 148, 136, 0.18);
+  border: 1px solid rgba(220, 79, 71, 0.18);
   background: transparent;
   height: 220px;
 }
 
 :root[saved-theme="dark"] .graph > .graph-outer {
-  border-color: rgba(45, 212, 191, 0.12);
+  border-color: rgba(255, 107, 107, 0.12);
 }
 
 .graph > .graph-outer > .global-graph-icon {
@@ -1002,7 +919,7 @@ pre:has(> code.mermaid)::before {
 }
 
 .graph > .graph-outer > .global-graph-icon:hover {
-  background-color: var(--rcm-teal-pale) !important;
+  background-color: var(--rcm-accent-pale) !important;
   color: var(--secondary);
   opacity: 1;
 }
@@ -1010,14 +927,14 @@ pre:has(> code.mermaid)::before {
 /* Global graph popup */
 .global-graph-outer > .global-graph-container {
   border-radius: var(--rcm-radius-lg);
-  border: 1px solid rgba(13, 148, 136, 0.22);
+  border: 1px solid rgba(220, 79, 71, 0.22);
   background-color: var(--light);
   box-shadow: var(--rcm-shadow-md);
 }
 
 :root[saved-theme="dark"] .global-graph-outer > .global-graph-container {
-  border-color: rgba(45, 212, 191, 0.15);
-  background-color: #1a1715;
+  border-color: rgba(255, 107, 107, 0.15);
+  background-color: #111a2b;
 }
 
 /* =================================================
@@ -1026,7 +943,7 @@ pre:has(> code.mermaid)::before {
 
 .clipboard-button {
   border-radius: var(--rcm-radius-sm);
-  background-color: color-mix(in srgb, var(--light) 92%, var(--rcm-teal) 8%);
+  background-color: color-mix(in srgb, var(--light) 92%, var(--rcm-accent) 8%);
   border: 1px solid var(--lightgray);
   color: var(--gray);
   padding: 0.3rem;
@@ -1043,7 +960,7 @@ pre:has(> code.mermaid)::before {
 
 .clipboard-button:hover {
   border-color: var(--secondary) !important;
-  background-color: var(--rcm-teal-pale) !important;
+  background-color: var(--rcm-accent-pale) !important;
 }
 
 .clipboard-button:hover > svg {
@@ -1051,13 +968,13 @@ pre:has(> code.mermaid)::before {
 }
 
 :root[saved-theme="dark"] .clipboard-button {
-  background-color: #1e1b19;
+  background-color: #141c2e;
   border-color: rgba(255, 255, 255, 0.10);
 }
 
 :root[saved-theme="dark"] .clipboard-button:hover {
-  border-color: rgba(45, 212, 191, 0.45) !important;
-  background-color: rgba(45, 212, 191, 0.08) !important;
+  border-color: rgba(255, 107, 107, 0.45) !important;
+  background-color: rgba(255, 107, 107, 0.08) !important;
 }
 
 :root[saved-theme="dark"] .clipboard-button > svg {
@@ -1135,7 +1052,7 @@ summary {
 summary::before {
   content: "▶";
   font-size: 0.65em;
-  color: var(--rcm-teal);
+  color: var(--rcm-accent);
   transition: transform 0.2s var(--rcm-ease);
   flex-shrink: 0;
 }
@@ -1149,7 +1066,7 @@ details[open] > summary::before {
 }
 
 summary:hover {
-  background: var(--rcm-teal-pale);
+  background: var(--rcm-accent-pale);
   color: var(--secondary);
 }
 
@@ -1206,7 +1123,7 @@ h6 {
 }
 
 th {
-  background: color-mix(in srgb, var(--light) 85%, var(--rcm-teal) 15%);
+  background: color-mix(in srgb, var(--light) 85%, var(--rcm-accent) 15%);
   border-bottom: 2px solid var(--secondary);
   color: var(--dark);
   font-weight: 700;
@@ -1227,16 +1144,16 @@ tr:not(:last-child) {
 }
 
 tbody tr:hover td {
-  background: var(--rcm-teal-pale);
+  background: var(--rcm-accent-pale);
 }
 
 :root[saved-theme="dark"] th {
-  background: rgba(13, 148, 136, 0.12);
+  background: rgba(220, 79, 71, 0.12);
   border-bottom-color: var(--secondary);
 }
 
 :root[saved-theme="dark"] tbody tr:hover td {
-  background: rgba(45, 212, 191, 0.06);
+  background: rgba(255, 107, 107, 0.06);
 }
 
 /* =================================================
@@ -1254,7 +1171,7 @@ pre[data-language]::after {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--rcm-teal);
+  color: var(--rcm-accent);
   opacity: 0.55;
   pointer-events: none;
   line-height: 1;
@@ -1262,7 +1179,7 @@ pre[data-language]::after {
 }
 
 :root[saved-theme="dark"] pre[data-language]::after {
-  color: var(--rcm-teal-strong);
+  color: var(--rcm-accent-strong);
   opacity: 0.5;
 }
 
@@ -1289,7 +1206,7 @@ ul.toc-content li > a::before {
   transform: translateY(-50%);
   width: 2px;
   height: 0;
-  background: var(--rcm-teal-strong);
+  background: var(--rcm-accent-strong);
   border-radius: 1px;
   transition: height 0.25s var(--rcm-ease), opacity 0.25s var(--rcm-ease);
   opacity: 0;
@@ -1306,43 +1223,6 @@ ul.toc-content li > a.in-view::before {
   opacity: 1;
 }
 
-/* =================================================
-   SCROLL-DRIVEN ANIMATIONS — entrada suave de bloques
-   CSS puro, sin JS. Requiere Chrome 115+ / Safari 18+
-   Degradación elegante: simplemente sin animación
-   ================================================= */
-
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    @keyframes rcm-in {
-      from {
-        opacity: 0.2;
-        transform: translateY(0.4rem);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Solo en dark mode — en light el contenido ya es claro y no necesita refuerzo */
-    :root[saved-theme="dark"] .center article h2,
-    :root[saved-theme="dark"] .center article h3 {
-      animation: rcm-in linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 28%;
-    }
-
-    :root[saved-theme="dark"] .center article blockquote,
-    :root[saved-theme="dark"] .center article figure[data-rehype-pretty-code-figure],
-    :root[saved-theme="dark"] .center article .callout,
-    :root[saved-theme="dark"] .center article table {
-      animation: rcm-in linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 22%;
-    }
-  }
-}
 
 /* =================================================
    CODE LINE HOVER — acento teal en línea activa
@@ -1353,33 +1233,13 @@ pre > code > [data-line] {
 }
 
 pre > code > [data-line]:hover {
-  background-color: rgba(13, 148, 136, 0.05);
-  border-left-color: var(--rcm-teal) !important;
+  background-color: rgba(220, 79, 71, 0.05);
+  border-left-color: var(--rcm-accent) !important;
 }
 
 :root[saved-theme="dark"] pre > code > [data-line]:hover {
-  background-color: rgba(45, 212, 191, 0.06);
-  border-left-color: var(--rcm-teal) !important;
-}
-
-/* =================================================
-   DROP CAP — primera letra de artículos
-   Solo en páginas de contenido, no en home
-   ================================================= */
-
-body:not([data-slug="index"]) .center article > p:first-of-type::first-letter {
-  font-family: var(--headerFont);
-  font-size: 3.5em;
-  font-weight: 800;
-  line-height: 0.78;
-  float: left;
-  margin: 0.06em 0.12em 0 0;
-  color: var(--rcm-teal);
-  letter-spacing: -0.02em;
-}
-
-:root[saved-theme="dark"] body:not([data-slug="index"]) .center article > p:first-of-type::first-letter {
-  color: var(--rcm-teal-strong);
+  background-color: rgba(255, 107, 107, 0.06);
+  border-left-color: var(--rcm-accent) !important;
 }
 
 /* =================================================
@@ -1406,7 +1266,7 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
 }
 
 .rcm-card {
-  background: color-mix(in srgb, var(--light) 94%, var(--rcm-teal) 6%);
+  background: color-mix(in srgb, var(--light) 94%, var(--rcm-accent) 6%);
   border: 1px solid var(--lightgray);
   border-radius: var(--rcm-radius-lg);
   box-shadow: var(--rcm-shadow-sm);
@@ -1422,29 +1282,26 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  border: 1px solid color-mix(in srgb, var(--rcm-teal) 25%, transparent);
-  background: var(--rcm-teal-pale);
+  border: 1px solid color-mix(in srgb, var(--rcm-accent) 25%, transparent);
+  background: var(--rcm-accent-pale);
   color: var(--secondary);
   transition: background 0.16s var(--rcm-ease), border-color 0.16s var(--rcm-ease);
   cursor: default;
 }
 
 .rcm-chip:hover {
-  background: color-mix(in srgb, var(--rcm-teal-pale) 100%, var(--rcm-teal) 8%);
-  border-color: color-mix(in srgb, var(--rcm-teal) 45%, transparent);
+  background: color-mix(in srgb, var(--rcm-accent-pale) 100%, var(--rcm-accent) 8%);
+  border-color: color-mix(in srgb, var(--rcm-accent) 45%, transparent);
 }
 
 .rcm-divider {
-  height: 1px;
+  height: 32px;
   border: 0;
   margin: 1.5rem 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--rcm-teal) 38%, var(--lightgray)) 28%,
-    color-mix(in srgb, var(--rcm-cyan)  32%, var(--lightgray)) 58%,
-    transparent
-  );
+  background-color: var(--rcm-accent);
+  -webkit-mask: var(--rcm-neural-branch) center / auto 100% no-repeat;
+  mask: var(--rcm-neural-branch) center / auto 100% no-repeat;
+  opacity: 0.7;
 }
 
 /* =================================================
@@ -1487,7 +1344,7 @@ mark {
 abbr[title] {
   text-decoration: underline dotted;
   text-underline-offset: 0.18em;
-  text-decoration-color: var(--rcm-teal);
+  text-decoration-color: var(--rcm-accent);
   cursor: help;
 }
 
@@ -1514,7 +1371,7 @@ del, s {
 /* ins — inserción con subrayado teal */
 ins {
   text-decoration: underline;
-  text-decoration-color: var(--rcm-teal);
+  text-decoration-color: var(--rcm-accent);
   text-underline-offset: 0.22em;
   text-decoration-thickness: 1.5px;
 }
@@ -1577,7 +1434,7 @@ a.footnote-ref {
   font-weight: 700;
   padding: 0 0.1em;
   margin-left: 0.06em;
-  background: var(--rcm-teal-pale);
+  background: var(--rcm-accent-pale);
   border-radius: 2px;
 }
 
@@ -1585,52 +1442,15 @@ a.footnote-ref {
    ARTICLE END MARK — señal elegante de fin de lectura
    ================================================= */
 
+/* Firma neural: nodo-dendrita como cierre de artículo */
 body:not([data-slug="index"]) .center article::after {
-  content: "◈";
+  content: "";
   display: block;
-  text-align: center;
-  margin-top: 3.5rem;
-  padding-bottom: 2.5rem;
-  font-size: 1.1rem;
-  background: linear-gradient(90deg, var(--rcm-teal), var(--rcm-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  width: 2.4rem;
+  height: 2.4rem;
+  margin: 3.5rem auto 2.5rem;
+  background-color: var(--rcm-accent);
+  -webkit-mask: var(--rcm-neural-node) center / contain no-repeat;
+  mask: var(--rcm-neural-node) center / contain no-repeat;
   opacity: 0.45;
-}
-
-/* =================================================
-   READING PROGRESS — barra lateral CSS scroll-driven
-   Crece de arriba a abajo en el borde izquierdo
-   Sin JS, sin DOM extra. Requiere Chrome 115+
-   ================================================= */
-
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
-    @keyframes rcm-reading-progress {
-      from { transform: scaleY(0); }
-      to   { transform: scaleY(1); }
-    }
-
-    /* Solo dark mode — en light la barra choca con el fondo claro */
-    :root[saved-theme="dark"] body:not([data-slug="index"]) .page::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(
-        180deg,
-        var(--rcm-teal-strong) 0%,
-        var(--rcm-cyan)        100%
-      );
-      transform-origin: 0% 0%;
-      transform: scaleY(0);
-      z-index: 9999;
-      pointer-events: none;
-      animation: rcm-reading-progress linear both;
-      animation-timeline: scroll(root block);
-    }
-  }
 }
