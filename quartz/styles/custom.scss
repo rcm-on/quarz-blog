@@ -31,8 +31,31 @@ body {
   background-color: var(--light);
 }
 
-/* Sin aurora ni patrón — lienzo navy/papel plano */
-body::before,
+/* Campo neuronal de fondo — decorativo, sutil, no interfiere con la lectura.
+   Estático (sin animación), detrás del contenido, difuminado en la zona central
+   para preservar el contraste del texto (WCAG). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--gray);
+  -webkit-mask:
+    var(--rcm-neural-field) center -40px / 1100px auto no-repeat,
+    radial-gradient(125% 70% at 50% -5%, #000 0%, transparent 62%);
+  -webkit-mask-composite: source-in;
+  mask:
+    var(--rcm-neural-field) center -40px / 1100px auto no-repeat,
+    radial-gradient(125% 70% at 50% -5%, #000 0%, transparent 62%);
+  mask-composite: intersect;
+  opacity: 0.08;
+}
+
+:root[saved-theme="dark"] body::before {
+  opacity: 0.11;
+}
+
 body::after {
   display: none;
 }
@@ -1453,4 +1476,85 @@ body:not([data-slug="index"]) .center article::after {
   -webkit-mask: var(--rcm-neural-node) center / contain no-repeat;
   mask: var(--rcm-neural-node) center / contain no-repeat;
   opacity: 0.45;
+}
+
+/* =================================================
+   ELEVACIÓN DE TARJETAS — modo oscuro
+   En dark, las superficies "tarjeta" deben ser MÁS claras que el lienzo
+   navy para leerse como elevadas (Refactoring UI). Borde algo más visible.
+   ================================================= */
+
+:root[saved-theme="dark"] .table-container,
+:root[saved-theme="dark"] details,
+:root[saved-theme="dark"] .rcm-card,
+:root[saved-theme="dark"] pre:has(> code.mermaid) {
+  background-color: #161f33 !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+/* Cabecera de tabla un punto más clara que el cuerpo de la tarjeta */
+:root[saved-theme="dark"] th {
+  background: #1d2740;
+}
+
+/* Callouts: tinte algo más perceptible sobre navy para que se separen */
+:root[saved-theme="dark"] .callout {
+  background: color-mix(in srgb, #161f33 88%, var(--color) 12%) !important;
+}
+
+/* =================================================
+   MERMAID ZOOM — el SVG se clona en #mermaid-container .mermaid-content,
+   que NO tiene la clase .mermaid, así que perdía la paleta. Se reaplica.
+   ================================================= */
+
+#mermaid-container .mermaid-content .node rect,
+#mermaid-container .mermaid-content .node circle,
+#mermaid-container .mermaid-content .node ellipse,
+#mermaid-container .mermaid-content .node polygon,
+#mermaid-container .mermaid-content .node path {
+  fill: transparent !important;
+  stroke: var(--rcm-accent) !important;
+  stroke-width: 1.5px !important;
+}
+
+#mermaid-container .mermaid-content .nodeLabel,
+#mermaid-container .mermaid-content .label,
+#mermaid-container .mermaid-content text {
+  fill: var(--darkgray) !important;
+  color: var(--darkgray) !important;
+  font-family: var(--bodyFont) !important;
+}
+
+#mermaid-container .mermaid-content foreignObject div,
+#mermaid-container .mermaid-content foreignObject span,
+#mermaid-container .mermaid-content .nodeLabel,
+#mermaid-container .mermaid-content .nodeLabel > * {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+#mermaid-container .mermaid-content .edgePath .path,
+#mermaid-container .mermaid-content .flowchart-link {
+  stroke: var(--gray) !important;
+  stroke-width: 1.5px !important;
+}
+
+#mermaid-container .mermaid-content .arrowheadPath,
+#mermaid-container .mermaid-content marker path {
+  fill: var(--gray) !important;
+  stroke: none !important;
+}
+
+#mermaid-container .mermaid-content .edgeLabel,
+#mermaid-container .mermaid-content .edgeLabel *,
+#mermaid-container .mermaid-content .labelBkg {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--gray) !important;
+}
+
+#mermaid-container .mermaid-content .cluster rect {
+  fill: transparent !important;
+  stroke: color-mix(in srgb, var(--rcm-accent) 50%, var(--lightgray)) !important;
+  stroke-dasharray: 5 3 !important;
 }
