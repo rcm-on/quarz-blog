@@ -1,17 +1,18 @@
-# Quartz v4
+# RCM on Quartz — Blog técnico
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+Blog personal de **Ramón Campos Martín** sobre Arquitectura, DevOps e IA.
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
+🔗 <https://blog.rcmon.dev>
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+Construido con [Quartz v4](https://quartz.jzhao.xyz/), generado a partir de notas en Obsidian (`private/` + `templates/`).
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+## Desarrollo local
 
-## Sponsors
+```bash
+npm i
+npx quartz build --serve
+```
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+## Despliegue
+
+El despliegue a GitHub Pages se realiza automáticamente mediante GitHub Actions al hacer push a la rama `main`.
