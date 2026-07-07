@@ -1,9 +1,9 @@
 ---
-title: Ramón Campos Martin | Arquitectura, DevOps e IA
+title: IA en producción, sin hype.
 layout: layout
 ---
 
-Notas técnicas sobre cómo diseñar, desplegar y operar sistemas en producción. Sin hype, con criterio.
+Notas técnicas de **Ramón Campos Martín** sobre cómo diseñar, desplegar y operar sistemas —y los agentes que los rodean— en producción. Con criterio, no con ruido.
 
 ---
 
@@ -25,3 +25,4 @@ Cómo diseñar el entorno que rodea al modelo — no solo el modelo.
 ---
 
 `#arquitectura` `#devops` `#ia` `#llm` `#agentes` `#kubernetes` `#aws`
+

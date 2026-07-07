@@ -1,0 +1,33 @@
+# IA en producción, sin hype — blog.rcmon.dev
+
+> Notas técnicas de Ramón Campos Martín sobre arquitectura de software, DevOps e IA aplicada:
+> cómo diseñar, desplegar y operar sistemas —y los agentes IA que los rodean— en producción.
+> Idioma: español. Generado con Quartz 4 (Obsidian + GitHub Actions).
+
+## Cómo navegar este sitio (para LLMs)
+
+- Índice legible por máquina de TODO el contenido publicado (título, descripción, tags, fechas, enlaces internos y texto completo por página): https://blog.rcmon.dev/static/contentIndex.json
+- Sitemap: https://blog.rcmon.dev/sitemap.xml
+- RSS: https://blog.rcmon.dev/index.xml
+- Las páginas por etiqueta viven en /tags/{tag} (p. ej. /tags/ia, /tags/arquitectura, /tags/context-engineering).
+- Secciones: /01-Artículos (reflexión sobre documentación y cultura técnica), /04-Arquitectura-IA (serie principal: patrones para agentes IA), /02-Laboratorios (guías prácticas con código).
+
+## Artículos — documentación y cultura técnica
+
+- [El conocimiento que no se documenta no se comparte. Era una elección.](https://blog.rcmon.dev/01-Artículos/documentacion-poder-conocimiento): Por qué no documentar era miedo, pereza o poder, y cómo la IA lo ha dejado al descubierto.
+- [Documentar ahora es diferente. Y por fin lo entendemos.](https://blog.rcmon.dev/01-Artículos/documentar-ahora-es-diferente): Con agentes IA, la documentación deja de ser un coste y se convierte en infraestructura operativa.
+
+## Arquitectura IA — serie principal
+
+- [Índice de la sección](https://blog.rcmon.dev/04-Arquitectura-IA): Patrones, decisiones y principios para construir sistemas de IA fiables en producción.
+- [Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA](https://blog.rcmon.dev/04-Arquitectura-IA/harness-engineering-agentes-ia): La efectividad de un agente no depende del modelo, sino del harness que lo rodea: control, supervisión y retroalimentación.
+- [ARCH.md: el documento que le da memoria a tu agente](https://blog.rcmon.dev/04-Arquitectura-IA/documento-arquitectura-base): El documento de arquitectura base como contrato operativo para que un agente trabaje con coherencia entre sesiones.
+
+## Laboratorios — guías prácticas
+
+- [Lab: ARCH.md — cómo describir tu proyecto para que el agente entienda el contexto](https://blog.rcmon.dev/02-Laboratorios/arch-md-ejemplo): Ejemplo genérico comentado de un ARCH.md, pareja práctica del artículo conceptual.
+
+## Notas
+
+- El frontmatter de los .md originales no se sirve como tal; sus campos (title, description, tags, date) están disponibles por página en contentIndex.json y en los meta tags HTML de cada URL.
+- Este fichero solo lista contenido publicado; el sitio tiene más material en preparación.

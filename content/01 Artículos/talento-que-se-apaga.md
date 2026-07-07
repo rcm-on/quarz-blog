@@ -26,9 +26,9 @@ La primera vez, te ignoran con educación. La propuesta "se tiene en cuenta". No
 
 La segunda vez, alguien te corta: *"¿vas a venir tú ahora a cambiar el proceso?"*. Dicho con ese tono que mezcla condescendencia y advertencia.
 
-La tercera vez, un compañero te lleva aparte y te lo dice sin rodeos: *"los que han intentado cambiar demasiadas cosas aquí los han echado"*.
+La tercera vez, un compañero te lleva aparte y te lo dice: *"aquí no compensa insistir demasiado con eso"*.
 
-Y ahí está. El mecanismo al descubierto. La organización no necesita despedirte. Solo necesita que aprendas a callarte.
+Y ahí está. El mecanismo al descubierto. La organización no necesita despedir a nadie para conseguir el silencio. A veces basta con que esa persona aprenda a no volver a proponer.
 
 ---
 
@@ -44,17 +44,17 @@ El silencio en una reunión no es neutralidad. Es memoria organizacional.
 
 ---
 
-## Por qué ocurre: el efecto superviviente
+## Por qué ocurre
 
-Aquí está la raíz del problema, y es incómoda de ver.
+Esto no ocurre en todos los sitios, y también he visto lo contrario: equipos donde disentir se valora de verdad. Pero cuando ocurre, suele tener la misma raíz.
 
-En organizaciones sanas, ascienden los mejores. En organizaciones tóxicas, ascienden los **supervivientes** — los que mejor aprendieron a no amenazar a nadie. Los que callaron en el momento correcto. Los que nunca hicieron preguntas incómodas.
+En algunos equipos ascienden quienes mejor evitan la fricción, no necesariamente quienes más aportan. Los que callaron en el momento correcto. Los que nunca hicieron preguntas incómodas.
 
-Y cuando llegan a managers, reproducen exactamente el sistema que los creó. No por maldad. Sino porque es el único que conocen y el único en el que saben sobrevivir.
+Y cuando llegan a managers, tienden a reproducir el sistema que los formó. Casi nunca es una decisión consciente — es el sistema de incentivos reproduciéndose a sí mismo.
 
-El resultado es un liderazgo con baja autoestima estructural: managers que se sienten amenazados por el talento que tienen debajo, que interpretan cada propuesta de mejora como una crítica personal, que necesitan ser los más listos de la sala para sentirse seguros.
+No es solo una impresión mía. Amy Edmondson, en su investigación sobre seguridad psicológica en Harvard, encontró que la mayoría de los empleados ha ocultado alguna vez información relevante a su responsable por miedo a las consecuencias de hablar. Y cuando Google estudió qué hacía más efectivos a sus equipos (el conocido proyecto Aristotle), la seguridad psicológica salió como el factor más determinante — por delante de cualquier otro.
 
-El narcisismo organizacional no necesita un villano. Necesita suficiente gente con suficiente miedo a ser desplazada. Y una cultura que lo permita sin consecuencias.
+Es un patrón bastante estudiado, con más de 25 años de investigación detrás. Lo que no veo es que se haya interiorizado lo suficiente en el día a día de los equipos. Se cita en charlas y en artículos de LinkedIn. Se aplica bastante menos en la reunión del martes.
 
 ---
 
@@ -66,7 +66,7 @@ Se pierde la información que esa persona habría dado. Los problemas que habrí
 
 Pero sobre todo se pierde algo que no aparece en ninguna métrica: la disposición del resto a intentarlo.
 
-Cada vez que alguien levanta la mano y recibe un "mejor este melón no lo abrimos", hay diez personas mirando que aprenden la lección. En la siguiente reunión, esas diez personas no levantan la mano.
+Cada "mejor este melón no lo abrimos" enseña a quien lo escucha a no proponer en la siguiente reunión.
 
 Así es como una organización se vuelve incapaz de mejorar. No de golpe. Propuesta a propuesta. Silencio a silencio.
 
@@ -74,14 +74,14 @@ Así es como una organización se vuelve incapaz de mejorar. No de golpe. Propue
 
 ## Qué se puede hacer
 
-La cultura no cambia con carteles de valores en la pared ni con formaciones de liderazgo sin consecuencias reales. Cambia cuando el sistema de incentivos cambia.
+La parte buena es que el patrón se puede revertir. La cultura no cambia con carteles de valores en la pared ni con formaciones de liderazgo sin consecuencias reales. Cambia cuando el sistema de incentivos cambia.
 
-**Lo que funciona:**
+**Lo que parece ayudar:**
 
-- Proteger explícitamente al que disocia — que levantar la mano no tenga coste
+- Proteger explícitamente a quien disiente — que levantar la mano no tenga coste
 - Medir cuántas propuestas se implementan, no solo cuántas se reciben
 - Feedback real con consecuencias reales para quien aplasta la iniciativa del equipo
-- Contratar liderazgo por seguridad psicológica, no solo por experiencia técnica
+- Valorar también la seguridad psicológica al contratar liderazgo, no solo la experiencia técnica
 
 **Lo que el talento puede hacer:**
 Reconocer el patrón temprano. Decidir con consciencia si vale la pena quedarse o no. El talento que entiende el sistema es el que mejor gestiona su carrera — y el que no deja que una organización disfuncional le defina.
