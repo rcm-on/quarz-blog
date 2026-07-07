@@ -101,17 +101,28 @@ async function _navigate(url: URL, isBack: boolean = false) {
   announcer.dataset.persist = ""
   html.body.appendChild(announcer)
 
-  // morph body
-  await micromorph(document.body, html.body)
+  // morph body — dentro de una View Transition si el navegador la soporta,
+  // para que el cambio de página sea un fundido y no un salto
+  const morph = async () => {
+    await micromorph(document.body, html.body)
 
-  // scroll into place and add history
-  if (!isBack) {
-    if (url.hash) {
-      const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
-      el?.scrollIntoView()
-    } else {
-      window.scrollTo({ top: 0 })
+    // scroll into place and add history
+    if (!isBack) {
+      if (url.hash) {
+        const el = document.getElementById(decodeURIComponent(url.hash.substring(1)))
+        el?.scrollIntoView()
+      } else {
+        window.scrollTo({ top: 0 })
+      }
     }
+  }
+
+  const startViewTransition = (document as any).startViewTransition?.bind(document)
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  if (startViewTransition && !reduceMotion) {
+    await startViewTransition(morph).updateCallbackDone
+  } else {
+    await morph()
   }
 
   // now, patch head, re-executing scripts

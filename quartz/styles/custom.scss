@@ -56,6 +56,26 @@ body::before {
   opacity: 0.11;
 }
 
+/* Retícula de puntos — textura de precisión bajo la cabecera.
+   Se desvanece antes de la zona de lectura; con la aurora detrás
+   da la profundidad "malla + nodos" del motivo neural. */
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--gray) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.10;
+  -webkit-mask: radial-gradient(90% 62% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 78%);
+  mask: radial-gradient(90% 62% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 78%);
+}
+
+:root[saved-theme="dark"] html::before {
+  opacity: 0.13;
+}
+
 /* Aurora — ambiente índigo × coral detrás de todo.
    Dos velos radiales grandes con deriva muy lenta (90s). El blur va
    incorporado en los propios gradientes (paradas suaves), sin filter,
@@ -67,18 +87,18 @@ body::after {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(42% 46% at 16% 8%,  rgba(79, 70, 229, 0.075) 0%, transparent 68%),
-    radial-gradient(36% 42% at 86% 4%,  rgba(220, 79, 71, 0.055) 0%, transparent 70%),
-    radial-gradient(50% 55% at 58% 100%, rgba(99, 102, 241, 0.05) 0%, transparent 72%);
+    radial-gradient(42% 46% at 16% 8%,  rgba(79, 70, 229, 0.10) 0%, transparent 68%),
+    radial-gradient(36% 42% at 86% 4%,  rgba(220, 79, 71, 0.075) 0%, transparent 70%),
+    radial-gradient(50% 55% at 58% 100%, rgba(99, 102, 241, 0.07) 0%, transparent 72%);
   animation: rcm-aurora 90s ease-in-out infinite alternate;
   will-change: transform;
 }
 
 :root[saved-theme="dark"] body::after {
   background:
-    radial-gradient(42% 46% at 16% 8%,  rgba(99, 102, 241, 0.13) 0%, transparent 68%),
-    radial-gradient(36% 42% at 86% 4%,  rgba(255, 107, 107, 0.07) 0%, transparent 70%),
-    radial-gradient(50% 55% at 58% 100%, rgba(129, 140, 248, 0.08) 0%, transparent 72%);
+    radial-gradient(42% 46% at 16% 8%,  rgba(99, 102, 241, 0.17) 0%, transparent 68%),
+    radial-gradient(36% 42% at 86% 4%,  rgba(255, 107, 107, 0.10) 0%, transparent 70%),
+    radial-gradient(50% 55% at 58% 100%, rgba(129, 140, 248, 0.11) 0%, transparent 72%);
 }
 
 @keyframes rcm-aurora {
@@ -88,6 +108,42 @@ body::after {
 
 @media (prefers-reduced-motion: reduce) {
   body::after {
+    animation: none;
+  }
+}
+
+/* =================================================
+   VIEW TRANSITIONS — navegación SPA con fundido
+   La salida es más corta que la entrada (el ojo perdona
+   irse rápido, agradece llegar suave). Elevación de 4px.
+   ================================================= */
+
+::view-transition-old(root) {
+  animation: rcm-vt-out 0.14s var(--rcm-ease) both;
+}
+
+::view-transition-new(root) {
+  animation: rcm-vt-in 0.22s var(--rcm-ease) both;
+}
+
+@keyframes rcm-vt-out {
+  to { opacity: 0; }
+}
+
+@keyframes rcm-vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
     animation: none;
   }
 }
@@ -179,11 +235,19 @@ a.internal {
   text-decoration: none;
 }
 
+/* Home: los títulos de artículo son filas editoriales, no enlaces subrayados.
+   El coral queda reservado al hover — señala interacción, no compite con el texto. */
 body[data-slug="index"] a.internal {
   background-color: transparent;
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-  text-decoration-color: color-mix(in srgb, var(--secondary) 40%, transparent);
+  text-decoration: none;
+  color: var(--dark);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color 0.16s var(--rcm-ease);
+}
+
+body[data-slug="index"] a.internal:hover {
+  color: var(--secondary);
 }
 
 a:focus-visible,
@@ -633,6 +697,22 @@ hr {
   }
 }
 
+/* Columna central como tarjeta de cristal: superficie translúcida con
+   borde y sombra. El fondo (aurora + retícula) respira alrededor y la
+   zona de lectura queda claramente delimitada. color-mix con --light
+   se adapta solo a ambos modos. */
+.page > #quartz-body .center {
+  background: color-mix(in srgb, var(--light) 80%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid color-mix(in srgb, var(--lightgray) 75%, transparent);
+  border-radius: var(--rcm-radius-lg);
+  box-shadow: var(--rcm-shadow-sm);
+  padding: clamp(1.4rem, 3vw, 2.6rem);
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
 .page > #quartz-body .center article {
   max-width: min(960px, 100%);
   background: transparent;
@@ -738,9 +818,46 @@ body[data-slug="index"] .page .center article > h2 {
 body[data-slug="index"] .page .center article > ul {
   border: none;
   background: transparent;
-  padding: 0 0 0 1.5rem;
   box-shadow: none;
   margin-bottom: 1rem;
+  /* Índice de publicación: sin bullets, filas con separador fino */
+  list-style: none;
+  padding: 0;
+}
+
+body[data-slug="index"] .page .center article > ul > li {
+  padding: 0.6rem 0.25rem;
+  margin: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 55%, transparent);
+  position: relative;
+}
+
+body[data-slug="index"] .page .center article > ul > li:last-child {
+  border-bottom: none;
+}
+
+/* Flecha discreta que aparece al pasar el ratón — affordance de navegación */
+body[data-slug="index"] .page .center article > ul > li::after {
+  content: "→";
+  position: absolute;
+  right: 0.35rem;
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  color: var(--rcm-accent);
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.16s var(--rcm-ease), transform 0.16s var(--rcm-ease);
+  pointer-events: none;
+}
+
+body[data-slug="index"] .page .center article > ul > li:hover::after {
+  opacity: 0.85;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* La fecha y el tiempo de lectura son meta de artículo; en portada son ruido */
+body[data-slug="index"] .content-meta {
+  display: none;
 }
 
 body[data-slug="index"] .page .center article > hr {
@@ -763,6 +880,18 @@ body[data-slug="index"] .page .center article > hr {
     border-radius: 0;
     padding-left: 0;
     padding-right: 0;
+  }
+
+  /* En móvil la tarjeta pierde el marco: el contenido ocupa todo el ancho */
+  .page > #quartz-body .center {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0 1rem;
+    margin-top: 1rem;
   }
 
   .page-title {
