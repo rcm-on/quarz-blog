@@ -56,8 +56,40 @@ body::before {
   opacity: 0.11;
 }
 
+/* Aurora — ambiente índigo × coral detrás de todo.
+   Dos velos radiales grandes con deriva muy lenta (90s). El blur va
+   incorporado en los propios gradientes (paradas suaves), sin filter,
+   para no costar GPU. Debajo del campo neural y del contenido. */
 body::after {
-  display: none;
+  content: "";
+  position: fixed;
+  inset: -25% -15%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 46% at 16% 8%,  rgba(79, 70, 229, 0.075) 0%, transparent 68%),
+    radial-gradient(36% 42% at 86% 4%,  rgba(220, 79, 71, 0.055) 0%, transparent 70%),
+    radial-gradient(50% 55% at 58% 100%, rgba(99, 102, 241, 0.05) 0%, transparent 72%);
+  animation: rcm-aurora 90s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+:root[saved-theme="dark"] body::after {
+  background:
+    radial-gradient(42% 46% at 16% 8%,  rgba(99, 102, 241, 0.13) 0%, transparent 68%),
+    radial-gradient(36% 42% at 86% 4%,  rgba(255, 107, 107, 0.07) 0%, transparent 70%),
+    radial-gradient(50% 55% at 58% 100%, rgba(129, 140, 248, 0.08) 0%, transparent 72%);
+}
+
+@keyframes rcm-aurora {
+  from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+  to   { transform: translate3d(1.5%, 1.5%, 0) scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after {
+    animation: none;
+  }
 }
 
 /* =================================================
@@ -107,7 +139,7 @@ body::after {
   height: 1.5px;
   width: 2.5rem;
   margin-top: 0.3rem;
-  background: linear-gradient(90deg, var(--rcm-accent-strong), transparent);
+  background: linear-gradient(90deg, var(--rcm-accent-strong), var(--rcm-indigo) 70%, transparent);
   border-radius: 1px;
 }
 
@@ -167,7 +199,7 @@ input:focus-visible {
    ================================================= */
 
 .navigation-progress {
-  background: linear-gradient(90deg, var(--rcm-accent-strong), var(--rcm-accent-2));
+  background: linear-gradient(90deg, var(--rcm-indigo), var(--rcm-accent-strong), var(--rcm-accent-2));
 }
 
 /* =================================================
