@@ -146,4 +146,4 @@ Porque cuando hay tiempo, ya es tarde. El nuevo ya se fue o ya se resignó.
 ---
 
 > Este artículo forma parte de una serie sobre conocimiento, documentación y organizaciones técnicas:
-> [[01 Artículos/coste-conocimiento-retenido-organizaciones|El coste oculto del conocimiento retenido]] · [[01 Artículos/documentacion-poder-conocimiento|El conocimiento que no se documenta no se comparte]] · [[02 Laboratorios/arch-md-ejemplo|Lab: ARCH.md ejemplo]]
+> [[01 Artículos/coste-conocimiento-retenido-organizaciones|El coste oculto del conocimiento retenido]] · [[01 Artículos/talento-que-se-apaga|El talento que se apaga]] · [[01 Artículos/documentacion-poder-conocimiento|El conocimiento que no se documenta no se comparte]] · [[02 Laboratorios/arch-md-ejemplo|Lab: ARCH.md ejemplo]]

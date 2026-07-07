@@ -156,6 +156,8 @@ Ahora no se puede.
 ---
 
 > Este artículo forma parte de una serie sobre documentación, conocimiento y organización técnica:
+> - [[01 Artículos/onboarding-talento-desperdiciado|El onboarding que nunca ocurre y el talento que se pierde en él]]
+> - [[01 Artículos/talento-que-se-apaga|El talento que se apaga]]
 > - [[01 Artículos/documentacion-poder-conocimiento|El conocimiento que no se documenta no se comparte. Era una elección.]]
 > - [[01 Artículos/documentar-ahora-es-diferente|Documentar ahora es diferente. Y por fin lo entendemos.]]
 > - [[04 Arquitectura IA/documento-arquitectura-base|ARCH.md: el documento que le da memoria a tu agente]]
