@@ -667,7 +667,8 @@ hr {
    ================================================= */
 
 .page > #quartz-body {
-  gap: 8px;
+  /* Aire entre tarjeta y rieles: la separación la hace el espacio, no las líneas */
+  gap: clamp(16px, 2vw, 28px);
   grid-template-columns: 300px minmax(0, 1fr) 280px;
 }
 
@@ -702,6 +703,11 @@ hr {
    zona de lectura queda claramente delimitada. color-mix con --light
    se adapta solo a ambos modos. */
 .page > #quartz-body .center {
+  /* El padding debe contar hacia dentro: sin esto la tarjeta desborda
+     su columna del grid e invade el sidebar derecho */
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
   background: color-mix(in srgb, var(--light) 80%, transparent);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   backdrop-filter: blur(16px) saturate(140%);
@@ -733,6 +739,13 @@ hr {
 :root[saved-theme="dark"] .page .page-header {
   background: transparent;
   border-color: transparent;
+}
+
+/* Dark: la tarjeta necesita borde propio (el color-mix con navy se pierde)
+   y una sombra más profunda para despegarse del lienzo */
+:root[saved-theme="dark"] .page > #quartz-body .center {
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow: var(--rcm-shadow-md);
 }
 
 footer {
