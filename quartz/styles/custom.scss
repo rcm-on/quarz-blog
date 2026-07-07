@@ -31,49 +31,33 @@ body {
   background-color: var(--light);
 }
 
-/* Campo neuronal de fondo — decorativo, sutil, no interfiere con la lectura.
-   Estático (sin animación), detrás del contenido, difuminado en la zona central
-   para preservar el contraste del texto (WCAG). */
+/* Retícula "blueprint" de fondo — malla técnica fina, CONTINUA y uniforme,
+   que evoca arquitectura. Sobria y por debajo de todo; la tarjeta de lectura
+   es opaca, así que no resta contraste al texto (WCAG). Estática. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background-color: var(--gray);
-  -webkit-mask:
-    var(--rcm-neural-field) center -40px / 1100px auto no-repeat,
-    radial-gradient(125% 70% at 50% -5%, #000 0%, transparent 62%);
-  -webkit-mask-composite: source-in;
-  mask:
-    var(--rcm-neural-field) center -40px / 1100px auto no-repeat,
-    radial-gradient(125% 70% at 50% -5%, #000 0%, transparent 62%);
-  mask-composite: intersect;
-  opacity: 0.08;
+  /* Blueprint de dos niveles: malla fina (44px) + líneas maestras (220px) */
+  background-image:
+    linear-gradient(rgba(19, 24, 38, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 24, 38, 0.045) 1px, transparent 1px),
+    linear-gradient(rgba(19, 24, 38, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19, 24, 38, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px, 44px 44px, 220px 220px, 220px 220px;
+  /* Vignette muy amplio: se atenúa solo en los bordes, el centro es continuo */
+  -webkit-mask: radial-gradient(145% 130% at 50% 35%, #000 62%, transparent 100%);
+  mask: radial-gradient(145% 130% at 50% 35%, #000 62%, transparent 100%);
 }
 
 :root[saved-theme="dark"] body::before {
-  opacity: 0.11;
-}
-
-/* Retícula de puntos — textura de precisión bajo la cabecera.
-   Se desvanece antes de la zona de lectura; con la aurora detrás
-   da la profundidad "malla + nodos" del motivo neural. */
-html::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle, var(--gray) 1px, transparent 1px);
-  background-size: 24px 24px;
-  opacity: 0.10;
-  -webkit-mask: radial-gradient(90% 62% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 78%);
-  mask: radial-gradient(90% 62% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 78%);
-}
-
-:root[saved-theme="dark"] html::before {
-  opacity: 0.13;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
 }
 
 /* Aurora — ambiente índigo × coral detrás de todo.
@@ -87,23 +71,23 @@ body::after {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(42% 46% at 16% 8%,  rgba(79, 70, 229, 0.10) 0%, transparent 68%),
-    radial-gradient(36% 42% at 86% 4%,  rgba(220, 79, 71, 0.075) 0%, transparent 70%),
-    radial-gradient(50% 55% at 58% 100%, rgba(99, 102, 241, 0.07) 0%, transparent 72%);
-  animation: rcm-aurora 90s ease-in-out infinite alternate;
+    radial-gradient(42% 46% at 16% 8%,  rgba(79, 70, 229, 0.17) 0%, transparent 68%),
+    radial-gradient(36% 42% at 86% 4%,  rgba(220, 79, 71, 0.13) 0%, transparent 70%),
+    radial-gradient(50% 55% at 58% 100%, rgba(99, 102, 241, 0.13) 0%, transparent 72%);
+  animation: rcm-aurora 60s ease-in-out infinite alternate;
   will-change: transform;
 }
 
 :root[saved-theme="dark"] body::after {
   background:
-    radial-gradient(42% 46% at 16% 8%,  rgba(99, 102, 241, 0.17) 0%, transparent 68%),
-    radial-gradient(36% 42% at 86% 4%,  rgba(255, 107, 107, 0.10) 0%, transparent 70%),
-    radial-gradient(50% 55% at 58% 100%, rgba(129, 140, 248, 0.11) 0%, transparent 72%);
+    radial-gradient(42% 46% at 16% 8%,  rgba(99, 102, 241, 0.28) 0%, transparent 68%),
+    radial-gradient(36% 42% at 86% 4%,  rgba(255, 107, 107, 0.17) 0%, transparent 70%),
+    radial-gradient(50% 55% at 58% 100%, rgba(129, 140, 248, 0.19) 0%, transparent 72%);
 }
 
 @keyframes rcm-aurora {
-  from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
-  to   { transform: translate3d(1.5%, 1.5%, 0) scale(1.06); }
+  from { transform: translate3d(-2.5%, -1.5%, 0) scale(1); }
+  to   { transform: translate3d(2.5%, 2.5%, 0) scale(1.09); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -119,21 +103,24 @@ body::after {
    ================================================= */
 
 ::view-transition-old(root) {
-  animation: rcm-vt-out 0.14s var(--rcm-ease) both;
+  animation: rcm-vt-out 0.2s var(--rcm-ease) both;
 }
 
 ::view-transition-new(root) {
-  animation: rcm-vt-in 0.22s var(--rcm-ease) both;
+  animation: rcm-vt-in 0.42s var(--rcm-ease) both;
 }
 
 @keyframes rcm-vt-out {
-  to { opacity: 0; }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes rcm-vt-in {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -195,7 +182,7 @@ body::after {
   height: 1.5px;
   width: 2.5rem;
   margin-top: 0.3rem;
-  background: linear-gradient(90deg, var(--rcm-accent-strong), var(--rcm-indigo) 70%, transparent);
+  background: linear-gradient(90deg, var(--rcm-accent-strong), transparent);
   border-radius: 1px;
 }
 
@@ -263,7 +250,7 @@ input:focus-visible {
    ================================================= */
 
 .navigation-progress {
-  background: linear-gradient(90deg, var(--rcm-indigo), var(--rcm-accent-strong), var(--rcm-accent-2));
+  background: var(--rcm-accent);
 }
 
 /* =================================================
@@ -381,12 +368,16 @@ pre {
   overflow-x: auto;
   position: relative;
   tab-size: 2;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  /* Claro: relleno gris muy claro para separar del blanco de la tarjeta */
+  background-color: #f1f4fa;
 }
 
 /* Dark mode: superficie navy ELEVADA — más clara que el lienzo para que
    el bloque se lea como tarjeta (no se funda con el fondo de la página) */
 :root[saved-theme="dark"] pre {
-  background-color: #1a2336 !important;
+  background-color: #26324f !important;
   border-color: rgba(255, 255, 255, 0.09);
 }
 
@@ -658,7 +649,7 @@ hr {
   background-color: var(--rcm-accent);
   -webkit-mask: var(--rcm-neural-branch) center / auto 100% no-repeat;
   mask: var(--rcm-neural-branch) center / auto 100% no-repeat;
-  opacity: 0.7;
+  opacity: 0.85;
   margin: 2.4rem 0;
 }
 
@@ -666,10 +657,15 @@ hr {
    LAYOUT — overrides de Quartz
    ================================================= */
 
-.page > #quartz-body {
-  /* Aire entre tarjeta y rieles: la separación la hace el espacio, no las líneas */
-  gap: clamp(16px, 2vw, 28px);
-  grid-template-columns: 300px minmax(0, 1fr) 280px;
+/* Grid de 3 columnas SOLO en desktop. En tablet Quartz usa 2 columnas
+   (320px auto) con su propio grid-template-areas; si forzamos 3 aquí el
+   área se descuadra y el sidebar izquierdo se solapa con la lectura. */
+@media all and (min-width: 1200px) {
+  .page > #quartz-body {
+    /* Aire entre tarjeta y rieles: la separación la hace el espacio, no las líneas */
+    gap: clamp(16px, 2vw, 28px);
+    grid-template-columns: 300px minmax(0, 1fr) 280px;
+  }
 }
 
 .page > #quartz-body .sidebar {
@@ -708,10 +704,11 @@ hr {
   box-sizing: border-box;
   max-width: 100%;
   min-width: 0;
-  background: color-mix(in srgb, var(--light) 80%, transparent);
+  /* Claro: tarjeta blanca frosted sobre lienzo gris → separación clara */
+  background: rgba(255, 255, 255, 0.72);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid color-mix(in srgb, var(--lightgray) 75%, transparent);
+  border: 1px solid rgba(19, 24, 38, 0.07);
   border-radius: var(--rcm-radius-lg);
   box-shadow: var(--rcm-shadow-sm);
   padding: clamp(1.4rem, 3vw, 2.6rem);
@@ -741,10 +738,12 @@ hr {
   border-color: transparent;
 }
 
-/* Dark: la tarjeta necesita borde propio (el color-mix con navy se pierde)
-   y una sombra más profunda para despegarse del lienzo */
+/* Dark: la tarjeta de lectura debe ser MÁS clara que el lienzo navy para
+   leerse como superficie elevada (si no, es imperceptible). Escala:
+   lienzo #0d1424 → tarjeta #151e33 → tarjetas internas #26324f. */
 :root[saved-theme="dark"] .page > #quartz-body .center {
-  border-color: rgba(255, 255, 255, 0.09);
+  background: #1b2540;
+  border-color: rgba(255, 255, 255, 0.13);
   box-shadow: var(--rcm-shadow-md);
 }
 
@@ -944,15 +943,28 @@ body[data-slug="index"] .page .center article > hr {
   border-radius: var(--rcm-radius-md);
 }
 
-/* Nodos — transparentes, solo borde teal */
+/* Nodos como "chip": relleno elevado sutil + borde coral + esquinas suaves */
 .mermaid .node rect,
 .mermaid .node circle,
 .mermaid .node ellipse,
 .mermaid .node polygon,
 .mermaid .node path {
-  fill: transparent !important;
+  fill: #ffffff !important;
   stroke: var(--rcm-accent) !important;
   stroke-width: 1.5px !important;
+}
+
+.mermaid .node rect {
+  rx: 7px !important;
+  ry: 7px !important;
+}
+
+:root[saved-theme="dark"] .mermaid .node rect,
+:root[saved-theme="dark"] .mermaid .node circle,
+:root[saved-theme="dark"] .mermaid .node ellipse,
+:root[saved-theme="dark"] .mermaid .node polygon,
+:root[saved-theme="dark"] .mermaid .node path {
+  fill: #333f5e !important;
 }
 
 /* El contenido HTML dentro de foreignObject también puede tener bg inline */
@@ -1044,15 +1056,175 @@ body[data-slug="index"] .page .center article > hr {
   stroke: var(--rcm-accent-2) !important;
 }
 
-/* Dark mode — borde más brillante sobre fondo oscuro */
+/* Dark mode — chip elevado + borde coral sobre fondo oscuro */
 :root[saved-theme="dark"] .mermaid .node rect,
 :root[saved-theme="dark"] .mermaid .node circle,
 :root[saved-theme="dark"] .mermaid .node ellipse,
 :root[saved-theme="dark"] .mermaid .node polygon,
 :root[saved-theme="dark"] .mermaid .node path {
-  fill: transparent !important;
+  fill: #333f5e !important;
   stroke: var(--rcm-accent) !important;
   stroke-width: 1.5px !important;
+}
+
+/* =================================================
+   MERMAID — DIAGRAMAS DE SECUENCIA
+   Clases propias (.actor, .actor-line, .messageLine, .note, .activation…)
+   que el estilo de flowchart no cubría.
+   ================================================= */
+
+/* Cajas de participante y barras de activación → chip */
+.mermaid .actor,
+.mermaid rect.actor,
+.mermaid .activation0,
+.mermaid .activation1,
+.mermaid .activation2 {
+  fill: #ffffff !important;
+  stroke: var(--rcm-accent) !important;
+  stroke-width: 1.4px !important;
+}
+
+:root[saved-theme="dark"] .mermaid .actor,
+:root[saved-theme="dark"] .mermaid rect.actor,
+:root[saved-theme="dark"] .mermaid .activation0,
+:root[saved-theme="dark"] .mermaid .activation1,
+:root[saved-theme="dark"] .mermaid .activation2 {
+  fill: #333f5e !important;
+}
+
+/* Texto (participantes, mensajes, notas, bucles) */
+.mermaid text.actor,
+.mermaid text.actor > tspan,
+.mermaid .messageText,
+.mermaid .noteText,
+.mermaid .noteText > tspan,
+.mermaid .loopText,
+.mermaid .loopText > tspan,
+.mermaid .labelText,
+.mermaid .labelText > tspan {
+  fill: var(--darkgray) !important;
+  stroke: none !important;
+  font-family: var(--bodyFont) !important;
+  font-size: 13px !important;
+}
+
+/* Líneas de vida y mensajes */
+.mermaid .actor-line {
+  stroke: var(--gray) !important;
+  stroke-dasharray: 3 3 !important;
+}
+
+.mermaid .messageLine0,
+.mermaid .messageLine1 {
+  stroke: var(--gray) !important;
+  stroke-width: 1.4px !important;
+}
+
+.mermaid .messageLine1 {
+  stroke-dasharray: 3 3 !important;
+}
+
+.mermaid #arrowhead path,
+.mermaid marker path {
+  fill: var(--gray) !important;
+  stroke: none !important;
+}
+
+/* Notas → chip coral tenue */
+.mermaid .note {
+  fill: var(--rcm-accent-pale) !important;
+  stroke: var(--rcm-accent) !important;
+  stroke-width: 1px !important;
+}
+
+/* Bucles / alt / opt → marco coral punteado y etiqueta chip */
+.mermaid .loopLine {
+  stroke: var(--rcm-accent) !important;
+  stroke-width: 1px !important;
+  stroke-dasharray: 4 3 !important;
+}
+
+.mermaid .labelBox {
+  fill: #ffffff !important;
+  stroke: var(--rcm-accent) !important;
+}
+
+:root[saved-theme="dark"] .mermaid .labelBox {
+  fill: #333f5e !important;
+}
+
+/* =================================================
+   MERMAID — COBERTURA AMPLIA (class, state, ER, etc.)
+   Mismo lenguaje: cajas = chip, líneas = gris, texto = darkgray.
+   ================================================= */
+
+/* Cajas/contenedores de cualquier tipo estructural → chip */
+.mermaid .classGroup rect,
+.mermaid .classGroup path,
+.mermaid g.classGroup rect,
+.mermaid .entityBox,
+.mermaid .attributeBoxOdd,
+.mermaid .attributeBoxEven,
+.mermaid .stateGroup rect,
+.mermaid .stateGroup path,
+.mermaid .composit,
+.mermaid .statediagram-state rect,
+.mermaid .statediagram-cluster rect,
+.mermaid rect.divider,
+.mermaid .er.entityBox {
+  fill: #ffffff !important;
+  stroke: var(--rcm-accent) !important;
+  stroke-width: 1.2px !important;
+}
+
+:root[saved-theme="dark"] .mermaid .classGroup rect,
+:root[saved-theme="dark"] .mermaid .classGroup path,
+:root[saved-theme="dark"] .mermaid g.classGroup rect,
+:root[saved-theme="dark"] .mermaid .entityBox,
+:root[saved-theme="dark"] .mermaid .attributeBoxOdd,
+:root[saved-theme="dark"] .mermaid .attributeBoxEven,
+:root[saved-theme="dark"] .mermaid .stateGroup rect,
+:root[saved-theme="dark"] .mermaid .stateGroup path,
+:root[saved-theme="dark"] .mermaid .composit,
+:root[saved-theme="dark"] .mermaid .statediagram-state rect,
+:root[saved-theme="dark"] .mermaid .statediagram-cluster rect,
+:root[saved-theme="dark"] .mermaid .er.entityBox {
+  fill: #333f5e !important;
+}
+
+/* Nodo de estado inicial/final (círculos rellenos) → coral */
+.mermaid .statediagram-state .start-state,
+.mermaid .statediagram-state circle.end-state-outer,
+.mermaid circle.stateStart,
+.mermaid .stateGroup circle {
+  fill: var(--rcm-accent) !important;
+  stroke: var(--rcm-accent) !important;
+}
+
+/* Relaciones / transiciones / líneas ER → gris */
+.mermaid .relation,
+.mermaid path.relation,
+.mermaid .transition,
+.mermaid .relationshipLine,
+.mermaid .er.relationshipLine {
+  stroke: var(--gray) !important;
+  fill: none !important;
+  stroke-width: 1.3px !important;
+}
+
+/* Texto de cualquier tipo → darkgray, tipografía del sitio */
+.mermaid .classText,
+.mermaid .classTitle,
+.mermaid text.classText,
+.mermaid .entityLabel,
+.mermaid .attributeLabel,
+.mermaid .stateLabel,
+.mermaid .er.entityLabel,
+.mermaid .relationshipLabel,
+.mermaid .titleText {
+  fill: var(--darkgray) !important;
+  stroke: none !important;
+  font-family: var(--bodyFont) !important;
 }
 
 :root[saved-theme="dark"] .mermaid .nodeLabel,
@@ -1310,6 +1482,7 @@ h6 {
   overflow: hidden;
   margin: 1.2rem 0;
   box-shadow: var(--rcm-shadow-sm);
+  background: #f4f7fc;
 }
 
 .table-container > table {
@@ -1662,18 +1835,110 @@ body:not([data-slug="index"]) .center article::after {
 :root[saved-theme="dark"] details,
 :root[saved-theme="dark"] .rcm-card,
 :root[saved-theme="dark"] pre:has(> code.mermaid) {
-  background-color: #161f33 !important;
+  background-color: #26324f !important;
   border-color: rgba(255, 255, 255, 0.09) !important;
 }
 
 /* Cabecera de tabla un punto más clara que el cuerpo de la tarjeta */
 :root[saved-theme="dark"] th {
-  background: #1d2740;
+  background: #333f5e;
 }
 
 /* Callouts: tinte algo más perceptible sobre navy para que se separen */
 :root[saved-theme="dark"] .callout {
-  background: color-mix(in srgb, #161f33 88%, var(--color) 12%) !important;
+  background: color-mix(in srgb, #26324f 88%, var(--color) 12%) !important;
+}
+
+/* =================================================
+   PULIDO FINAL — ritmo tipográfico, listados y 404
+   ================================================= */
+
+/* Ritmo vertical consistente en prosa */
+.center article > p {
+  margin: 0 0 1.15rem;
+}
+
+.center article > ul,
+.center article > ol {
+  margin: 0 0 1.2rem;
+}
+
+.center article li + li {
+  margin-top: 0.3rem;
+}
+
+.center article h2 {
+  margin-bottom: 0.85rem;
+}
+
+.center article h3 {
+  margin-bottom: 0.55rem;
+}
+
+/* h4 diferenciado (antes sin estilo propio) */
+.center article h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 1.6rem 0 0.5rem;
+  color: var(--dark);
+}
+
+/* Listados de páginas — cada entrada como fila elegante con hover */
+ul.section-ul li.section-li {
+  margin-bottom: 0.35rem;
+  border-radius: var(--rcm-radius-md);
+  transition: background-color 0.16s var(--rcm-ease), transform 0.16s var(--rcm-ease);
+}
+
+ul.section-ul li.section-li > .section {
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--rcm-radius-md);
+  position: relative;
+}
+
+ul.section-ul li.section-li:hover {
+  background: var(--rcm-accent-pale);
+  transform: translateX(2px);
+}
+
+/* Título de cada entrada */
+ul.section-ul .section .desc h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+ul.section-ul .section .desc h3 > a {
+  color: var(--dark);
+  transition: color 0.16s var(--rcm-ease);
+}
+
+ul.section-ul li.section-li:hover .desc h3 > a {
+  color: var(--secondary);
+}
+
+/* Fecha/meta en monoespaciada discreta */
+ul.section-ul .section > .meta {
+  font-family: var(--codeFont);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--gray);
+  opacity: 0.85 !important;
+  white-space: nowrap;
+}
+
+/* Página 404 — centrada y con presencia */
+body[data-slug="404"] .center {
+  text-align: center;
+}
+
+body[data-slug="404"] article > h1 {
+  font-size: clamp(3rem, 8vw, 5rem);
+  margin-bottom: 0.5rem;
 }
 
 /* =================================================
@@ -1686,9 +1951,17 @@ body:not([data-slug="index"]) .center article::after {
 #mermaid-container .mermaid-content .node ellipse,
 #mermaid-container .mermaid-content .node polygon,
 #mermaid-container .mermaid-content .node path {
-  fill: transparent !important;
+  fill: #ffffff !important;
   stroke: var(--rcm-accent) !important;
   stroke-width: 1.5px !important;
+}
+
+:root[saved-theme="dark"] #mermaid-container .mermaid-content .node rect,
+:root[saved-theme="dark"] #mermaid-container .mermaid-content .node circle,
+:root[saved-theme="dark"] #mermaid-container .mermaid-content .node ellipse,
+:root[saved-theme="dark"] #mermaid-container .mermaid-content .node polygon,
+:root[saved-theme="dark"] #mermaid-container .mermaid-content .node path {
+  fill: #333f5e !important;
 }
 
 #mermaid-container .mermaid-content .nodeLabel,
