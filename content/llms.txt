@@ -22,8 +22,6 @@
 - [Índice de la sección](https://blog.rcmon.dev/04-Arquitectura-IA): Patrones, decisiones y principios para construir sistemas de IA fiables en producción.
 - [Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA](https://blog.rcmon.dev/04-Arquitectura-IA/harness-engineering-agentes-ia): La efectividad de un agente no depende del modelo, sino del harness que lo rodea: control, supervisión y retroalimentación.
 - [ARCH.md: el documento que le da memoria a tu agente](https://blog.rcmon.dev/04-Arquitectura-IA/documento-arquitectura-base): El documento de arquitectura base como contrato operativo para que un agente trabaje con coherencia entre sesiones.
-- [Maté mi propia feature: postmortem de la capa ejecutable](https://blog.rcmon.dev/04-Arquitectura-IA/blog-documentacion-ejecutable): ADR retirado — por qué este blog no ofrece skills auto-instalables (canal de confianza, integridad, sobre-ingeniería) y qué quedó en su lugar: las "Notas para agentes" de cada lab.
-
 ## Laboratorios — guías prácticas
 
 - [Lab: ARCH.md — cómo describir tu proyecto para que el agente entienda el contexto](https://blog.rcmon.dev/02-Laboratorios/arch-md-ejemplo): Ejemplo genérico comentado de un ARCH.md, pareja práctica del artículo conceptual.
