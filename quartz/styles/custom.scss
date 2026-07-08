@@ -694,20 +694,18 @@ hr {
   }
 }
 
-/* Columna central como tarjeta de cristal: superficie translúcida con
-   borde y sombra. El fondo (aurora + retícula) respira alrededor y la
-   zona de lectura queda claramente delimitada. color-mix con --light
-   se adapta solo a ambos modos. */
+/* Columna central como tarjeta de lectura: superficie SÓLIDA y opaca con
+   borde y sombra. El fondo (aurora + retícula) respira alrededor pero NO se
+   transparenta bajo el texto → contraste WCAG y separación limpia. Mismo
+   criterio en claro y oscuro: superficie elevada opaca sobre el lienzo. */
 .page > #quartz-body .center {
   /* El padding debe contar hacia dentro: sin esto la tarjeta desborda
      su columna del grid e invade el sidebar derecho */
   box-sizing: border-box;
   max-width: 100%;
   min-width: 0;
-  /* Claro: tarjeta blanca frosted sobre lienzo gris → separación clara */
-  background: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  backdrop-filter: blur(16px) saturate(140%);
+  /* Claro: tarjeta blanca opaca sobre lienzo gris → separación clara */
+  background: #ffffff;
   border: 1px solid rgba(19, 24, 38, 0.07);
   border-radius: var(--rcm-radius-lg);
   box-shadow: var(--rcm-shadow-sm);

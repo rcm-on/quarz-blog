@@ -1,5 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+import { blueprintOgImage } from "./quartz/util/ogTemplate"
 
 /**
  * Quartz 4 Configuration
@@ -32,8 +33,8 @@ const config: QuartzConfig = {
           gray: "#5b6678",
           darkgray: "#2a3142",
           dark: "#131826",
-          secondary: "#dc4f47",
-          tertiary: "#ef6a5f",
+          secondary: "#cc3b32",
+          tertiary: "#e0463b",
           highlight: "rgba(220, 79, 71, 0.07)",
           textHighlight: "#dc4f4730",
         },
@@ -90,8 +91,12 @@ const config: QuartzConfig = {
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
       Plugin.CNAME(),
+      Plugin.Actions(),
       // Comment out CustomOgImages to speed up build time
-      Plugin.CustomOgImages(),
+      Plugin.CustomOgImages({
+        colorScheme: "darkMode",
+        imageStructure: blueprintOgImage,
+      }),
     ],
   },
 }
