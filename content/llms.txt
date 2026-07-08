@@ -27,7 +27,7 @@
 ## Laboratorios — guías prácticas
 
 - [Lab: ARCH.md — cómo describir tu proyecto para que el agente entienda el contexto](https://blog.rcmon.dev/02-Laboratorios/arch-md-ejemplo): Ejemplo genérico comentado de un ARCH.md, pareja práctica del artículo conceptual.
-- [Lab: LiteLLM, resolviendo la entropía multiproveedor](https://blog.rcmon.dev/02-Laboratorios/litellm-multiproveedor): Gateway con Docker Compose que unifica Azure AI Foundry, NVIDIA NIM (gratuito) y Ollama local tras un endpoint OpenAI-compatible con fallback. Incluye una sección "Instrucciones para agentes" con precondiciones, pasos y verificación para reproducir el lab junto al usuario.
+- [Lab: LiteLLM, resolviendo la entropía multiproveedor](https://blog.rcmon.dev/02-Laboratorios/litellm-multiproveedor): Gateway con Docker Compose que unifica Azure AI Foundry, NVIDIA NIM (gratuito) y Ollama local tras un endpoint OpenAI-compatible con fallback. Cierra con "Notas para agentes": lo que hay que saber para reproducir el lab junto al usuario (adaptación de la config, manejo de claves, criterio de verificación).
 
 ## Notas
 

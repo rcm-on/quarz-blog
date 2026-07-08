@@ -169,33 +169,16 @@ Para saltar de NVIDIA a Azure no tocas ni una línea de Python: cambias `model="
 
 ---
 
-## Instrucciones para agentes
+## Notas para agentes
 
-> [!info] Sección para agentes
-> Esta sección está redactada para que un **agente IA**, trabajando junto al usuario y con su consentimiento, reproduzca el laboratorio en su máquina. Si le pasas este post a tu agente, esta es la parte que debe seguir. Los bloques de código de la sección *"Los tres ficheros"* son la fuente canónica de los contenidos.
+> [!info] Si reproduces este lab con tu agente
+> Los pasos ya están en el post; los bloques de código de *"Los tres ficheros"* son la fuente canónica. Estas notas son lo que la narrativa no dice:
 
-**Objetivo:** dejar un gateway LiteLLM escuchando en `http://localhost:4000`, con los proveedores que el usuario tenga disponibles y fallback configurado.
-
-**Precondiciones — verifica antes de empezar:**
-
-1. `docker --version` y `docker compose version` responden. Si no, detente e informa: Docker es requisito.
-2. Pregunta al usuario qué proveedores tiene: clave de Azure AI Foundry, clave de NVIDIA NIM ([build.nvidia.com](https://build.nvidia.com), gratuita), y/o Ollama corriendo en local (`curl -s http://localhost:11434/api/tags`).
-
-**Pasos:**
-
-1. Crea un directorio de trabajo (p. ej. `litellm-gateway/`) pregunta al usuario si quiere crearlo el o la ruta de creacion, y entra en él.
-2. Escribe `docker-compose.yml` con el contenido del bloque homónimo de este post, sin modificarlo.
-3. Escribe `config.yaml` con el contenido del bloque homónimo, **eliminando las entradas de `model_list` de los proveedores que el usuario no tenga** y ajustando la lista de `fallbacks` a los que queden. Genera un `master_key` aleatorio en lugar de `sk-lab-1234`.
-4. Escribe `.env` solo con las variables de los proveedores elegidos. Pide las claves al usuario; **nunca las inventes ni las escribas en `config.yaml`**.
-5. Ejecuta `docker compose up -d`.
-
-**Verificación — no des el lab por completado sin esto:**
-
-1. `curl -s http://localhost:4000/health/liveliness` devuelve una respuesta viva.
-2. Una petición de chat a `/v1/chat/completions` con el `master_key` generado y uno de los nombres lógicos devuelve `choices[0].message.content` no vacío.
-3. Informa al usuario del endpoint (`http://localhost:4000/v1`), el `master_key` generado y los nombres lógicos disponibles.
-
-**Si algo falla:** `docker compose logs litellm` es la primera fuente. Los errores más comunes son clave inválida (401 del proveedor), nombre de deployment de Azure que no coincide, y Ollama inaccesible desde el contenedor (revisa `extra_hosts`).
+- **Antes de empezar:** verifica que `docker compose version` responde y pregunta al usuario qué proveedores tiene (Azure, NVIDIA NIM, Ollama) y dónde quiere el directorio de trabajo.
+- **Adapta la config:** elimina de `model_list` los proveedores que el usuario no tenga y ajusta los `fallbacks` a los que queden. Genera un `master_key` aleatorio en lugar de `sk-lab-1234`.
+- **Claves:** pídeselas al usuario y ponlas solo en `.env`. Nunca las inventes ni las escribas en `config.yaml`.
+- **Hecho significa verificado:** no des el lab por completado hasta que `/health/liveliness` responda y una petición a `/v1/chat/completions` devuelva contenido. Termina informando del endpoint, el `master_key` y los nombres lógicos disponibles.
+- **Si algo falla:** `docker compose logs litellm`. Lo típico: 401 del proveedor (clave), deployment de Azure que no coincide, Ollama inaccesible desde el contenedor (`extra_hosts`).
 
 ---
 
