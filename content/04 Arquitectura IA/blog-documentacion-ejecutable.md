@@ -8,7 +8,7 @@ tags:
   - seguridad
   - docs-as-code
   - meta
-description: "Diseñé una capa ejecutable para este blog: posts que compilaban a skills instalables por agentes. Funcionó de extremo a extremo. Y la retiré el mismo día, porque el modelo de amenaza no aguantaba. Este es el ADR de por qué — y de cómo volverá."
+description: "Diseñé una capa ejecutable para este blog: posts que compilaban a skills instalables por agentes. Funcionó de extremo a extremo. Y la retiré el mismo día, porque el modelo de amenaza no aguantaba y cada arreglo añadía más maquinaria. Este es el ADR de por qué — y de qué quedó en su lugar."
 ---
 
 Este post iba a ser otro. Su primera versión era el ADR que proponía la **capa ejecutable** de este blog: posts que no solo se leen, sino que un agente puede descubrir, instalar y ejecutar. La construí, funcionó de extremo a extremo, y la retiré antes de dejarla publicada.
@@ -16,7 +16,7 @@ Este post iba a ser otro. Su primera versión era el ADR que proponía la **capa
 Los ADRs no documentan solo lo que se adopta. Documentan lo que se descarta y por qué — esa es la mitad del valor. Así que este es el postmortem de una feature que maté yo mismo, con el análisis que la mató.
 
 > [!important] Estado del ADR
-> **Propuesto** (2026-07-08) → **Retirado por seguridad** (2026-07-09). Las *Instrucciones para agentes* de los labs se mantienen como documentación; la maquinaria de descubrimiento e instalación automática queda desactivada hasta el rediseño descrito al final.
+> **Propuesto** (2026-07-08) → **Retirado** (2026-07-09). La maquinaria (emitter, manifiesto, skills) está eliminada del código y del sitio. Lo que queda en su lugar: unas *Notas para agentes* al final de cada lab, como documentación que se aplica con el usuario delante.
 
 ---
 
@@ -46,27 +46,22 @@ Ninguna de estas objeciones era teórica: son el pan de cada día de cualquier c
 
 ## ⚖️ La decisión
 
-Retirarla, no matarla. Qué se queda y qué se va:
+Podría haberla parcheado. De hecho, lo intenté sobre el papel: distribuir las skills desde un repo Git con tags en lugar de servirlas por HTTP, checksums en el catálogo, permisos de solo lectura declarados en el frontmatter, un pipeline que probara cada skill con un agente antes del release... Cada parche era razonable. Y la suma era un producto de distribución de software colgando de un blog personal — más maquinaria de la que la idea valía, más superficie que mantener, más promesas de seguridad que cumplir.
 
-- **Se queda:** la sección "Instrucciones para agentes" de los labs, como documentación. Un agente puede leerla y reproducir el lab *con su usuario delante* — la mediación humana es la barrera de seguridad, no un paso a optimizar. El emitter queda en el repo, desregistrado.
-- **Se va:** el manifiesto, el catálogo de skills, el `curl` de auto-instalación y toda mención en `llms.txt` y la home. Nada en el sitio invita ya a un agente a ejecutar o instalarse nada.
+Así que la decisión fue retirarla entera, no parchearla:
 
-## 🧭 Cómo volverá (el rediseño)
-
-El error no era la idea — "el post compila a skill" sigue siendo la tesis correcta. El error era **el canal de confianza**. El rediseño cambia el canal, no la tesis:
-
-1. **Distribución con procedencia.** El build no servirá skills por HTTP: las publicará en un **repo Git con tags de versión**, instalable por el canal estándar de plugins del agente. La confianza se muda de "una web me lo dice" a "un repo auditable, versionado y diffable que el usuario instala deliberadamente". El blog explica y enlaza; no dispensa ejecutables.
-2. **Skills de solo lectura primero.** Las primeras skills no tocarán el sistema: **auditan** — revisa mi `docker-compose` contra la guía, evalúa mi ARCH.md contra la checklist. Valor alto, superficie de ataque mínima, y es el contenido diferencial del blog (las guidelines) convertido en herramienta.
-3. **Integridad verificable.** Catálogo con checksums y versiones fijables, para que "la skill que aprobaste" y "la skill que se ejecuta" sean demostrablemente la misma.
+- **Se va:** el emitter, el manifiesto, el catálogo de skills, el `curl` de auto-instalación y toda mención en `llms.txt` y la home. Eliminado del código, no desactivado.
+- **Se queda:** lo único que aportaba valor real sin modelo de amenaza — unas **Notas para agentes** al final de cada lab. No un runbook paralelo que duplique los pasos (el post ya los cuenta, y un agente los extrae perfectamente): solo lo que la narrativa no dice — las decisiones de adaptación, los guardarraíles con las claves, el criterio de "hecho". El usuario le pasa la URL a su agente y trabaja con él delante. La mediación humana es la barrera de seguridad, no un paso a optimizar.
 
 ## 📝 Lo que me llevo
 
 - **"Funciona de extremo a extremo" no es un criterio de publicación.** Es el momento exacto de preguntarse quién más puede usar ese extremo a extremo.
 - **En sistemas con agentes, el canal de confianza es parte de la arquitectura**, no un detalle de despliegue. El mismo payload es una herramienta o un exploit según quién lo sirve y cómo se verifica.
+- **Cuando asegurar una feature exige construir un producto entero alrededor, la feature no era viable.** Una skill es una dependencia de software: o se distribuye como tal —versionada, empaquetada, verificable— o no se distribuye. Un blog no es ese canal, y fingir que puede serlo era el error de fondo.
 - **Matar una feature propia a tiempo es una decisión de arquitectura de primera clase** — y documentarla vale más que la feature. Por eso este post existe.
 
 ## 📎 Referencias
 
 - [Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA](harness-engineering-agentes-ia.md) — el marco: el harness es el producto, y su seguridad también.
-- [Lab: LiteLLM, resolviendo la entropía multiproveedor](../02%20Laboratorios/litellm-multiproveedor.md) — el lab cuyas instrucciones para agentes siguen publicadas como documentación.
-- [llms.txt — la convención](https://llmstxt.org/) · [Agent Skills](https://code.claude.com/docs/en/skills) — las piezas estándar sobre las que se apoyará el rediseño.
+- [Lab: LiteLLM, resolviendo la entropía multiproveedor](../02%20Laboratorios/litellm-multiproveedor.md) — el lab que cierra con las "Notas para agentes" que sí sobrevivieron.
+- [llms.txt — la convención](https://llmstxt.org/) · [Agent Skills](https://code.claude.com/docs/en/skills) — los estándares que la capa usaba.
