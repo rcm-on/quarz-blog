@@ -17,10 +17,17 @@ Notas técnicas de **Ramón Campos Martín** sobre cómo diseñar, desplegar y o
 Cómo diseñar el entorno que rodea al modelo — no solo el modelo.
 
 - [[04 Arquitectura IA/harness-engineering-agentes-ia|Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA]]
+- [[04 Arquitectura IA/documento-arquitectura-base|ARCH.md: el documento que le da memoria a tu agente]]
+- [[04 Arquitectura IA/blog-documentacion-ejecutable|Este blog se ejecuta: documentación como herramienta para agentes]]
 
 ## Laboratorios
 
 - [[02 Laboratorios/arch-md-ejemplo|Lab: ARCH.md — ejemplo de documento de arquitectura para agentes IA]]
+- [[02 Laboratorios/litellm-multiproveedor|Lab: LiteLLM, resolviendo la entropía multiproveedor]] — el primer lab ejecutable: instálalo como skill.
+
+---
+
+🤖 **¿Traes un agente?** Este blog también es una herramienta: empieza por [llms.txt](https://blog.rcmon.dev/llms.txt) y su [catálogo de skills](https://blog.rcmon.dev/skills/index.json).
 
 ---
 
