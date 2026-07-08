@@ -18,6 +18,7 @@ Cómo diseñar el entorno que rodea al modelo — no solo el modelo.
 
 - [[04 Arquitectura IA/harness-engineering-agentes-ia|Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA]]
 - [[04 Arquitectura IA/documento-arquitectura-base|ARCH.md: el documento que le da memoria a tu agente]]
+- [[04 Arquitectura IA/blog-documentacion-ejecutable|Maté mi propia feature: postmortem de la capa ejecutable]]
 
 ## Laboratorios
 
@@ -31,4 +32,3 @@ Cómo diseñar el entorno que rodea al modelo — no solo el modelo.
 ---
 
 `#arquitectura` `#devops` `#ia` `#llm` `#agentes` `#kubernetes` `#aws`
-
