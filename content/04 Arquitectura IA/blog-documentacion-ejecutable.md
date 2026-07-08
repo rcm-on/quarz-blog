@@ -1,6 +1,7 @@
 ---
 title: "Este blog se ejecuta: documentación como herramienta para agentes"
 date: 2026-07-08
+draft: true
 tags:
   - arquitectura
   - ia

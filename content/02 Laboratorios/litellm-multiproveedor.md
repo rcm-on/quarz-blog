@@ -9,11 +9,6 @@ tags:
   - docker
   - agentes
 description: "Un gateway LiteLLM con Docker Compose que unifica Azure AI Foundry, los modelos gratuitos de NVIDIA y Ollama local tras un único endpoint OpenAI-compatible, con fallback automático. Incluye instrucciones ejecutables para agentes."
-action:
-  id: setup-litellm-proxy
-  kind: runbook
-  title: "Levantar un gateway LiteLLM multiproveedor con Docker Compose"
-  when_to_use: "El usuario quiere que su agente hable con Azure AI Foundry, NVIDIA NIM y/o modelos locales a través de un único endpoint OpenAI-compatible, con fallback entre proveedores."
 ---
 
 Cuando conectas tu primer agente a un LLM, eliges un proveedor y escribes su SDK directamente en el código. Funciona. Y sin darte cuenta acabas de firmar tres deudas a la vez.
@@ -176,8 +171,8 @@ Para saltar de NVIDIA a Azure no tocas ni una línea de Python: cambias `model="
 
 ## Instrucciones para agentes
 
-> [!info] Sección ejecutable
-> Esta sección está pensada para que un **agente IA** ejecute el laboratorio de forma autónoma en la máquina del usuario. Este post declara un bloque `action:` en su frontmatter, aparece en el manifiesto global [/static/actions.json](https://blog.rcmon.dev/static/actions.json) y esta misma sección se publica como skill instalable en [/skills/setup-litellm-proxy/SKILL.md](https://blog.rcmon.dev/skills/setup-litellm-proxy/SKILL.md). Los bloques de código de la sección *"Los tres ficheros"* son la fuente canónica de los contenidos.
+> [!info] Sección para agentes
+> Esta sección está redactada para que un **agente IA**, trabajando junto al usuario y con su consentimiento, reproduzca el laboratorio en su máquina. Si le pasas este post a tu agente, esta es la parte que debe seguir. Los bloques de código de la sección *"Los tres ficheros"* son la fuente canónica de los contenidos.
 
 **Objetivo:** dejar un gateway LiteLLM escuchando en `http://localhost:4000`, con los proveedores que el usuario tenga disponibles y fallback configurado.
 

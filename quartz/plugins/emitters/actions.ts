@@ -144,6 +144,50 @@ function skillMd(entry: ActionManifestEntry, instructions: string): string {
   ].join("\n")
 }
 
+function skillsIndexHtml(pageTitle: string, base: string, actions: ActionManifestEntry[]): string {
+  const esc = (s: string) =>
+    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+  const items = actions
+    .map(
+      (a) => `  <article>
+    <h2>${esc(a.title ?? a.id)}</h2>
+    <p><code>${esc(a.id)}</code> · tipo: <strong>${a.kind}</strong></p>
+    <p><em>Cuándo usarla:</em> ${esc(a.when_to_use ?? "")}</p>
+    <p>
+      <a href="${a.skill}">SKILL.md</a> ·
+      <a href="${a.source}">post con el contexto completo</a> ·
+      <a href="${a.instructions}">instrucciones en el post</a>
+    </p>
+    <pre><code>curl --create-dirs -o .claude/skills/${esc(a.id)}/SKILL.md ${a.skill}</code></pre>
+  </article>`,
+    )
+    .join("\n")
+  return `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skills — ${esc(pageTitle)}</title>
+  <meta name="description" content="Catálogo de skills instalables generadas desde los posts ejecutables del blog.">
+  <style>
+    body { max-width: 42rem; margin: 2rem auto; padding: 0 1rem; font-family: system-ui, sans-serif; line-height: 1.6; }
+    pre { overflow-x: auto; background: #f4f4f4; padding: .5rem; }
+    @media (prefers-color-scheme: dark) { body { background: #16161d; color: #e6e6ea; } pre { background: #24242e; } a { color: #8fa8ff; } }
+  </style>
+</head>
+<body>
+  <h1>Skills del blog</h1>
+  <p>Cada skill se genera en el build desde la sección "Instrucciones para agentes" de un post
+     ejecutable. Instálala en el directorio de skills de tu agente (siempre con consentimiento
+     del usuario) o, si tu LLM no puede escribir ficheros, lee el SKILL.md y aplica sus pasos
+     en la sesión. Catálogo legible por máquina: <a href="https://${base}/skills/index.json">index.json</a> ·
+     punto de entrada para agentes: <a href="https://${base}/llms.txt">llms.txt</a>.</p>
+${items}
+</body>
+</html>
+`
+}
+
 export const Actions: QuartzEmitterPlugin = () => ({
   name: "Actions",
   async emit(ctx, content) {
@@ -264,6 +308,17 @@ export const Actions: QuartzEmitterPlugin = () => ({
         ),
         slug: joinSegments("skills", "index") as FullSlug,
         ext: ".json",
+      }),
+    )
+
+    // catálogo también en HTML (/skills/): para humanos y para LLMs cuyo
+    // lector de URLs no acepta application/json (p. ej. Gemini)
+    emitted.push(
+      await write({
+        ctx,
+        content: skillsIndexHtml(cfg.pageTitle, base, actions),
+        slug: joinSegments("skills", "index") as FullSlug,
+        ext: ".html",
       }),
     )
 

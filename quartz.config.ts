@@ -91,7 +91,8 @@ const config: QuartzConfig = {
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
       Plugin.CNAME(),
-      Plugin.Actions(),
+      // Plugin.Actions(), — capa ejecutable retirada temporalmente (revisión de seguridad);
+      // los posts que la documentan están en draft hasta rediseñarla.
       // Comment out CustomOgImages to speed up build time
       Plugin.CustomOgImages({
         colorScheme: "darkMode",
