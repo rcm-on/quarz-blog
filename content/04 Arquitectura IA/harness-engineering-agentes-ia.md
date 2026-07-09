@@ -176,7 +176,7 @@ Esa es la pregunta correcta.
 
 ## Aplícalo
 
-Copia esto a tu agente, allí donde lo uses a diario:
+¿Trabajas con un agente de código (Claude Code, Cursor, ChatGPT con herramientas...)? Pégale esto allí donde lo uses a diario:
 
 ```text
 Lee https://blog.rcmon.dev/04-Arquitectura-IA/harness-engineering-agentes-ia

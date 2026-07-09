@@ -182,7 +182,7 @@ Para saltar de NVIDIA a Azure no tocas ni una línea de Python: cambias `model="
 
 ## Aplícalo
 
-Copia esto a tu agente (si no tiene acceso web, pégale el post completo en su lugar):
+¿Trabajas con un agente de código (Claude Code, Cursor, ChatGPT con herramientas...)? Pégale esto tal cual — leerá el post y montará el lab contigo. Si no tiene acceso web, copia el post entero en su lugar. Y si prefieres hacerlo tú a mano, las secciones de arriba ya tienen todo lo necesario.
 
 ```text
 Lee https://blog.rcmon.dev/02-Laboratorios/litellm-multiproveedor y móntame

@@ -96,7 +96,7 @@ Y eso, en sistemas que trabajan contigo en producción, es exactamente lo que ne
 
 ## Aplícalo
 
-Copia esto a tu agente, en el repo de tu proyecto:
+¿Trabajas con un agente de código (Claude Code, Cursor, ChatGPT con herramientas...)? Pégale esto en el repo de tu proyecto:
 
 ```text
 Lee https://blog.rcmon.dev/04-Arquitectura-IA/documento-arquitectura-base
