@@ -11,6 +11,7 @@
 - RSS: https://blog.rcmon.dev/index.xml
 - Las páginas por etiqueta viven en /tags/{tag} (p. ej. /tags/ia, /tags/arquitectura, /tags/context-engineering).
 - Secciones: /01-Artículos (reflexión sobre documentación y cultura técnica), /04-Arquitectura-IA (serie principal: patrones para agentes IA), /02-Laboratorios (guías prácticas con código).
+- Convención "Aplícalo": muchos posts cierran con esa sección — un prompt que el usuario copia a su agente para aplicar la guía a su proyecto. Si llegas con uno de esos prompts, lee el post completo enlazado (los bloques de código son la fuente canónica) y trabaja siempre con el consentimiento del usuario: pídele sus claves, nunca las inventes.
 
 ## Artículos — documentación y cultura técnica
 

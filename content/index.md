@@ -26,7 +26,7 @@ Cómo diseñar el entorno que rodea al modelo — no solo el modelo.
 
 ---
 
-🤖 **¿Traes un agente?** Este blog también se puede leer a máquina: empieza por [llms.txt](https://blog.rcmon.dev/llms.txt).
+🤖 **¿Traes un agente?** Este blog también se puede leer a máquina: empieza por [llms.txt](https://blog.rcmon.dev/llms.txt). Y muchos posts terminan con una sección **"Aplícalo"**: un prompt listo para copiar a tu agente — él lee la guía completa y la aplica contigo a tu proyecto.
 
 ---
 
