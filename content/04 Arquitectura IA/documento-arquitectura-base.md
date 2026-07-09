@@ -94,4 +94,19 @@ Y eso, en sistemas que trabajan contigo en producción, es exactamente lo que ne
 
 ---
 
+## Aplícalo
+
+Copia esto a tu agente, en el repo de tu proyecto:
+
+```text
+Lee https://blog.rcmon.dev/04-Arquitectura-IA/documento-arquitectura-base
+y su lab de ejemplo. Si mi proyecto ya tiene un ARCH.md (o equivalente),
+audítalo contra sus criterios: ¿recoge las decisiones y su porqué, las
+convenciones que importan y lo que el agente nunca debe hacer? ¿Se lee en
+2 minutos? Si no existe, genera un borrador de 30 líneas: infiere lo que
+puedas del repo y pregúntame solo lo que no esté escrito en ningún sitio.
+```
+
+---
+
 > Relacionado: [[04 Arquitectura IA/harness-engineering-agentes-ia|Harness Engineering]] · [[04 Arquitectura IA/ratchet-efecto-memoria-agente|El efecto ratchet]]

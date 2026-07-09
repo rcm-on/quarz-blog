@@ -174,4 +174,19 @@ Esa es la pregunta correcta.
 
 ---
 
+## Aplícalo
+
+Copia esto a tu agente, allí donde lo uses a diario:
+
+```text
+Lee https://blog.rcmon.dev/04-Arquitectura-IA/harness-engineering-agentes-ia
+y evalúa el harness con el que trabajo contigo contra sus criterios:
+¿qué contexto persistente, guardarraíles, gestión de estado y ciclo de
+verificación tengo — y cuáles me faltan? No propongas herramientas nuevas:
+dime las tres mejoras de más impacto con lo que ya uso, de la más barata
+a la más cara.
+```
+
+---
+
 > Relacionado: [[04 Arquitectura IA/documento-arquitectura-base|ARCH.md: el documento que le da memoria a tu agente]] · [[04 Arquitectura IA/ratchet-efecto-memoria-agente|El efecto ratchet]]
