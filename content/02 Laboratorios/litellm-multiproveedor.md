@@ -140,7 +140,7 @@ curl -s http://localhost:4000/v1/chat/completions \
   }'
 ```
 
-## 🤖 Aplicarlo con un agente
+## 🔌 Conectar tu agente al gateway
 
 Aquí está el pago del patrón. El agente **no cambia**: solo lo apuntas al gateway. Como LiteLLM habla OpenAI, cualquier cliente OpenAI sirve con dos variables de entorno:
 
@@ -180,7 +180,9 @@ Para saltar de NVIDIA a Azure no tocas ni una línea de Python: cambias `model="
 - **Hecho significa verificado:** no des el lab por completado hasta que `/health/liveliness` responda y una petición a `/v1/chat/completions` devuelva contenido. Termina informando del endpoint, el `master_key` y los nombres lógicos disponibles.
 - **Si algo falla:** `docker compose logs litellm`. Lo típico: 401 del proveedor (clave), deployment de Azure que no coincide, Ollama inaccesible desde el contenedor (`extra_hosts`).
 
-**Cópialo a tu agente** (si no tiene acceso web, pégale el post completo en su lugar):
+## Aplícalo
+
+Copia esto a tu agente (si no tiene acceso web, pégale el post completo en su lugar):
 
 ```text
 Lee https://blog.rcmon.dev/02-Laboratorios/litellm-multiproveedor y móntame
