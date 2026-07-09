@@ -180,6 +180,16 @@ Para saltar de NVIDIA a Azure no tocas ni una línea de Python: cambias `model="
 - **Hecho significa verificado:** no des el lab por completado hasta que `/health/liveliness` responda y una petición a `/v1/chat/completions` devuelva contenido. Termina informando del endpoint, el `master_key` y los nombres lógicos disponibles.
 - **Si algo falla:** `docker compose logs litellm`. Lo típico: 401 del proveedor (clave), deployment de Azure que no coincide, Ollama inaccesible desde el contenedor (`extra_hosts`).
 
+**Cópialo a tu agente** (si no tiene acceso web, pégale el post completo en su lugar):
+
+```text
+Lee https://blog.rcmon.dev/02-Laboratorios/litellm-multiproveedor y móntame
+el gateway LiteLLM del lab. Sigue las "Notas para agentes" del final:
+pregúntame qué proveedores tengo y dónde quiero el directorio de trabajo,
+pídeme las claves (van solo en .env) y no lo des por hecho hasta verificar
+/health/liveliness y una petición de chat real.
+```
+
 ---
 
 ## ✅ Resultado
