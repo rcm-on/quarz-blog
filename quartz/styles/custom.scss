@@ -1308,7 +1308,11 @@ pre:has(> code.mermaid)::before {
    CLIPBOARD BUTTON — botón copy branded
    ================================================= */
 
-.clipboard-button {
+// El componente base (clipboard.scss) lo oculta hasta :hover — inservible en
+// móvil/tablet, donde no hay hover. Lo dejamos siempre visible y algo más
+// discreto, con opacidad completa al pasar el ratón.
+pre .clipboard-button {
+  opacity: 0.55 !important;
   border-radius: var(--rcm-radius-sm);
   background-color: color-mix(in srgb, var(--light) 92%, var(--rcm-accent) 8%);
   border: 1px solid var(--lightgray);
@@ -1318,6 +1322,10 @@ pre:has(> code.mermaid)::before {
   transition: background-color 0.18s var(--rcm-ease),
               border-color 0.18s var(--rcm-ease),
               opacity 0.18s var(--rcm-ease);
+}
+
+pre:hover .clipboard-button {
+  opacity: 1 !important;
 }
 
 .clipboard-button > svg {
