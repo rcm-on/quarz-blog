@@ -40,9 +40,9 @@ export const blueprintOgImage: SocialImageOptions["imageStructure"] = ({
   const gridSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">${lines}</g><g stroke="#ffffff" stroke-opacity="0.08" stroke-width="1">${major}</g></svg>`
   const gridUri = `data:image/svg+xml;base64,${Buffer.from(gridSvg).toString("base64")}`
 
-  // Nodo neural (marca) en coral
-  const nodeSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="${coral}" stroke-width="1.9" stroke-linecap="round"><path d="M24 24 L24 10"/><path d="M24 24 L24 38"/><path d="M24 24 L37 17"/><path d="M24 24 L11 31"/><path d="M24 24 L37 32"/><path d="M24 24 L11 16"/><g fill="${coral}" stroke="none"><circle cx="24" cy="24" r="4.4"/><circle cx="24" cy="10" r="2.4"/><circle cx="24" cy="38" r="2.4"/><circle cx="37" cy="17" r="2.4"/><circle cx="11" cy="31" r="2.4"/><circle cx="37" cy="32" r="2.4"/><circle cx="11" cy="16" r="2.4"/></g></svg>`
-  const nodeUri = `data:image/svg+xml;base64,${Buffer.from(nodeSvg).toString("base64")}`
+  // Icono de marca m. (misma que favicon/avatar): m minúscula en tinta + punto coral
+  const markSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g transform="translate(115.2,162.8) scale(1.8649)" fill-rule="nonzero"><path d="M0,0 L19,0 L19,100 L0,100 Z" fill="${ink}"/><path d="M0,42 A33.25,42 0 0 1 66.5,42 L47.5,42 A14.25,23 0 0 0 19,42 Z" fill="${ink}"/><path d="M47.5,42 A33.25,42 0 0 1 114,42 L95,42 A14.25,23 0 0 0 66.5,42 Z" fill="${ink}"/><path d="M47.5,42 L66.5,42 L66.5,100 L47.5,100 Z" fill="${ink}"/><path d="M95,42 L114,42 L114,100 L95,100 Z" fill="${ink}"/><circle cx="139" cy="88" r="12" fill="${coral}"/></g></svg>`
+  const markUri = `data:image/svg+xml;base64,${Buffer.from(markSvg).toString("base64")}`
 
   const rawDate = getDate(cfg, fileData)
   const date = rawDate ? formatDate(rawDate, cfg.locale) : null
@@ -82,9 +82,9 @@ export const blueprintOgImage: SocialImageOptions["imageStructure"] = ({
           padding: "3rem 3.5rem",
         }}
       >
-        {/* Cabecera: nodo neural + dominio */}
+        {/* Cabecera: icono de marca m. + dominio */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <img src={nodeUri} width={52} height={52} />
+          <img src={markUri} width={52} height={52} />
           <div style={{ display: "flex", fontSize: 30, color: muted }}>{cfg.baseUrl}</div>
         </div>
 

@@ -263,19 +263,10 @@ input:focus-visible {
   color: var(--dark);
 }
 
-/* Firma neural: nodo-dendrita junto al título del sitio */
-.page-title > a::after {
-  content: "";
-  display: inline-block;
-  width: 0.85em;
-  height: 0.85em;
-  margin-left: 0.4em;
-  vertical-align: -0.08em;
-  background-color: var(--rcm-accent);
-  -webkit-mask: var(--rcm-neural-node) center / contain no-repeat;
-  mask: var(--rcm-neural-node) center / contain no-repeat;
-  opacity: 0.9;
-}
+/* Regla de lockup (veredicto de branding): en la cabecera va SOLO el wordmark
+   rcmon — nunca un icono al lado. El icono m. vive en favicon/avatar; la
+   arborescencia neural queda como decoración de ambiente (hr, cierre, fondo),
+   no como logo junto al título. Por eso aquí no hay ::after. */
 
 .page-header {
   border-bottom: 1px solid color-mix(in srgb, var(--lightgray) 75%, transparent);
