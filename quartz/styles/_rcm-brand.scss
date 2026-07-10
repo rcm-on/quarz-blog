@@ -144,6 +144,17 @@ input:focus-visible {
   border-radius: var(--rcm-radius-sm);
 }
 
+/* A11y (WCAG): en el cuerpo del artículo el color no basta para distinguir un
+   enlace en texto largo — subrayado explícito. También ayuda a daltónicos, para
+   quienes coral↔gris se acercan. No afecta anclas de encabezado ni tarjetas. */
+.center article p a,
+.center article li a,
+.center article dd a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
 
 /* -----------------------------------------------------------------
    6. CÓDIGO — bloques e inline
