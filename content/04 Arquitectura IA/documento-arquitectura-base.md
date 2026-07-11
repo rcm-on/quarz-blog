@@ -1,6 +1,7 @@
 ---
 title: "ARCH.md: el documento que le da memoria a tu agente"
 date: 2026-05-14
+status: "aceptada"
 tags:
   - arquitectura
   - ia

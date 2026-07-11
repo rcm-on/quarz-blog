@@ -1,6 +1,7 @@
 ---
 title: "Documentar ahora es diferente. Y por fin lo entendemos."
 date: 2026-05-14
+status: "aceptada"
 tags:
   - arquitectura
   - ia

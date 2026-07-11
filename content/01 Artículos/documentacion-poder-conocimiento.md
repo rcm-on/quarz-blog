@@ -1,6 +1,7 @@
 ---
 title: "El conocimiento que no se documenta no se comparte. Era una elección."
 date: 2026-05-14
+status: "aceptada"
 tags:
   - arquitectura
   - documentación

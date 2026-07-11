@@ -2,6 +2,7 @@
 title: "Lab: dejé que un agente instalara el gateway LiteLLM solo"
 date: 2026-07-09
 draft: true
+status: "rechazada"
 tags:
   - lab
   - ia
@@ -11,6 +12,9 @@ tags:
   - context-engineering
 description: "Rastro real de un agente (Claude Code) descubriendo la skill setup-litellm-proxy desde llms.txt, ejecutando sus precondiciones y escribiendo los tres ficheros del gateway sin intervención manual — qué hizo bien, dónde se detuvo y por qué."
 ---
+
+> [!important] Estado del experimento
+> **Publicado** (2026-07-09) → **Rechazado** (2026-07-09). La skill instalable `setup-litellm-proxy` que este post documenta dependía de la capa ejecutable (manifiesto + skills auto-descubiertas), retirada por revisión de seguridad — ver el [postmortem](04-Arquitectura-IA/blog-documentacion-ejecutable). Este post queda en `draft` como registro de lo que se probó, no como guía a reproducir.
 
 El [lab de LiteLLM multiproveedor](02-Laboratorios/litellm-multiproveedor) tiene una sección de más: "Instrucciones para agentes". No es documentación para humanos — es un runbook que un agente IA puede leer y ejecutar solo, publicado como skill instalable en `/skills/setup-litellm-proxy/SKILL.md`. Escribir esa sección es fácil. Confiar en que un agente la siga bien, sin supervisión, es otra cosa.
 

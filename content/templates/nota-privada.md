@@ -2,6 +2,7 @@
 title: "{{title}}"
 date: {{date}}
 draft: true
+status: "propuesta"
 tags:
   - privado
 ---

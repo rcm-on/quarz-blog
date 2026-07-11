@@ -1,6 +1,7 @@
 ---
 title: "Ref: {{title}}"
 date: {{date}}
+status: "propuesta"
 tags:
   - referencia
 url: ""

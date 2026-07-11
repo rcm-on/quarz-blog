@@ -1,6 +1,7 @@
 ---
 title: "Lab: LiteLLM, resolviendo la entropía multiproveedor"
 date: 2026-07-08
+status: "aceptada"
 tags:
   - lab
   - ia
@@ -8,18 +9,18 @@ tags:
   - litellm
   - docker
   - agentes
-description: "Un gateway LiteLLM con Docker Compose que unifica Azure AI Foundry, los modelos gratuitos de NVIDIA y Ollama local tras un único endpoint OpenAI-compatible, con fallback automático. Incluye instrucciones ejecutables para agentes."
+description: "Un gateway LiteLLM con Docker Compose que unifica Azure AI Foundry, los modelos gratuitos de NVIDIA y Ollama local tras un único endpoint OpenAI-compatible, con fallback automático. Incluye notas para que un agente IA reproduzca el lab junto al usuario."
 ---
 
 Cuando conectas tu primer agente a un LLM, eliges un proveedor y escribes su SDK directamente en el código. Funciona. Y sin darte cuenta acabas de firmar tres deudas a la vez.
 
 La primera es de **acoplamiento**: el nombre del modelo, el formato de la petición y las claves están cosidos por todo tu código. La segunda es de **disponibilidad**: cuando ese proveedor tiene una caída —y la tendrá— tu agente se para en seco. La tercera es de **coste y control**: no puedes mandar la tarea barata a un modelo gratuito y la crítica a uno de pago sin reescribir la integración.
 
-Y el escenario real es peor que el teórico, porque no eliges *un* proveedor: la empresa tiene **Azure AI Foundry** por contrato, tú tienes los **modelos gratuitos de NVIDIA** (NIM API) para experimentar sin coste, y un **Ollama local** para lo que no puede salir de tu máquina. Tres proveedores, tres dialectos, tres formas de autenticar.
+Y el escenario real es peor que el teórico, porque no eliges *un* proveedor: tienes **Azure AI Foundry** por contrato, los **modelos gratuitos de NVIDIA** (NIM API) para experimentar sin coste, y un **Ollama local** para lo que no puede salir de tu máquina. Tres proveedores, tres dialectos, tres formas de autenticar.
 
 Eso es la **entropía multiproveedor**: cada proveedor que añades mete desorden en el sistema — otro dialecto de API, otro esquema de autenticación, otro catálogo de modelos que evoluciona por su cuenta. Y el desorden crece más rápido que el número de proveedores, porque cada integración nueva interactúa con todas las anteriores. Resolverlo a mano —un `if` por proveedor— no reduce la entropía: la reparte por tu código.
 
-La solución es un patrón de infraestructura clásico: **un gateway**. Una pieza que absorbe el desorden por dentro —habla el dialecto de cada proveedor— y expone orden por fuera: un único contrato OpenAI-compatible. Ese gateway es [LiteLLM](https://docs.litellm.ai/).
+La solución es un patrón de infraestructura clásico: **un gateway**. Una pieza que absorbe el desorden por dentro —habla el dialecto de cada proveedor— y expone orden por fuera: un único contrato OpenAI-compatible. Ese gateway es [LiteLLM](https://docs.litellm.ai/): open source, ~40.000 estrellas en GitHub, y en producción en sitios como Netflix o Rocket Money — no es una apuesta exótica, es la pieza estándar de esta capa.
 
 ---
 
@@ -39,7 +40,7 @@ graph LR
 > [!info] Componentes del stack
 > - **Cliente:** cualquier agente que hable OpenAI (SDK, Claude Code, Cursor, un `curl`).
 > - **Gateway:** LiteLLM Proxy en contenedor (Docker Compose, endpoint `:4000`).
-> - **Proveedores:** Azure AI Foundry (contrato empresa), NVIDIA NIM (gratuito, [build.nvidia.com](https://build.nvidia.com)), Ollama (local, privacidad).
+> - **Proveedores:** Azure AI Foundry, NVIDIA NIM (gratuito, [build.nvidia.com](https://build.nvidia.com)), Ollama (local, privacidad).
 
 La estrategia de routing sale sola de las restricciones: **NVIDIA para experimentar** (gratis), **Azure para producción** (contrato y compliance), **Ollama para lo sensible** (no sale de casa). El fallback conecta los tres: si Azure no responde, la petición cae a NVIDIA.
 
@@ -97,12 +98,20 @@ model_list:
 litellm_settings:
   fallbacks:
     - produccion: ["experimentos", "local"]
+    - experimentos: ["local"]   # cada nombre lógico declara los suyos
+  num_retries: 2        # reintenta el primario antes de degradar
+  request_timeout: 60   # y considéralo caído si tarda más de esto
 
 general_settings:
-  master_key: sk-lab-1234                    # clave que usarán los clientes
+  master_key: os.environ/LITELLM_MASTER_KEY   # clave que usarán los clientes
 ```
 
 Fíjate en lo que acabas de comprar: el agente pedirá `produccion` sin saber que es Azure, y si Azure no responde, LiteLLM redirige la misma petición al modelo gratuito de NVIDIA y, en última instancia, al local. **El fallback es la entropía multiproveedor resuelta en tres líneas.**
+
+> [!warning] La letra pequeña del fallback
+> Dos cosas que este lab enseña a base de errores. Primera: el fallback solo aplica al modelo **pedido** — declarar fallbacks para `produccion` no cubre las llamadas directas a `experimentos`; cada nombre lógico necesita su propia entrada (por eso el ejemplo declara las dos). Segunda: no rescata fallos **a mitad de stream** — si el proveedor corta cuando ya empezó a responder, la petición muere igualmente.
+
+Y un ajuste de expectativas: lo que disparará el fallback casi nunca será una caída épica del proveedor, sino un **429 de cuota** — el tier gratuito saturado, o el TPM de tu deployment agotado por un agente que mete 30.000 tokens por petición. El patrón es el mismo; el enemigo es más mundano.
 
 ### 3. `.env` — las claves, fuera de la configuración
 
@@ -110,6 +119,7 @@ Fíjate en lo que acabas de comprar: el agente pedirá `produccion` sin saber qu
 AZURE_API_BASE=https://mi-recurso.openai.azure.com
 AZURE_API_KEY=...
 NVIDIA_NIM_API_KEY=nvapi-...
+LITELLM_MASTER_KEY=sk-lab-1234                # genera una clave propia, no reutilices esta
 ```
 
 > [!note] Nombres de modelo
@@ -120,6 +130,8 @@ NVIDIA_NIM_API_KEY=nvapi-...
 ```bash
 docker compose up -d
 ```
+
+El contenedor tarda 10–15 segundos en estar listo: si el primer `curl` no responde, no es un fallo — espera y repite.
 
 Comprueba que el gateway está vivo (sin clave):
 
@@ -167,6 +179,28 @@ Para saltar de NVIDIA a Azure no tocas ni una línea de Python: cambias `model="
 > [!tip] Agentes que hablan Anthropic (Claude Code, etc.)
 > LiteLLM también expone un endpoint compatible con la API de Anthropic. Puedes apuntar herramientas que usan `ANTHROPIC_BASE_URL` al gateway y enrutar por debajo hacia cualquiera de los tres proveedores.
 
+Y el cliente menos obvio, que fue el que más guerra dio:
+
+> [!tip] ¿Y GitHub Copilot Chat como cliente?
+> Se puede — este gateway acabó sirviendo modelos al chat de VS Code vía BYOK — pero tiene trampas propias: el proveedor correcto es *Custom Endpoint* (`customendpoint`, `apiType: chat-completions`), y la API key debe entrar por el diálogo seguro de la UI, no escrita en el JSON (si la pones en texto plano, VS Code manda la cabecera `Authorization: Bearer` vacía). El debugging completo da para su propio post; queda apuntado para el siguiente de la serie.
+
+## 🚦 Acotar el gasto sin base de datos
+
+Los presupuestos en euros por consumidor necesitan Postgres y daría para un lab aparte. Pero un techo de daño sí cabe en el `config.yaml`: límites estáticos de tasa por modelo, directamente en `litellm_params`.
+
+```yaml
+  - model_name: produccion
+    litellm_params:
+      model: azure/gpt-4o
+      api_base: os.environ/AZURE_API_BASE
+      api_key: os.environ/AZURE_API_KEY
+      api_version: "2024-10-21"
+      rpm: 20        # peticiones por minuto
+      tpm: 40000     # tokens por minuto
+```
+
+No mide gasto acumulado, pero acota el daño máximo por minuto. Para un lab o un uso personal, es el 80% del valor con el 5% de la complejidad: un bucle mal cerrado ya no te vacía la cuenta antes de que te des cuenta.
+
 ---
 
 ## Notas para agentes
@@ -175,10 +209,11 @@ Para saltar de NVIDIA a Azure no tocas ni una línea de Python: cambias `model="
 > Los pasos ya están en el post; los bloques de código de *"Los tres ficheros"* son la fuente canónica. Estas notas son lo que la narrativa no dice:
 
 - **Antes de empezar:** verifica que `docker compose version` responde y pregunta al usuario qué proveedores tiene (Azure, NVIDIA NIM, Ollama) y dónde quiere el directorio de trabajo.
-- **Adapta la config:** elimina de `model_list` los proveedores que el usuario no tenga y ajusta los `fallbacks` a los que queden. Genera un `master_key` aleatorio en lugar de `sk-lab-1234`.
+- **Adapta la config:** elimina de `model_list` los proveedores que el usuario no tenga y ajusta los `fallbacks` a los que queden. Genera un `LITELLM_MASTER_KEY` aleatorio en `.env`, nunca reutilices el `sk-lab-1234` del ejemplo.
 - **Claves:** pídeselas al usuario y ponlas solo en `.env`. Nunca las inventes ni las escribas en `config.yaml`.
 - **Hecho significa verificado:** no des el lab por completado hasta que `/health/liveliness` responda y una petición a `/v1/chat/completions` devuelva contenido. Termina informando del endpoint, el `master_key` y los nombres lógicos disponibles.
-- **Si algo falla:** `docker compose logs litellm`. Lo típico: 401 del proveedor (clave), deployment de Azure que no coincide, Ollama inaccesible desde el contenedor (`extra_hosts`).
+- **Si algo falla:** `docker compose logs litellm`. Lo típico: 401 del proveedor (clave), deployment de Azure que no coincide, Ollama inaccesible desde el contenedor (`extra_hosts`), 429 de cuota del proveedor (no es un fallo del gateway: mira el TPM del deployment).
+- **Si el error no cuadra:** desactiva temporalmente los `fallbacks` y reproduce. El fallback enmascara al culpable — el log señala al último modelo de la cadena, no al que falló primero. Fue el truco que resolvió el diagnóstico más difícil de este lab.
 
 ## Aplícalo
 
@@ -205,10 +240,13 @@ Con un gateway y tres ficheros:
 
 La entropía multiproveedor no se resuelve eligiendo bien el proveedor. Se resuelve **dejando de elegir en el código** y concentrando el desorden en una capa que puedes cambiar sin desplegar.
 
+## Cuándo dar el siguiente paso
+
+Esta versión cubre un consumidor: tú. En cuanto haya más de una aplicación o más de un agente detrás del gateway, aparece la pregunta de quién gasta qué — y ahí entra Postgres, con claves virtuales por consumidor, presupuesto máximo (`max_budget`) y dashboard de gasto. Ese es el terreno del siguiente escalón: aislar consumidores sobre el mismo gateway.
+
 ## 📎 Referencias
 
 - [Documentación de LiteLLM](https://docs.litellm.ai/)
 - [LiteLLM Proxy — configuración](https://docs.litellm.ai/docs/proxy/configs)
 - [Azure AI Foundry en LiteLLM](https://docs.litellm.ai/docs/providers/azure_ai)
 - [NVIDIA NIM en LiteLLM](https://docs.litellm.ai/docs/providers/nvidia_nim) · [Catálogo gratuito](https://build.nvidia.com)
-- [Lab: Ollama + Docker en local](https://blog.rcmon.dev/02-Laboratorios/ollama-docker-local) — el modelo `local` de este `config.yaml`.

@@ -1,6 +1,7 @@
 ---
 title: "{{title}}"
 date: {{date}}
+status: "propuesta"
 tags:
   - arquitectura
 description: ""

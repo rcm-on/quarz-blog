@@ -1,6 +1,7 @@
 ---
 title: "Lab: {{title}}"
 date: {{date}}
+status: "propuesta"
 tags:
   - lab
   - devops
