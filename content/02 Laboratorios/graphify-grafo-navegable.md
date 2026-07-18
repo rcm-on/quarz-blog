@@ -188,7 +188,9 @@ No hay un "×" fijo. Ajusté el contexto de **16 preguntas reales** con un token
 
 *Cada punto, una pregunta. Regresión: `grep ≈ 1.100 · ficheros^0,89` (R²=0,73 — **~lineal**, no una curva mágica); el grafo (teal) se queda plano bajo el budget. Resultado: **mediana ~2×, hasta 37×**, y en **4 de 16 gana el grep**. La cifra por fichero es de este repo — en el tuyo será otra.*
 
-**Un matiz que no se suele decir:** el grafo **vale lo que su extractor**. Tree-sitter es preciso y barato para lo estructural —quién implementa, quién llama, qué importa—, pero **no ve el wiring de runtime** (inyección de dependencias, reflection). Ahí el grep sigue siendo la red de seguridad. No son rivales: **grafo para estructura, grep para lo dinámico**.
+**Un matiz que no se suele decir:** el grafo **vale lo que su extractor**. Tree-sitter lee *sintaxis*, no *semántica*: es preciso y barato para lo estructural —quién implementa, quién llama, qué importa—, pero **no resuelve tipos ni genéricos**, así que el wiring de runtime (un `AddTransient<T>` de inyección de dependencias, la reflection) se le escapa. Un extractor con análisis semántico de verdad —Roslyn en .NET, o el propio compilador del lenguaje— sí lo capturaría; con tree-sitter hay **pérdida de información**. Por eso ahí el grep sigue siendo la red. **Grafo para estructura, grep para lo dinámico.**
+
+(Ojo: Graphify sí añade aristas `INFERRED`, pero son **heurísticas** —adivina relaciones probables—, no la resolución semántica que te daría un compilador.)
 
 > [!info] Próximo avance
 > El análisis riguroso queda para la siguiente entrega: **loops reales de agente** (dos agentes con el mismo modelo, uno solo-grep y otro solo-graphify), **precisión por tipo de pregunta**, si el coste es de verdad super-lineal contra la *complejidad* (aquí solo lo medí contra ficheros, y salió ~lineal), y por qué **darle el `graph.json` entero al modelo es la trampa** (cientos de miles de tokens de ruido).
