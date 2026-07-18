@@ -26,16 +26,16 @@ Grepear un repo mediano para una pregunta de una frase puede disparar el context
 ```mermaid
 graph LR
     subgraph "Grep-and-read"
-        Q1["¿Dónde se\ndescuentan créditos?"] --> S1[grep término 1]
+        Q1["¿Dónde se<br/>descuentan créditos?"] --> S1[grep término 1]
         S1 --> R1[Leer N ficheros]
         R1 --> S2[grep término 2]
         S2 --> R2[Leer más ficheros]
-        R2 --> A1["contexto que crece\ncon cada vuelta"]
+        R2 --> A1["contexto que crece<br/>con cada vuelta"]
     end
     subgraph "Grafo navegable"
-        Q2["¿Dónde se\ndescuentan créditos?"] --> G[Consulta al grafo]
-        G --> N[2-3 nodos relevantes\ncon sus aristas]
-        N --> A2["~2k tokens\n(acotado)"]
+        Q2["¿Dónde se<br/>descuentan créditos?"] --> G[Consulta al grafo]
+        G --> N[2-3 nodos relevantes<br/>con sus aristas]
+        N --> A2["~2k tokens<br/>(acotado)"]
     end
 ```
 
