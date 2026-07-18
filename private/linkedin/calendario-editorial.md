@@ -30,7 +30,7 @@ Independiente de la serie "Conocimiento retenido" — no comparte orden ni foote
 
 | # | Artículo (blog) | Post LinkedIn | Estado | Fecha blog | Fecha LinkedIn |
 |---|---|---|---|---|---|
-| 1 | graphify-grafo-navegable | graphify-grafo-navegable | ✅ Listo para lanzar | _pendiente_ | _pendiente_ |
+| 1 | graphify-grafo-navegable | graphify-grafo-navegable | ✔️ Publicado | 2026-07-18 | 2026-07-18 |
 
 Par concepto↔lab: `04 Arquitectura IA/datos-navegables-para-agentes` (artículo) ↔ `02 Laboratorios/graphify-grafo-navegable` (lab), enlazados entre sí.
 ⚠️ El artículo pareja aún tiene en el pie un enlace al toolkit propio, que **no está publicado**: revisar antes de publicar el artículo.
