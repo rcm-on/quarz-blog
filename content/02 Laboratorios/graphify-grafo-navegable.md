@@ -162,68 +162,36 @@ Repórtame los tokens de los nodos y aristas que devuelve el grafo.
 | **Contexto ahorrado** | — | **… ×** |
 
 > [!example] Resultado real — y por qué hay que medir
-> **Este blog (Quartz, 610 nodos), 6 preguntas.** El grafo abre **0 ficheros** en todas (responde con `graphify query`); el grep abre los que haga falta:
+> **Este blog (Quartz, 610 nodos), tokenizador real (tiktoken).** El grafo abre **0 ficheros** (responde con `graphify query`); el grep abre los que haga falta. 6 de las 16 preguntas medidas:
 >
 > | Pregunta | ficheros (grep) | grep tk | grafo tk | ahorro |
 > |---|---|---|---|---|
-> | GlobalConfiguration | 8 | 9.248 | 1.562 | 5,9× |
-> | FullPageLayout | 5 | 4.755 | 1.565 | 3,0× |
-> | PageList | 4 | 3.794 | 1.563 | 2,4× |
-> | GraphOptions | 1 | 1.008 | 460 | 2,2× |
-> | QuartzConfig | 3 | 1.417 | 1.564 | 0,9× |
-> | Analytics | 1 | 707 | 881 | 0,8× |
+> | GlobalConfiguration | 8 | 8.734 | 1.754 | 5,0× |
+> | GraphOptions | 1 | 1.632 | 496 | 3,3× |
+> | FullPageLayout | 5 | 4.526 | 1.759 | 2,6× |
+> | PageList | 4 | 3.426 | 1.705 | 2,0× |
+> | QuartzConfig | 3 | 1.433 | 1.750 | 0,8× |
+> | Analytics | 1 | 708 | 991 | 0,7× |
 >
-> **Media 2,5× · rango 0,8–5,9×.** En 2 de 6, el grep salió *más barato*: abría pocos ficheros y el `graphify query` está acotado (~1,5k tokens). El grafo gana cuando el grep tendría que abrir **muchos** ficheros; empata o pierde cuando la respuesta ya estaba en 1-3 ficheros pequeños. (En otro proyecto propio en .NET, una pregunta similar dio **9,8×**.) Moraleja: mide *tu* repo con este lab, no te fíes del titular.
->
-> *Y es un suelo conservador: cuenta **un** grep + leer las coincidencias. Un agente real encadena varios greps en bucle (grep → leer → grep → leer…), así que en preguntas de varios saltos el grep gasta más y el ahorro sube.*
+> **Sobre las 16: mediana ~2×, rango 0,5–37×, y en 4 el grep salió más barato** (abría pocos ficheros y el `graphify query` tiene su coste base ~topado). El grafo gana cuando el grep tendría que abrir **muchos** ficheros; empata o pierde cuando la respuesta ya estaba en 1-2 pequeños. Moraleja: mide *tu* repo con este lab, no te fíes del titular.
 
 > [!check] Checkpoint
 > El agente termina con una cifra propia de ahorro (grep vs. grafo) sobre tu repo. **No es "71,5×"**: es 8×, 40× o lo que te haya salido. Lo que prueba el experimento no es el número, es que **la estructura del dato de búsqueda importa más que el tamaño del modelo** que busca.
 
 **Por qué gana el grafo:** en grep-and-read el agente abre ficheros que no venían al caso solo porque la palabra aparecía de pasada. El grafo no: la arista ya codifica la relación real, y la marca como **EXTRACTED** (está en el código: una llamada, un import, un FK) o **INFERRED** (la dedujo Graphify). Por eso la respuesta del grafo cita sus fuentes y sabes qué fiar y qué verificar — mientras que grep te devuelve coincidencias de texto que hay que leer para descartar.
 
-## 🧮 El modelo del ahorro (por qué el veredicto es estructural)
+## 🧮 ¿Cuánto ahorra? Depende — y ese es el punto
 
-Los números de arriba no son anécdota: salen de **cómo escala cada estrategia**. Y no escala de forma lineal.
-
-**Una pregunta se responde en varios saltos** (`h = 1…H`): el agente localiza algo y desde ahí salta al siguiente. En cada salto, las dos estrategias pagan cosas distintas:
-
-- **grep** busca un término y **lee los ficheros que salen** → cuesta `fₕ · sₕ` (ficheros × tamaño).
-- **grafo** hace una `graphify query` → cuesta `bₕ`, **topado por el budget** (`bₕ ≤ B`) y sin abrir ficheros.
-
-El contexto total de una pregunta es la **suma de sus saltos**:
-
-$$C_{\text{grep}} = \sum_{h=1}^{H} f_h\,s_h \qquad\qquad C_{\text{grafo}} = \sum_{h=1}^{H} b_h \;\le\; H\cdot B$$
-
-**Por qué no es lineal.** `f` y `s` **no son constantes**: crecen con el tamaño del repo (más código → términos más ambiguos, ficheros mayores) y con el alcance de la pregunta (`H`↑). Los tres suben a la vez, así que `C_grep` es **super-lineal** en la complejidad — una curva convexa. En cambio `b` está **topado** por el budget, así que `C_grafo` es **sub-lineal** y se **aplana**. El ahorro no es un "×" fijo, es una función que crece:
-
-$$R = \frac{\sum_h f_h\,s_h}{\sum_h b_h}\ \nearrow\ \text{con el tamaño del repo y la profundidad de la pregunta.}$$
-
-**Medido salto a salto** (recorrido real de 4 saltos en un proyecto propio en .NET: Console → parser → analyzer → exporter):
-
-| | por salto (tokens) | total |
-|---|---|---|
-| **grafo** (`bₕ`) | 460 · 1.134 · 362 · 445 — *topado* | **2.401** |
-| **grep** (`fₕ·sₕ`) | 0 · 6.748 · 756 · 1.735 — *disparado* | **9.239** |
-
-Los **mismos 4 saltos** en ambos: el ahorro (**3,8×**) no viene de hacer menos loops, sino del **coste de cada loop**. Mira el salto `ScriptDomParser`: al grep le costó 6.748 tk (5 ficheros); al grafo, 1.134 topados.
-
-**La conclusión estructural:** grep ≈ **O(Σ fₕsₕ)** con `f,s` crecientes → **super-lineal**; grafo ≈ **O(Σ bₕ)** con `b` topado → **sub-lineal, se aplana**. El grafo no elimina los loops: **acota el coste de cada uno**. Y para `N` preguntas se suma por pregunta —cada una con su `H`, su `f`, su `s`—, así que el ahorro es una **distribución**, no un número. Por eso: mídelo en tu repo.
+No hay un "×" fijo. Ajusté el contexto de **16 preguntas reales** con un tokenizador real (tiktoken): el coste del **grep crece ~lineal con los ficheros** que toca la pregunta; el del **grafo se queda topado** por su presupuesto (`--budget`), da igual lo grande que sea el repo.
 
 ![Ajuste sobre 16 preguntas: el grep crece ~lineal con los ficheros que toca la pregunta; el grafo se queda topado bajo el budget](/static/labs/graphify/coste-funcion.png)
 
-*Ajuste real sobre 16 preguntas (cada punto, una pregunta). El grep (coral) crece ~lineal con los ficheros que toca; el grafo (teal) se queda plano bajo el budget. Regresión: `grep ≈ 1.000 · ficheros^0,93` (R²=0,75); grafo, pendiente ~0. La cifra `a≈1.000 tk/fichero` es de este repo — en el tuyo será otra.*
+*Cada punto, una pregunta. Regresión: `grep ≈ 1.100 · ficheros^0,89` (R²=0,73 — **~lineal**, no una curva mágica); el grafo (teal) se queda plano bajo el budget. Resultado: **mediana ~2×, hasta 37×**, y en **4 de 16 gana el grep**. La cifra por fichero es de este repo — en el tuyo será otra.*
 
-> [!check] El veredicto, contra los datos medidos
-> Un solo modelo predice los tres regímenes, **incluido cuándo el grafo pierde**:
->
-> | Pregunta | régimen | ahorro |
-> |---|---|---|
-> | blog `Analytics` | 1 salto, 1 fichero pequeño (`Σfs < B`) | **0,8×** — gana el grep |
-> | .NET, recorrido 4 saltos | multi-salto, ficheros medianos | **3,8×** |
-> | .NET `ISqlParser`, bucle | término ambiguo, 6 greps / 15 ficheros | **16,4×** |
->
-> Que prediga el caso en que **pierde** es lo que lo hace fiable — y por qué el "×" se mide por pregunta, no se promete.
+**Un matiz que no se suele decir:** el grafo **vale lo que su extractor**. Tree-sitter es preciso y barato para lo estructural —quién implementa, quién llama, qué importa—, pero **no ve el wiring de runtime** (inyección de dependencias, reflection). Ahí el grep sigue siendo la red de seguridad. No son rivales: **grafo para estructura, grep para lo dinámico**.
+
+> [!info] Próximo avance
+> El análisis riguroso queda para la siguiente entrega: **loops reales de agente** (dos agentes con el mismo modelo, uno solo-grep y otro solo-graphify), **precisión por tipo de pregunta**, si el coste es de verdad super-lineal contra la *complejidad* (aquí solo lo medí contra ficheros, y salió ~lineal), y por qué **darle el `graph.json` entero al modelo es la trampa** (cientos de miles de tokens de ruido).
 
 ## Prueba tú
 
