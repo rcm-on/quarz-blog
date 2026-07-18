@@ -188,6 +188,9 @@ No hay un "×" fijo. Ajusté el contexto de **16 preguntas reales** con un token
 
 *Cada punto, una pregunta. Regresión: `grep ≈ 1.100 · ficheros^0,89` (R²=0,73 — **~lineal**, no una curva mágica); el grafo (teal) se queda plano bajo el budget. Resultado: **mediana ~2×, hasta 37×**, y en **4 de 16 gana el grep**. La cifra por fichero es de este repo — en el tuyo será otra.*
 
+> [!warning] Qué es esto, y qué no
+> Esto es una **validación suave**: N=16 preguntas sobre **un solo repo** (este blog). No es un benchmark ni una ley del coste — la regresión ajusta *estos* puntos, no predice el tuyo. Lo único que prueba, y no es poco, es que **el 71,5× del titular no generaliza** a una pregunta cualquiera. Para saber tu número, mídelo: por eso este lab te da el método, no una cifra para citar.
+
 **Un matiz que no se suele decir:** el grafo **vale lo que su extractor**. Tree-sitter lee *sintaxis*, no *semántica*: es preciso y barato para lo estructural —quién implementa, quién llama, qué importa—, pero **no resuelve tipos ni genéricos**, así que el wiring de runtime (un `AddTransient<T>` de inyección de dependencias, la reflection) se le escapa. Un extractor con análisis semántico de verdad —Roslyn en .NET, o el propio compilador del lenguaje— sí lo capturaría; con tree-sitter hay **pérdida de información**. Por eso ahí el grep sigue siendo la red. **Grafo para estructura, grep para lo dinámico.**
 
 (Ojo: Graphify sí añade aristas `INFERRED`, pero son **heurísticas** —adivina relaciones probables—, no la resolución semántica que te daría un compilador.)
