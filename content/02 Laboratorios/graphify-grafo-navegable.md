@@ -13,7 +13,7 @@ Pídele a un agente de código "¿dónde se descuentan los créditos del usuario
 
 El coste no está en el modelo. Está en cómo busca.
 
-Grepear un repo mediano para una pregunta de una frase puede quemar del orden de 100k+ tokens en lecturas exploratorias antes de llegar a los tres ficheros que de verdad importaban. Ese gasto no aparece en ningún benchmark de "calidad del modelo": aparece en la factura y en la ventana de contexto que ya no tienes disponible para el resto de la tarea.
+Grepear un repo mediano para una pregunta de una frase puede disparar el contexto a decenas de miles de tokens en lecturas exploratorias antes de llegar a los tres ficheros que de verdad importaban. Ese gasto no aparece en ningún benchmark de "calidad del modelo": aparece en la factura y en la ventana de contexto que ya no tienes disponible para el resto de la tarea.
 
 ## Qué vas a aprender
 
@@ -30,12 +30,12 @@ graph LR
         S1 --> R1[Leer N ficheros]
         R1 --> S2[grep término 2]
         S2 --> R2[Leer más ficheros]
-        R2 --> A1["~123k tokens"]
+        R2 --> A1["contexto que crece\ncon cada vuelta"]
     end
     subgraph "Grafo navegable"
         Q2["¿Dónde se\ndescuentan créditos?"] --> G[Consulta al grafo]
         G --> N[2-3 nodos relevantes\ncon sus aristas]
-        N --> A2["~1,7k tokens"]
+        N --> A2["~2k tokens\n(acotado)"]
     end
 ```
 
@@ -173,7 +173,7 @@ Repórtame los tokens de los nodos y aristas que devuelve el grafo.
 > | QuartzConfig | 3 | 1.433 | 1.750 | 0,8× |
 > | Analytics | 1 | 708 | 991 | 0,7× |
 >
-> **Sobre las 16: mediana ~2×, rango 0,5–37×, y en 4 el grep salió más barato** (abría pocos ficheros y el `graphify query` tiene su coste base ~topado). El grafo gana cuando el grep tendría que abrir **muchos** ficheros; empata o pierde cuando la respuesta ya estaba en 1-2 pequeños. Moraleja: mide *tu* repo con este lab, no te fíes del titular.
+> **Sobre las 16: mediana ~2×, rango 0,5–37×, y en 4 el grep salió más barato** (abría pocos ficheros y el `graphify query` tiene un coste base que no es cero, ~500–1.700 tk). El grafo gana cuando el grep tendría que abrir **muchos** ficheros; empata o pierde cuando la respuesta ya estaba en 1-2 pequeños. Moraleja: mide *tu* repo con este lab, no te fíes del titular.
 
 > [!check] Checkpoint
 > El agente termina con una cifra propia de ahorro (grep vs. grafo) sobre tu repo. **No es "71,5×"**: es 8×, 40× o lo que te haya salido. Lo que prueba el experimento no es el número, es que **la estructura del dato de búsqueda importa más que el tamaño del modelo** que busca.
@@ -209,9 +209,23 @@ Graphify extrae con tree-sitter, así que brilla en **código**: cualquiera de l
 
 ## Reprodúcelo con tu agente
 
-El blog como laboratorio: pégale el bloque de "Aplícalo" más abajo a tu agente y que monte esto contigo.
+El blog como laboratorio: pégale este bloque a tu agente y que monte el lab contigo.
 
-Contexto que necesita: acceso a un repo real (el suyo o uno de referencia) para generar el grafo, permiso para instalar `uv`/`graphifyy` si no los tiene, y — para el experimento de "Rómpelo a propósito" — que tú le confirmes qué pregunta concreta usar, porque tiene que ser algo verificable en tu propio código, no un ejemplo genérico.
+```text
+Vamos a montar el lab de Graphify sobre este repo, paso a paso.
+1. Instala graphifyy (uv tool install graphifyy, o pipx) y verifica que el
+   comando graphify responde.
+2. Registra el skill con el asistente que estoy usando (graphify install + su
+   subcomando) y genera el grafo con /graphify . — enséñame graphify-out/:
+   abre graph.html y resúmeme GRAPH_REPORT.md.
+3. Mídelo: te haré una pregunta concreta y verificable sobre este código.
+   Respóndela dos veces con contexto fresco — una solo con grep y lectura de
+   ficheros, otra solo con graphify query — y dame una tabla comparativa
+   (grep lanzados, ficheros abiertos, tokens de contexto y ahorro real).
+   Guárdala como comparativa.md. Quiero el número de MI repo, no el de marketing.
+```
+
+Contexto que necesita: acceso a un repo real (el suyo o uno de referencia) para generar el grafo, permiso para instalar `uv`/`graphifyy` si no los tiene, y —para el paso de medir— que tú le confirmes qué pregunta concreta usar, porque tiene que ser algo verificable en tu propio código, no un ejemplo genérico.
 
 En cada checkpoint debe verificar de verdad, no asumir: que `graphify-out/` existe con los tres ficheros, que el skill responde dentro del asistente (`/graphify`), y que `graphify query` de la CLI devuelve nodos y aristas nombrados, no un resumen vago.
 
