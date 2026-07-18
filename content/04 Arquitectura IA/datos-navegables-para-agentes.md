@@ -105,4 +105,6 @@ El NodeStore no es una optimización. Es un cambio de modelo mental: el dato se 
 
 ---
 
+**Relacionado:** [[02 Laboratorios/graphify-grafo-navegable|Lab: Graphify]] — la versión de estantería de esta misma tesis, aplicada a grafos de código con tree-sitter en vez de a lineage de SQL Server.
+
 *El toolkit que generó estos números es open-source: [github.com/rcm-on/tsql-lineage-toolkit](https://github.com/rcm-on/tsql-lineage-toolkit). Análisis completo de WideWorldImporters en 3,8 segundos, sin cloud, sin telemetría. El fix de compatibilidad con SQL Server 2025 está incluido en la última versión.*
