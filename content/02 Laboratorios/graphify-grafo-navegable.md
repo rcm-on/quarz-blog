@@ -195,6 +195,8 @@ No hay un "×" fijo. Ajusté el contexto de **16 preguntas reales** con un token
 
 (Ojo: Graphify sí añade aristas `INFERRED`, pero son **heurísticas** —adivina relaciones probables—, no la resolución semántica que te daría un compilador.)
 
+**Y un coste que la gráfica no enseña:** construir el grafo. El ahorro por consulta de arriba no lo incluye. Para código sale barato —tree-sitter hace una pasada única sobre el AST, sin LLM—, pero si el repo tiene documentación, PDFs o imágenes, el pase semántico sobre eso sí llama al modelo. Y el grafo caduca: en cuanto tocas el código queda desfasado y hay que regenerarlo, no se actualiza solo. Así que el ahorro por consulta se amortiza mejor cuantas más preguntas hagas contra el mismo grafo entre cambios; si lo generas y preguntas una sola vez, construirlo pesa más de lo que este experimento refleja.
+
 > [!info] Próximo avance
 > El análisis riguroso queda para la siguiente entrega: **loops reales de agente** (dos agentes con el mismo modelo, uno solo-grep y otro solo-graphify), **precisión por tipo de pregunta**, si el coste es de verdad super-lineal contra la *complejidad* (aquí solo lo medí contra ficheros, y salió ~lineal), y por qué **darle el `graph.json` entero al modelo es la trampa** (cientos de miles de tokens de ruido).
 
@@ -228,35 +230,13 @@ Vamos a montar el lab de Graphify sobre este repo, paso a paso.
    Guárdala como comparativa.md. Quiero el número de MI repo, no el de marketing.
 ```
 
-Contexto que necesita: acceso a un repo real (el suyo o uno de referencia) para generar el grafo, permiso para instalar `uv`/`graphifyy` si no los tiene, y —para el paso de medir— que tú le confirmes qué pregunta concreta usar, porque tiene que ser algo verificable en tu propio código, no un ejemplo genérico.
+Contexto que necesita: acceso a un repo real, permiso para instalar `uv`/`graphifyy` si no los tiene, y que tú le confirmes qué pregunta concreta usar — algo verificable en tu propio código, no un ejemplo genérico.
 
-En cada checkpoint debe verificar de verdad, no asumir: que `graphify-out/` existe con los tres ficheros, que el skill responde dentro del asistente (`/graphify`), y que `graphify query` de la CLI devuelve nodos y aristas nombrados, no un resumen vago.
+Antes de dar el lab por bueno, comprueba que tu agente no se lo ha saltado:
 
-## Cuestionario para tu agente
-
-- [ ] ¿Se instaló `graphifyy` (PyPI) y se verificó que el comando `graphify` responde (`graphify --version` o equivalente)?
-- [ ] ¿Se registró el skill con el asistente de código en uso (`graphify install` + el subcomando del asistente)?
-- [ ] ¿Se generó `graphify-out/` con los tres ficheros (`graph.html`, `GRAPH_REPORT.md`, `graph.json`) sobre un repo real?
-- [ ] ¿Se ejecutó al menos una consulta (`graphify query`, `graphify path` o `graphify explain`) y se comprobó que la respuesta cita nodos/aristas concretos del repo, no una respuesta genérica?
-- [ ] ¿Se midió el ahorro real de tokens en el repo del usuario (grep-and-read vs. grafo) para la misma pregunta, en vez de asumir la cifra de marketing?
-- [ ] ¿Se informó al usuario del resultado final: ruta de `graphify-out/`, asistente registrado y el número de tokens medido en el experimento?
-
-## Comprueba lo aprendido
-
-> [!question]- ¿Por qué tree-sitter no necesita llamar a un LLM para extraer el grafo de código, pero el pase semántico de documentación sí?
-> Tree-sitter parsea gramática: produce un AST determinista a partir de la sintaxis del lenguaje (funciones, llamadas, imports), lo mismo que hace un compilador antes de generar código máquina. No hay ambigüedad que resolver, así que no hace falta un modelo. Un PDF o una imagen no tiene gramática formal — entender "de qué habla" este documento y cómo se relaciona con el código requiere interpretación semántica, que es justo lo que aporta un LLM.
-
-> [!question]- ¿Qué diferencia práctica hay entre una arista EXTRACTED y una INFERRED, y por qué te debería importar cuál es cuál?
-> EXTRACTED viene directamente del fuente — una llamada de función, un import, una FK — es un hecho verificable con solo mirar el código. INFERRED es una relación que Graphify dedujo sin que estuviera escrita explícitamente (por ejemplo, dos módulos que comparten un tipo de dato sin llamarse entre sí). Te debería importar porque determina cuánto puedes fiarte de la respuesta sin verificar: una cadena de aristas EXTRACTED es tan fiable como el código mismo; una INFERRED es una hipótesis razonable, no un hecho, y merece una comprobación antes de actuar sobre ella.
-
-> [!question]- El lab pide medir tú mismo el ahorro de tokens en vez de citar el "71,5×" de Graphify sin más. ¿Por qué importa esa distinción?
-> Porque la cifra de otro repo, con otra pregunta y otro tamaño de codebase, no predice lo que pasará en el tuyo. El ahorro depende de cuánto ruido hay realmente en tu repo respecto a la pregunta que haces — un monolito con nombres pobres se beneficia mucho más del grafo que un repo pequeño y bien organizado donde el grep ya era casi directo. Medir tu propio caso es lo que separa una decisión de arquitectura de repetir un titular.
-
-> [!question]- ¿Por qué el coste del grafo se mantiene ~plano aunque el repo crezca, y el del grep no?
-> Porque un `graphify query` está acotado por el presupuesto (`--budget`): devuelve solo el subgrafo relevante, no importa si el repo tiene 127 nodos o 610. El grep, en cambio, lee ficheros enteros, y cuantos más ficheros mencionen el término, más tokens gasta — su coste crece ~lineal con los ficheros que toca la pregunta, mientras el del grafo se queda topado.
-
-> [!question]- ¿Cuándo elegirías construir un grafo a medida en vez de usar Graphify?
-> Cuando el dominio no es código fuente que tree-sitter pueda parsear — datos, catálogos de metadatos, documentación estructurada con su propia semántica — o cuando necesitas control fino sobre qué información exacta lleva cada nodo y cómo se calculan sus aristas. Graphify gana en velocidad de puesta en marcha y cobertura de lenguajes; un grafo a medida gana cuando el dominio se sale de "código".
+- [ ] `graphify-out/` existe con los tres ficheros, sobre un repo real (no de juguete).
+- [ ] Una consulta (`query`, `path` o `explain`) devolvió nodos y aristas concretos de tu repo, no un resumen genérico.
+- [ ] `comparativa.md` lleva **tus** números medidos, no la cifra de marketing.
 
 ## Referencias
 
