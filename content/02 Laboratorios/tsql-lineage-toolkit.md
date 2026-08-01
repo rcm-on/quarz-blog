@@ -7,7 +7,7 @@ description: "Un motor determinista de lineage e impacto para SQL Server que ve 
 
 Antes de renombrar una columna en una base de datos con decenas de stored procedures, la pregunta es siempre la misma: **¿qué rompo?**
 
-Responderla a mano significa leer procedimientos uno a uno. Las herramientas comerciales —Purview, Octopai, Informatica— cuestan una fortuna y aun así no ven las tablas que solo aparecen en SQL dinámico o dentro de cursores. Este laboratorio documenta cómo lo resolví con un toolkit propio, y los números reales que obtuve analizando **WideWorldImporters contra SQL Server 2025**.
+Responderla a mano significa leer procedimientos uno a uno. Ni el catálogo de metadatos ni un grep ven las tablas que solo aparecen en SQL dinámico o dentro de cursores — justo donde vive el riesgo. Este laboratorio documenta cómo lo resolví con un toolkit propio, y los números reales que obtuve analizando **WideWorldImporters contra SQL Server 2025**.
 
 ---
 
