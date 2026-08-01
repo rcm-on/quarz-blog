@@ -198,9 +198,7 @@ El patrón de diseño detrás de esto está explicado en: [[04 Arquitectura IA/d
 
 ---
 
-## 📋 Comparativa
-
-### vs. herramientas gratuitas
+## 📋 Qué hueco llena
 
 | Herramienta | AST real | Plan de ejecución | Dashboard | Lineage columna | Agent-ready |
 |---|---|---|---|---|---|
@@ -209,16 +207,7 @@ El patrón de diseño detrás de esto está explicado en: [[04 Arquitectura IA/d
 | Apache Atlas | Catálogo metadatos | No | Genérico | No | No |
 | dbt lineage | Solo modelos dbt | No | dbt Cloud | Limitado | No |
 
-### vs. herramientas comerciales
-
-| Herramienta | Precio | AST real | Plan de ejecución | Offline | Código abierto |
-|---|---|---|---|---|---|
-| **TSql Lineage Toolkit** | Gratis | Sí | Sí | Sí | Sí |
-| Microsoft Purview | €€€€ / Azure-only | No (catálogo) | No | No | No |
-| Octopai | €€€€ enterprise | No | No | No | No |
-| Informatica IDMC | €€€€€ enterprise | No | No | No | No |
-
-Ninguna herramienta gratuita usa ScriptDom ni lee el XML del plan de ejecución. Ninguna de pago fusiona análisis estático con accesos descubiertos en runtime.
+El catálogo (Atlas, Purview y similares) ve lo que está declarado en `sys.objects`, nada más: un trigger creado en runtime o una tabla que solo existe dentro de un `EXEC(@sql)` no aparece. Un regex (sqllineage) no distingue un `IF` real de uno dentro de un string que se está construyendo. Ninguna herramienta gratuita usa ScriptDom ni lee el XML del plan de ejecución. Este toolkit entiende el AST completo del procedimiento —lo que hace, no solo lo que declara— y por eso ve el SQL dinámico y las reglas de negocio que las demás se pierden.
 
 ---
 
