@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+  <title>Una arquitecta traza en su mesa el grafo que después orquesta: el plan del papel se levanta en constelación de modelos y atraviesa el gate antes de salir verificado</title>
+  <defs>
+    <radialGradient id="glow-plan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#4338ca" stop-opacity="0.22"/>
+      <stop offset="65%"  stop-color="#4338ca" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#4338ca" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-lead" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#4338ca" stop-opacity="0.30"/>
+      <stop offset="60%"  stop-color="#4338ca" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#4338ca" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-gate" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#b45309" stop-opacity="0.26"/>
+      <stop offset="65%"  stop-color="#b45309" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg-left" cx="6%" cy="60%" r="52%">
+      <stop offset="0%" stop-color="#4338ca" stop-opacity="0.055"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg-right" cx="96%" cy="50%" r="44%">
+      <stop offset="0%" stop-color="#b45309" stop-opacity="0.055"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="halo">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="tip-i" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,1 L7,4 L0,7 Z" fill="#4338ca" opacity="0.55"/>
+    </marker>
+    <marker id="tip-o" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,1 L7,4 L0,7 Z" fill="#b45309" opacity="0.7"/>
+    </marker>
+    <marker id="peer-r" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="4" markerHeight="4" orient="auto">
+      <path d="M0,1 L7,4 L0,7 Z" fill="#4338ca" opacity="0.55"/>
+    </marker>
+    <marker id="peer-l" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+      <path d="M0,1 L7,4 L0,7 Z" fill="#4338ca" opacity="0.55"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="300" fill="transparent"/>
+  <rect width="1200" height="300" fill="url(#bg-left)"/>
+  <rect width="1200" height="300" fill="url(#bg-right)"/>
+  <rect x="1" y="1" width="1198" height="298" rx="12" fill="none" stroke="#4338ca" stroke-width="0.8" opacity="0.1"/>
+
+  <!-- ============ MESA DE TRABAJO ============ -->
+  <g stroke="#4338ca" fill="none" stroke-linecap="round">
+    <line x1="128" y1="214" x2="334" y2="214" stroke-width="1.6" opacity="0.35"/>
+    <line x1="122" y1="222" x2="340" y2="222" stroke-width="1"   opacity="0.18"/>
+    <line x1="150" y1="222" x2="150" y2="252" stroke-width="1"   opacity="0.14"/>
+    <line x1="316" y1="222" x2="316" y2="252" stroke-width="1"   opacity="0.14"/>
+  </g>
+
+  <!-- El plano: lo que está diseñando es el mismo grafo que orquesta arriba -->
+  <circle cx="205" cy="202" r="62" fill="url(#glow-plan)"/>
+  <path d="M152,210 L238,210 L252,190 L166,190 Z" fill="rgba(67,56,202,0.06)" stroke="#4338ca" stroke-width="1.2" opacity="0.5"/>
+  <g stroke="#4338ca" stroke-width="0.7" opacity="0.22">
+    <line x1="160" y1="204" x2="244" y2="204"/>
+    <line x1="164" y1="198" x2="248" y2="198"/>
+  </g>
+  <g opacity="0.45">
+    <line x1="182" y1="203" x2="206" y2="196" stroke="#4338ca" stroke-width="0.9"/>
+    <line x1="206" y1="196" x2="228" y2="203" stroke="#4338ca" stroke-width="0.9"/>
+    <line x1="206" y1="196" x2="212" y2="205" stroke="#4338ca" stroke-width="0.9"/>
+    <circle cx="182" cy="203" r="2.6" fill="#4338ca"/>
+    <circle cx="206" cy="196" r="3.2" fill="#4338ca"/>
+    <circle cx="228" cy="203" r="2.6" fill="#4338ca"/>
+    <circle cx="212" cy="205" r="2.2" fill="#4338ca"/>
+  </g>
+
+  <!-- ============ LA ARQUITECTA ============ -->
+  <path d="M60,246 C56,206 62,182 68,170" fill="none" stroke="#4338ca" stroke-width="1.2" opacity="0.22"/>
+  <g stroke="#4338ca" stroke-linecap="round" stroke-linejoin="round">
+    <!-- espalda y torso -->
+    <path d="M92,130 C80,152 76,180 78,208 L124,208 C126,178 122,150 112,132 Z"
+          fill="rgba(67,56,202,0.08)" stroke-width="1.8" opacity="0.8"/>
+    <!-- cabeza -->
+    <circle cx="101" cy="110" r="18" fill="rgba(67,56,202,0.16)" stroke-width="1.9" opacity="0.9" filter="url(#halo)"/>
+    <!-- recogido: define el perfil sin caer en retrato -->
+    <path d="M86,101 C88,86 116,86 117,102 C120,96 119,88 112,84" fill="none" stroke-width="1.6" opacity="0.55"/>
+    <!-- brazo que traza sobre el plano -->
+    <path d="M108,150 C132,168 154,186 172,196" fill="none" stroke-width="1.7" opacity="0.7"/>
+    <line x1="172" y1="196" x2="186" y2="184" stroke-width="1.4" opacity="0.5"/>
+    <!-- brazo que dirige: sube hacia la constelación -->
+    <path d="M110,140 C142,132 172,122 200,112" fill="none" stroke-width="1.8" opacity="0.75"/>
+  </g>
+  <circle cx="204" cy="111" r="4.5" fill="rgba(67,56,202,0.35)" stroke="#4338ca" stroke-width="1.4" opacity="0.85"/>
+
+  <!-- ============ EL ENCARGO: de la mano al que planifica ============ -->
+  <path d="M212,108 C260,96 314,84 366,78" fill="none" stroke="#b45309" stroke-width="1.7"
+        opacity="0.6" stroke-dasharray="6 5" stroke-linecap="round" marker-end="url(#tip-o)"/>
+
+  <!-- ============ CONSTELACIÓN DE MODELOS ============ -->
+  <circle cx="404" cy="76" r="60" fill="url(#glow-lead)"/>
+  <circle cx="404" cy="76" r="23" fill="rgba(67,56,202,0.16)" stroke="#4338ca" stroke-width="2" opacity="0.9" filter="url(#halo)"/>
+  <circle cx="404" cy="76" r="35" fill="none" stroke="#4338ca" stroke-width="0.8" opacity="0.22"/>
+  <text x="404" y="128" fill="#4338ca" font-size="11" font-family="JetBrains Mono, monospace" text-anchor="middle" font-weight="700" opacity="0.75">Opus</text>
+  <text x="404" y="142" fill="#4338ca" font-size="8.5" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.42">planifica</text>
+
+  <!-- hilos del que planifica a los que ejecutan y auditan -->
+  <g fill="none" stroke="#4338ca" stroke-width="1.2" opacity="0.32">
+    <path d="M424,92  C452,124 468,146 486,158" marker-end="url(#tip-i)"/>
+    <path d="M410,100 C412,150 400,190 400,212" marker-end="url(#tip-i)"/>
+    <path d="M427,68  C486,54  548,58  588,72"  marker-end="url(#tip-i)"/>
+    <path d="M424,90  C520,148 600,182 664,196" marker-end="url(#tip-i)"/>
+  </g>
+
+  <circle cx="502" cy="166" r="15" fill="rgba(67,56,202,0.1)" stroke="#4338ca" stroke-width="1.5" opacity="0.85"/>
+  <text x="502" y="196" fill="#4338ca" font-size="9.5" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.6">Sonnet</text>
+
+  <circle cx="398" cy="226" r="13" fill="rgba(67,56,202,0.1)" stroke="#4338ca" stroke-width="1.5" opacity="0.85"/>
+  <text x="398" y="254" fill="#4338ca" font-size="9.5" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.6">Haiku</text>
+
+  <!-- auditoría cruzada: dos familias distintas mirándose -->
+  <circle cx="606" cy="76" r="17" fill="rgba(67,56,202,0.1)" stroke="#4338ca" stroke-width="1.6" opacity="0.88"/>
+  <text x="606" y="46" fill="#4338ca" font-size="9.5" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.6">Claude</text>
+
+  <circle cx="682" cy="200" r="17" fill="rgba(67,56,202,0.1)" stroke="#4338ca" stroke-width="1.6" opacity="0.88"/>
+  <text x="682" y="232" fill="#4338ca" font-size="9.5" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.6">Gemini</text>
+
+  <line x1="617" y1="90" x2="671" y2="186" stroke="#4338ca" stroke-width="1.4" opacity="0.5"
+        stroke-dasharray="4 4" marker-start="url(#peer-l)" marker-end="url(#peer-r)"/>
+  <text x="600" y="150" fill="#4338ca" font-size="8.5" font-family="JetBrains Mono, monospace" text-anchor="end" opacity="0.45">se auditan</text>
+
+  <!-- polvo de fondo: densidad sin ruido -->
+  <g fill="#4338ca" opacity="0.16">
+    <circle cx="332" cy="52" r="1.8"/>
+    <circle cx="470" cy="104" r="1.5"/>
+    <circle cx="548" cy="196" r="1.8"/>
+    <circle cx="636" cy="130" r="1.4"/>
+    <circle cx="726" cy="94" r="1.7"/>
+    <circle cx="352" cy="176" r="1.4"/>
+    <circle cx="762" cy="246" r="1.5"/>
+  </g>
+
+  <!-- ============ EL GATE: todo pasa por aquí ============ -->
+  <circle cx="884" cy="150" r="86" fill="url(#glow-gate)"/>
+  <g fill="none" stroke="#4338ca" stroke-width="1.2" opacity="0.32">
+    <path d="M519,161 C640,140 740,124 838,124" marker-end="url(#tip-i)"/>
+    <path d="M412,224 C560,236 700,190 836,152" marker-end="url(#tip-i)"/>
+    <path d="M622,86  C700,102 776,122 836,144" marker-end="url(#tip-i)"/>
+    <path d="M699,196 C748,192 796,184 838,176" marker-end="url(#tip-i)"/>
+  </g>
+  <path d="M884,64 C930,102 930,198 884,236 C838,198 838,102 884,64 Z"
+        fill="rgba(180,83,9,0.09)" stroke="#b45309" stroke-width="2" opacity="0.9" filter="url(#halo)"/>
+  <line x1="884" y1="86" x2="884" y2="214" stroke="#b45309" stroke-width="0.9" opacity="0.3"/>
+  <text x="884" y="154" fill="#b45309" font-size="11.5" font-family="JetBrains Mono, monospace" text-anchor="middle" font-weight="800" opacity="0.9">gate</text>
+  <text x="884" y="262" fill="#b45309" font-size="9" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.5">arbitra sin opinar</text>
+
+  <!-- ============ SALIDA VERIFICADA ============ -->
+  <line x1="932" y1="150" x2="1078" y2="150" stroke="#b45309" stroke-width="1.6" opacity="0.5"
+        stroke-dasharray="6 4" marker-end="url(#tip-o)"/>
+  <circle cx="1116" cy="150" r="18" fill="rgba(180,83,9,0.1)" stroke="#b45309" stroke-width="1.7" opacity="0.85"/>
+  <path d="M1107,150 L1113,157 L1125,142" fill="none" stroke="#b45309" stroke-width="2.3" opacity="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="1116" y="194" fill="#b45309" font-size="9.5" font-family="JetBrains Mono, monospace" text-anchor="middle" opacity="0.55">verificado</text>
+</svg>
