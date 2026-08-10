@@ -20,18 +20,16 @@ flowchart TD
     R(["🧑 Yo · el objetivo"]) --> O["Opus<br/>planifica · fija el harness,<br/>las reglas y los gates"]
     O -->|brief cerrado| S["Sonnet<br/>ejecuta"]
     O -->|lo ya decidido| H["Haiku<br/>documenta"]
-    O -.encarga auditoría.-> C["Claude"]
-    O -.encarga auditoría.-> G["Gemini"]
-    C <-->|"discrepancia = señal"| G
+    O <-->|"auditoría cruzada<br/>discrepancia = señal"| G["Gemini 2.5 Pro<br/>audita desde otra familia"]
     S --> GATE{{"Gate / Oráculo<br/>tests · SQL Server · corpus"}}
     H --> GATE
-    C --> GATE
+    O --> GATE
     G --> GATE
     GATE -->|verde| DONE(["✔ Resultado verificado"])
     GATE -.->|"rojo → escala"| O
 ```
 
-*Yo doy el objetivo; **Opus** planifica y pone las reglas; los modelos pequeños ejecutan y documentan; **Claude y Gemini** se auditan; y ningún resultado pasa sin el visto bueno de un **gate objetivo** — que, si falla, escala de vuelta al que planifica.*
+*Yo doy el objetivo; **Opus** planifica y pone las reglas; los modelos pequeños ejecutan y documentan; **Opus y Gemini 2.5 Pro** —dos familias distintas— se auditan mutuamente; y ningún resultado pasa sin el visto bueno de un **gate objetivo** que, si falla, escala de vuelta al que planifica.*
 
 ---
 
