@@ -2,7 +2,6 @@
 title: "Dejé de preguntar qué modelo es mejor: delegación por complejidad y auditoría cruzada Claude⇄Gemini"
 date: 2026-07-25
 draft: false
-banner: "/static/banners/orquestar-equipo-modelos.svg"
 tags:
   - ia
   - arquitectura
