@@ -1,7 +1,7 @@
 ---
 title: "El efecto ratchet: cómo los agentes IA aprenden a no repetir errores"
 date: 2026-05-14
-draft: true
+draft: false
 tags:
   - ia
   - agentes
@@ -88,6 +88,8 @@ graph TD
     S3 --> S4["Mes 6: 35 reglas"]
     S4 --> R["Agente confiable en este proyecto"]
 ```
+
+*Las cifras son ilustrativas: lo que importa es la forma de la curva, no los números. El ritmo depende de cuánto te equivoques y de cuánta disciplina tengas para documentarlo.*
 
 Al principio el agente comete muchos errores. Con el tiempo, el espacio de errores posibles se reduce sesión a sesión. No porque el modelo haya mejorado — porque el contexto que le das es más preciso.
 
