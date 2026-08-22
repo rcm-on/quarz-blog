@@ -116,7 +116,7 @@ Y al arreglarlo, el mismo gate cazó el segundo error: la lectura correcta apare
 
 ### Determinismo, coherencia entre formatos, y e2e
 
-Tres capas baratas que descartan clases enteras de problema: la misma entrada tres veces da el mismo hash; el JSON, la base SQLite y el almacén por nodos dicen lo mismo; y el dashboard carga el artefacto sin un solo error de JavaScript.
+Tres capas baratas que descartan clases enteras de problema: la misma entrada tres veces da el mismo hash; el JSON, la base SQLite y el almacén por nodos —el mismo grafo partido en un fichero por nodo— dicen lo mismo; y el dashboard carga el artefacto sin un solo error de JavaScript.
 
 ---
 
@@ -131,10 +131,10 @@ Tres capas baratas que descartan clases enteras de problema: la misma entrada tr
 | **Traza a mano** | **ausencias puntuales** | 1 arista donde debía haber 8 |
 | **Gate con corpus de referencia** | **duplicación** | una lectura emitida 3 veces |
 | Determinismo | indeterminismo | 3 ejecuciones, hash idéntico |
-| Coherencia de formatos | divergencia | los cinco formatos dan la misma cifra |
+| Coherencia de formatos | divergencia | los tres formatos dan la misma cifra |
 | e2e | contrato roto con el consumidor | 0 errores de JS |
 
-Esa tabla es todo el post. Si te llevas una sola cosa, que sea la columna del medio: **no son nueve maneras de hacer lo mismo con más o menos rigor. Son nueve preguntas distintas**, y las tres que yo no me estaba haciendo son justo las que escondían los defectos graves.
+Esa tabla es todo el post. Si te llevas una sola cosa, que sea la columna del medio: **no son nueve maneras de hacer lo mismo con más o menos rigor. Son nueve preguntas distintas**. Las tres en negrita son las que yo no me estaba haciendo, y son justo las que escondían los defectos graves.
 
 > [!warning] Una coincidencia incómoda, porque hay que contarla
 > El artefacto derivado que abrió esta historia tenía **1.593 nodos y 4.282 aristas**. Después de los doce arreglos, la ejecución buena da **1.593 nodos y 4.382 aristas**. Mismo número de nodos por pura casualidad, grafo distinto. Lo escribo porque durante media hora creí que había vuelto al punto de partida, y porque un número que coincide es exactamente el tipo de dato que hay que mirar dos veces.
@@ -193,6 +193,6 @@ Las nueve capas no son burocracia. Son lo que hace que ir rápido no signifique 
 
 ---
 
-**Sigue en la serie:** cómo se le encarga trabajo a un agente — los doce arreglos los escribieron agentes, y la plantilla de encargo entera estará ahí para copiar.
+**Sigue en la serie**, próximamente: *cómo se le encarga trabajo a un agente*. Los doce arreglos no los escribí yo, los escribieron agentes — y la plantilla de encargo que usé va entera en ese post, para copiar y pegar.
 
 *El motor del que hablo es open source: [github.com/rcm-on/tsql-lineage-toolkit](https://github.com/rcm-on/tsql-lineage-toolkit). Los defectos, con su reproducción y las cifras antes y después, están documentados en el propio repositorio.*
