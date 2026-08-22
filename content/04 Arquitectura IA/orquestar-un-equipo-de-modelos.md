@@ -21,7 +21,7 @@ flowchart TD
     O -->|brief cerrado| S["Sonnet<br/>ejecuta"]
     O -->|lo ya decidido| H["Haiku<br/>documenta"]
     O <-->|"auditoría cruzada<br/>discrepancia = señal"| G["Gemini 2.5 Pro<br/>audita desde otra familia"]
-    S --> GATE{{"Gate / Oráculo<br/>tests · SQL Server · corpus"}}
+    S --> GATE{{"Gate objetivo<br/>tests · SQL Server · corpus"}}
     H --> GATE
     O --> GATE
     G --> GATE
@@ -94,7 +94,7 @@ En el proyecto esto no es una idea abstracta, son entradas fechadas y firmadas e
 
 No fue una corrección de estilo. Fue la detección de que un agente había *afirmado* un resultado sin producir la evidencia que ese resultado requería — y solo se detectó porque el segundo agente insistió en verificar contra el disco, no contra la narrativa.
 
-**Caso 2 — falsos positivos por usar la herramienta equivocada.** Gemini reportó tres "gaps" de lineage (CASE, UNION, DISTINCT) basándose en `sqlglot`, no en el motor real del proyecto. Claude ejecutó el motor propio contra los tres casos: dos eran falsos positivos (CASE y DISTINCT sí funcionaban), uno era real (UNION). La discrepancia no se resolvió por autoridad — se resolvió reproduciendo el caso con el oráculo correcto.
+**Caso 2 — falsos positivos por usar la herramienta equivocada.** Gemini reportó tres "gaps" de lineage (CASE, UNION, DISTINCT) basándose en `sqlglot`, no en el motor real del proyecto. Claude ejecutó el motor propio contra los tres casos: dos eran falsos positivos (CASE y DISTINCT sí funcionaban), uno era real (UNION). La discrepancia no se resolvió por autoridad — se resolvió reproduciendo el caso con la referencia correcta.
 
 **Caso 3 — el mismo ejercicio de auditoría, en ciego, con hallazgos casi idénticos y una discrepancia reveladora.** Cuando ambos modelos auditaron el mismo NodeStore sin verse (`notes/auditor-challenge.md`), coincidieron en el hotspot crítico (`usp_SearchCustomers_Injection`) y llegaron, por caminos independientes, exactamente a los mismos números: **14/14 y 12/12** columnas de dos vistas de cliente afectadas por un mismo procedimiento de carga de datos. Eso es validación cruzada fuerte — dos agentes sin verse convergiendo en el mismo dato exacto.
 
@@ -107,7 +107,7 @@ Pero también discreparon: Gemini incluyó `Application.People` (una tabla con `
 
 ## 5. El árbitro objetivo: cuando discrepan, decide el gate
 
-Que dos modelos discrepen no significa que haya que decidir "a ojo" quién tiene razón. En este proyecto, cuando aparece un desacuerdo de diseño, no gana el argumento mejor redactado — gana el oráculo objetivo: los tests, la instancia real de SQL Server, o el corpus de evaluación reproducible.
+Que dos modelos discrepen no significa que haya que decidir "a ojo" quién tiene razón. En este proyecto, cuando aparece un desacuerdo de diseño, no gana el argumento mejor redactado — gana la fuente de verdad objetiva: los tests, la instancia real de SQL Server, o el corpus de evaluación reproducible.
 
 El ejemplo más limpio no fue entre Claude y Gemini, sino un debate de diseño con un tercer agente (Cline) sobre si dos artefactos del pipeline debían generarse siempre o quedar detrás de un flag opcional. El protocolo del debate obligaba a algo muy concreto: cada postura se puntuaba en una rúbrica ponderada por criterios pactados de antemano (valor para el agente, solidez, coherencia del contrato, coste, flexibilidad), y la decisión salía del total ponderado — **52 frente a 38 frente a 28** — no de quién había escrito el párrafo más convincente. El debate incluso definía por adelantado la condición exacta que reabriría la decisión en el futuro (si el coste de generar el artefacto dejara de ser ≈0), para que "ganar el debate hoy" no se confundiera con "tener razón para siempre".
 
@@ -127,7 +127,7 @@ Esa es la función del gate en todo el sistema: no es un obstáculo burocrático
 
 Dos de esos cinco merecen una frase más, porque son los que casi nadie tiene.
 
-**El control negativo mide la medición, no el producto.** Sabotea el oráculo a propósito —renombra todas las columnas a nombres que no existen— y exige que el recall se desplome por debajo del 0,1%. Si con un oráculo falso la comparación sigue dando cifras razonables, es que la comparación no compara: una clave mal formada, una normalización que iguala todo, dos conjuntos vacíos dándose la razón. Y entonces los umbrales del test de al lado llevaban meses sin significar nada.
+**El control negativo mide la medición, no el producto.** Sabotea la fuente de verdad a propósito —renombra todas las columnas a nombres que no existen— y exige que el recall se desplome por debajo del 0,1%. Si con una fuente de verdad falsa la comparación sigue dando cifras razonables, es que la comparación no compara: una clave mal formada, una normalización que iguala todo, dos conjuntos vacíos dándose la razón. Y entonces los umbrales del test de al lado llevaban meses sin significar nada.
 
 **La regresión de prosa arbitra a los propios auditores.** Los informes que escribieron Claude y Gemini están llenos de números —complejidad 19, exactamente 17 tablas escritas, 34 pasos de SQL dinámico resueltos, 14/14 y 12/12 columnas impactadas—, y cada uno de esos números depende del estado del motor, que cambia cada semana. Así que un test los re-deriva del grafo real en cada ejecución. Con un caso negativo dentro que es el que más vale: una vista que **no** debe salir afectada y sigue sin estarlo (0 de 6). Un auditor que solo confirma impactos aprueba con nota a cualquiera que conteste "todo está afectado".
 
@@ -165,7 +165,7 @@ Desde que esa frase está escrita, los casos nuevos no se debaten: se resuelven 
 
 ## 6. Esto es harness engineering, no prompt-magic
 
-Nada de lo anterior depende de un prompt ingenioso. Depende de una estructura: roles fijos por complejidad, tareas que llegan como brief cerrado con criterio de verificación incluido, un protocolo de archivo compartido que impide que un agente borre el trabajo de otro, dos familias de modelo auditándose mutuamente, y un árbitro objetivo — gate, oráculo, rúbrica pactada — para cuando discrepan.
+Nada de lo anterior depende de un prompt ingenioso. Depende de una estructura: roles fijos por complejidad, tareas que llegan como brief cerrado con criterio de verificación incluido, un protocolo de archivo compartido que impide que un agente borre el trabajo de otro, dos familias de modelo auditándose mutuamente, y un árbitro objetivo — gate, fuente de verdad, rúbrica pactada — para cuando discrepan.
 
 Si ya trabajas con [[04 Arquitectura IA/harness-engineering-agentes-ia|harness engineering]], esto es la extensión natural cuando el trabajo deja de caber en un solo agente: el harness no solo estructura *cómo* piensa un modelo, también estructura *quién* piensa qué, y quién comprueba a quién. Cada discrepancia detectada y resuelta se documenta para que no vuelva a aparecer, y la fiabilidad del conjunto no sale del modelo que elijas: sale de este sistema a su alrededor.
 
@@ -183,7 +183,7 @@ contrario en un fichero compartido. Pide al otro modelo que audite tu
 propuesta en ciego (sin ver tu razonamiento) contra el mismo material.
 Compara los dos informes: dónde coinciden es señal fuerte; dónde
 discrepan, no decidas a ojo — define antes un criterio objetivo
-(test, oráculo, rúbrica ponderada) que arbitre.
+(test, referencia, rúbrica ponderada) que arbitre.
 ```
 
 ---
