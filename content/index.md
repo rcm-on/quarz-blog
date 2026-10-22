@@ -11,20 +11,20 @@ Notas técnicas de **Ramón Campos Martín** sobre cómo diseñar, desplegar y o
 
 Cómo diseñar el entorno que rodea al modelo — no solo el modelo.
 
-- [[04 Arquitectura IA/doce-fallos-en-mi-herramienta|Doce fallos en mi propia herramienta: qué capa de verificación encontró cada uno]]
+- [[04 Arquitectura IA/doce-fallos-en-mi-herramienta|Doce fallos en mi propia herramienta]]
 - [[04 Arquitectura IA/orquestar-un-equipo-de-modelos|He dejado de preguntar qué modelo es mejor]]
-- [[04 Arquitectura IA/ratchet-efecto-memoria-agente|El efecto ratchet: cómo los agentes IA aprenden a no repetir errores]]
-- [[04 Arquitectura IA/harness-engineering-agentes-ia|Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA]]
+- [[04 Arquitectura IA/ratchet-efecto-memoria-agente|El efecto ratchet: agentes que no repiten errores]]
+- [[04 Arquitectura IA/harness-engineering-agentes-ia|Harness Engineering: el nuevo rol del arquitecto]]
 - [[04 Arquitectura IA/documento-arquitectura-base|ARCH.md: el documento que le da memoria a tu agente]]
 
 ## Laboratorios
 
 Guías prácticas con código, cifras medidas y los límites de cada cosa.
 
-- [[02 Laboratorios/tsql-lineage-toolkit|TSql Lineage Toolkit: lineage de procedimientos SQL Server sin pagar licencias]]
-- [[02 Laboratorios/graphify-grafo-navegable|Lab: Graphify, dar al agente un grafo que recorrer en vez de un repo que grepear]]
+- [[02 Laboratorios/tsql-lineage-toolkit|TSql Lineage Toolkit: lineage sin licencias]]
+- [[02 Laboratorios/graphify-grafo-navegable|Lab: Graphify, un grafo en vez de grep]]
 - [[02 Laboratorios/litellm-multiproveedor|Lab: LiteLLM, resolviendo la entropía multiproveedor]]
-- [[02 Laboratorios/arch-md-ejemplo|Lab: ARCH.md — ejemplo de documento de arquitectura para agentes IA]]
+- [[02 Laboratorios/arch-md-ejemplo|Lab: ARCH.md, el contexto que el agente necesita]]
 
 ## Artículos
 

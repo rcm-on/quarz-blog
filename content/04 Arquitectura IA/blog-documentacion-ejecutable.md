@@ -63,6 +63,6 @@ Así que la decisión fue retirarla entera, no parchearla:
 
 ## 📎 Referencias
 
-- [Harness Engineering: el nuevo rol del arquitecto en la era de los agentes IA](harness-engineering-agentes-ia.md) — el marco: el harness es el producto, y su seguridad también.
+- [Harness Engineering: el nuevo rol del arquitecto](harness-engineering-agentes-ia.md) — el marco: el harness es el producto, y su seguridad también.
 - [Lab: LiteLLM, resolviendo la entropía multiproveedor](../02%20Laboratorios/litellm-multiproveedor.md) — el lab que cierra con las "Notas para agentes" que sí sobrevivieron.
 - [llms.txt — la convención](https://llmstxt.org/) · [Agent Skills](https://code.claude.com/docs/en/skills) — los estándares que la capa usaba.

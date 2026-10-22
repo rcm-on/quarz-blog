@@ -1,5 +1,5 @@
 ---
-title: "Lab: ARCH.md — cómo describir tu proyecto para que el agente entienda el contexto"
+title: "Lab: ARCH.md, el contexto que el agente necesita"
 date: 2026-05-14
 status: "aceptada"
 tags:
@@ -7,7 +7,7 @@ tags:
   - ia
   - agentes
   - context-engineering
-description: "Guía práctica con ejemplo genérico de un documento de arquitectura base. Aprende a describir tu proyecto en Markdown para que un agente IA trabaje con coherencia entre sesiones."
+description: "Guía con ejemplo genérico de un documento de arquitectura: describe tu proyecto en Markdown para que un agente IA trabaje con coherencia entre sesiones."
 ---
 
 Un agente IA no recuerda nada entre sesiones. Sin un documento de referencia, cada conversación empieza de cero y el agente toma decisiones que contradicen las de la sesión anterior.

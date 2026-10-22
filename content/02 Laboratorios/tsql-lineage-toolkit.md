@@ -1,8 +1,8 @@
 ---
-title: "TSql Lineage Toolkit: lineage de procedimientos SQL Server sin pagar licencias"
+title: "TSql Lineage Toolkit: lineage sin licencias"
 date: 2026-06-17
 tags: [sql-server, data-lineage, dotnet, arquitectura, ia]
-description: "Un motor determinista de lineage e impacto para SQL Server que ve lo que ninguna otra herramienta ve: 34 sentencias de SQL dinámico resueltas, triggers creados en runtime, reglas de negocio y flujos de control — todo offline y sin licencias."
+description: "Motor de lineage para SQL Server: 34 sentencias de SQL dinámico resueltas y triggers en runtime que otras herramientas no ven. Offline, sin licencias."
 ---
 
 Antes de renombrar una columna en una base de datos con decenas de stored procedures, la pregunta es siempre la misma: **¿qué rompo?**
@@ -111,7 +111,7 @@ Ahí se ve otra vez la resta: la entrada son 47 objetos, el NodeStore escribe 64
 *(Actualización 2026-08-01: entre la primera medición de este laboratorio y hoy
 integré 12 arreglos en el motor — el más visible modela cada `WHERE` como una
 regla de negocio propia. Por eso el grafo pasó de 1.529/4.151 a 1.593/4.382
-nodos y relaciones; el detalle de cada arreglo, con su repro, está en
+nodos y relaciones; el detalle de cada arreglo, con su caso reproducible, está en
 [`docs/corpus-multibase.md`](https://github.com/rcm-on/tsql-lineage-toolkit/blob/master/docs/corpus-multibase.md)
 del repositorio.)*
 

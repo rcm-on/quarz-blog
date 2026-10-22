@@ -1,10 +1,10 @@
 ---
-title: "Lab: Graphify, dar al agente un grafo que recorrer en vez de un repo que grepear"
+title: "Lab: Graphify, un grafo en vez de grep"
 date: 2026-07-18
 draft: false
 status: "aceptada"
 tags: [lab, ia, agentes, context-engineering, grafos, tokens]
-description: "Instalar Graphify, convertir un repo en grafo consultable y medir con tus propios tokens si de verdad se grepea menos cuando el agente tiene un grafo que recorrer."
+description: "Instalar Graphify, convertir un repo en grafo consultable y medir con tus tokens si de verdad se grepea menos con un grafo que recorrer."
 ---
 
 ## El problema

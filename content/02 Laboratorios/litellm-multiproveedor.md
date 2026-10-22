@@ -9,7 +9,7 @@ tags:
   - litellm
   - docker
   - agentes
-description: "Un gateway LiteLLM con Docker Compose que unifica Azure AI Foundry, los modelos gratuitos de NVIDIA y Ollama local tras un único endpoint OpenAI-compatible, con fallback automático. Incluye notas para que un agente IA reproduzca el lab junto al usuario."
+description: "Gateway LiteLLM que unifica Azure AI Foundry, NVIDIA gratis y Ollama local en un endpoint OpenAI-compatible, con fallback automático."
 ---
 
 Cuando conectas tu primer agente a un LLM, eliges un proveedor y escribes su SDK directamente en el código. Funciona. Y sin darte cuenta acabas de firmar tres deudas a la vez.

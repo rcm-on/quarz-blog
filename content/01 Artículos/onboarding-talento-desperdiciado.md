@@ -1,5 +1,5 @@
 ---
-title: "El onboarding que nunca ocurre y el talento que se pierde en él"
+title: "El onboarding que nunca ocurre"
 date: 2026-05-14
 draft: true
 tags:

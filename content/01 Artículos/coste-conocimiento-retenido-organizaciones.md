@@ -1,5 +1,5 @@
 ---
-title: "El coste oculto del conocimiento retenido en las organizaciones"
+title: "El coste oculto del conocimiento retenido"
 date: 2026-05-14
 draft: true
 tags:

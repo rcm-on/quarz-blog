@@ -1,5 +1,5 @@
 ---
-title: "Dejé de preguntar qué modelo es mejor: delegación por complejidad y auditoría cruzada Claude⇄Gemini"
+title: "He dejado de preguntar qué modelo es mejor"
 date: 2026-07-25
 draft: false
 tags:
@@ -29,7 +29,7 @@ flowchart TD
     GATE -.->|"rojo → escala"| O
 ```
 
-*Yo doy el objetivo; **Opus** planifica y pone las reglas; los modelos pequeños ejecutan y documentan; **Opus y Gemini 2.5 Pro** —dos familias distintas— se auditan mutuamente; y ningún resultado pasa sin el visto bueno de un **gate objetivo** que, si falla, escala de vuelta al que planifica.*
+*Yo doy el objetivo. **Opus** planifica y pone las reglas. Los modelos pequeños ejecutan y documentan. **Opus y Gemini 2.5 Pro** —dos familias distintas— se auditan el uno al otro. Y nada pasa sin el visto bueno de un **gate objetivo**: si falla, vuelve al que planificó.*
 
 ---
 
@@ -165,9 +165,19 @@ Desde que esa frase está escrita, los casos nuevos no se debaten: se resuelven 
 
 ## 6. Esto es harness engineering, no prompt-magic
 
-Nada de lo anterior depende de un prompt ingenioso. Depende de una estructura: roles fijos por complejidad, tareas que llegan como brief cerrado con criterio de verificación incluido, un protocolo de archivo compartido que impide que un agente borre el trabajo de otro, dos familias de modelo auditándose mutuamente, y un árbitro objetivo — gate, fuente de verdad, rúbrica pactada — para cuando discrepan.
+Nada de lo anterior depende de un prompt ingenioso. Depende de una estructura:
 
-Si ya trabajas con [[04 Arquitectura IA/harness-engineering-agentes-ia|harness engineering]], esto es la extensión natural cuando el trabajo deja de caber en un solo agente: el harness no solo estructura *cómo* piensa un modelo, también estructura *quién* piensa qué, y quién comprueba a quién. Cada discrepancia detectada y resuelta se documenta para que no vuelva a aparecer, y la fiabilidad del conjunto no sale del modelo que elijas: sale de este sistema a su alrededor.
+- Roles fijos por complejidad.
+- Tareas que llegan como brief cerrado, con el criterio de verificación dentro.
+- Un protocolo de archivo compartido que impide que un agente borre el trabajo de otro.
+- Dos familias de modelo auditándose la una a la otra.
+- Y un árbitro objetivo —gate, fuente de verdad, rúbrica pactada— para cuando discrepan.
+
+Si ya trabajas con [[04 Arquitectura IA/harness-engineering-agentes-ia|harness engineering]], esto es la extensión natural cuando el trabajo deja de caber en un solo agente.
+
+El harness no solo estructura *cómo* piensa un modelo. También estructura *quién* piensa qué, y quién comprueba a quién.
+
+Cada discrepancia que se detecta y se resuelve queda documentada, para que no vuelva a aparecer. Y la fiabilidad del conjunto no sale del modelo que elijas: sale del sistema que lo rodea.
 
 La pregunta que dejo de hacerme es "¿qué modelo es mejor?". La que me hago ahora es: ¿qué rol le toca a cada uno, y quién audita a quién cuando se equivocan?
 
