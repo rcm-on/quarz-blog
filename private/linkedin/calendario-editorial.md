@@ -39,9 +39,9 @@ Par concepto↔lab: `04 Arquitectura IA/datos-navegables-para-agentes` (artícul
 
 | # | Artículo (blog) | Post LinkedIn | Estado | Fecha blog | Fecha LinkedIn |
 |---|---|---|---|---|---|
-| 1 | 02 Laboratorios/tsql-lineage-toolkit | tsql-lineage-toolkit | 📤 Blog publicado, falta LinkedIn | 2026-06-17 | _pendiente_ |
+| 1 | 02 Laboratorios/tsql-lineage-toolkit | tsql-lineage-toolkit | ✔️ Publicado | 2026-06-17 | 2026-08-01 |
 | 2 | 04 Arquitectura IA/medir-agentes-no-scripts | medir-agentes-no-scripts | ✅ Listo para lanzar | _pendiente_ | _pendiente_ |
-| 3 | 04 Arquitectura IA/orquestar-un-equipo-de-modelos | orquestar-un-equipo-de-modelos | 📤 Blog publicado, falta LinkedIn | 2026-08-10 | _pendiente_ |
+| 3 | 04 Arquitectura IA/orquestar-un-equipo-de-modelos | orquestar-un-equipo-de-modelos | ✔️ Publicado | 2026-08-10 | 2026-08-23 |
 
 Orden sugerido: **1 primero** (el producto, con el repo ya público como CTA) → 2 → 3 (el método detrás). Cada carpeta lleva su `imagen.png` generada con `_generador/imagen.template.py` (1080×1350, marca navy × coral).
 
@@ -109,3 +109,46 @@ de encargo, lo más guardable de la serie). 3, 4, 5 → ilustración.
 - **El logo nunca lo dibuja el modelo de imagen.** Se estampa después con
   `python private/linkedin/_generador/marca.py imagen.png --pdf`, que lo toma de
   `quartz/static/icon.png`. Opacidad medida: 0,30 (0,38 en portada).
+
+
+---
+
+## Rendimiento real en LinkedIn (export 2025-10-23 → 2026-10-22)
+
+Cruzado con los hashtags de cada `texto-post.md`. **El calendario llevaba cuatro
+errores**: daba por no publicados posts que sí salieron.
+
+| Fecha | Post | Formato | Impr. | Alcanz. | Fuera red | Guard. | Clics |
+|---|---|---|---|---|---|---|---|
+| 2026-08-23 | orquestar-un-equipo-de-modelos | Imagen | 171 | 87 | 43% | 0 | 2 |
+| 2026-08-01 | tsql-lineage-toolkit | Imagen | 254 | 87 | 31% | 0 | 0 |
+| 2026-07-18 | graphify-grafo-navegable | Imagen | 668 | 179 | 26% | 0 | 0 |
+| 2026-07-11 | litellm-multiproveedor | **Documento** | **725** | **400** | **62%** | **3** | 0 |
+| 2026-05-22 | documentacion-poder-conocimiento | Imagen | 186 | 59 | 23% | 0 | 0 |
+| 2026-05-15 | harness-engineering | **Documento** | 428 | 176 | 34% | 1 | 0 |
+
+Más cuatro posts de opinión/enlace sin artículo detrás (2026-07-24 repost: 70 impr.
+con 99% dentro de la red; 2026-06-02 y 2025-12-12 texto; 2026-05-13 vídeo).
+
+**Totales del año: 10 posts · 2.902 impresiones · 1.160 alcanzados · 2 seguidores
+ganados · 22 visitas al perfil · 4 guardados · 9 clics a enlace.** Último post:
+2026-08-23 — dos meses de silencio.
+
+### Lo que dicen los datos
+
+- **El formato Documento es el que más alcanza**: los dos únicos que hay son el 1º
+  y el 3º por impresiones, y se llevan **los 4 guardados del año**. N=2, no es
+  prueba, pero es la única señal que hay. Contradice la regla de "post de tesis →
+  una sola imagen".
+- **Texto, vídeo y repost pierden**: 90, 179, 131 y 70 impresiones. El repost tuvo
+  el 99% dentro de la red propia: no sirve para alcanzar a nadie nuevo.
+- **LinkedIn no manda tráfico al blog**: 9 clics en todo el año, y los 7 mejores
+  son de un post que era solo un enlace. El post del toolkit tuvo **0 clics**.
+- **Nada convierte**: 2 seguidores en 12 meses con 1.160 personas alcanzadas.
+
+### Nunca publicados en LinkedIn (texto ya escrito)
+
+- `doce-fallos-en-mi-herramienta` — artículo vivo desde 2026-08-22, texto listo (399 palabras). **Es el de hoy.**
+- `medir-agentes-no-scripts` — texto listo (531), pero el artículo sigue en `draft: true`.
+- `01-coste-conocimiento`, `02-onboarding-talento`, `03-talento-apagado` — textos y carruseles listos, artículos en `draft: true`.
+- `ratchet-efecto-memoria-agente` — artículo vivo, sin texto preparado.
