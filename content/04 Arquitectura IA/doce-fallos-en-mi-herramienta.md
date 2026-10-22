@@ -9,20 +9,22 @@ tags:
   - evaluación
   - calidad
   - data-lineage
-description: "Un motor con 136 pruebas en verde y cero errores de parseo escondía doce defectos. Lo que faltaba no era cantidad de pruebas: eran tipos."
+description: "Cómo se descubren los fallos que tus pruebas en verde no ven: nueve tipos de verificación, la pregunta que hace cada uno, y el punto ciego que deja."
 banner: "/static/banners/doce-fallos-capas.jpg"
 socialImage: "/static/social/doce-fallos-linkedin.jpg"
 ---
 
-*Primera parte de una serie de cuatro sobre el método: el caso, [[04 Arquitectura IA/como-se-encarga-trabajo-a-un-agente|cómo se le encarga trabajo a un agente]], [[04 Arquitectura IA/un-solo-corpus-te-engana|por qué una sola base de prueba te engaña]] y [[04 Arquitectura IA/cambiar-el-instrumento-de-medida|cuándo hay que cambiar el instrumento de medida]].*
+*Primera parte de una serie de cuatro sobre el método: el caso, cómo se le encarga trabajo a un agente, por qué una sola base de prueba te engaña y cuándo hay que cambiar el instrumento de medida.*
 
-En julio de 2026, mi motor de análisis de T-SQL tenía 136 pruebas unitarias en verde, cero errores de parseo sobre una base de datos real y un grafo internamente coherente. En una tarde encontramos **doce defectos**. Cuatro de ellos hacían que la herramienta respondiera *"no hay riesgo"* cuando sí lo había.
+En julio de 2026, mi motor de análisis de T-SQL tenía 136 pruebas unitarias en verde, cero errores de parseo sobre una base de datos real y un grafo internamente coherente. En una tarde encontramos **doce defectos**: cuatro graves, cinco medios y tres bajos.
 
-No los encontró escribir más pruebas. Los encontró entender que **cada capa de verificación caza un tipo de fallo distinto**, y que yo solo estaba usando dos.
+El peor hacía que la herramienta respondiera *"no hay riesgo"* cuando sí lo había. Preguntada por quién escribe en una tabla concreta, devolvía **cero escritores. Había tres.**
+
+No los encontró escribir más pruebas. Los encontró **cambiar el tipo de pregunta**.
 
 ---
 
-## El síntoma que abrió la caja
+## Cómo empieza un descubrimiento: por algo que no encaja
 
 Empezó con algo aburrido: tres documentos describían la misma ejecución con tres cifras distintas, y la captura de pantalla que ilustraba el artículo pertenecía a una cuarta.
 
@@ -32,7 +34,9 @@ Esa resta —47 + 17 = 64— era el producto entero, escrita en la documentació
 
 Pero la segunda pregunta fue la que abrió la caja: *¿y por qué el artefacto en disco dice 1.593 nodos si el código dice 1.529?* Porque el artefacto se había generado con código sin commitear. Llevaba semanas derivando y **ninguna prueba lo detectaba**, porque ninguna prueba miraba eso.
 
-## Congelar antes de arreglar
+Ahí está el patrón, y es el único que sirve: **un descubrimiento no empieza con un fallo, empieza con una incoherencia que nadie vigilaba.**
+
+## Congelar antes de buscar
 
 El primer instinto fue arreglar. Fue el instinto equivocado.
 
@@ -42,33 +46,37 @@ Ese orden —**congelar → arreglar → recongelar**— parece burocracia hasta
 
 ---
 
-## No son nueve maneras de hacer lo mismo
+## Nueve tipos de verificación, nueve preguntas distintas
 
-Acabamos con nueve capas. Lo interesante no es la lista: es que **encontraron cosas distintas**, y ninguna podía sustituir a otra.
+Aquí está el cambio de mentalidad, y es todo el post. Una capa de verificación no es un nivel de rigor: **es una pregunta**. Y una pregunta solo puede descubrir la clase de fallo que es capaz de formular.
 
-| Capa | Encuentra | Ejemplo real |
+| Tipo | La pregunta que hace | La clase de fallo que descubre |
 |---|---|---|
-| Unitarias | regresión | 136 en verde, y doce defectos debajo |
-| Reproducir a mano | fallos de tubería | `INSERT…UNION` perdía las 2 lecturas |
-| **Contraste con el catálogo** | **ausencias masivas** | 98/98 y 90/90 claves ajenas |
-| Invariantes | incoherencia | 0 violaciones en 5.281 pasos |
-| **Traza a mano** | **ausencias puntuales** | 1 arista donde debía haber 8 |
-| **Gate con base de referencia** | **duplicación** | una lectura emitida 3 veces |
-| Determinismo | indeterminismo | 3 ejecuciones, hash idéntico |
-| Coherencia de formatos | divergencia | los tres formatos dan la misma cifra |
-| e2e | contrato roto con el consumidor | 0 errores de JS |
+| Unitarias | ¿sigue funcionando lo que funcionaba? | regresión |
+| Reproducir a mano | ¿qué hace de verdad con cinco líneas delante? | fallos de tubería |
+| **Contraste con el catálogo** | **¿me estoy dejando algo?** | **ausencias masivas** |
+| Invariantes | ¿es coherente consigo mismo? | incoherencia |
+| **Traza sentencia a sentencia** | **¿dice esto lo que dice el código?** | **ausencias puntuales** |
+| **Gate con base de referencia** | **¿ha cambiado algo que no debía cambiar?** | **duplicación** |
+| Determinismo | ¿la misma entrada da el mismo resultado? | indeterminismo |
+| Coherencia de formatos | ¿todas las salidas cuentan lo mismo? | divergencia |
+| e2e | ¿el consumidor puede usarlo? | contrato roto |
 
-Esa tabla es todo el post. Si te llevas una sola cosa, que sea la columna del medio: **no son nueve maneras de hacer lo mismo con más o menos rigor. Son nueve preguntas distintas**. Las tres en negrita son las que yo no me estaba haciendo, y son justo las que escondían los defectos graves.
+Lee la columna del medio entera y verás por qué doce defectos convivían con 136 pruebas en verde: **las unitarias solo saben preguntar una de las nueve cosas**. Nadie escribe un test para algo que no sabe que falta.
 
-### Contraste con el catálogo — falsos negativos
+Las tres en negrita son las preguntas que yo no estaba haciendo. Son justo las que escondían los defectos graves. Las cuento una a una, porque el valor está en entender qué descubre cada una **y qué deja pasar**.
+
+### ¿Me estoy dejando algo? — contraste con el catálogo
 
 Contrastar el grafo contra el catálogo del propio SQL Server: `sys.foreign_keys`, `sys.sql_expression_dependencies`.
 
 **98 de 98 claves ajenas. 90 de 90 en la segunda base. Cero ausencias, cero relaciones inventadas.**
 
-Esta es la capa que casi nadie publica, porque casi nadie la pasaría. Y es la única que responde a *"¿me estoy dejando algo?"* con un número en vez de con una opinión.
+Es la capa que casi nadie publica, porque casi nadie la pasaría. Y es la única que responde a esa pregunta con un número en vez de con una opinión.
 
-### La traza sentencia a sentencia — ausencias
+**Su punto ciego:** no existe si trabajas sin base de datos. Contra ficheros `.sql` sueltos no hay catálogo contra el que comparar, y la pregunta deja de poder formularse.
+
+### ¿Dice esto lo que dice el código? — la traza sentencia a sentencia
 
 Poner el código fuente y los pasos extraídos **uno al lado del otro**, línea a línea, y leerlos.
 
@@ -88,15 +96,19 @@ Y pasaba todos los invariantes con nota: sus ocho pasos estaban bien ordenados, 
 > [!important] Los invariantes detectan incoherencias. No detectan ausencias.
 > Un grafo puede estar perfectamente bien formado y describir otra cosa.
 
-### El gate con base de referencia — duplicaciones
+**Su punto ciego:** no escala. Leer a mano encuentra lo que ninguna otra capa ve, y solo donde te da tiempo a mirar.
+
+### ¿Ha cambiado algo que no debía? — el gate con base de referencia
 
 Una base de prueba con los resultados esperados fijados a mano.
 
-Esta capa cazó algo que **ninguna otra vigilaba**: mi propio arreglo de filtros en CTEs emitía pasos que volvían a declarar una lectura que ya existía. `READS_FROM` pasaba de 1 a 3 para la misma tabla. Ninguna capa vigilaba que una arista se emitiera **de más** — solo esa, porque alguien había fijado ahí un número exacto.
+Esta capa descubrió algo que **ninguna otra vigilaba**: mi propio arreglo de filtros en CTEs emitía pasos que volvían a declarar una lectura que ya existía. `READS_FROM` pasaba de 1 a 3 para la misma tabla. Ninguna capa vigilaba que una arista se emitiera **de más** — solo esa, porque alguien había fijado ahí un número exacto.
 
 Y al arreglarlo, el mismo gate cazó el segundo error: la lectura correcta aparecía en `#step2` en vez de `#step0`, porque los identificadores de paso son posicionales y emitir pasos antes de tiempo **renumeraba todo lo demás en silencio**.
 
-### Y la más barata de todas
+**Su punto ciego:** solo vigila lo que alguien se molestó en fijar. Fuera de esos números, no mira.
+
+### Y la pregunta más barata de todas
 
 Cinco líneas de SQL, pasadas por el binario real, mirando la base de datos resultante:
 
@@ -117,9 +129,9 @@ Y el arreglo ya estaba escrito **en el mismo fichero, cuarenta líneas más arri
 
 ## El falso positivo, que es peor que el falso negativo
 
-Once de los doce defectos eran **falsos negativos**: el grafo callaba.
+Casi todos los defectos eran **falsos negativos**: el grafo callaba.
 
-Uno era distinto. `RAISERROR` se clasificaba como *lanzar un error* sin mirar la severidad. En T-SQL, severidad ≤ 10 **no lanza nada**: es el idioma estándar para escribir progreso al cliente. Resultado: el camino de terminación **normal** de un procedimiento se describía como cuatro errores consecutivos.
+Uno era justo lo contrario. `RAISERROR` se clasificaba como *lanzar un error* sin mirar la severidad. En T-SQL, severidad ≤ 10 **no lanza nada**: es el idioma estándar para escribir progreso al cliente. Resultado: el camino de terminación **normal** de un procedimiento se describía como cuatro errores consecutivos.
 
 **1.012 casos.**
 
@@ -147,11 +159,13 @@ Es exactamente el error que esta herramienta existe para evitar —confundir tex
 
 ## Qué me llevo
 
-**Más pruebas no es más cobertura.** Doce defectos convivían con 136 pruebas en verde. Lo que faltaba no era cantidad: eran **tipos** de verificación. Y ninguna capa sustituye a otra: los invariantes no ven ausencias, la traza no ve duplicaciones, y el contraste con el catálogo no existe si trabajas sin base de datos.
+**Más pruebas no es más cobertura.** Doce defectos convivían con 136 en verde. Lo que faltaba no era cantidad: eran **tipos** de pregunta. Y ninguno sustituye a otro — los invariantes no ven ausencias, la traza no ve duplicaciones, y el contraste con el catálogo no existe si trabajas sin base de datos.
 
-**Lo que hace productiva a la IA no es la velocidad.** Un agente escribe un arreglo en minutos; eso ya lo sabíamos, y no es lo que cambia el resultado. Lo que lo cambia es que **la verificación sea más barata que el error**. Cuando comprobar una hipótesis cuesta dos minutos, dejas de defender corazonadas y empiezas a descartarlas — seis veces en una tarde. Sin ese ciclo, lo único que aceleras es la producción de código que nadie ha verificado, y eso no es productividad: es deuda a mayor velocidad.
+Por eso la lista de nueve no es una checklist de calidad. Es otra cosa: **una colección de puntos ciegos que no se solapan.** Añadir un décimo tipo que falle igual que uno de los nueve no aporta nada. Añadir uno que falle **distinto** puede darte un defecto grave.
 
-**Publica los fallos.** Que la validación encontrara doce defectos en mi propia herramienta dice más de su fiabilidad que cualquier tabla en verde. Una herramienta que nunca ha fallado es una herramienta que nadie ha medido.
+**Lo que hace productiva a la IA no es la velocidad.** Un agente escribe un arreglo en minutos; eso ya lo sabíamos. Lo que cambia el resultado es que **la verificación sea más barata que el error**. Cuando comprobar una hipótesis cuesta dos minutos, dejas de defender corazonadas y empiezas a descartarlas — seis veces en una tarde. Sin ese ciclo, lo único que aceleras es la producción de código que nadie ha verificado, y eso no es productividad: es deuda a mayor velocidad.
+
+**Y publica los fallos.** Que la validación encontrara doce defectos en mi propia herramienta dice más de su fiabilidad que cualquier tabla en verde. Una herramienta que nunca ha fallado es una herramienta que nadie ha medido.
 
 ---
 
@@ -160,17 +174,17 @@ Es exactamente el error que esta herramienta existe para evitar —confundir tex
 Si trabajas con un agente de código sobre tu propio proyecto, pégale esto:
 
 ```text
-Con mi permiso, clasifica mis comprobaciones automáticas por el TIPO de
-fallo que cada una puede cazar, no por cuántas son: regresión, ausencias
+Con mi permiso, clasifica mis comprobaciones automáticas por la PREGUNTA
+que cada una es capaz de hacer, no por cuántas son: regresión, ausencias
 masivas, ausencias puntuales, duplicación, incoherencia, indeterminismo,
-divergencia entre formatos y contrato con el consumidor. Dime qué tipos
-no tengo cubiertos por ninguna comprobación: ese es el hueco donde viven
-los defectos que mis pruebas en verde no ven. Para cada hueco, propón la
-comprobación más barata que lo cerraría. No ejecutes cambios todavía y
-no inventes resultados: si necesitas correr algo, dime el comando y
-espera a que yo lo lance.
+divergencia entre formatos y contrato con el consumidor. Dime qué
+preguntas no hace ninguna de mis comprobaciones: ese es el hueco donde
+viven los defectos que mis pruebas en verde no ven. Para cada hueco,
+propón la comprobación más barata que lo cerraría. No ejecutes cambios
+todavía y no inventes resultados: si necesitas correr algo, dime el
+comando y espera a que yo lo lance.
 ```
 
 ---
 
-*El motor del que hablo es open source: [github.com/rcm-on/tsql-lineage-toolkit](https://github.com/rcm-on/tsql-lineage-toolkit). Los doce defectos, con su reproducción y las cifras antes y después, están documentados en el propio repositorio. Los arreglos no los escribí yo, los escribieron agentes — y la plantilla de encargo que usé va entera en [[04 Arquitectura IA/como-se-encarga-trabajo-a-un-agente|el siguiente post]].*
+*El motor del que hablo es open source: [github.com/rcm-on/tsql-lineage-toolkit](https://github.com/rcm-on/tsql-lineage-toolkit). Los doce están documentados uno a uno en `docs/corpus-multibase.md`, con su severidad, su causa, la rama que lo arregló y cómo se verificó. Los arreglos no los escribí yo, los escribieron agentes; cómo se les encarga es el siguiente post de la serie.*
