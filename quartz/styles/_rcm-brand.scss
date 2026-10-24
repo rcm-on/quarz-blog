@@ -16,35 +16,20 @@
    1. TOKENS CSS — light (default)
    ----------------------------------------------------------------- */
 :root {
-  /* Tres niveles del acento coral:
-     strong → decoración viva (bordes, motivo neural)
-     base   → links e interactivos (legible sobre papel claro)
-     accent-2 → variante cálida/clara para detalles */
+  /* Acento coral: strong = decoración · base = links (AA sobre blanco) · 2 = detalles */
   --rcm-accent-strong: #e85c52;
-  --rcm-accent:        #cc3b32; /* AA sobre blanco (~4.9:1) para links/texto */
+  --rcm-accent:        #cc3b32;
   --rcm-accent-2:      #f0857a;
   --rcm-accent-pale:   rgba(220, 79, 71, 0.08);
-  --rcm-accent-2-pale: rgba(240, 133, 122, 0.08);
 
-  /* Índigo — segundo eje de la paleta (frío, estructural).
-     El coral señala lo interactivo; el índigo da profundidad
-     a fondos, gradientes y detalles de ambiente. */
-  --rcm-indigo:        #4f46e5;
-  --rcm-indigo-soft:   #6366f1;
-  --rcm-indigo-pale:   rgba(79, 70, 229, 0.08);
-
-  /* Radios */
   --rcm-radius-lg: 16px;
   --rcm-radius-md: 10px;
   --rcm-radius-sm:  6px;
 
-  /* Sombras */
   --rcm-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
   --rcm-shadow-md: 0 2px 6px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.06);
 
-  /* Easings */
-  --rcm-ease:        cubic-bezier(0.22, 0.61, 0.36, 1);
-  --rcm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --rcm-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   /* Ancho de prosa cómodo para lectura técnica */
   --rcm-prose-width: 72ch;
@@ -60,12 +45,8 @@
   --rcm-accent:        #ff6b6b;
   --rcm-accent-2:      #ff9a8c;
   --rcm-accent-pale:   rgba(255, 107, 107, 0.10);
-  --rcm-accent-2-pale: rgba(255, 154, 140, 0.10);
-  --rcm-indigo:        #818cf8;
-  --rcm-indigo-soft:   #a5b4fc;
-  --rcm-indigo-pale:   rgba(129, 140, 248, 0.10);
-  --rcm-shadow-sm:   0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 12px rgba(0, 0, 0, 0.25);
-  --rcm-shadow-md:   0 2px 6px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.30);
+  --rcm-shadow-sm:     0 1px 2px rgba(0, 0, 0, 0.30), 0 4px 12px rgba(0, 0, 0, 0.25);
+  --rcm-shadow-md:     0 2px 6px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.30);
 }
 
 

@@ -12,6 +12,7 @@ description: "Durante años los técnicos consideramos que documentar era perder
 
 Durante años la documentación fue lo que hacíamos cuando ya no había nada más importante que hacer. Que era casi nunca.
 
+
 Lo entiendo. Vengo de ese lugar. Eres técnico, tienes el sistema en la cabeza, sabes exactamente cómo funciona cada pieza. Escribirlo para que otro lo entienda se siente redundante. Lento. Burocrático. Una deuda con el pasado que alguien más pidió y nadie va a leer.
 
 Lo que no veíamos entonces es que el problema no era la documentación. Era para quién la escribíamos.
