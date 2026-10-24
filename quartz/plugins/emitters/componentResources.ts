@@ -280,12 +280,24 @@ export const ComponentResources: QuartzEmitterPlugin = () => {
       } else if (cfg.theme.fontOrigin === "googleFonts" && !cfg.theme.cdnCaching) {
         // when cdnCaching is true, we link to google fonts in Head.tsx
         const theme = ctx.cfg.configuration.theme
-        const response = await fetch(googleFontHref(theme))
+        // PARCHE LOCAL (rcm-on): sin User-Agent de navegador moderno, Google
+        // devuelve la hoja con fuentes TTF. Medido el 2026-10-24: las 8 caras de
+        // Space Grotesk + Inter + JetBrains Mono pesaban 1,7 MB en TTF. Con este
+        // User-Agent devuelve WOFF2, que es lo que recibe un visitante real.
+        // Reaplicar si se actualiza Quartz desde upstream.
+        const modernUA = {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+        }
+        const response = await fetch(googleFontHref(theme), { headers: modernUA })
         googleFontsStyleSheet = await response.text()
 
         if (theme.typography.title) {
           const title = ctx.cfg.configuration.pageTitle
-          const response = await fetch(googleFontSubsetHref(theme, title))
+          const response = await fetch(googleFontSubsetHref(theme, title), {
+            headers: modernUA,
+          })
           googleFontsStyleSheet += `\n${await response.text()}`
         }
 
