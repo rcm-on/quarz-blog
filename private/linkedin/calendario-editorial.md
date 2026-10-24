@@ -56,7 +56,7 @@ texto del post ya están al día. **Es el siguiente que sale.**
 | # | Artículo (blog) | Post LinkedIn | Estado | Fecha blog | Fecha LinkedIn |
 |---|---|---|---|---|---|
 | 0 | 04 Arquitectura IA/ratchet-efecto-memoria-agente | _sin preparar_ | 📤 Blog publicado, falta LinkedIn | 2026-08-22 | _pendiente_ |
-| 1 | 04 Arquitectura IA/doce-fallos-en-mi-herramienta | _sin preparar_ | 📤 Blog publicado, falta LinkedIn | 2026-08-22 | _pendiente_ |
+| 1 | 04 Arquitectura IA/doce-fallos-en-mi-herramienta | doce-fallos-en-mi-herramienta | ✔️ Publicado | 2026-07-30 | **2026-10-24** |
 | 2 | 04 Arquitectura IA/como-se-encarga-trabajo-a-un-agente | _sin preparar_ | ⏳ Por preparar | _pendiente_ | _pendiente_ |
 | 3 | 04 Arquitectura IA/un-solo-corpus-te-engana | _sin preparar_ | ⏳ Por preparar | _pendiente_ | _pendiente_ |
 | 4 | 04 Arquitectura IA/cambiar-el-instrumento-de-medida | _sin preparar_ | ⏳ Por preparar | _pendiente_ | _pendiente_ |
@@ -148,7 +148,30 @@ ganados · 22 visitas al perfil · 4 guardados · 9 clics a enlace.** Último po
 
 ### Nunca publicados en LinkedIn (texto ya escrito)
 
-- `doce-fallos-en-mi-herramienta` — artículo vivo desde 2026-08-22, texto listo (399 palabras). **Es el de hoy.**
+- ~~`doce-fallos-en-mi-herramienta`~~ — **publicado el 2026-10-24**, en formato Documento (`cheatsheet.pdf`, 10 páginas) con el enlace en el primer comentario. Primer Documento desde julio: medir impresiones y guardados hacia el 2026-10-31.
 - `medir-agentes-no-scripts` — texto listo (531), pero el artículo sigue en `draft: true`.
 - `01-coste-conocimiento`, `02-onboarding-talento`, `03-talento-apagado` — textos y carruseles listos, artículos en `draft: true`.
 - `ratchet-efecto-memoria-agente` — artículo vivo, sin texto preparado.
+
+
+---
+
+## Medición pendiente — doce-fallos (publicado 2026-10-24)
+
+Primer post en formato **Documento** desde el de LiteLLM (2026-07-11). Hacia el
+**2026-10-31** hay que exportar el rendimiento y anotar aquí:
+
+| Dato | LiteLLM (Documento) | harness (Documento) | doce-fallos |
+|---|---|---|---|
+| Impresiones | 725 | 428 | _pendiente_ |
+| Alcanzados | 400 | 176 | _pendiente_ |
+| Fuera de la red | 62% | 34% | _pendiente_ |
+| Guardados | 3 | 1 | _pendiente_ |
+| Seguidores ganados | 0 | 0 | _pendiente_ |
+
+Con tres Documentos medidos ya se puede decir si el formato aguanta o si el 725
+de LiteLLM fue suerte. Hasta entonces, N=2 y no es prueba de nada.
+
+**Novedad respecto a los dos anteriores:** el enlace va en el primer comentario,
+no en el cuerpo. Si los clics suben de forma apreciable sobre los 9 de todo el
+año anterior, esa decisión se queda.
